@@ -12,11 +12,11 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${COMPANY.name} — 코딩 교육 솔루션`,
+    default: `${COMPANY.name} — AI 시대 코딩 학원을 위한 커리큘럼 솔루션`,
     template: `%s · ${COMPANY.short}`,
   },
   description:
-    "렛츠코딩은 교육기관이 코딩 수업을 직접 운영할 수 있도록 커리큘럼과 학습 공간, 운영 도구를 함께 제공합니다.",
+    "AI가 코드를 쓰는 시대, 학원의 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 AI 시대에 맞춘 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.",
 };
 
 export const viewport: Viewport = {
