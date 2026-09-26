@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>렛츠코딩 릴 2026</title>
+<!-- IBM Plex Mono · Serif Italic (latin 서브셋, OFL). 폰트 파일을 곁에 두어 오프라인에서도 같은 글자가 나온다. -->
+<link rel="stylesheet" href="plex.css" data-bundle="plex">
+<!-- Pretendard 92개 동적 서브셋 선언. 미리보기 서버가 src/app/fonts.css 를 그대로 내준다. -->
+<link rel="stylesheet" href="fonts.css" data-bundle="pretendard">
+<style>
+  /* 렛츠코딩 디자인 시스템(DESIGN.md)을 따른다: 그림자·그라디언트 없음, 면의 밝기 단계와
+     헤어라인으로만 깊이를 만든다. 포인트 블루는 재생 버튼과 현재 위치 표시에만. */
+  :root {
+    --bg: #e9edf3;
+    --surface: #ffffff;
+    --fill: #dde3ec;
+    --ink: #1b2333;
+    --ink-soft: #55607a;
+    --ink-faint: #5e6880;
+    --separator: #d5dbe4;
+    --edge: #7c8699;
+    --accent: #3b6fe0;
+    --accent-deep: #2d57b8;
+    --stage: #0c111d;
+    --sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --press-ms: 150ms;
+    color-scheme: light;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :root { --press-ms: 0ms; }
+  }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .page {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 16px;
+    padding-block: 40px 64px;
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .page { padding-inline: 24px; padding-block: 64px 96px; gap: 32px; }
+  }
+
+  .intro { max-width: 44rem; }
+  .kicker { margin: 0; font-size: 0.9375rem; font-weight: 500; color: var(--ink-soft); }
+  h1 {
+    margin: 8px 0 0;
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+    line-height: 1.15;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .lead { margin: 16px 0 0; max-width: 46ch; font-size: 1.0625rem; line-height: 1.65; color: var(--ink-soft); }
+
+  .card { background: var(--surface); border-radius: 18px; }
+  .stage { padding: 12px; display: grid; gap: 12px; }
+  @media (min-width: 768px) { .stage { padding: 16px; } }
+
+  .screen {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-inline: auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--stage);
+  }
+  .screen[data-format="9x16"] { aspect-ratio: 9 / 16; width: min(100%, calc(72vh * 9 / 16)); }
+  .screen canvas { display: block; width: 100%; height: 100%; }
+
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .control {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 1px solid var(--edge);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color var(--press-ms) ease-out;
+  }
+  .control:active { background: var(--fill); }
+  .control-accent { background: var(--accent); border-color: var(--accent); color: #ffffff; min-width: 7.5rem; justify-content: center; }
+  .control-accent:active { background: var(--accent-deep); }
+  .control svg { width: 14px; height: 14px; }
+
+  .readout { display: grid; gap: 2px; }
+  .tc { font-family: var(--mono); font-size: 0.9375rem; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .now { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--ink-soft); }
+
+  .track { background: var(--fill); border-radius: 14px; padding: 4px; }
+  .segment {
+    min-height: 44px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink-soft);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color var(--press-ms) ease-out;
+  }
+  .segment[aria-pressed="true"], .segment[data-selected] { background: var(--surface); color: var(--ink); }
+  .format { display: inline-flex; gap: 4px; margin-left: auto; }
+  .format .segment { padding: 0 14px; font-family: var(--mono); font-size: 0.875rem; font-weight: 500; }
+
+  .scrub { width: 100%; margin: 0; height: 28px; accent-color: var(--accent); }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+  @media (min-width: 900px) { .timeline { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+  .timeline .segment {
+    width: 100%;
+    height: 100%;
+    padding: 8px 10px 10px;
+    display: grid;
+    gap: 2px;
+    align-content: start;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .timeline .num { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
+  .timeline .lbl { font-size: 0.8125rem; font-weight: 600; line-height: 1.3; word-break: keep-all; }
+  @media (max-width: 479px) {
+    .timeline .segment { padding: 8px 8px 10px; }
+    .timeline .lbl { font-size: 0.75rem; }
+  }
+  @media (max-width: 379px) {
+    .timeline .lbl { font-size: 0.6875rem; }
+  }
+  .timeline .fill {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: calc(var(--p, 0) * 100%);
+    background: var(--accent);
+  }
+  .keys { margin: 0; font-size: 0.8125rem; color: var(--ink-faint); display: none; }
+  @media (hover: hover) and (pointer: fine) { .keys { display: block; } }
+  .keys kbd { font-family: var(--mono); font-size: 0.75rem; padding: 1px 6px; border-radius: 6px; background: var(--fill); color: var(--ink); }
+
+  .scenes h2 { margin: 0; font-size: 1.375rem; font-weight: 650; letter-spacing: -0.02em; }
+  .scenes > p { margin: 8px 0 0; max-width: 56ch; line-height: 1.6; color: var(--ink-soft); }
+  .scene-list { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 12px; }
+  @media (min-width: 768px) { .scene-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .scene { background: var(--surface); border-radius: 18px; padding: 20px 22px; display: grid; gap: 10px; align-content: start; }
+  .scene-head { display: flex; align-items: baseline; gap: 10px; }
+  .scene-head .no { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
+  .scene-head h3 { margin: 0; font-size: 1.0625rem; font-weight: 650; letter-spacing: -0.01em; }
+  .scene-head .time { margin-left: auto; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scene p { margin: 0; line-height: 1.6; font-size: 0.9375rem; color: var(--ink-soft); }
+  .scene .says { color: var(--ink); font-weight: 500; }
+  .source { margin: 16px 0 0; font-size: 0.8125rem; line-height: 1.6; color: var(--ink-faint); }
+
+  /* 익스포트: 캔버스만 */
+  html.export, html.export body { margin: 0; background: #000000; overflow: hidden; }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="intro">
+    <p class="kicker">렛츠코딩 모션그래픽</p>
+    <h1>렛츠코딩 릴 2026</h1>
+    <p class="lead">15초, 8개 씬, 128 BPM. 모든 전환이 한 박자(0.469초) 단위에 맞춰 떨어집니다. 문구와 수치는 랜딩페이지에 쓰인 것만 옮겼습니다.</p>
+  </header>
+
+  <section class="stage card" aria-label="릴 미리보기">
+    <div class="screen" id="screen" data-format="16x9">
+      <canvas id="reel" role="img" aria-label="렛츠코딩 모션그래픽 릴. 코딩을 왜 배우냐는 질문에서 시작해 무료 파일럿 안내로 끝난다."></canvas>
+    </div>
+    <div class="bar">
+      <button id="play" class="control control-accent" type="button" aria-pressed="true">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path id="play-icon" fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg>
+        <span id="play-label">일시정지</span>
+      </button>
+      <div class="readout">
+        <output id="tc" class="tc" for="scrub">00:00:00:00</output>
+        <span id="now" class="now">01/08 WHY CODE</span>
+      </div>
+      <div class="track format" role="group" aria-label="화면 비율">
+        <button class="segment" type="button" data-format="16x9" aria-pressed="true">16:9</button>
+        <button class="segment" type="button" data-format="9x16" aria-pressed="false">9:16</button>
+      </div>
+    </div>
+    <input id="scrub" class="scrub" type="range" min="0" max="899" step="1" value="0" aria-label="재생 위치(프레임)">
+    <ol id="timeline" class="track timeline" aria-label="씬으로 이동"></ol>
+    <p class="keys"><kbd>Space</kbd> 재생·정지 &nbsp; <kbd>←</kbd><kbd>→</kbd> 한 프레임 &nbsp; <kbd>Shift</kbd>+<kbd>←</kbd><kbd>→</kbd> 한 박자</p>
+  </section>
+
+  <section class="scenes" aria-labelledby="scenes-title">
+    <h2 id="scenes-title">씬 구성</h2>
+    <p>레퍼런스 릴의 여덟 가지 기법을 순서 그대로 가져오고, 각 씬이 말하는 내용만 렛츠코딩으로 바꿨습니다.</p>
+    <ol class="scene-list">
+      <li class="scene">
+        <div class="scene-head"><span class="no">01</span><h3>WHY CODE</h3><span class="time">0.00–1.87s</span></div>
+        <p>키네틱 타이포. 글자가 16분음표 간격으로 떨어져 스프링으로 착지하고 발밑에 링이 퍼집니다. 세리프 이탤릭 한 줄과 궤도 타원이 뒤따릅니다.</p>
+        <p class="says">“AI가 코딩 다 해주는데, 코딩을 왜 배워요?”</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">02</span><h3>IDEA</h3><span class="time">1.87–3.75s</span></div>
+        <p>파티클 약 3천 개가 폭발했다가 소용돌이치고 글자 모양으로 모입니다. 꼬리는 직전 위치까지 그은 선이라 모션 블러처럼 보입니다.</p>
+        <p class="says">AI가 대신 못 하는 것을 시킵니다</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">03</span><h3>PLAN · MAKE · SHIP</h3><span class="time">3.75–5.62s</span></div>
+        <p>셰이프 모프. 한 박자마다 배경색과 도형이 바뀌고 지난 외곽선이 잔상으로 남습니다. 왼쪽 아래 그래프가 지금 쓰는 이징 곡선과 진행값을 보여 줍니다.</p>
+        <p class="says">정하고 · 만들고 · 내놓고 · 고치고</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">04</span><h3>LOUNGE</h3><span class="time">5.62–7.50s</span></div>
+        <p>타일 플립 전환. 파란 타일이 왼쪽부터 뒤집히며 [행][열] 격자를 드러내고, 박자마다 작품 카드가 올라옵니다. 나갈 때는 가운데 칸부터 흩어집니다.</p>
+        <p class="says">학생 작품이 사라지지 않는 학원</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">05</span><h3>GROW</h3><span class="time">7.50–9.37s</span></div>
+        <p>메타볼. 방울이 붙었다 떨어지며 자라다가 화면을 채웁니다. 글자는 방울 밖에서 흰색, 방울 안에서 노란색입니다.</p>
+        <p class="says">진도표 대신, 성장을 보여 줍니다</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">06</span><h3>196 WORKS</h3><span class="time">9.37–11.25s</span></div>
+        <p>카운터와 라인 드로잉. 펜이 하이포트로코이드(R=5, r=3, d=5)를 그리고, 굴러가는 원과 팔이 옅게 보입니다. 바닥의 사인파는 박자마다 부풉니다.</p>
+        <p class="says">학생 44명이 4개월 반 동안 올린 작품 196건</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">07</span><h3>MONTAGE</h3><span class="time">11.25–13.12s</span></div>
+        <p>앞 씬들을 16분음표, 8분음표, 한 박자로 점점 길게 끊어 되감습니다. RGB 분리, 가로 띠 밀기, 4분할을 거쳐 타이틀에서 멎고 원이 화면을 닫습니다.</p>
+        <p class="says">LET'S CODE</p>
+      </li>
+      <li class="scene">
+        <div class="scene-head"><span class="no">08</span><h3>렛츠코딩</h3><span class="time">13.12–15.00s</span></div>
+        <p>커서, 워드마크, 밑줄, 정보 순으로 올라오는 엔드카드. 밑줄이 화면 가로선이 되어 01의 첫 프레임으로 이어지므로 끊김 없이 반복됩니다.</p>
+        <p class="says">AI 시대의 코딩 커리큘럼, 원장님 혼자 고민하지 마세요.</p>
+      </li>
+    </ol>
+    <p class="source">196건과 44명은 렛츠코딩앤플레이의 2026.4.6–8.22 등록분이며 2026.8.24 운영 DB에서 집계한 값입니다(랜딩페이지 PROOF 항목과 같음).</p>
+  </section>
+</main>
+
+<script src="reel.js" data-bundle="reel"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.LetsCodingReel;
+  var canvas = document.getElementById('reel');
+  var reel = R.create(canvas);
+  var FRAMES = Math.round(R.DURATION * R.FPS);
+  var params = new URLSearchParams(location.search);
+
+  /* 익스포트 모드: 렌더러(scripts/render.mjs)가 프레임 번호로 한 장씩 요청한다 */
+  if (params.has('export')) {
+    document.documentElement.classList.add('export');
+    canvas.width = Number(params.get('w')) || 1920;
+    canvas.height = Number(params.get('h')) || 1080;
+    document.body.replaceChildren(canvas);
+    window.REEL = {
+      ready: false,
+      frames: FRAMES,
+      fps: R.FPS,
+      render: function (i) { reel.render(i / R.FPS); },
+      capture: function (i) { reel.render(i / R.FPS); return canvas.toDataURL('image/png'); },
+    };
+    R.loadFonts().then(function () {
+      window.REEL.fonts = R.fontStatus();
+      reel.render(0);
+      window.REEL.ready = true;
+    });
+    return;
+  }
+
+  var screen = document.getElementById('screen');
+  var playBtn = document.getElementById('play');
+  var playIcon = document.getElementById('play-icon');
+  var playLabel = document.getElementById('play-label');
+  var tcOut = document.getElementById('tc');
+  var nowOut = document.getElementById('now');
+  var scrub = document.getElementById('scrub');
+  var timeline = document.getElementById('timeline');
+  var formatBtns = Array.prototype.slice.call(document.querySelectorAll('[data-format]')).filter(function (el) { return el.tagName === 'BUTTON'; });
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var POSTER = 14.6; // 엔드카드가 다 올라온 시점
+  var t = reduce ? POSTER : 0;
+  var playing = !reduce;
+  var format = location.hash === '#9x16' ? '9x16' : '16x9';
+  var ready = false;
+  var last = 0;
+
+  scrub.max = String(FRAMES - 1);
+
+  var segs = R.scenes.map(function (s) {
+    var li = document.createElement('li');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'segment';
+    b.innerHTML = '<span class="num"></span><span class="lbl"></span><span class="fill" aria-hidden="true"></span>';
+    b.querySelector('.num').textContent = String(s.index + 1).padStart(2, '0');
+    b.querySelector('.lbl').textContent = s.label;
+    b.setAttribute('aria-label', String(s.index + 1).padStart(2, '0') + ' ' + s.label + '로 이동');
+    b.addEventListener('click', function () { seek(s.start); });
+    li.appendChild(b);
+    timeline.appendChild(li);
+    return b;
+  });
+
+  function sizeCanvas() {
+    var rect = screen.getBoundingClientRect();
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var vertical = format === '9x16';
+    var w = Math.round(rect.width * dpr);
+    w = Math.max(270, Math.min(vertical ? 1080 : 1920, w));
+    var h = Math.round(vertical ? (w * 16) / 9 : (w * 9) / 16);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+  }
+
+  function draw() {
+    if (!ready) return;
+    var info = reel.render(t);
+    var frame = Math.min(FRAMES - 1, Math.floor(t * R.FPS + 1e-6));
+    tcOut.textContent = R.timecode(t);
+    nowOut.textContent = String(info.idx + 1).padStart(2, '0') + '/08 ' + R.scenes[info.idx].label;
+    if (document.activeElement !== scrub) scrub.value = String(frame);
+    segs.forEach(function (b, i) {
+      if (i === info.idx) {
+        b.setAttribute('data-selected', '');
+        b.setAttribute('aria-current', 'step');
+        b.style.setProperty('--p', (info.lt / R.BAR).toFixed(3));
+      } else if (b.hasAttribute('data-selected')) {
+        b.removeAttribute('data-selected');
+        b.removeAttribute('aria-current');
+        b.style.setProperty('--p', '0');
+      }
+    });
+  }
+
+  function setPlaying(p) {
+    playing = p;
+    playBtn.setAttribute('aria-pressed', String(p));
+    playLabel.textContent = p ? '일시정지' : '재생';
+    playIcon.setAttribute('d', p ? 'M3 2h3v10H3zM8 2h3v10H8z' : 'M3 1.5v11l9.5-5.5z');
+  }
+  function seek(sec) {
+    t = ((sec % R.DURATION) + R.DURATION) % R.DURATION;
+    draw();
+  }
+  function setFormat(fmt) {
+    format = fmt;
+    screen.setAttribute('data-format', fmt);
+    formatBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-format') === fmt)); });
+    sizeCanvas();
+    draw();
+  }
+
+  playBtn.addEventListener('click', function () { setPlaying(!playing); });
+  formatBtns.forEach(function (b) {
+    b.addEventListener('click', function () { setFormat(b.getAttribute('data-format')); });
+  });
+  scrub.addEventListener('input', function () { seek(Number(scrub.value) / R.FPS); });
+  document.addEventListener('keydown', function (e) {
+    var tag = (e.target && e.target.tagName) || '';
+    if (e.key === ' ' && tag !== 'BUTTON' && tag !== 'INPUT') {
+      e.preventDefault();
+      setPlaying(!playing);
+    } else if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && tag !== 'INPUT') {
+      e.preventDefault();
+      setPlaying(false);
+      var step = e.shiftKey ? R.BEAT : 1 / R.FPS;
+      seek(t + (e.key === 'ArrowRight' ? step : -step));
+    }
+  });
+
+  if (window.ResizeObserver) new ResizeObserver(function () { sizeCanvas(); draw(); }).observe(screen);
+  window.addEventListener('resize', function () { sizeCanvas(); draw(); });
+
+  function tick(now) {
+    var dt = last ? Math.min(0.1, (now - last) / 1000) : 0;
+    last = now;
+    if (playing && ready) {
+      t = (t + dt) % R.DURATION;
+      draw();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  setPlaying(playing);
+  setFormat(format);
+  R.loadFonts().then(function () {
+    ready = true;
+    sizeCanvas();
+    draw();
+    requestAnimationFrame(tick);
+  });
+})();
+</script>
+</body>
+</html>
