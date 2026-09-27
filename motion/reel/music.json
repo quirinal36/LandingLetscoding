@@ -1,0 +1,18 @@
+{
+  "source": "motion/out/music/00b0422df30201e67df28b98ad0682ad-1.mp3",
+  "detected_bpm": 130.143,
+  "beat_jitter_ms": 13.7,
+  "stretch": 0.98353,
+  "start_sec": 49.9024,
+  "start_bar": 27,
+  "downbeat_phase": 0,
+  "downbeat_scores": [
+    0.685,
+    -0.48,
+    -0.086,
+    -0.119
+  ],
+  "length_sec": 15.0,
+  "beat_error_ms_median": 2.9,
+  "out": "motion/reel/music.mp3"
+}
