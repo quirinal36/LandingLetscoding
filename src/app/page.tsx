@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui";
+import { HeroFigure } from "@/components/hero-figure";
 
 /*
   문구의 출처는 렛츠코딩 라운지 저장소(yudanah/letscoding_lounge)다.
@@ -11,6 +12,13 @@ import { ButtonLink } from "@/components/ui";
 
 const LOUNGE_URL = "https://lounge.letscoding.kr/works";
 const CONTACT = { email: "contact@letscoding.kr", tel: "010-5679-0072" };
+
+/** 히어로 아래 사실 세 줄. 전부 확인 가능한 것만. 효과 수치는 두지 않는다. */
+const FACTS = [
+  { label: "운영 기간", value: "7년째", note: "전북 혁신도시에서 직접 운영 중인 코딩학원" },
+  { label: "과제 공급", value: "학습과제 193개", note: "매달 추천 과제 5개가 새로 열립니다" },
+  { label: "학생 작품", value: "작품 196건", note: "2026.4 – 8 라운지 등록 · 8.24 집계" },
+];
 
 /** 상담실에서 원장님이 받는 질문. */
 const WORRIES = [
@@ -79,17 +87,23 @@ function SectionHeading({ kicker, title, lead }: { kicker: string; title: string
 export default function Home() {
   return (
     <div className="mx-auto max-w-5xl px-4 md:px-6">
-      {/* ── 히어로 ─────────────────────────────────────────────── */}
-      <section className="pt-16 pb-20 md:pt-24 md:pb-28">
+      {/* ── 히어로 ─────────────────────────────────────────────
+          MYPROBLEM.md를 한 화면으로 줄인 것.
+          문제(2번): 아이는 자라는데 교재는 6개월마다 처음으로 돌아간다.
+          답(3·6번): 학생이 자기 프로젝트를 거듭하며 스스로 다음 단계로 올라간다.
+          화자(1번): 7년차 원장이 같은 원장에게. 파는 사람이 아니라 같은 일을 하는 사람.
+          숫자는 검증된 것만. 재원율·매출 같은 효과 수치는 쓰지 않는다. */}
+      <section className="pt-14 pb-16 md:pt-20 md:pb-24">
         <p className="text-[0.9375rem] font-medium text-ink-soft">
-          코딩학원 · 공부방 · 교습소를 위한 AI 시대 커리큘럼
+          7년차 코딩학원 원장이 같은 자리에 계신 원장님께
         </p>
-        <h1 className="mt-4 max-w-[17ch] text-[2.5rem] leading-[1.15] font-semibold tracking-[-0.04em] text-balance md:text-[3.75rem]">
-          AI 시대의 코딩 커리큘럼, 원장님 혼자 고민하지 마세요
+        <h1 className="mt-4 max-w-[18ch] text-[2.375rem] leading-[1.15] font-semibold tracking-[-0.04em] text-balance md:text-[3.5rem]">
+          아이는 자라는데, 교재는 6개월마다 처음으로 돌아갑니다
         </h1>
-        <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-ink-soft md:text-xl">
-          7년차 코딩학원이 직접 만들어 매일 수업에 쓰는 커리큘럼과 운영 시스템을 그대로
-          드립니다. 문법 진도표 대신, 학생이 스스로 정하고 만들고 설명하는 수업입니다.
+        <p className="mt-6 max-w-[50ch] text-lg leading-relaxed text-ink-soft md:text-xl">
+          새 로봇을 들이고 새 교재를 사도 다시 초보 단계였습니다. 그래서 학생이 자기 프로젝트를
+          만들며 스스로 다음 단계로 올라가는 수업과 플랫폼을 직접 만들었습니다. 지금 우리 학원에서
+          매일 쓰는 그것을 그대로 드립니다.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <ButtonLink href="/seminar/inquiry" tone="accent" size="lg">
@@ -99,6 +113,21 @@ export default function Home() {
             실제 운영 중인 라운지 보기
           </ButtonLink>
         </div>
+
+        <div className="mt-14 md:mt-16">
+          <HeroFigure />
+        </div>
+
+        <dl className="mt-6 grid gap-x-6 gap-y-3 text-[0.9375rem] sm:grid-cols-3">
+          {FACTS.map((f) => (
+            <div key={f.label} className="flex items-baseline gap-2">
+              <dt className="sr-only">{f.label}</dt>
+              <dd className="text-ink-soft">
+                <span className="font-semibold text-ink">{f.value}</span> {f.note}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* ── 고민 ───────────────────────────────────────────────── */}

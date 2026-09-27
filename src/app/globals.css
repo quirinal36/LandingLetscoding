@@ -67,6 +67,9 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* 한국어는 어절 단위로만 줄을 바꾼다. 글자 중간에서 끊기지 않게. */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 @layer components {
