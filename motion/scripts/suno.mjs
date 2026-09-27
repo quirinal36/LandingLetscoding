@@ -74,26 +74,33 @@ async function call(route, init = {}) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-console.log(`모델 ${model} · "${title}"\n스타일: ${style}`);
-const { taskId } = await call("/generate", {
-  method: "POST",
-  body: JSON.stringify({
-    customMode: true,
-    instrumental: true,
-    model,
-    style,
-    title,
-    // 콜백은 받지 않고 아래에서 상태를 물어본다. 필수 항목이라 문서용 주소를 넣는다.
-    callBackUrl: "https://example.com/kie-callback",
-  }),
-});
-console.log(`작업 ${taskId} — 생성 중…`);
+// --task <id>: 이미 만든 곡을 다시 내려받기만 한다(크레딧을 쓰지 않는다)
+let taskId = opt("task", null);
+const resume = Boolean(taskId);
+if (resume) {
+  console.log(`작업 ${taskId} — 이미 만든 곡을 내려받습니다`);
+} else {
+  console.log(`모델 ${model} · "${title}"\n스타일: ${style}`);
+  ({ taskId } = await call("/generate", {
+    method: "POST",
+    body: JSON.stringify({
+      customMode: true,
+      instrumental: true,
+      model,
+      style,
+      title,
+      // 콜백은 받지 않고 아래에서 상태를 물어본다. 필수 항목이라 문서용 주소를 넣는다.
+      callBackUrl: "https://example.com/kie-callback",
+    }),
+  }));
+  console.log(`작업 ${taskId} — 생성 중…`);
+}
 
 const FAILED = /FAIL|ERROR|EXCEPTION/;
 const deadline = Date.now() + timeoutMin * 60_000;
 let detail;
-for (;;) {
-  await sleep(10_000);
+for (let first = true; ; first = false) {
+  if (!(resume && first)) await sleep(10_000);
   detail = await call(`/generate/record-info?taskId=${encodeURIComponent(taskId)}`);
   const status = detail?.status || "UNKNOWN";
   process.stdout.write(`\r상태: ${status}            `);
@@ -108,11 +115,28 @@ await mkdir(outDir, { recursive: true });
 await writeFile(path.join(outDir, `${taskId}.json`), JSON.stringify(detail, null, 2));
 const tracks = detail?.response?.sunoData || [];
 if (!tracks.length) throw new Error(`응답에 곡이 없습니다: ${JSON.stringify(detail)}`);
+// 완성본(audioUrl)이 먼저, 막히면 스트리밍 사본으로. 음원은 kie.ai가 아닌 파일 도메인에 있다
+const failures = [];
 for (const [i, track] of tracks.entries()) {
-  const url = track.audioUrl || track.sourceAudioUrl || track.streamAudioUrl;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`${url} 내려받기 실패: HTTP ${res.status}`);
   const file = path.join(outDir, `${taskId}-${i + 1}.mp3`);
-  await writeFile(file, Buffer.from(await res.arrayBuffer()));
-  console.log(`${file}  ${Math.round(track.duration || 0)}초  ${track.tags || ""}`);
+  const urls = [track.audioUrl, track.sourceAudioUrl, track.streamAudioUrl, track.sourceStreamAudioUrl].filter(Boolean);
+  let saved = false;
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await writeFile(file, Buffer.from(await res.arrayBuffer()));
+      console.log(`${file}  ${Math.round(track.duration || 0)}초  (${new URL(url).host})`);
+      saved = true;
+      break;
+    } catch (err) {
+      failures.push(`${new URL(url).host}: ${err.cause?.cause?.message || err.cause?.message || err.message}`);
+    }
+  }
+  if (!saved) {
+    throw new Error(
+      `${i + 1}번 곡을 내려받지 못했습니다.\n  ${[...new Set(failures)].join("\n  ")}\n` +
+        `이 도메인들을 네트워크에서 허용한 뒤 다시 받기: node scripts/suno.mjs --task ${taskId}`,
+    );
+  }
 }

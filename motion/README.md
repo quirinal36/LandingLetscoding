@@ -82,6 +82,7 @@ echo "KIE_API_KEY=..." >> ../.env.local
 # 2) 생성 — 수노가 두 변주를 준다 → out/music/<taskId>-1.mp3, -2.mp3
 node scripts/suno.mjs
 node scripts/suno.mjs --style "..." --title "..." --model V5   # 바꿔 보고 싶을 때
+node scripts/suno.mjs --task <taskId>                          # 만든 곡을 다시 받기만(크레딧 안 씀)
 
 # 3) 맞추기 — 템포를 재서 128로 맞추고, 에너지가 가장 크게 올라오는 8마디를 골라 첫 박을 0초에
 pip install librosa soundfile
@@ -95,7 +96,9 @@ npm run render -- --silent   # 무음으로 뽑을 때
 
 - 기본 스타일: `upbeat future house, 128 BPM, four-on-the-floor kick, … instrumental, no vocals` (`scripts/suno.mjs` 맨 위)
 - `reel/music.json`에 잰 BPM, 늘이고 줄인 비율, 원곡에서 자른 위치, 박 오차가 남는다
-- 클라우드 세션에서 돌릴 때는 환경의 네트워크 설정에서 `api.kie.ai`(와 음원 파일 도메인)를 허용해야 한다
+- 클라우드 세션에서 돌릴 때는 환경의 네트워크 설정에서 세 도메인을 허용해야 한다:
+  `api.kie.ai`(생성 요청), `tempfile.aiquickdraw.com`(완성 MP3), `audiostream.kie.ai`(스트리밍 사본, 예비).
+  프록시 뒤에서는 `NODE_USE_ENV_PROXY=1 node scripts/suno.mjs`
 - 광고에 쓰기 전에 kie.ai·Suno의 상업적 이용 조건을 확인할 것
 - 릴스처럼 앱에서 음원을 붙인다면 `--silent`로 뽑아 올리고 앱에서 고르면 된다
 
