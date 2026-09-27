@@ -227,7 +227,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="bar sticky top-0 z-50" data-scrolled={scrolled}>
+    <header className={cn("bar sticky top-0 z-50", pathname === "/" && "tone-dark")} data-scrolled={scrolled}>
       <a
         href="#main"
         className="control sr-only px-4 py-2 focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-10"

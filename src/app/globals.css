@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./landing.css";
 
 /* ──────────────────────────────────────────────────────────────
    렛츠코딩 디자인 토큰
@@ -281,5 +282,18 @@ body {
     .rise-in {
       animation-duration: 1ms;
     }
+  }
+}
+
+/* ── 히어로 무대 (DESIGN.md 예외 한 자리) ────────────────────────
+   기본 스타일이 곧 마지막 프레임이다. 애니메이션만 끄면 정보가 다 모인
+   정지 화면이 남는다. 움직일 것이 없으니 재생 버튼도 숨긴다. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage,
+  .hero-stage * {
+    animation: none !important;
+  }
+  .hero-stage-toggle {
+    display: none;
   }
 }
