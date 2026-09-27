@@ -13,6 +13,7 @@
 import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createServer, ROOT } from "./serve.mjs";
@@ -35,6 +36,9 @@ const outDir = path.join(ROOT, "motion/out");
 const out = path.resolve(opt("out", path.join(outDir, `letscoding-reel-${format}.mp4`)));
 const stills = opt("frames", null);
 const crf = opt("crf", "16");
+// 배경음악: reel/music.mp3 가 있으면 AAC로 바꿔 넣는다(scripts/fit_music.py 가 만든다). --silent 면 뺀다
+const music = path.resolve(opt("audio", path.join(ROOT, "motion/reel/music.mp3")));
+const withMusic = !args.includes("--silent") && existsSync(music);
 
 await mkdir(path.dirname(out), { recursive: true });
 const server = createServer();
@@ -71,6 +75,7 @@ try {
       [
         "-y", "-loglevel", "error",
         "-f", "image2pipe", "-framerate", "60", "-c:v", "png", "-i", "-",
+        ...(withMusic ? ["-i", music, "-map", "0:v", "-map", "1:a", "-c:a", "aac", "-b:a", "256k", "-shortest"] : []),
         // RGB → BT.709로 변환해야 브랜드 파랑이 플레이어마다 틀어지지 않는다
         "-vf", "scale=out_color_matrix=bt709:out_range=tv,format=yuv420p",
         "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-profile:v", "high", "-level", "4.2",
@@ -80,6 +85,7 @@ try {
       ],
       { stdio: ["pipe", "inherit", "inherit"] },
     );
+    console.log(withMusic ? `배경음악: ${path.relative(ROOT, music)}` : "배경음악 없음(무음)");
     const started = Date.now();
     for (let i = 0; i < frames; i++) {
       if (!ffmpeg.stdin.write(await grab(i))) await once(ffmpeg.stdin, "drain");

@@ -46,36 +46,37 @@
   };
 
   /* ── 문구 ─────────────────────────────────────────────────
-     바꿀 때는 여기만 고치면 된다. 레이아웃은 글자 폭을 재서 맞춘다. */
+     바꿀 때는 여기만 고치면 된다. 레이아웃은 글자 폭을 재서 맞춘다.
+     배열로 적은 문구는 세로(9:16) 화면에서 줄을 나누는 자리이고, 가로 화면에서는 한 줄로 붙는다. */
   const COPY = {
     hudLeft: "LET'S CODING — REEL 2026",
     hudRight: '2026 · 60 FPS · 128 BPM',
     s1: {
-      lines: ['WHY', 'CODE?'], // 가로 화면에서는 한 줄로 붙는다
+      lines: ["Let's", 'Coding'],
       accent: 'in the age of AI',
       ko: 'AI가 코딩 다 해주는데, 코딩을 왜 배워요?',
     },
     s2: { word: 'IDEA', ko: 'AI가 대신 못 하는 것을 시킵니다' },
     s3: [
-      { ko: '정하고', en: 'PLAN' },
       { ko: '만들고', en: 'MAKE' },
-      { ko: '내놓고', en: 'SHIP' },
+      { ko: '플레이하고', en: 'PLAY' },
+      { ko: '피드백', en: 'FEEDBACK' },
       { ko: '고치고', en: 'ITERATE' },
     ],
-    s4: { word: 'LOUNGE', ko: '학생 작품이 사라지지 않는 학원' },
-    s5: { word: 'grow.', ko: '진도표 대신, 성장을 보여 줍니다' },
+    s4: { word: 'LOUNGE', ko: '내가 스타트업 대표가 되는 공간' },
+    s5: { word: 'grow', ko: '생각근육 > 공감근육 > 성장' },
     s6: {
-      value: 196,
+      value: 224,
       unit: 'STUDENT WORKS',
-      ko: '학생 44명이 4개월 반 동안 올린 작품',
-      note: '렛츠코딩앤플레이 · 2026.4.6–8.22 등록분',
+      ko: '5개월 동안 등록된 작품',
+      note: '', // 집계 기간·출처를 한 줄로 적으면 숫자 아래에 작게 나온다
     },
     s7: { word: "LET'S CODE", sub: '2026' },
     s8: {
-      wordmark: '렛츠코딩',
-      pillars: 'CURRICULUM · LOUNGE · PYTHON',
-      tagline: 'AI 시대의 코딩 커리큘럼, 원장님 혼자 고민하지 마세요.',
-      cta: '4주 무료 파일럿 · CONTACT@LETSCODING.KR',
+      wordmark: ['렛츠코딩', '라운지'],
+      pillars: 'AI시대변화, 커리큘럼, 홍보상담',
+      tagline: ['AI체질개선과 무한한 커리큘럼', '함께하면 가벼워집니다.'],
+      cta: '문의처 : contact@letscoding.kr',
     },
   };
 
@@ -313,7 +314,7 @@
      엔드카드의 노란 선이 갈라지며 파란 면이 열리고, 글자가 하나씩 떨어져 스프링으로 착지한다.
      ════════════════════════════════════════════════════════ */
   const S1 = {
-    label: 'WHY CODE',
+    label: "LET'S CODING",
     tone: () => 'w',
     draw(ctx, f, lt) {
       const out = prog(lt, BAR - 0.21, BAR);
@@ -341,7 +342,7 @@
       ctx.fillRect(0, H / 2 + half - lw / 2, W, lw);
     }
 
-    // ② 글자 낙하 — 16분음표 간격으로 한 글자씩
+    // ② 글자 낙하 — 한 글자씩. 글자가 많으면 간격을 좁혀 0.6초 안에 다 떨어진다
     const lines = portrait ? COPY.s1.lines : [COPY.s1.lines.join(' ')];
     const maxW = W * (portrait ? 0.84 : 0.8);
     const maxS = H * (portrait ? 0.17 : 0.3);
@@ -349,6 +350,8 @@
     font(ctx, 900, size, FONT.sans);
     const lineGap = size * 0.98;
     const base0 = portrait ? H * 0.42 : H * 0.53;
+    const count = Array.from(lines.join('')).filter((ch) => ch !== ' ').length;
+    const stagger = Math.min(0.085, 0.6 / Math.max(1, count - 1));
     ctx.textAlign = 'center';
     let k = 0;
     let lastBase = base0;
@@ -359,7 +362,7 @@
       lastBase = base;
       for (const gl of g.list) {
         if (gl.ch === ' ') continue;
-        const start = 0.2 + k * 0.085;
+        const start = 0.2 + k * stagger;
         const seed = hash(k * 131 + 17);
         k++;
         const p = prog(lt, start, start + 0.6);
@@ -400,7 +403,7 @@
     font(ctx, 500, aSize, FONT.serif, 'italic');
     const aText = COPY.s1.accent;
     const aw = ctx.measureText(aText).width;
-    const ay = lastBase + aSize * 1.15;
+    const ay = lastBase + size * 0.22 + aSize * 0.8; // 소문자 g·y의 내림획을 비켜 간다
     const rev = EASE.outCubic(prog(lt, 0.86, 1.18));
     if (rev > 0) {
       ctx.save();
@@ -760,7 +763,7 @@
   }
 
   const S3 = {
-    label: 'PLAN · MAKE · SHIP',
+    label: 'MAKE · PLAY · FEEDBACK',
     tone(lt) {
       const k = Math.min(3, Math.floor(lt / BEAT));
       return k === 0 || k === 3 ? 'w' : 'k';
@@ -1151,7 +1154,7 @@
   }
 
   const S6 = {
-    label: '196 WORKS',
+    label: `${COPY.s6.value} WORKS`,
     tone: () => 'k',
     draw(ctx, f, lt) {
       const { W, H, u, portrait } = f;
@@ -1199,10 +1202,12 @@
       drawTracked(ctx, COPY.s6.unit, x0, base + 64 * u, 0.28 * (portrait ? 30 : 27) * u, 'left');
       font(ctx, 700, (portrait ? 42 : 38) * u, FONT.sans);
       ctx.fillText(COPY.s6.ko, x0, base + 120 * u);
-      font(ctx, 500, (portrait ? 17 : 15) * u, FONT.mono);
-      ctx.globalAlpha = 0.72;
-      ctx.fillText(COPY.s6.note, x0, base + 162 * u);
-      ctx.globalAlpha = 1;
+      if (COPY.s6.note) {
+        font(ctx, 500, (portrait ? 17 : 15) * u, FONT.mono);
+        ctx.globalAlpha = 0.72;
+        ctx.fillText(COPY.s6.note, x0, base + 162 * u);
+        ctx.globalAlpha = 1;
+      }
 
       // 스피로그래프
       const cx = portrait ? W * 0.5 : W * 0.69;
@@ -1377,37 +1382,43 @@
      ════════════════════════════════════════════════════════ */
   function s8Layout(ctx, f) {
     const { W, H, u, portrait } = f;
-    const word = COPY.s8.wordmark;
-    const size = portrait ? fit(ctx, word, 900, FONT.sans, W * 0.56, H * 0.12) : H * 0.165;
+    // 세로 화면은 워드마크를 두 줄로 크게, 가로 화면은 한 줄로
+    const lines = portrait ? COPY.s8.wordmark : [COPY.s8.wordmark.join(' ')];
+    const longest = lines.reduce((a, b) => (Array.from(a).length >= Array.from(b).length ? a : b));
+    const size = Math.min(
+      portrait ? H * 0.1 : H * 0.165,
+      fit(ctx, longest, 900, FONT.sans, W * 0.62, portrait ? H * 0.1 : H * 0.165),
+    );
     font(ctx, 900, size, FONT.sans);
-    const g = glyphs(ctx, word);
+    const gl = lines.map((l) => glyphs(ctx, l));
     const cap = size * 0.74;
     const markS = cap * 0.98;
     const gap = size * 0.16;
-    const blockW = markS + gap + g.width;
+    const lineGap = size * 1.08;
+    const blockW = markS + gap + Math.max(...gl.map((g) => g.width));
     const tagSize = (portrait ? 42 : 36) * u;
     font(ctx, 700, tagSize, FONT.sans);
-    const tagLines = portrait ? COPY.s8.tagline.split(/(?<=,)\s/) : [COPY.s8.tagline];
+    const tagLines = portrait ? COPY.s8.tagline : [COPY.s8.tagline.join(' ')];
     const tagW = Math.max(...tagLines.map((l) => ctx.measureText(l).width));
     const groupW = Math.max(blockW, tagW);
     const x0 = portrait ? W * 0.1 : W / 2 - groupW / 2;
-    const base = portrait ? H * 0.4 : H * 0.44;
-    const ulY = base + size * 0.17;
+    const base = portrait ? H * 0.36 : H * 0.44; // 첫 줄 기준선
+    const ulY = base + (lines.length - 1) * lineGap + size * 0.17;
     const pillY = ulY + (portrait ? 68 : 60) * u;
     const tagY = pillY + (portrait ? 70 : 62) * u;
     const ctaY = tagY + (tagLines.length - 1) * tagSize * 1.35 + (portrait ? 64 : 56) * u;
-    return { size, g, cap, markS, gap, blockW, x0, base, ulY, pillY, tagY, ctaY, tagSize, tagLines, textX: x0 + markS + gap };
+    return { size, gl, cap, markS, gap, lineGap, blockW, x0, base, ulY, pillY, tagY, ctaY, tagSize, tagLines, textX: x0 + markS + gap };
   }
 
   const S8 = {
-    label: "LET'S CODING",
+    label: "LET'S CODING LOUNGE",
     tone: () => 'w',
     draw(ctx, f, lt) {
       const { W, H, u, portrait } = f;
       ctx.fillStyle = C.ink;
       ctx.fillRect(0, 0, W, H);
       const L = s8Layout(ctx, f);
-      const fade = 1 - prog(lt, 1.6, 1.7);
+      const fade = 1 - prog(lt, 1.64, 1.72);
       ctx.globalAlpha = fade;
 
       // 마크
@@ -1426,19 +1437,25 @@
         ctx.restore();
       }
 
-      // 워드마크 — 음절마다 튀어 오른다
+      // 워드마크 — 음절마다 튀어 오른다. 음절이 많으면 간격을 좁혀 같은 시간 안에 끝낸다
       font(ctx, 900, L.size, FONT.sans);
       ctx.textAlign = 'left';
-      let typed = 0;
-      L.g.list.forEach((gl, i) => {
-        const st = 0.26 + i * 0.075;
+      const sylls = [];
+      L.gl.forEach((g, li) => g.list.forEach((gl) => gl.ch !== ' ' && sylls.push({ gl, li })));
+      // 문의처가 가장 오래 머물도록 앞쪽을 촘촘히 당겨 둔다
+      const stagger = Math.min(0.075, 0.28 / Math.max(1, sylls.length - 1));
+      const typeEnd = 0.22 + (sylls.length - 1) * stagger + 0.03;
+      const ulStart = Math.max(0.5, typeEnd); // 밑줄과 그 뒤 정보는 타이핑이 끝난 뒤에
+      let typed = null;
+      sylls.forEach(({ gl, li }, i) => {
+        const st = 0.22 + i * stagger;
         const p = prog(lt, st, st + 0.42);
         if (p <= 0) return;
-        typed = i + 1;
+        typed = { gl, li };
         const s = 0.55 + 0.45 * spring(p, 8, 14);
         ctx.save();
         ctx.globalAlpha = fade * Math.min(1, p * 6);
-        ctx.translate(L.textX + gl.x + gl.w / 2, L.base + (1 - spring(p, 8, 14)) * 40 * u);
+        ctx.translate(L.textX + gl.x + gl.w / 2, L.base + li * L.lineGap + (1 - spring(p, 8, 14)) * 40 * u);
         ctx.scale(s, s);
         ctx.fillStyle = C.white;
         ctx.textAlign = 'center';
@@ -1446,45 +1463,47 @@
         ctx.restore();
       });
 
-      // 커서
-      if (lt < 0.62 && (lt < 0.26 || lt > 0.55 ? blinkOn(lt) : true)) {
-        const last = L.g.list[typed - 1];
-        const cxp = L.textX + (last ? last.x + last.w : 0) + 10 * u;
+      // 커서 — 치기 전과 다 친 뒤에는 깜빡이고, 치는 동안에는 켜져 있다
+      if (lt < ulStart && (lt < 0.22 || lt > typeEnd ? blinkOn(lt) : true)) {
+        const cxp = L.textX + (typed ? typed.gl.x + typed.gl.w : 0) + 10 * u;
+        const cy = L.base + (typed ? typed.li : 0) * L.lineGap;
         ctx.fillStyle = C.yellow;
-        ctx.fillRect(cxp, L.base - L.cap * 0.95, L.size * 0.08, L.cap * 1.02);
+        ctx.fillRect(cxp, cy - L.cap * 0.95, L.size * 0.08, L.cap * 1.02);
       }
 
-      // 모노 캡션 · 태그라인 · CTA
-      const pa = EASE.outCubic(prog(lt, 0.78, 1.0));
+      // 한 줄 소개 · 태그라인 · 문의처
+      const pa = EASE.outCubic(prog(lt, ulStart + 0.1, ulStart + 0.3));
       if (pa > 0) {
-        font(ctx, 600, (portrait ? 23 : 21) * u, FONT.mono);
+        const ps = (portrait ? 30 : 27) * u;
+        font(ctx, 600, ps, FONT.sans);
         ctx.fillStyle = C.white;
         ctx.globalAlpha = fade * pa * 0.82;
-        drawTracked(ctx, COPY.s8.pillars, L.x0, L.pillY + (1 - pa) * 12 * u, 0.3 * (portrait ? 23 : 21) * u, 'left');
+        drawTracked(ctx, COPY.s8.pillars, L.x0, L.pillY + (1 - pa) * 12 * u, 0.06 * ps, 'left');
       }
-      const ta = EASE.outCubic(prog(lt, 0.92, 1.14));
+      const ta = EASE.outCubic(prog(lt, ulStart + 0.2, ulStart + 0.4));
       if (ta > 0) {
         font(ctx, 700, L.tagSize, FONT.sans);
         ctx.fillStyle = C.white;
         ctx.globalAlpha = fade * ta;
         L.tagLines.forEach((line, i) => ctx.fillText(line, L.x0, L.tagY + i * L.tagSize * 1.35 + (1 - ta) * 12 * u));
       }
-      const ctaN = Math.floor(Array.from(COPY.s8.cta).length * prog(lt, 1.1, 1.5));
-      if (lt > 1.06) {
-        font(ctx, 500, (portrait ? 24 : 21) * u, FONT.mono);
+      const ctaT0 = ulStart + 0.32;
+      const ctaN = Math.floor(Array.from(COPY.s8.cta).length * prog(lt, ctaT0, ctaT0 + 0.28));
+      const cs = (portrait ? 28 : 25) * u;
+      if (lt > ctaT0 - 0.04) {
+        font(ctx, 500, cs, FONT.mono);
         ctx.fillStyle = C.yellow;
         ctx.globalAlpha = fade;
         const shown = Array.from(COPY.s8.cta).slice(0, ctaN).join('');
         ctx.fillText(shown, L.x0, L.ctaY);
-        if (lt < 1.5 || blinkOn(lt)) {
-          const cs = (portrait ? 24 : 21) * u;
+        if (lt < ctaT0 + 0.28 || blinkOn(lt)) {
           ctx.fillRect(L.x0 + ctx.measureText(shown).width + 4 * u, L.ctaY - cs * 0.8, cs * 0.55, cs);
         }
       }
       ctx.globalAlpha = 1;
 
       // 밑줄 → 나갈 때 화면 가로 선이 되어 가운데로
-      const e = EASE.inOutCubic(prog(lt, 1.62, BAR));
+      const e = EASE.inOutCubic(prog(lt, 1.64, BAR));
       if (e > 0) {
         const lx0 = lerp(L.x0, 0, e);
         const lx1 = lerp(L.x0 + L.blockW, W, e);
@@ -1493,7 +1512,7 @@
         ctx.fillStyle = C.yellow;
         ctx.fillRect(lx0, ly - lw / 2, lx1 - lx0, lw);
       } else {
-        const ul = EASE.outCubic(prog(lt, 0.6, 0.86));
+        const ul = EASE.outCubic(prog(lt, ulStart, ulStart + 0.26));
         if (ul > 0) {
           ctx.fillStyle = C.yellow;
           ctx.fillRect(L.x0, L.ulY - 3 * u, L.blockW * ul, 6 * u);

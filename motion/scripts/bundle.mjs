@@ -12,6 +12,7 @@
  *
  * 실행: node motion/scripts/bundle.mjs
  */
+import { existsSync } from "node:fs";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { ROOT } from "./serve.mjs";
@@ -66,7 +67,14 @@ const fontStyle = [
   "</style>",
 ].join("\n");
 
+// 배경음악: 있으면 data URI로 넣고, 없으면 <audio>를 빼서 소리 버튼이 뜨지 않게 한다
+const musicFile = path.join(REEL, "music.mp3");
+const musicTag = existsSync(musicFile)
+  ? `<audio id="music" src="data:audio/mpeg;base64,${(await readFile(musicFile)).toString("base64")}" preload="auto"></audio>`
+  : "";
+
 let page = html
+  .replace(/<audio id="music"[^>]*data-bundle="music"[^>]*><\/audio>/, () => musicTag)
   .replace(/<link[^>]*data-bundle="plex"[^>]*>\n?/, "")
   .replace(/<link[^>]*data-bundle="pretendard"[^>]*>/, fontStyle)
   .replace(/<!-- IBM Plex[^>]*-->\n?/, "")
@@ -97,6 +105,6 @@ const frag = path.join(OUT, "letscoding-reel.fragment.html");
 await writeFile(full, page);
 await writeFile(frag, fragment + "\n");
 const kb = (s) => `${(Buffer.byteLength(s) / 1024).toFixed(0)}KB`;
-console.log(`Pretendard 서브셋 ${pretendardFaces.length}/${faces.length}개 포함`);
+console.log(`Pretendard 서브셋 ${pretendardFaces.length}/${faces.length}개 포함 · 배경음악 ${musicTag ? "포함" : "없음"}`);
 console.log(`${full}  ${kb(page)}`);
 console.log(`${frag}  ${kb(fragment)}`);

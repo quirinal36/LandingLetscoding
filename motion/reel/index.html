@@ -41,6 +41,7 @@
     -webkit-font-smoothing: antialiased;
   }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  [hidden] { display: none !important; } /* .control의 display가 hidden 속성을 덮지 않게 */
 
   .page {
     max-width: 72rem;
@@ -186,18 +187,24 @@
   <header class="intro">
     <p class="kicker">렛츠코딩 모션그래픽</p>
     <h1>렛츠코딩 릴 2026</h1>
-    <p class="lead">15초, 8개 씬, 128 BPM. 모든 전환이 한 박자(0.469초) 단위에 맞춰 떨어집니다. 문구와 수치는 랜딩페이지에 쓰인 것만 옮겼습니다.</p>
+    <p class="lead">15초, 8개 씬, 128 BPM. 모든 전환이 한 박자(0.469초) 단위에 맞춰 떨어집니다.</p>
   </header>
 
   <section class="stage card" aria-label="릴 미리보기">
     <div class="screen" id="screen" data-format="16x9">
-      <canvas id="reel" role="img" aria-label="렛츠코딩 모션그래픽 릴. 코딩을 왜 배우냐는 질문에서 시작해 무료 파일럿 안내로 끝난다."></canvas>
+      <canvas id="reel" role="img" aria-label="렛츠코딩 모션그래픽 릴. Let's Coding으로 시작해 렛츠코딩 라운지 문의처로 끝난다."></canvas>
     </div>
     <div class="bar">
       <button id="play" class="control control-accent" type="button" aria-pressed="true">
         <svg viewBox="0 0 14 14" aria-hidden="true"><path id="play-icon" fill="currentColor" d="M3 2h3v10H3zM8 2h3v10H8z"/></svg>
         <span id="play-label">일시정지</span>
       </button>
+      <!-- 배경음악(reel/music.mp3)이 있을 때만 보인다. 브라우저는 사람이 누른 뒤에만 소리를 낸다 -->
+      <button id="sound" class="control" type="button" aria-pressed="false" hidden>
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path fill="currentColor" d="M2 5h2.5L8 2v10L4.5 9H2z"/><path id="sound-wave" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M10 5c.8.6.8 3.4 0 4M11.8 3.4c1.9 1.7 1.9 5.5 0 7.2"/></svg>
+        <span id="sound-label">소리 켜기</span>
+      </button>
+      <audio id="music" src="music.mp3" preload="auto" data-bundle="music"></audio>
       <div class="readout">
         <output id="tc" class="tc" for="scrub">00:00:00:00</output>
         <span id="now" class="now">01/08 WHY CODE</span>
@@ -217,9 +224,9 @@
     <p>레퍼런스 릴의 여덟 가지 기법을 순서 그대로 가져오고, 각 씬이 말하는 내용만 렛츠코딩으로 바꿨습니다.</p>
     <ol class="scene-list">
       <li class="scene">
-        <div class="scene-head"><span class="no">01</span><h3>WHY CODE</h3><span class="time">0.00–1.87s</span></div>
-        <p>키네틱 타이포. 글자가 16분음표 간격으로 떨어져 스프링으로 착지하고 발밑에 링이 퍼집니다. 세리프 이탤릭 한 줄과 궤도 타원이 뒤따릅니다.</p>
-        <p class="says">“AI가 코딩 다 해주는데, 코딩을 왜 배워요?”</p>
+        <div class="scene-head"><span class="no">01</span><h3>LET'S CODING</h3><span class="time">0.00–1.87s</span></div>
+        <p>키네틱 타이포. 글자가 하나씩 떨어져 스프링으로 착지하고 발밑에 링이 퍼집니다. 세리프 이탤릭 한 줄과 궤도 타원이 뒤따릅니다.</p>
+        <p class="says">Let's Coding · “AI가 코딩 다 해주는데, 코딩을 왜 배워요?”</p>
       </li>
       <li class="scene">
         <div class="scene-head"><span class="no">02</span><h3>IDEA</h3><span class="time">1.87–3.75s</span></div>
@@ -227,24 +234,24 @@
         <p class="says">AI가 대신 못 하는 것을 시킵니다</p>
       </li>
       <li class="scene">
-        <div class="scene-head"><span class="no">03</span><h3>PLAN · MAKE · SHIP</h3><span class="time">3.75–5.62s</span></div>
+        <div class="scene-head"><span class="no">03</span><h3>MAKE · PLAY · FEEDBACK</h3><span class="time">3.75–5.62s</span></div>
         <p>셰이프 모프. 한 박자마다 배경색과 도형이 바뀌고 지난 외곽선이 잔상으로 남습니다. 왼쪽 아래 그래프가 지금 쓰는 이징 곡선과 진행값을 보여 줍니다.</p>
-        <p class="says">정하고 · 만들고 · 내놓고 · 고치고</p>
+        <p class="says">만들고 · 플레이하고 · 피드백 · 고치고</p>
       </li>
       <li class="scene">
         <div class="scene-head"><span class="no">04</span><h3>LOUNGE</h3><span class="time">5.62–7.50s</span></div>
         <p>타일 플립 전환. 파란 타일이 왼쪽부터 뒤집히며 [행][열] 격자를 드러내고, 박자마다 작품 카드가 올라옵니다. 나갈 때는 가운데 칸부터 흩어집니다.</p>
-        <p class="says">학생 작품이 사라지지 않는 학원</p>
+        <p class="says">내가 스타트업 대표가 되는 공간</p>
       </li>
       <li class="scene">
         <div class="scene-head"><span class="no">05</span><h3>GROW</h3><span class="time">7.50–9.37s</span></div>
         <p>메타볼. 방울이 붙었다 떨어지며 자라다가 화면을 채웁니다. 글자는 방울 밖에서 흰색, 방울 안에서 노란색입니다.</p>
-        <p class="says">진도표 대신, 성장을 보여 줍니다</p>
+        <p class="says">생각근육 &gt; 공감근육 &gt; 성장</p>
       </li>
       <li class="scene">
-        <div class="scene-head"><span class="no">06</span><h3>196 WORKS</h3><span class="time">9.37–11.25s</span></div>
+        <div class="scene-head"><span class="no">06</span><h3>224 WORKS</h3><span class="time">9.37–11.25s</span></div>
         <p>카운터와 라인 드로잉. 펜이 하이포트로코이드(R=5, r=3, d=5)를 그리고, 굴러가는 원과 팔이 옅게 보입니다. 바닥의 사인파는 박자마다 부풉니다.</p>
-        <p class="says">학생 44명이 4개월 반 동안 올린 작품 196건</p>
+        <p class="says">5개월 동안 등록된 학생 작품 224건</p>
       </li>
       <li class="scene">
         <div class="scene-head"><span class="no">07</span><h3>MONTAGE</h3><span class="time">11.25–13.12s</span></div>
@@ -252,12 +259,11 @@
         <p class="says">LET'S CODE</p>
       </li>
       <li class="scene">
-        <div class="scene-head"><span class="no">08</span><h3>렛츠코딩</h3><span class="time">13.12–15.00s</span></div>
+        <div class="scene-head"><span class="no">08</span><h3>렛츠코딩 라운지</h3><span class="time">13.12–15.00s</span></div>
         <p>커서, 워드마크, 밑줄, 정보 순으로 올라오는 엔드카드. 밑줄이 화면 가로선이 되어 01의 첫 프레임으로 이어지므로 끊김 없이 반복됩니다.</p>
-        <p class="says">AI 시대의 코딩 커리큘럼, 원장님 혼자 고민하지 마세요.</p>
+        <p class="says">AI체질개선과 무한한 커리큘럼 함께하면 가벼워집니다. · 문의처 : contact@letscoding.kr</p>
       </li>
     </ol>
-    <p class="source">196건과 44명은 렛츠코딩앤플레이의 2026.4.6–8.22 등록분이며 2026.8.24 운영 DB에서 집계한 값입니다(랜딩페이지 PROOF 항목과 같음).</p>
   </section>
 </main>
 
@@ -296,6 +302,11 @@
   var playBtn = document.getElementById('play');
   var playIcon = document.getElementById('play-icon');
   var playLabel = document.getElementById('play-label');
+  var music = document.getElementById('music');
+  var soundBtn = document.getElementById('sound');
+  var soundLabel = document.getElementById('sound-label');
+  var soundWave = document.getElementById('sound-wave');
+  var soundOn = false;
   var tcOut = document.getElementById('tc');
   var nowOut = document.getElementById('now');
   var scrub = document.getElementById('scrub');
@@ -360,14 +371,33 @@
     });
   }
 
+  function syncMusic() {
+    if (!music) return;
+    if (soundOn && playing && ready) {
+      music.currentTime = t;
+      var started = music.play();
+      if (started && started.catch) started.catch(function () { setSound(false); });
+    } else if (!music.paused) {
+      music.pause();
+    }
+  }
   function setPlaying(p) {
     playing = p;
     playBtn.setAttribute('aria-pressed', String(p));
     playLabel.textContent = p ? '일시정지' : '재생';
     playIcon.setAttribute('d', p ? 'M3 2h3v10H3zM8 2h3v10H8z' : 'M3 1.5v11l9.5-5.5z');
+    syncMusic();
+  }
+  function setSound(on) {
+    soundOn = on && !!music;
+    soundBtn.setAttribute('aria-pressed', String(soundOn));
+    soundLabel.textContent = soundOn ? '소리 끄기' : '소리 켜기';
+    soundWave.style.opacity = soundOn ? '1' : '0.25';
+    syncMusic();
   }
   function seek(sec) {
     t = ((sec % R.DURATION) + R.DURATION) % R.DURATION;
+    if (music && soundOn && playing) music.currentTime = t;
     draw();
   }
   function setFormat(fmt) {
@@ -379,6 +409,12 @@
   }
 
   playBtn.addEventListener('click', function () { setPlaying(!playing); });
+  if (music) {
+    music.loop = true;
+    music.addEventListener('loadedmetadata', function () { soundBtn.hidden = false; });
+    music.addEventListener('error', function () { soundBtn.hidden = true; soundOn = false; });
+    soundBtn.addEventListener('click', function () { setSound(!soundOn); });
+  }
   formatBtns.forEach(function (b) {
     b.addEventListener('click', function () { setFormat(b.getAttribute('data-format')); });
   });
@@ -403,18 +439,22 @@
     var dt = last ? Math.min(0.1, (now - last) / 1000) : 0;
     last = now;
     if (playing && ready) {
-      t = (t + dt) % R.DURATION;
+      // 소리가 나고 있으면 오디오 시계가 기준이다 — 화면이 음악을 따라간다
+      if (soundOn && music && !music.paused) t = music.currentTime % R.DURATION;
+      else t = (t + dt) % R.DURATION;
       draw();
     }
     requestAnimationFrame(tick);
   }
 
   setPlaying(playing);
+  if (music) setSound(false);
   setFormat(format);
   R.loadFonts().then(function () {
     ready = true;
     sizeCanvas();
     draw();
+    syncMusic();
     requestAnimationFrame(tick);
   });
 })();

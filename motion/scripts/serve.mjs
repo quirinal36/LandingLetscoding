@@ -24,6 +24,8 @@ const TYPES = {
   ".css": "text/css; charset=utf-8",
   ".woff2": "font/woff2",
   ".txt": "text/plain; charset=utf-8",
+  ".m4a": "audio/mp4",
+  ".mp3": "audio/mpeg",
 };
 
 function inside(base, urlPath) {
@@ -46,16 +48,34 @@ export function createServer() {
       res.writeHead(403).end();
       return;
     }
+    let body;
     try {
-      const body = await readFile(file);
-      res.writeHead(200, {
-        "content-type": TYPES[path.extname(file)] || "application/octet-stream",
-        "cache-control": "no-store",
-      });
-      res.end(body);
+      body = await readFile(file);
     } catch {
       res.writeHead(404).end("not found");
+      return;
     }
+    const headers = {
+      "content-type": TYPES[path.extname(file)] || "application/octet-stream",
+      "cache-control": "no-store",
+      "accept-ranges": "bytes",
+    };
+    // 음악을 원하는 위치로 옮기려면(스크럽) 브라우저가 바이트 범위로 요청한다
+    const range = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
+    if (range && (range[1] || range[2])) {
+      const size = body.length;
+      const start = range[1] ? Number(range[1]) : Math.max(0, size - Number(range[2]));
+      const end = range[1] && range[2] ? Math.min(Number(range[2]), size - 1) : size - 1;
+      if (start >= size || start > end) {
+        res.writeHead(416, { "content-range": `bytes */${size}` }).end();
+        return;
+      }
+      res.writeHead(206, { ...headers, "content-range": `bytes ${start}-${end}/${size}`, "content-length": end - start + 1 });
+      res.end(body.subarray(start, end + 1));
+      return;
+    }
+    res.writeHead(200, headers);
+    res.end(body);
   });
 }
 
