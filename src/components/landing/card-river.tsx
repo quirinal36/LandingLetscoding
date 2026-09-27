@@ -23,7 +23,6 @@ function Row({ items, speed, reverse = false, drift }: { items: Work[]; speed: n
         {doubled.map((w, i) => (
           <li key={`${w.slug}-${i}`} className="river-card" aria-hidden={i >= items.length ? true : undefined}>
             <Image src={`/landing/works/${w.slug}.webp`} alt={i < items.length ? `${w.title} · ${w.kind}` : ""} width={560} height={315} sizes="260px" className="size-full object-cover" />
-            <span className="river-label">{w.title}</span>
           </li>
         ))}
       </ul>

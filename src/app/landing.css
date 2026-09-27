@@ -244,18 +244,6 @@
     outline: 1px solid rgba(255, 255, 255, 0.08);
     outline-offset: -1px;
   }
-  .river-label {
-    position: absolute;
-    inset: auto 0 0;
-    padding: 18px 10px 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   /* ── 이야기 무대 ───────────────────────────────────────────── */
   .stage-grid {
@@ -371,10 +359,21 @@
 @media (prefers-reduced-motion: reduce) {
   .intro,
   .text-glow,
-  .river-track,
   .scene *,
   .scene {
     animation: none !important;
+  }
+  /* 카드의 강은 멈추지 않고 느려진다. 내용이지 연출이 아니다.
+     윈도우는 「애니메이션 효과」가 꺼진 PC가 흔해서, 전부 끄면 첫 화면이 죽은 페이지처럼 보인다.
+     기울기·시차·흐림은 끄고, 일직선 흐름만 절반 속도로 남긴다. */
+  .river-track {
+    animation-duration: calc(var(--dur) * 2);
+  }
+  .river-tilt {
+    transform: perspective(1400px) rotateX(22deg) rotateZ(-5deg) scale(1.12);
+  }
+  .river-row {
+    transform: none;
   }
   [data-reveal],
   .js [data-reveal]:not([data-shown]) {
