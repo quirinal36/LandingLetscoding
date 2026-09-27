@@ -1,0 +1,236 @@
+[
+ {
+  "slug": "english",
+  "title": "삐약! 영어 탐험",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/english"
+ },
+ {
+  "slug": "video-editor",
+  "title": "동영상 편집기",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/video-editor"
+ },
+ {
+  "slug": "chuseok",
+  "title": "나의 추석 캐릭터는?",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/chuseok"
+ },
+ {
+  "slug": "absolute-pitch",
+  "title": "절대음감 테스트",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/absolute-pitch"
+ },
+ {
+  "slug": "image-editor",
+  "title": "이미지 편집기",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/image-editor"
+ },
+ {
+  "slug": "pixel-art-maker",
+  "title": "픽셀아트 변환기",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/pixel-art-maker"
+ },
+ {
+  "slug": "pixel-quiz",
+  "title": "무슨 그림인지 맞혀봐!",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/pixel-quiz"
+ },
+ {
+  "slug": "wrong-code",
+  "title": "틀린 코드 찾기",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/wrong-code"
+ },
+ {
+  "slug": "easy-print",
+  "title": "Easy Print",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/easy-print"
+ },
+ {
+  "slug": "color-eater",
+  "title": "COLOR EATER",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/color-eater"
+ },
+ {
+  "slug": "letscoding-village",
+  "title": "렛츠코딩 빌리지",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/letscoding-village"
+ },
+ {
+  "slug": "color-mixer",
+  "title": "Color Mixer",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/color-mixer"
+ },
+ {
+  "slug": "pixel-flipbook",
+  "title": "픽셀 플립북",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/pixel-flipbook"
+ },
+ {
+  "slug": "songpyeon",
+  "title": "뀨의 송편 가게",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/songpyeon"
+ },
+ {
+  "slug": "deep-step",
+  "title": "Deep Step",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/deep-step"
+ },
+ {
+  "slug": "cs50-duck",
+  "title": "하버드 CS50 Duck",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/cs50-duck"
+ },
+ {
+  "slug": "qr-code",
+  "title": "QR 코드 생성기",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/qr-code"
+ },
+ {
+  "slug": "run-away",
+  "title": "Run away!",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/run-away"
+ },
+ {
+  "slug": "pycamp",
+  "title": "파이썬 훈련소",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/pycamp"
+ },
+ {
+  "slug": "make-it-easy",
+  "title": "무슨 말?",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/make-it-easy"
+ },
+ {
+  "slug": "memory",
+  "title": "메모리 메모리",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/memory"
+ },
+ {
+  "slug": "peeps-path",
+  "title": "삐약이네 집으로",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/peeps-path"
+ },
+ {
+  "slug": "colors",
+  "title": "Colors",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/colors"
+ },
+ {
+  "slug": "word-racing",
+  "title": "Word Racing",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/word-racing"
+ },
+ {
+  "slug": "bulmeong",
+  "title": "불멍",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/bulmeong"
+ },
+ {
+  "slug": "nineteen",
+  "title": "십구단을 외자",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/nineteen"
+ },
+ {
+  "slug": "slowbb",
+  "title": "엄청 느린 벽돌깨기",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/slowbb"
+ },
+ {
+  "slug": "number-pop",
+  "title": "숫자 뽁뽁이",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/number-pop"
+ },
+ {
+  "slug": "words-for-coding",
+  "title": "알고있슝?",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/words-for-coding"
+ },
+ {
+  "slug": "weekly-words",
+  "title": "이번 주 단어",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/weekly-words"
+ },
+ {
+  "slug": "stone-collector",
+  "title": "Stone Collector",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/stone-collector"
+ },
+ {
+  "slug": "how-to-write",
+  "title": "어떻게 써?",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/how-to-write"
+ },
+ {
+  "slug": "ttobak-dongyo",
+  "title": "또박동요",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/ttobak-dongyo"
+ },
+ {
+  "slug": "ten-pang",
+  "title": "텐팡",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/ten-pang"
+ },
+ {
+  "slug": "taja",
+  "title": "이히히 타자연습",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/taja"
+ },
+ {
+  "slug": "compass",
+  "title": "포켓나침반",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/compass"
+ },
+ {
+  "slug": "ball",
+  "title": "굴려라공",
+  "kind": "웹 게임",
+  "href": "https://lounge.letscoding.kr/works/nana/ball"
+ },
+ {
+  "slug": "translator",
+  "title": "영한/한영 번역기",
+  "kind": "블록 코딩",
+  "href": "https://lounge.letscoding.kr/works/nana/translator"
+ },
+ {
+  "slug": "letscoding",
+  "title": "렛츠코딩, 파이썬 학습 플랫폼",
+  "kind": "웹사이트",
+  "href": "https://lounge.letscoding.kr/works/nana/letscoding"
+ }
+]

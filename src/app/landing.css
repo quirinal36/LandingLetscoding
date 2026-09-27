@@ -1,0 +1,408 @@
+/* ──────────────────────────────────────────────────────────────
+   랜딩 레이어 — Apple식 무대 연출 (DESIGN.md 「랜딩」 절)
+
+   1. 두 톤: 검은 무대(.tone-dark)와 밝은 면(.tone-paper)을 번갈아 쓴다.
+      .tone-dark 는 토큰만 다시 정의한다. 아래 컴포넌트는 그대로 두면 알아서 뒤집힌다.
+   2. 그라디언트는 두 자리에만: 큰 제목의 글자 채움, 제품 뒤의 빛.
+   3. 스크롤 연출은 --p(0→1) 하나로 움직인다. 동작 줄이기 설정이면 전부 멈추고
+      마지막 상태가 남는다.
+   ────────────────────────────────────────────────────────────── */
+
+.tone-dark {
+  --color-bg: #000000;
+  --color-surface: #161618;
+  --color-fill: #242427;
+  --color-fill-strong: #3a3a3f;
+  --color-ink: #f5f5f7;
+  --color-ink-soft: #a1a1a6;
+  --color-ink-faint: #8e8e93;
+  --color-separator: #2c2c30;
+  --color-edge: #6e6e73;
+  --color-accent: #3b6fe0;
+  --color-accent-deep: #2d57b8;
+  --color-accent-soft: #0f2146;
+  --color-accent-ink: #7aa7ff;
+  color-scheme: dark;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+.tone-paper {
+  --color-bg: #f5f5f7;
+  background-color: #f5f5f7;
+  color: var(--color-ink);
+}
+
+/* 알약 모양 — .control 의 반지름보다 앞서야 해서 레이어 밖에 둔다 */
+.pill {
+  border-radius: 9999px;
+}
+
+/* 다크 톤 위에서 하드코딩된 밝은 값들을 뒤집는다 */
+.tone-dark .bar,
+.bar.tone-dark {
+  background-color: rgba(0, 0, 0, 0.72);
+}
+.bar.tone-dark[data-scrolled="true"] {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+@media (hover: hover) and (pointer: fine) {
+  .tone-dark .control:hover {
+    background-color: #2a2a2e;
+  }
+  .tone-dark .control-accent:hover {
+    background-color: #3567d6;
+  }
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .tone-dark .floating {
+    background-color: rgba(28, 28, 30, 0.82);
+  }
+}
+
+@layer components {
+  /* ── 큰 글자 ─────────────────────────────────────────────── */
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+
+  /* 금속 느낌의 글자 채움 — 위는 밝고 아래로 식는다 */
+  .text-metal {
+    background: linear-gradient(180deg, #ffffff 0%, #e8ebf2 38%, #8f9bb3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 포인트 빛 — 파랑에서 하늘색으로. 이 페이지의 "앞으로" */
+  .text-glow {
+    background: linear-gradient(100deg, #7aa7ff 0%, #4f8bff 35%, #58d5ff 70%, #b7c9ff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: glow-drift 8s ease-in-out infinite alternate;
+  }
+  @keyframes glow-drift {
+    to {
+      background-position: 100% 0;
+    }
+  }
+
+  .text-ink-gradient {
+    background: linear-gradient(180deg, #1b2333 0%, #3c4a66 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Apple식 텍스트 링크 — 파란 글자 + 꺾쇠 */
+  .link-chevron {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    min-height: 44px;
+    color: var(--color-accent-ink);
+    font-weight: 500;
+  }
+  .link-chevron::after {
+    content: "›";
+    font-size: 1.25em;
+    line-height: 1;
+    transition: transform var(--press-ms) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link-chevron:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .link-chevron:hover::after {
+      transform: translateX(3px);
+    }
+  }
+
+  /* 유리 칩 — 무대 위에 떠 있는 작은 정보 */
+  .glass {
+    background-color: rgba(40, 40, 44, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+    backdrop-filter: saturate(160%) blur(18px);
+  }
+
+  /* ── 첫 등장 — 흐릿하게 떠올라 또렷해진다 ─────────────────── */
+  .intro {
+    animation: intro 1.1s var(--ease-out) both;
+    animation-delay: calc(var(--d, 0) * 1ms);
+  }
+  @keyframes intro {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+      filter: blur(10px);
+    }
+  }
+
+  /* ── 스크롤에 들어오면 나타남 (RevealObserver 가 data-shown 을 붙인다) ── */
+  [data-reveal] {
+    transition:
+      opacity 0.9s var(--ease-out),
+      transform 0.9s var(--ease-out),
+      filter 0.9s var(--ease-out);
+    transition-delay: calc(var(--d, 0) * 1ms);
+  }
+  .js [data-reveal]:not([data-shown]) {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(6px);
+  }
+
+  /* ── 고정 장면 — 긴 구간 동안 화면에 붙어 있다 ─────────────── */
+  .scene {
+    position: relative;
+  }
+  .scene-pin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  /* ── 한 단어씩 밝아지는 문단 ─────────────────────────────── */
+  .scrub-word {
+    opacity: clamp(0.16, calc(var(--p, 1) * (var(--n) + 6) - var(--i)), 1);
+    transition: opacity 120ms linear;
+  }
+
+  /* 제품 뒤의 빛 */
+  .halo {
+    position: absolute;
+    inset: -10% -20% auto;
+    height: 90%;
+    background:
+      radial-gradient(40% 50% at 50% 60%, rgba(59, 111, 224, 0.55), transparent 70%),
+      radial-gradient(30% 40% at 30% 40%, rgba(88, 213, 255, 0.28), transparent 70%),
+      radial-gradient(30% 40% at 72% 45%, rgba(148, 110, 255, 0.28), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  /* 마지막 계단 — 화면에 들어오면 그어진다 */
+  .final-draw {
+    stroke-dasharray: 1 1.1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.6s var(--ease-out) 0.2s;
+  }
+  .js .final-stairs:not([data-shown]) .final-draw {
+    stroke-dashoffset: 1.02;
+  }
+
+
+  /* ── 카드의 강 ─────────────────────────────────────────────── */
+  .river {
+    position: relative;
+    overflow: hidden;
+    padding: 6vh 0 4vh;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+  /* 판 전체가 마우스 쪽으로 기운다 */
+  .river-tilt {
+    display: grid;
+    gap: clamp(10px, 1.4vw, 18px);
+    transform: perspective(1400px) rotateX(calc(22deg - var(--my, 0) * 5deg)) rotateY(calc(var(--mx, 0) * 7deg)) rotateZ(-5deg) scale(1.12);
+    transform-origin: 50% 40%;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  /* 줄마다 다른 폭으로 미끄러진다 — 앞줄이 더 많이 움직여 깊이가 생긴다 */
+  .river-row {
+    overflow: hidden;
+    transform: translateX(calc(var(--mx, 0) * var(--drift, 0px)));
+    will-change: transform;
+  }
+  .river-track {
+    display: flex;
+    gap: clamp(10px, 1.4vw, 18px);
+    width: max-content;
+    animation: river var(--dur) linear infinite var(--dir);
+  }
+  @keyframes river {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .river-card {
+    position: relative;
+    width: clamp(150px, 18vw, 260px);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #14161c;
+    outline: 1px solid rgba(255, 255, 255, 0.08);
+    outline-offset: -1px;
+  }
+  .river-label {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 18px 10px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── 이야기 무대 ───────────────────────────────────────────── */
+  .stage-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 5.5% 7.33%;
+    -webkit-mask-image: radial-gradient(80% 80% at 50% 50%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(80% 80% at 50% 50%, #000 40%, transparent 100%);
+  }
+  .ceiling {
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12));
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.25);
+  }
+  .flash {
+    border-radius: 999px;
+    background: radial-gradient(circle, #fff 0%, #ffd27a 25%, rgba(255, 180, 84, 0) 70%);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+  .kit {
+    border-radius: 16px;
+    color: #1b2333;
+    background: linear-gradient(160deg, #ffe08a, #f0a93a);
+    box-shadow:
+      inset 0 -6px 0 rgba(0, 0, 0, 0.12),
+      0 10px 24px rgba(0, 0, 0, 0.35);
+  }
+  .work-card {
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  .skill-chip {
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0b0d14;
+    background: #7aa7ff;
+  }
+  @media (min-width: 768px) {
+    .skill-chip {
+      font-size: 12px;
+      padding: 6px 11px;
+    }
+  }
+  .next-slot {
+    border: 2px dashed var(--color-accent);
+    border-radius: 14px;
+    background: rgba(59, 111, 224, 0.08);
+    transition: background-color var(--press-ms) var(--ease-out);
+  }
+  .next-slot:hover {
+    background: rgba(59, 111, 224, 0.2);
+  }
+
+  /* ── 폰 ─────────────────────────────────────────────────── */
+  .phone {
+    position: relative;
+    width: clamp(220px, 26vw, 300px);
+    aspect-ratio: 9 / 19.2;
+    padding: 12px;
+    border-radius: 44px;
+    background: #101114;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.14),
+      0 40px 80px rgba(0, 0, 0, 0.55),
+      inset 0 0 0 2px #2a2c33;
+  }
+  .phone-screen {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 34px;
+    background: #000;
+  }
+  .phone-notch {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 30%;
+    height: 22px;
+    border-radius: 999px;
+    background: #000;
+    transform: translateX(-50%);
+  }
+
+  /* ── 크게 떠오르는 두 색 제목 ─────────────────────────────── */
+  .text-gold {
+    background: linear-gradient(100deg, #ffe7a3 0%, #ffc857 45%, #ff9f43 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── 가로로 넘기는 하이라이트 ──────────────────────────────── */
+  .rail {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+  .rail > * {
+    scroll-snap-align: start;
+  }
+}
+
+/* ── 동작 줄이기 — 모든 연출을 끄고 마지막 상태만 남긴다 ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .text-glow,
+  .river-track,
+  .scene *,
+  .scene {
+    animation: none !important;
+  }
+  [data-reveal],
+  .js [data-reveal]:not([data-shown]) {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  /* --p 는 0에 머문다. 히어로 글자는 보이고, 이야기는 마지막 프레임이 남는다 */
+  .scene {
+    height: auto !important;
+  }
+  /* 이야기 자막은 넘기지 않고 한꺼번에 읽는다 */
+  .story-captions {
+    min-height: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .story-caption {
+    position: static;
+    opacity: 1 !important;
+  }
+  .scene-pin {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+  }
+  .scrub-word {
+    opacity: 1;
+  }
+}
