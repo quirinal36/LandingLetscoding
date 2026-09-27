@@ -244,18 +244,6 @@
     outline: 1px solid rgba(255, 255, 255, 0.08);
     outline-offset: -1px;
   }
-  .river-label {
-    position: absolute;
-    inset: auto 0 0;
-    padding: 18px 10px 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   /* ── 이야기 무대 ───────────────────────────────────────────── */
   .stage-grid {
