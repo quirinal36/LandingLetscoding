@@ -1562,7 +1562,8 @@
     const ctx = canvas.getContext('2d', { alpha: false });
     return {
       canvas,
-      render(t) {
+      /** opts.hud === false 면 HUD 없이 장면만 그린다(썸네일 배경용). */
+      render(t, opts) {
         t = ((t % DURATION) + DURATION) % DURATION;
         const f = frame(canvas.width, canvas.height);
         const idx = Math.min(SCENE_COUNT - 1, Math.floor(t / BAR + 1e-9));
@@ -1572,7 +1573,7 @@
         SCENES[idx].draw(ctx, f, lt);
         ctx.restore();
         reset(ctx);
-        drawHUD(ctx, f, t, idx, SCENES[idx].tone(lt));
+        if (!opts || opts.hud !== false) drawHUD(ctx, f, t, idx, SCENES[idx].tone(lt));
         return { idx, lt };
       },
     };

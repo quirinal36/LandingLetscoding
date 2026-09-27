@@ -14,7 +14,10 @@ npx playwright install chromium  # 처음 한 번 (MP4 렌더용 브라우저)
 npm run render                   # out/letscoding-reel-16x9.mp4  1920×1080
 npm run render:vertical          # out/letscoding-reel-9x16.mp4  1080×1920 (릴스·쇼츠)
 npm run bundle                   # out/letscoding-reel.html      파일 하나, 오프라인 재생
+npm run thumbnail                # out/youtube-thumbnail.jpg     유튜브 썸네일 1280×720
 ```
+
+유튜브에 올릴 제목·설명·태그는 [YOUTUBE.md](./YOUTUBE.md)에 있다. 썸네일 문구는 `reel/thumbnail.html` 맨 위 `T`.
 
 MP4 렌더에는 ffmpeg가 필요하다(`brew install ffmpeg`, `winget install ffmpeg`).
 PATH에 없으면 `FFMPEG=/경로/ffmpeg npm run render`.
@@ -30,6 +33,7 @@ motion/
 ├─ reel/
 │  ├─ reel.js        엔진 + 8개 씬. 맨 위에 COPY(문구) · C(색) · FONT(글꼴) · BPM
 │  ├─ index.html     플레이어(재생·정지, 스크럽, 16:9 ↔ 9:16). ?export 로 열면 캔버스만
+│  ├─ thumbnail.html 유튜브 썸네일(릴 장면을 배경으로 쓴다)
 │  ├─ plex.css       IBM Plex Mono · Serif Italic 선언
 │  ├─ plex/          IBM Plex woff2(latin) + OFL 라이선스
 │  └─ music.mp3      배경음악 15초(있을 때만. fit_music.py가 만든다)
@@ -38,8 +42,10 @@ motion/
 │  ├─ render.mjs     MP4 렌더러 (music.mp3가 있으면 AAC로 넣는다)
 │  ├─ bundle.mjs     단일 HTML 번들러
 │  ├─ suno.mjs       kie.ai Suno API로 배경음악 생성
-│  └─ fit_music.py   생성된 곡을 128 BPM 8마디(15초)로 맞춰 자른다
+│  ├─ fit_music.py   생성된 곡을 128 BPM 8마디(15초)로 맞춰 자른다
+│  └─ thumbnail.mjs  썸네일 JPG·PNG를 뽑는다
 ├─ ANALYSIS.md       레퍼런스 분석
+├─ YOUTUBE.md        유튜브 제목·설명·태그
 └─ out/              결과물 (git에 올리지 않음)
 ```
 
