@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   },
   description:
     "AI가 코드를 쓰는 시대, 학원의 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 AI 시대에 맞춘 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.",
+  verification: {
+    other: { "naver-site-verification": "f9d3cddbda95b21d446288c741f98fc6147ca6cb" },
+  },
 };
 
 export const viewport: Viewport = {
