@@ -130,14 +130,14 @@ export default function Home() {
           </p>
           <h1 className="display mt-4 text-[2.75rem] md:text-[5.75rem]">
             <span className="intro text-metal block" {...intro(120)}>
-              아이는 자라는데,
+              학생 한 명이,
             </span>
             <span className="intro text-gold block pb-2" {...intro(260)}>
-              교재는 처음으로.
+              스타트업을 합니다.
             </span>
           </h1>
           <p className="intro mx-auto mt-5 max-w-[36ch] text-[1.0625rem] leading-relaxed text-ink-soft md:text-[1.375rem]" {...intro(420)}>
-            새 로봇을 들여도 6개월이면 다시 초보 단계. 그 굴레를 끊은 수업과 플랫폼을 그대로 드립니다.
+            작품을 만들고, 알리고, 루캣으로 투자를 받습니다. 학생 한 명이 매달 스타트업의 한 바퀴를 직접 돕니다.
           </p>
           <div className="intro mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2" {...intro(560)}>
             <ButtonLink href={INQUIRY} tone="accent" size="lg" className="pill">
