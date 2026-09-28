@@ -12,6 +12,7 @@ import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { ScrollScene } from "@/components/landing/scroll-scene";
 import { StoryCaptions, StoryStage } from "@/components/landing/story-stage";
 import { STORY_T } from "@/components/landing/timeline";
+import { COMPANY } from "@/lib/nav";
 
 /*
   랜딩 — MYPROBLEM.md 의 이야기를 학생 작품으로 보여 준다. (DESIGN.md 「랜딩」, HERO-MOTION-PLAN.md)
@@ -36,6 +37,62 @@ import { STORY_T } from "@/components/landing/timeline";
 const LOUNGE_URL = "https://lounge.letscoding.kr/works";
 const INQUIRY = "/seminar/inquiry";
 const CONTACT = { email: "contact@letscoding.kr", tel: "010-5679-0072" };
+
+/* 구조화 데이터 — 이 페이지에 보이는 사실만 싣는다. 가격·문구를 바꾸면 여기도 같이 고친다. */
+const ORG_ID = `${COMPANY.url}/#organization`;
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": ORG_ID,
+      name: COMPANY.name,
+      alternateName: [COMPANY.short, COMPANY.latin],
+      url: COMPANY.url,
+      logo: `${COMPANY.url}/icon.png`,
+      email: CONTACT.email,
+      telephone: `+82-${CONTACT.tel.slice(1)}`,
+      description: "7년차 코딩학원이 직접 만들어 매일 쓰는 AI 시대 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${COMPANY.url}/#website`,
+      name: COMPANY.short,
+      url: COMPANY.url,
+      inLanguage: "ko-KR",
+      publisher: { "@id": ORG_ID },
+    },
+    {
+      "@type": "Service",
+      name: "렛츠코딩 라운지",
+      url: "https://lounge.letscoding.kr",
+      provider: { "@id": ORG_ID },
+      audience: { "@type": "BusinessAudience", name: "코딩 학원" },
+      description: "학생들이 바이브코딩으로 만든 게임과 웹사이트를 올리고, 서로 해 보고, 반응을 주고받는 곳입니다.",
+      offers: [
+        {
+          "@type": "Offer",
+          name: "4주 무료 파일럿",
+          price: 0,
+          priceCurrency: "KRW",
+          description: "인원 수와 관계없이 첫 반 하나로 먼저 써 보세요.",
+        },
+        {
+          "@type": "Offer",
+          name: "학생 1명 월 이용료",
+          priceCurrency: "KRW",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: 11000,
+            priceCurrency: "KRW",
+            unitText: "학생 1명 월",
+            valueAddedTaxIncluded: true,
+          },
+        },
+      ],
+    },
+  ],
+};
 
 const reveal = (d = 0) => ({ "data-reveal": "", style: { "--d": d } as CSSProperties });
 const intro = (d = 0) => ({ style: { "--d": d } as CSSProperties });
@@ -126,6 +183,10 @@ const START = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, "\\u003c") }}
+      />
       <RevealObserver />
 
       {/* ═══ 1. 히어로 — 카드의 강 ═══════════════════════════════════ */}
