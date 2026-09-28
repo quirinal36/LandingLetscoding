@@ -52,4 +52,5 @@ export const COMPANY = {
   name: "주식회사 렛츠코딩",
   short: "렛츠코딩",
   latin: "LETSCODING",
+  url: "https://www.letscoding.kr",
 } as const;

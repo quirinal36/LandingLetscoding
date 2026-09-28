@@ -1,5 +1,9 @@
 import { ButtonLink } from "@/components/ui";
 
+/** 준비 중 페이지는 내용이 채워질 때까지 검색 색인에서 뺀다. 링크는 계속 따라가게 둔다.
+ *  내용을 채우면 해당 페이지에서 이 값을 지우고 sitemap.ts에 경로를 추가한다. */
+export const STUB_ROBOTS = { index: false, follow: true } as const;
+
 /** 내비게이션을 실제로 눌러볼 수 있도록 둔 임시 페이지. 내용은 이후 채운다. */
 export function PageStub({ title, note }: { title: string; note: string }) {
   return (

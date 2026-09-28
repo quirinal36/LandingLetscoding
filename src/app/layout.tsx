@@ -10,13 +10,30 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
+const DESCRIPTION =
+  "AI가 코드를 쓰는 시대, 학원의 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 AI 시대에 맞춘 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(COMPANY.url),
+  alternates: { canonical: "./" },
   title: {
     default: `${COMPANY.name} — AI 시대 코딩 학원을 위한 커리큘럼 솔루션`,
     template: `%s · ${COMPANY.short}`,
   },
-  description:
-    "AI가 코드를 쓰는 시대, 학원의 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 AI 시대에 맞춘 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.",
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: COMPANY.short,
+    url: "./",
+    description: DESCRIPTION,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "렛츠코딩 코딩 학원 원장 대상 워크숍 현장" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    description: DESCRIPTION,
+    images: ["/og.jpg"],
+  },
   verification: {
     other: { "naver-site-verification": "f9d3cddbda95b21d446288c741f98fc6147ca6cb" },
   },
