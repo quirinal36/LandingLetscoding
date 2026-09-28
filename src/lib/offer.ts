@@ -1,5 +1,10 @@
 /** 홈과 도입문의가 같이 쓰는 연락처와 도입 조건. 여기만 고치면 두 페이지와 JSON-LD가 같이 바뀐다. */
-export const CONTACT = { email: "contact@letscoding.kr", tel: "010-5679-0072" };
+export const CONTACT = {
+  email: "contact@letscoding.kr",
+  tel: "010-5679-0072",
+  // 1:1 채팅이 켜지면 끝에 /chat 을 붙이고, 도입문의의 "전화나 이메일로" 문구에 카카오톡을 넣는다.
+  kakao: "https://pf.kakao.com/_BpVxiX",
+};
 
 export const START = [
   { kicker: "파일럿", title: "4주 무료", body: "인원 수와 관계없이 첫 반 하나로 먼저 써 보세요." },

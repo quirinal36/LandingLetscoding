@@ -28,6 +28,11 @@ export default function Page() {
       <p className="mt-2 text-[0.9375rem] text-ink-soft">렛츠코딩 파이썬 14일 무료체험도 같은 곳으로 문의해 주세요.</p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <a href={CONTACT.kakao} target="_blank" rel="noopener" className="card block p-7 sm:col-span-2 transition-transform hover:-translate-y-0.5">
+          <span className="text-sm font-semibold text-accent-ink">카카오톡</span>
+          <span className="mt-2 block text-2xl font-semibold">렛츠코딩 채널</span>
+          <span className="mt-2 block text-sm text-ink-soft">채널을 추가해 두시면 소식을 받아 보실 수 있어요</span>
+        </a>
         <a href={TEL_HREF} className="card block p-7 transition-transform hover:-translate-y-0.5">
           <span className="text-sm font-semibold text-accent-ink">전화</span>
           <span className="mt-2 block text-2xl font-semibold">{CONTACT.tel}</span>
