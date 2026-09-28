@@ -7,7 +7,7 @@ import type { CSSProperties } from "react";
 
   원과 선은 SVG 로 그려 어느 폭에서도 비율을 지킨다. 연결 설명은 HTML 로 두어
   넓은 화면에서는 선 옆에 붙고, 좁은 화면에서는 그림 아래 목록으로 내려온다.
-  자바스크립트 없이도 완성된 그림이 보이고, 화면에 들어오면 선이 그어진다 (landing.css .loop-draw).
+  선 위의 빛점은 양방향으로 흐르고, 원은 서로 다른 박자로 숨 쉰다. 동작은 CSS 로만 만든다.
 */
 
 type Node = { key: string; title: string; sub: string; cx: number; cy: number };
@@ -61,17 +61,28 @@ export function LoopDiagram() {
           {LINKS.map((l, i) => {
             const a = byKey[l.from];
             const b = byKey[l.to];
+            const length = Math.hypot(b.cx - a.cx, b.cy - a.cy);
+            const angle = Math.atan2(b.cy - a.cy, b.cx - a.cx) * 180 / Math.PI;
             return (
-              <g key={l.title}>
-                <line x1={a.cx} y1={a.cy} x2={b.cx} y2={b.cy} stroke={l.color} strokeWidth={10} strokeLinecap="round" pathLength={1} className="loop-draw" style={{ "--i": i } as CSSProperties} />
-                <circle cx={(a.cx + b.cx) / 2} cy={(a.cy + b.cy) / 2} r={12} fill="#ffffff" stroke={l.color} strokeWidth={4} />
+              <g key={l.title} transform={`translate(${a.cx} ${a.cy}) rotate(${angle})`} style={{ color: l.color, "--i": i, "--travel": `${length}px` } as CSSProperties}>
+                <line x2={length} stroke="currentColor" strokeWidth={18} strokeLinecap="round" pathLength={1} className="loop-draw" />
+                <g className="loop-flow" aria-hidden="true">
+                  {[1, -1].map((direction) => (
+                    <g key={direction} className={`loop-particle${direction === -1 ? " loop-particle-back" : ""}`}>
+                      <line x1={-direction * 34} x2={0} y1={direction * 7} y2={direction * 7} stroke="currentColor" strokeWidth={5} strokeLinecap="round" opacity={0.35} />
+                      <circle cy={direction * 7} r={17} fill="currentColor" opacity={0.1} />
+                      <circle cy={direction * 7} r={8} fill="#ffffff" stroke="currentColor" strokeWidth={3.5} />
+                    </g>
+                  ))}
+                </g>
               </g>
             );
           })}
 
-          {NODES.map((n) => (
-            <g key={n.key}>
-              <circle cx={n.cx} cy={n.cy} r={R} fill="#ffffff" stroke="#d5dbe4" strokeWidth={3} />
+          {NODES.map((n, i) => (
+            <g key={n.key} style={{ "--i": i } as CSSProperties}>
+              <circle cx={n.cx} cy={n.cy} r={R} fill="none" stroke="#a8b7cf" strokeWidth={2} className="loop-halo" aria-hidden="true" />
+              <circle cx={n.cx} cy={n.cy} r={R} fill="#ffffff" stroke="#d5dbe4" strokeWidth={3} className="loop-node" />
               <text x={n.cx} y={n.cy - 4} textAnchor="middle" className="[dominant-baseline:auto] max-md:translate-y-[12px]" fontSize={34} fontWeight={800} fill="#1b2333" letterSpacing="-0.02em">
                 {n.title}
               </text>
@@ -93,7 +104,13 @@ export function LoopDiagram() {
           ))}
         </ul>
       </div>
-      <figcaption className="mt-8 text-[0.8125rem] text-ink-faint md:mt-4">모든 연결은 양방향으로 순환합니다.</figcaption>
+      <figcaption className="mt-8 flex flex-wrap items-center justify-between gap-x-6 text-[0.8125rem] text-ink-faint md:mt-4">
+        <span>모든 연결은 양방향으로 순환합니다.</span>
+        <label className="loop-toggle flex min-h-11 cursor-pointer items-center gap-2">
+          <input type="checkbox" className="size-4 accent-[#3b6fe0]" />
+          움직임 멈추기
+        </label>
+      </figcaption>
     </figure>
   );
 }

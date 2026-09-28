@@ -199,8 +199,9 @@
     stroke-dashoffset: 1.02;
   }
 
-  /* 운영 구조도 — 세 연결선이 차례로 그어진다 */
+  /* 운영 구조도 — 양방향 흐름과 엇박자의 호흡. 글자는 움직이지 않는다. */
   .loop-draw {
+    stroke-opacity: 0.24;
     stroke-dasharray: 1 1.1;
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1.1s var(--ease-out) calc(0.25s + var(--i, 0) * 0.35s);
@@ -208,7 +209,48 @@
   .js .loop:not([data-shown]) .loop-draw {
     stroke-dashoffset: 1.02;
   }
-
+  .loop-flow {
+    transition: opacity 0.6s ease 1.1s;
+  }
+  .js .loop:not([data-shown]) .loop-flow {
+    opacity: 0;
+  }
+  .loop-particle {
+    animation: loop-travel 4.8s linear infinite;
+    animation-delay: calc(var(--i) * -1.6s);
+  }
+  .loop-particle-back {
+    animation-direction: reverse;
+    animation-delay: calc(-0.8s + var(--i) * -1.6s);
+  }
+  .loop-node,
+  .loop-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: loop-breathe 4.8s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -1.6s);
+  }
+  .loop-halo {
+    opacity: 0;
+    animation-name: loop-ripple;
+  }
+  .js .loop:not([data-shown]) :is(.loop-particle, .loop-node, .loop-halo),
+  .loop:has(.loop-toggle input:checked) :is(.loop-particle, .loop-node, .loop-halo) {
+    animation-play-state: paused;
+  }
+  @keyframes loop-travel {
+    from { transform: translateX(0); }
+    to { transform: translateX(var(--travel)); }
+  }
+  @keyframes loop-breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.035); }
+  }
+  @keyframes loop-ripple {
+    0%, 15% { transform: scale(1); opacity: 0; }
+    35% { opacity: 0.5; }
+    85%, 100% { transform: scale(1.22); opacity: 0; }
+  }
 
   /* ── 성장 장면 — 종이 팝업북 (growth-stage.tsx) ─────────────── */
   .growth-stage {
@@ -524,8 +566,20 @@
 @media (prefers-reduced-motion: reduce) {
   /* 저절로 재생되는 것만 끈다 */
   .intro,
-  .text-glow {
+  .text-glow,
+  .loop-particle,
+  .loop-node,
+  .loop-halo {
     animation: none !important;
+  }
+  .loop-flow,
+  .loop-halo,
+  .loop-toggle {
+    display: none;
+  }
+  .loop-draw {
+    stroke-opacity: 1;
+    stroke-width: 10;
   }
   /* 카드의 강은 멈추지 않고 느려진다. 내용이지 연출이 아니다.
      기울기·시차·흐림은 끄고, 일직선 흐름만 절반 속도로 남긴다. */
