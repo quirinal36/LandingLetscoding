@@ -13,6 +13,7 @@ import { ScrollScene } from "@/components/landing/scroll-scene";
 import { StoryCaptions, StoryStage } from "@/components/landing/story-stage";
 import { STORY_T } from "@/components/landing/timeline";
 import { COMPANY } from "@/lib/nav";
+import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
 
 /*
   랜딩 — MYPROBLEM.md 의 이야기를 학생 작품으로 보여 준다. (DESIGN.md 「랜딩」, HERO-MOTION-PLAN.md)
@@ -36,7 +37,6 @@ import { COMPANY } from "@/lib/nav";
 
 const LOUNGE_URL = "https://lounge.letscoding.kr/works";
 const INQUIRY = "/seminar/inquiry";
-const CONTACT = { email: "contact@letscoding.kr", tel: "010-5679-0072" };
 
 /* 구조화 데이터 — 이 페이지에 보이는 사실만 싣는다. 가격·문구를 바꾸면 여기도 같이 고친다. */
 const ORG_ID = `${COMPANY.url}/#organization`;
@@ -136,7 +136,7 @@ type Highlight = { title: string; body: string; image?: { src: string; alt: stri
 const STEPS = ["아이디어 구상", "문제와 해결 정리", "제작 완료", "라운지 게시", "가이드 영상"];
 const HIGHLIGHTS: Highlight[] = [
   { title: "매달 5개의 새 문제", body: "이달의 문제가 매달 새로 열립니다. 학생은 하나를 골라 4주 프로젝트로 만듭니다.", image: { src: "/landing/monthly.png", alt: "라운지의 이달의 추천 과제 목록 화면", fit: "contain" } },
-  { title: "학습과제 193개", body: "이달의 문제 대신 과제로 4주 수업을 꾸릴 수 있습니다. 학년과 난이도로 골라 반에 배정합니다.", image: { src: "/landing/learning.png", alt: "컴퓨터 과학 학습과제 목록 화면", fit: "contain" } },
+  { title: "학습과제 193개", body: "이달의 문제 대신 과제로 4주 수업을 꾸릴 수 있습니다. 선생님이 골라 반 학생들에게 배정합니다.", image: { src: "/landing/learning.png", alt: "컴퓨터 과학 학습과제 목록 화면", fit: "contain" } },
   { title: "작품이 주소를 갖습니다", body: "라운지에 올린 작품은 링크 하나로 친구 휴대폰에서 바로 실행됩니다.", image: { src: "/landing/play.jpg", alt: "라운지에 올라간 코딩 게임의 실행 화면" } },
   { title: "진도표 대신 포트폴리오", body: "만든 작품이 프로필에 쌓입니다. 상담에서 무엇을 만들었는지 한 화면으로 보여 줍니다.", image: { src: "/landing/profile.jpg", alt: "작품이 쌓인 라운지 공개 프로필 화면" } },
   {
@@ -165,19 +165,6 @@ const HIGHLIGHTS: Highlight[] = [
       </div>
     ),
   },
-];
-
-const PROOF = [
-  { value: 196, unit: "건", label: "등록된 학생 작품" },
-  { value: 44, unit: "명", label: "작품을 올린 학생" },
-  { value: 6093, unit: "회", label: "작품 조회" },
-  { value: 342, unit: "개", label: "작품에 달린 댓글" },
-];
-
-const START = [
-  { kicker: "파일럿", title: "4주 무료", body: "인원 수와 관계없이 첫 반 하나로 먼저 써 보세요." },
-  { kicker: "가격", title: "학생 1명\n월 11,000원", body: "부가세 포함. 원장님이 수강료에 포함해 결제합니다." },
-  { kicker: "코칭", title: "첫 수업은\n함께", body: "렛츠코딩 팀이 바이브코딩 수업 진행을 코칭합니다." },
 ];
 
 export default function Home() {
@@ -360,7 +347,7 @@ export default function Home() {
       <section className="tone-dark py-28 md:py-40">
         <Container>
           <div {...reveal()}>
-            <Eyebrow>우리 학원에서 먼저 4개월 반</Eyebrow>
+            <Eyebrow>우리 학원에서 먼저 반년</Eyebrow>
             <h2 className="display text-metal mt-3 max-w-[16ch] text-[2.5rem] md:text-[4.5rem]">팔기 전에, 먼저 매일 썼습니다.</h2>
           </div>
           <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
@@ -374,7 +361,7 @@ export default function Home() {
               </div>
             ))}
           </dl>
-          <p className="mt-12 text-[0.8125rem] text-ink-faint">렛츠코딩앤플레이 · 2026.4.6 – 8.22 등록분 · 2026.8.24 운영 DB 집계</p>
+          <p className="mt-12 text-[0.8125rem] text-ink-faint">{PROOF_ASOF}</p>
         </Container>
       </section>
 

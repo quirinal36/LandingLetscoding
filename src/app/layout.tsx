@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     siteName: COMPANY.short,
     url: "./",
     description: DESCRIPTION,
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "렛츠코딩 코딩 학원 원장 대상 워크숍 현장" }],
+    images: [{ url: "/landing/og.jpg", width: 1897, height: 990, alt: "렛츠코딩 워케이션 센터 화면" }],
   },
   twitter: {
     card: "summary_large_image",
     description: DESCRIPTION,
-    images: ["/og.jpg"],
+    images: ["/landing/og.jpg"],
   },
   verification: {
     other: { "naver-site-verification": "f9d3cddbda95b21d446288c741f98fc6147ca6cb" },
