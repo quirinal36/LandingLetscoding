@@ -41,7 +41,7 @@ export const NAV: NavGroup[] = [
     label: "소식",
     layer: 4,
     items: [
-      { label: "블로그", href: "/news/blog" },
+      { label: "블로그", href: "/blog" },
       { label: "업데이트 소식", href: "/news/updates" },
       { label: "공지사항", href: "/news/notice" },
     ],
