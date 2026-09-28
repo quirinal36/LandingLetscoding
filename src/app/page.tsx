@@ -2,9 +2,13 @@ import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { ButtonLink } from "@/components/ui";
 import { CardRiver } from "@/components/landing/card-river";
+import { GROWTH_T, GrowthCaptions, GrowthStage } from "@/components/landing/growth-stage";
+import { LoungeModel } from "@/components/landing/lounge-model";
+import { LoopDiagram } from "@/components/landing/loop-diagram";
 import { PhoneVideo } from "@/components/landing/phone-video";
 import { Rail } from "@/components/landing/rail";
 import { RevealObserver } from "@/components/landing/reveal-observer";
+import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { ScrollScene } from "@/components/landing/scroll-scene";
 import { StoryCaptions, StoryStage } from "@/components/landing/story-stage";
 import { STORY_T } from "@/components/landing/timeline";
@@ -14,13 +18,16 @@ import { STORY_T } from "@/components/landing/timeline";
 
   글보다 물건이 먼저다. 이 페이지에서 움직이는 것은 전부 진짜다.
     1. 히어로      헤드라인 아래로 실제 학생 작품 카드가 3D로 흐른다
-    2. 이야기      교구 상자가 천장에 부딪혀 떨어지고, 작품 카드가 쌓여 천장을 깬다. 스크롤이 재생 막대
-    3. 문단        학원은 한 명을 오래 지켜야 한다. 단어가 하나씩 밝아진다
-    4. 영상        원장님이 만든 30초 쇼츠가 폰 안에서 돈다
-    5. AI 질문     코딩테스트가 사라진다. 남는 힘은 무엇인가
-    6. 제품        렛츠코딩 라운지 하이라이트
-    7. 숫자        우리 학원의 실제 운영 수치
-    8. 시작 · 끝   파일럿 · 가격 · 코칭, 다음 칸은 원장님 학원에서
+    2. AI 질문     코딩테스트가 사라진다. 남는 힘은 무엇인가
+    3. 성장        종이 팝업북이 스크롤로 일어선다. 만든다 → 다듬는다 → 자란다 → 남는다 (growth-stage.tsx)
+    4. 모형        라운지 확장 모델 도식. 네 칸이 스크롤로 차례로 나온다 (lounge-model.tsx)
+    5. 제품        렛츠코딩 라운지. 5-1 작품 목록 캡처 · 5-2 세 축 다이어그램 · 5-3 하이라이트
+    6. 숫자        우리 학원의 실제 운영 수치
+    7. 시작        파일럿 · 가격 · 코칭
+    8. 이야기      교구 상자가 천장에 부딪혀 떨어지고, 작품 카드가 쌓여 천장을 깬다. 스크롤이 재생 막대
+    9. 문단        학원은 한 명을 오래 지켜야 한다. 단어가 하나씩 밝아진다
+    10. 영상       원장님이 만든 30초 쇼츠가 폰 안에서 돈다
+    11. 끝         다음 칸은 원장님 학원에서
 
   사실의 경계: 숫자는 기준일이 있는 실측만. 효과(재원율·매출)는 약속하지 않는다.
   외부 사실(채용 변화)은 출처를 붙인다. 이미지는 실제 캡처와 공개 허용된 작품 썸네일만.
@@ -133,11 +140,11 @@ export default function Home() {
               학생 한 명이,
             </span>
             <span className="intro text-gold block pb-2" {...intro(260)}>
-              스타트업을 합니다.
+              스타트업이 됩니다.
             </span>
           </h1>
           <p className="intro mx-auto mt-5 max-w-[36ch] text-[1.0625rem] leading-relaxed text-ink-soft md:text-[1.375rem]" {...intro(420)}>
-            작품을 만들고, 알리고, 루캣으로 투자를 받습니다. 학생 한 명이 매달 스타트업의 한 바퀴를 직접 돕니다.
+            학생이 곧 하나의 스타트업입니다. 만들고, 알리고, 투자를 받습니다.
           </p>
           <div className="intro mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2" {...intro(560)}>
             <ButtonLink href={INQUIRY} tone="accent" size="lg" className="pill">
@@ -155,76 +162,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ 2. 이야기 — 천장을 깨다 ═════════════════════════════════ */}
-      <ScrollScene length={5} mode="timeline" duration={STORY_T} className="tone-dark" pinClassName="flex items-center">
-        <Container className="grid items-center gap-8 pt-16 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="mb-5 text-[0.8125rem] font-medium tracking-[0.08em] text-ink-faint uppercase">7년 동안 겪은 일</p>
-            <StoryCaptions />
-          </div>
-          <div className="relative">
-            <div className="halo opacity-60" aria-hidden="true" />
-            <div className="relative">
-              <StoryStage />
-            </div>
-          </div>
-        </Container>
-        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10" aria-hidden="true">
-          <div className="h-full origin-left bg-accent" style={{ transform: "scaleX(var(--p))" }} />
-        </div>
-      </ScrollScene>
-
-      {/* ═══ 3. 한 명을 오래 지켜야 하는 사업 ═══════════════════════════ */}
-      <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
-        <Container>
-          <p className="display max-w-[22ch] text-[1.875rem] leading-[1.25] md:text-[3.25rem]">
-            {PARAGRAPH.split(" ").map((w, i, all) => (
-              <span key={i} className="scrub-word" style={{ "--i": i, "--n": all.length } as CSSProperties}>
-                {w}{" "}
-              </span>
-            ))}
-          </p>
-        </Container>
-      </ScrollScene>
-
-      {/* ═══ 4. 영상 — 한 달 동안 학생이 하는 일 ═══════════════════════ */}
-      <section className="tone-dark relative overflow-hidden py-24 md:py-36">
-        <div className="halo top-[10%] opacity-70" aria-hidden="true" />
-        <Container className="relative grid items-center gap-12 lg:grid-cols-[1fr_auto_1fr]">
-          <div {...reveal()}>
-            <Eyebrow>2026년 1월부터</Eyebrow>
-            <h2 className="display text-metal mt-3 text-[2.5rem] md:text-[4rem]">
-              문법 대신,
-              <br />
-              자기 게임을 만듭니다.
-            </h2>
-            <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft">
-              2024년에 장고로 웹앱 수업을 시도했다가 이론의 벽에 막혔습니다. AI가 코드를 써 주게 된 2026년, 같은 수업이 됩니다.
-            </p>
-          </div>
-
-          <div className="relative mx-auto" {...reveal(150)}>
-            <div className="halo inset-[-20%] opacity-80" aria-hidden="true" />
-            <div className="relative -rotate-3 transition-transform duration-500 hover:rotate-0">
-              <PhoneVideo src="/landing/video/lounge-shorts.mp4" poster="/landing/video/lounge-shorts-poster.jpg" />
-            </div>
-          </div>
-
-          <ol className="grid gap-4">
-            {MONTH.map((m, i) => (
-              <li key={m.n} className="glass flex items-start gap-4 rounded-2xl px-5 py-4" {...reveal(200 + i * 110)}>
-                <span className="font-mono text-[0.75rem] text-accent-ink">{m.n}</span>
-                <span>
-                  <span className="block text-lg font-bold">{m.t}</span>
-                  <span className="mt-0.5 block text-[0.9375rem] text-ink-soft">{m.d}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      {/* ═══ 5. AI 시대의 질문 ═══════════════════════════════════════ */}
+      {/* ═══ 2. AI 시대의 질문 ═══════════════════════════════════════ */}
       <section className="tone-dark border-t border-white/10 py-28 md:py-44">
         <Container>
           <div {...reveal()}>
@@ -262,7 +200,38 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 6. 렛츠코딩 라운지 ══════════════════════════════════════ */}
+      {/* ═══ 3. 성장 — 종이 팝업북 (GROWTH-SCENE-PLAN.md) ═════════════ */}
+      <section className="tone-paper pt-28 md:pt-40">
+        <Container>
+          <div {...reveal()}>
+            <Eyebrow>렛츠코딩 라운지의 학습 모형</Eyebrow>
+            <h2 className="display text-ink-gradient mt-3 max-w-[18ch] text-[2.25rem] md:text-[4rem]">그 힘은 혼자서가 아니라, 공동체 안에서 자랍니다.</h2>
+          </div>
+        </Container>
+      </section>
+      <ScrollScene length={8.8} mode="timeline" duration={GROWTH_T} className="tone-paper" pinClassName="flex items-center">
+        <Container className="grid items-center gap-8 md:gap-12 lg:grid-cols-[0.75fr_1.25fr]">
+          <div className="order-2 lg:order-1">
+            <GrowthCaptions />
+          </div>
+          <div className="order-1 lg:order-2">
+            <GrowthStage />
+          </div>
+        </Container>
+      </ScrollScene>
+
+      {/* ═══ 4. 라운지 확장 모델 도식 (lounge_model.jpg 를 HTML·CSS 로) ═══ */}
+      <section className="tone-paper pt-12 pb-28 md:pt-20 md:pb-40">
+        <Container>
+          <div className="mb-12 text-center md:mb-16" {...reveal()}>
+            <Eyebrow>라운지 확장 모델</Eyebrow>
+            <h2 className="display mx-auto mt-3 max-w-[18ch] text-[2rem] md:text-[3.25rem]">학습은 나에서 우리로, 공동체로 넓어집니다.</h2>
+          </div>
+          <LoungeModel />
+        </Container>
+      </section>
+
+      {/* ═══ 5. 렛츠코딩 라운지 ══════════════════════════════════════ */}
       <section className="tone-paper overflow-hidden py-28 md:py-40">
         <Container>
           <div {...reveal()}>
@@ -273,19 +242,37 @@ export default function Home() {
             </p>
           </div>
 
-          <figure className="mt-14 overflow-hidden rounded-[28px] bg-white p-2 md:p-3" {...reveal(100)}>
-            <div className="flex items-center gap-1.5 px-3 pt-1 pb-2.5" aria-hidden="true">
-              <span className="size-3 rounded-full bg-[#ff5f57]" />
-              <span className="size-3 rounded-full bg-[#febc2e]" />
-              <span className="size-3 rounded-full bg-[#28c840]" />
-              <span className="ml-3 truncate rounded-full bg-[#f0f1f4] px-4 py-1 text-[0.8125rem] text-ink-faint">lounge.letscoding.kr</span>
+          {/* 5-1. 라운지 작품 목록 캡처 — 누운 브라우저 창이 스크롤로 일어서고, 선 뒤에는 창 안의 목록이 아래로 흐른다 */}
+          <ScrollProgress className="lounge-shot-wrap mt-14">
+            <figure className="lounge-shot overflow-hidden rounded-[28px] bg-white p-2 md:p-3">
+              <div className="flex items-center gap-1.5 px-3 pt-1 pb-2.5" aria-hidden="true">
+                <span className="size-3 rounded-full bg-[#ff5f57]" />
+                <span className="size-3 rounded-full bg-[#febc2e]" />
+                <span className="size-3 rounded-full bg-[#28c840]" />
+                <span className="ml-3 truncate rounded-full bg-[#f0f1f4] px-4 py-1 text-[0.8125rem] text-ink-faint">lounge.letscoding.kr</span>
+              </div>
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[20px]">
+                <Image src="/landing/works-grid.jpg" alt="렛츠코딩 라운지 작품 목록. 게임과 웹사이트 썸네일이 격자로 쌓여 있다" fill sizes="(min-width: 1088px) 1040px, 94vw" className="lounge-shot-img object-cover" />
+              </div>
+            </figure>
+          </ScrollProgress>
+
+          {/* 5-2. 세 축, 하나의 순환 */}
+          <div className="mt-28 md:mt-36">
+            <div {...reveal()}>
+              <Eyebrow>세 축, 하나의 순환</Eyebrow>
+              <h3 className="display mt-3 max-w-[18ch] text-[1.75rem] md:text-[2.5rem]">따로 도는 기능이 아니라, 서로를 밀어 주는 구조입니다.</h3>
+              <p className="mt-5 max-w-[42ch] text-[1.0625rem] leading-relaxed text-ink-soft">
+                라운지는 작품공유, 가상경제, 과제관리 세 축으로 운영됩니다. 작품이 조회되면 자산이 생기고, 과제를 끝내면 자산이 늘고, 과제가 곧 작품이 됩니다.
+              </p>
             </div>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[20px]">
-              <Image src="/landing/works-grid.jpg" alt="렛츠코딩 라운지 작품 목록. 게임과 웹사이트 썸네일이 격자로 쌓여 있다" fill sizes="(min-width: 1088px) 1040px, 94vw" className="object-cover object-top" />
+            <div className="mt-12">
+              <LoopDiagram />
             </div>
-          </figure>
+          </div>
         </Container>
 
+        {/* 5-3. 하이라이트 */}
         <div className="mt-24">
           <Container>
             <h3 className="display mb-8 text-[1.75rem] md:text-[2.5rem]" {...reveal()}>
@@ -293,9 +280,9 @@ export default function Home() {
             </h3>
           </Container>
           <Rail label="렛츠코딩 라운지 하이라이트">
-            {HIGHLIGHTS.map((h) => (
-              <li key={h.title} className="flex w-[82vw] max-w-[22rem] shrink-0 flex-col overflow-hidden rounded-[28px] bg-white">
-                <div className="relative h-64 bg-[#eef0f4]">
+            {HIGHLIGHTS.map((h, i) => (
+              <li key={h.title} className="flex w-[82vw] max-w-[22rem] shrink-0 flex-col overflow-hidden rounded-[28px] bg-white" {...reveal(i * 110)}>
+                <div className="hl-media relative h-64 bg-[#eef0f4]">
                   {h.image ? <Image src={h.image.src} alt={h.image.alt} fill sizes="352px" className={h.image.fit === "contain" ? "object-contain p-4" : "object-cover object-top"} /> : h.art}
                 </div>
                 <div className="flex flex-1 flex-col p-7">
@@ -308,7 +295,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ 7. 운영 수치 ═══════════════════════════════════════════ */}
+      {/* ═══ 6. 운영 수치 ═══════════════════════════════════════════ */}
       <section className="tone-dark py-28 md:py-40">
         <Container>
           <div {...reveal()}>
@@ -330,7 +317,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 8. 시작 ═══════════════════════════════════════════════ */}
+      {/* ═══ 7. 시작 ══════════════════════════════════════════════ */}
       <section className="tone-paper py-28 md:py-40">
         <Container>
           <div {...reveal()}>
@@ -352,7 +339,76 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 9. 다음 칸 ═════════════════════════════════════════════ */}
+      {/* ═══ 8. 이야기 — 천장을 깨다 ═════════════════════════════════ */}
+      <ScrollScene length={5} mode="timeline" duration={STORY_T} className="tone-dark" pinClassName="flex items-center">
+        <Container className="grid items-center gap-8 pt-16 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="mb-5 text-[0.8125rem] font-medium tracking-[0.08em] text-ink-faint uppercase">7년 동안 겪은 일</p>
+            <StoryCaptions />
+          </div>
+          <div className="relative">
+            <div className="halo opacity-60" aria-hidden="true" />
+            <div className="relative">
+              <StoryStage />
+            </div>
+          </div>
+        </Container>
+        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10" aria-hidden="true">
+          <div className="h-full origin-left bg-accent" style={{ transform: "scaleX(var(--p, 1))" }} />
+        </div>
+      </ScrollScene>
+
+      {/* ═══ 9. 한 명을 오래 지켜야 하는 사업 ═══════════════════════════ */}
+      <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
+        <Container>
+          <p className="display max-w-[22ch] text-[1.875rem] leading-[1.25] md:text-[3.25rem]">
+            {PARAGRAPH.split(" ").map((w, i, all) => (
+              <span key={i} className="scrub-word" style={{ "--i": i, "--n": all.length } as CSSProperties}>
+                {w}{" "}
+              </span>
+            ))}
+          </p>
+        </Container>
+      </ScrollScene>
+
+      {/* ═══ 10. 영상 — 한 달 동안 학생이 하는 일 ═══════════════════════ */}
+      <section className="tone-dark relative overflow-hidden py-24 md:py-36">
+        <div className="halo top-[10%] opacity-70" aria-hidden="true" />
+        <Container className="relative grid items-center gap-12 lg:grid-cols-[1fr_auto_1fr]">
+          <div {...reveal()}>
+            <Eyebrow>2026년 1월부터</Eyebrow>
+            <h2 className="display text-metal mt-3 text-[2.5rem] md:text-[4rem]">
+              문법 대신,
+              <br />
+              자기 게임을 만듭니다.
+            </h2>
+            <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft">
+              2024년에 장고로 웹앱 수업을 시도했다가 이론의 벽에 막혔습니다. AI가 코드를 써 주게 된 2026년, 같은 수업이 됩니다.
+            </p>
+          </div>
+
+          <div className="relative mx-auto" {...reveal(150)}>
+            <div className="halo inset-[-20%] opacity-80" aria-hidden="true" />
+            <div className="relative -rotate-3 transition-transform duration-500 hover:rotate-0">
+              <PhoneVideo src="/landing/video/lounge-shorts.mp4" poster="/landing/video/lounge-shorts-poster.jpg" />
+            </div>
+          </div>
+
+          <ol className="grid gap-4">
+            {MONTH.map((m, i) => (
+              <li key={m.n} className="glass flex items-start gap-4 rounded-2xl px-5 py-4" {...reveal(200 + i * 110)}>
+                <span className="font-mono text-[0.75rem] text-accent-ink">{m.n}</span>
+                <span>
+                  <span className="block text-lg font-bold">{m.t}</span>
+                  <span className="mt-0.5 block text-[0.9375rem] text-ink-soft">{m.d}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      {/* ═══ 11. 다음 칸 ════════════════════════════════════════════ */}
       <section className="tone-dark relative overflow-hidden py-32 text-center md:py-48">
         <div className="halo top-[20%]" aria-hidden="true" />
         <Container className="relative">

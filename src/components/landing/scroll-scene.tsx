@@ -9,8 +9,12 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
   mode="timeline" 이면 안쪽 CSS 애니메이션 전부를 멈추고, 재생 위치를 p × duration 에 맞춘다.
   시간으로 짠 장면(StoryGraph)을 그대로 스크롤로 되감고 감을 수 있다.
 
-  동작 줄이기 설정이면 아무것도 하지 않는다. CSS가 고정을 풀고 마지막 상태를 보여 준다.
+  동작 줄이기 설정에서도 스크럽은 계속한다. 스크롤이 곧 재생 막대라 저절로 움직이는 것이 없고,
+  어지러운 이동·블러·튕김은 CSS(landing.css 「동작 줄이기」)가 걷어 내어 밝기 변화만 남긴다.
   React 상태를 쓰지 않는다. 스크롤마다 다시 그리지 않고 변수 하나만 바꾼다.
+
+  --p 는 마크업에 심지 않고 스크립트가 처음 붙인다. CSS 의 var(--p, 1) 기본값이 곧 마지막 상태라,
+  스크립트가 못 돌아도(오류·차단·구형 브라우저) 다 읽히는 화면이 남는다. 0으로 심으면 영원히 흐린 채 멈춘다.
 */
 export function ScrollScene({
   length,
@@ -34,9 +38,7 @@ export function ScrollScene({
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const anims = mode === "timeline" ? el.getAnimations({ subtree: true }) : [];
+    const anims = mode === "timeline" && typeof el.getAnimations === "function" ? el.getAnimations({ subtree: true }) : [];
     anims.forEach((a) => a.pause());
 
     let frame = 0;
@@ -68,7 +70,7 @@ export function ScrollScene({
     <section
       ref={root}
       className={`scene ${className}`}
-      style={{ height: `${length * 100}svh`, "--p": 0 } as CSSProperties}
+      style={{ height: `${length * 100}svh` } as CSSProperties}
     >
       <div className={`scene-pin ${pinClassName}`}>{children}</div>
     </section>

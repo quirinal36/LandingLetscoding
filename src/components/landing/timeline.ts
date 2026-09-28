@@ -17,19 +17,20 @@ export const BOUNCE = "cubic-bezier(0.34, 1.56, 0.64, 1)"; // 살짝 넘쳤다 �
 
 export type Frame = [time: number, css: string, easeToNext?: string];
 
-const pct = (t: number) => `${Number(((t / STORY_T) * 100).toFixed(3))}%`;
+const pct = (t: number, total: number) => `${Number(((t / total) * 100).toFixed(3))}%`;
 
-export function kf(name: string, frames: Frame[]) {
+/** total: 이 장면 타임라인의 전체 길이(초). 기본은 이야기 장면의 STORY_T */
+export function kf(name: string, frames: Frame[], total = STORY_T) {
   const first = frames[0];
   const last = frames[frames.length - 1];
-  const all: Frame[] = [[0, first[1]], ...frames, [STORY_T, last[1]]];
+  const all: Frame[] = [[0, first[1]], ...frames, [total, last[1]]];
   const body = all
-    .map(([t, css, ease]) => `${pct(t)}{${css}${ease ? `;animation-timing-function:${ease}` : ""}}`)
+    .map(([t, css, ease]) => `${pct(t, total)}{${css}${ease ? `;animation-timing-function:${ease}` : ""}}`)
     .join("");
   return `@keyframes ${name}{${body}}`;
 }
 
-export const run = (name: string): CSSProperties => ({ animation: `${name} ${STORY_T}s linear both` });
+export const run = (name: string, total = STORY_T): CSSProperties => ({ animation: `${name} ${total}s linear both` });
 
 export const fadeUp = (name: string, t0: number, d = 0.35, from = "translateY(14px)") =>
   kf(name, [

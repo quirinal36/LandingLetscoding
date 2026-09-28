@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 기획용 생성 원본 이미지·영상 (용량이 커서 로컬에만 둔다)
+prototypes/**/*.png
+prototypes/**/*.jpg
+prototypes/**/*.jpeg
+prototypes/**/*.webp
+prototypes/**/*.mp4
+prototypes/**/*.mov
+prototypes/**/*.webm
+
+# 개인 메모
+MYPROBLEM.md

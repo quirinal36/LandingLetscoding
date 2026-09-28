@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+html,body{margin:0;background:transparent;font-family:"Pretendard Variable",Pretendard,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{padding:24px;display:inline-block}
+.card{width:520px;background:#fff;border:2px solid #d5dbe4;border-radius:28px;overflow:hidden}
+.card img{display:block;width:100%;height:auto}
+.card .b{display:flex;align-items:center;gap:14px;padding:20px 24px}
+.link{width:44px;height:44px;border-radius:50%;background:#e4ebfb;color:#2a53b0;display:grid;place-items:center;font-size:24px;font-weight:700}
+.t{font-size:30px;font-weight:700;color:#1b2333;letter-spacing:-.02em}
+.u{font-size:20px;color:#55607a;margin-top:2px}
+.bub{position:relative;background:#fff;border:2px solid #d5dbe4;border-radius:32px;padding:26px 34px;font-size:40px;font-weight:700;color:#1b2333;letter-spacing:-.03em;white-space:nowrap}
+.bub:after{content:"";position:absolute;left:64px;bottom:-22px;width:36px;height:36px;background:#fff;border-right:2px solid #d5dbe4;border-bottom:2px solid #d5dbe4;transform:rotate(45deg)}
+.heart{margin-top:30px;margin-left:12px;display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid #d5dbe4;border-radius:999px;padding:12px 22px;font-size:32px;font-weight:700;color:#e5484d}
+</style></head><body>
+<div class="wrap" id="x"></div>
+<script>
+var q=location.hash.slice(1);
+var x=document.getElementById('x');
+if(q==='card') x.innerHTML='<div class="card"><img src="thumb.png"><div class="b"><span class="link">🔗</span><div><div class="t">텐팡</div><div class="u">lounge.letscoding.kr</div></div></div></div>';
+if(q==='bubble') x.innerHTML='<div class="bub">최고야! 나도 해보고 싶어!</div>';
+if(q==='heart') x.innerHTML='<div class="heart">♥ +1</div>';
+</script></body></html>

@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>렛츠코딩 — 한 달 구성 시안</title>
+<!--
+  LANDING-PLAN.md 의 "한 달" 뼈대를 옮긴 정적 시안이다.
+  - 이미지·영상 자리는 .ph 로 비워 두었다. data-asset 에 들어갈 파일과 상태(실사/촬영 예정/캡처 예정)를 적었다.
+  - 디자인 규칙은 DESIGN.md 를 따른다: 그림자·그라디언트 없음, 포인트 블루는 전환 동선에만, 스크롤 연출 없음.
+  - 예외 한 자리: 25일 섹션의 금색(루캣).
+  - 파란 점선은 "함께 그려 갈 길"이다. 히어로의 빈 칸에서 시작해 마지막 문의 칸에서 끝난다.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+  :root {
+    --bg: #e9edf3;
+    --surface: #ffffff;
+    --fill: #dde3ec;
+    --fill-strong: #d0d8e4;
+    --ink: #1b2333;
+    --ink-soft: #55607a;
+    --ink-faint: #5e6880;
+    --separator: #d5dbe4;
+    --edge: #7c8699;
+    --accent: #3b6fe0;
+    --accent-deep: #2d57b8;
+    --accent-soft: #e4ebfb;
+    --accent-ink: #2a53b0;
+    /* 예외 한 자리 — 25일 섹션에서만 쓴다 */
+    --lucat: #e3a92b;
+    --lucat-soft: #fbf1db;
+    --lucat-ink: #7a5208;
+
+    --r-control: 12px;
+    --r-card: 18px;
+    --r-track: 14px;
+    --ease: cubic-bezier(0.32, 0.72, 0.35, 1);
+    --press: 150ms;
+    --rail: 96px;
+  }
+  @media (prefers-reduced-motion: reduce) { :root { --press: 0ms; } }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+    line-height: 1.5;
+  }
+  a { color: inherit; }
+  img, video { max-width: 100%; display: block; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 16px; top: 16px; z-index: 10; background: var(--surface); padding: 8px 12px; border-radius: var(--r-control); }
+
+  /* ── 면 ─────────────────────────────────────── */
+  .card { background: var(--surface); border-radius: var(--r-card); }
+  .track { background: var(--fill); border-radius: var(--r-track); }
+
+  /* ── 컨트롤 ─────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 48px; padding: 0 20px;
+    border: 1px solid var(--edge); border-radius: var(--r-control);
+    background: var(--surface); color: var(--ink);
+    font: inherit; font-weight: 600; font-size: 16px; text-decoration: none; cursor: pointer;
+    transition: background-color var(--press) var(--ease);
+  }
+  .btn:active { background: var(--fill); }
+  .btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-accent:active { background: var(--accent-deep); }
+  .btn-sm { min-height: 44px; padding: 0 14px; font-size: 14px; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { background: #f4f6fa; }
+    .btn-accent:hover { background: var(--accent-deep); }
+  }
+
+  /* ── 자리표시 (이미지·영상이 들어갈 곳) ────────
+     점선은 "빈 칸 = 원장님 자리" 메타포 전용이라, 자리표시는 점선을 쓰지 않는다. */
+  .ph {
+    position: relative;
+    background: var(--fill);
+    border-radius: var(--r-card);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 12px 14px;
+    overflow: hidden;
+    min-height: 80px;
+  }
+  .ph-label { font-size: 12px; color: var(--ink-soft); line-height: 1.35; }
+  .ph-label b { display: block; color: var(--ink); font-weight: 600; font-size: 13px; }
+  .ph-tag {
+    position: absolute; top: 10px; left: 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+    padding: 3px 8px; border-radius: 999px; background: var(--surface); color: var(--ink-soft);
+  }
+  .ph-tag[data-kind="real"] { color: var(--accent-ink); }
+  .ph-tag[data-kind="shoot"] { color: #8a3b12; }
+  .ph-tag[data-kind="capture"] { color: var(--ink-soft); }
+  .ph-tag[data-kind="figure"] { color: #4a3aa8; }
+  .ph-video::after {
+    content: ""; position: absolute; top: 12px; right: 12px;
+    width: 0; height: 0; border-left: 9px solid var(--ink-faint);
+    border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+  }
+
+  /* ── 빈 칸 — 원장님 학원의 자리 ───────────────── */
+  .slot {
+    border: 2px dashed var(--accent);
+    border-radius: var(--r-card);
+    background: transparent;
+    display: grid; place-items: center;
+    color: var(--accent-ink);
+  }
+  .slot-plus { font-size: 28px; font-weight: 300; line-height: 1; }
+
+  /* ── 상단 바 ─────────────────────────────────── */
+  .bar {
+    position: sticky; top: 0; z-index: 5;
+    background: rgba(233, 237, 243, 0.8);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--separator);
+  }
+  .bar-in { max-width: 1120px; margin: 0 auto; padding: 0 16px; height: 64px; display: flex; align-items: center; gap: 24px; }
+  .brand { font-weight: 800; letter-spacing: -0.03em; font-size: 18px; text-decoration: none; }
+  .nav { display: none; gap: 4px; margin-left: 8px; }
+  .nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-soft); padding: 10px 12px; border-radius: var(--r-control); }
+  .bar .btn { margin-left: auto; }
+  @media (min-width: 860px) { .nav { display: flex; } }
+
+  /* ── 한 달 뼈대 ─────────────────────────────────
+     왼쪽 레일에 날짜가 서고, 파란 점선이 레일을 따라 끝까지 내려간다.
+     점선은 스크롤에 따라 그려지지 않는다. 처음부터 그려져 있다. */
+  .month { max-width: 1120px; margin: 0 auto; padding: 0 16px; position: relative; }
+  .day { display: grid; grid-template-columns: 1fr; padding: 56px 0; border-top: 1px solid var(--separator); }
+  .day:first-child { border-top: 0; padding-top: 40px; }
+  .date { display: flex; align-items: baseline; gap: 8px; margin-bottom: 20px; }
+  .date-d { font-size: 15px; font-weight: 700; color: var(--accent-ink); letter-spacing: -0.01em; }
+  .date-m { font-size: 13px; color: var(--ink-faint); }
+  .date-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); align-self: center; flex: none; }
+
+  @media (min-width: 960px) {
+    .month::before {
+      content: ""; position: absolute;
+      left: calc(16px + 5px); top: 64px; bottom: 140px;
+      border-left: 2px dashed var(--accent);
+    }
+    .day { grid-template-columns: var(--rail) 1fr; padding: 88px 0; }
+    .day:first-child { padding-top: 56px; }
+    .date { display: block; margin: 0; padding-left: 24px; position: sticky; top: 96px; align-self: start; }
+    .date-dot { position: absolute; left: 0; top: 5px; width: 12px; height: 12px; outline: 4px solid var(--bg); }
+    .date-d { font-size: 17px; }
+  }
+
+  h1, h2, h3 { margin: 0; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
+  h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.12; letter-spacing: -0.045em; }
+  h2 { font-size: clamp(28px, 4.4vw, 40px); line-height: 1.22; }
+  h3 { font-size: 18px; letter-spacing: -0.02em; }
+  .lead { margin: 16px 0 0; font-size: 18px; color: var(--ink-soft); max-width: 44ch; }
+  p { margin: 0; }
+
+  /* ── 1일 · 히어로 ───────────────────────────── */
+  .hero-top { display: grid; gap: 24px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .wall { margin-top: 48px; position: relative; display: grid; gap: 10px; grid-template-columns: repeat(3, 1fr); }
+  .wall > * { aspect-ratio: 4 / 3; min-height: 0; }
+  .wall .ph { border-radius: 14px; padding: 8px 10px; }
+  .wall .ph-label { font-size: 11px; }
+  @media (min-width: 720px) { .wall { grid-template-columns: repeat(5, 1fr); } }
+  @media (max-width: 719px) { .wall > .hide-sm { display: none; } }
+
+  .task-card { margin-top: 12px; padding: 20px 22px; border: 1px solid var(--separator); }
+  @media (min-width: 960px) {
+    .task-card {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 360px; margin: 0;
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      backdrop-filter: saturate(180%) blur(24px);
+    }
+  }
+  .task-card ol { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: t; }
+  .task-card li { counter-increment: t; display: flex; gap: 10px; padding: 9px 0; border-top: 1px solid var(--separator); font-size: 15px; }
+  .task-card li::before { content: counter(t, decimal-leading-zero); font-family: ui-monospace, monospace; font-size: 12px; color: var(--ink-faint); padding-top: 2px; }
+  .kicker { font-size: 13px; font-weight: 600; color: var(--ink-faint); }
+  .pause { grid-column: 1 / -1; justify-self: end; aspect-ratio: auto !important; min-height: 44px !important; }
+  .wall > .task-card { grid-column: 1 / -1; aspect-ratio: auto; }
+  .day > *, .cals > *, .play > *, .fig > *, .market-grid > *, .next > * { min-width: 0; }
+
+  /* ── 3일 · 두 달력 ──────────────────────────── */
+  .memo {
+    margin-top: 28px; max-width: 520px; padding: 20px 22px;
+    background: var(--surface); border-radius: var(--r-card);
+    font-size: 20px; font-weight: 600; letter-spacing: -0.02em;
+    transform: rotate(-1deg);
+  }
+  .memo small { display: block; margin-top: 8px; font-size: 13px; font-weight: 500; color: var(--ink-faint); letter-spacing: 0; }
+  .cals { margin-top: 40px; display: grid; gap: 16px; }
+  @media (min-width: 860px) { .cals { grid-template-columns: 1fr 1fr; } }
+  .cal { padding: 22px; }
+  .cal h3 { font-size: 16px; }
+  .cal .sub { margin-top: 4px; font-size: 14px; color: var(--ink-soft); }
+  .grid-m { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .m { border-radius: 10px; padding: 8px 9px; min-height: 64px; font-size: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+  .m-n { font-size: 11px; color: var(--ink-faint); font-weight: 600; }
+  .m-t { font-size: 12.5px; font-weight: 600; line-height: 1.3; }
+  .m-fill { background: var(--fill); }
+  .m-empty { background: transparent; border: 1px solid var(--separator); color: var(--ink-faint); }
+  .m-empty .m-t { color: var(--fill-strong); font-weight: 500; }
+  .m-now { background: var(--accent-soft); }
+  .m-now .m-t { color: var(--accent-ink); }
+  .m-next { border: 2px dashed var(--accent); background: transparent; }
+  .m-next .m-t { color: var(--accent-ink); }
+
+  /* ── 10일 · 플레이 ──────────────────────────── */
+  .play { margin-top: 40px; display: grid; gap: 16px; }
+  @media (min-width: 860px) { .play { grid-template-columns: 1.7fr 1fr; } }
+  .play-main { aspect-ratio: 16 / 10; }
+  .play-side { display: grid; gap: 16px; align-content: start; }
+  .url { display: flex; align-items: center; gap: 8px; padding: 14px 16px; font-size: 14px; }
+  .url span { color: var(--ink-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .url::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fa36b; flex: none; }
+
+  /* ── 20일 · 그림 1 ──────────────────────────── */
+  .fig { margin-top: 40px; display: grid; gap: 16px; }
+  @media (min-width: 860px) { .fig { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .fig-main { aspect-ratio: 3 / 4; }
+  .fig-notes { display: grid; gap: 12px; }
+  .note { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; padding: 14px; }
+  .note-n { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 14px; background: var(--fill); }
+  .note .ph { margin-top: 10px; aspect-ratio: 16 / 9; min-height: 0; }
+  .note p { font-size: 15px; font-weight: 600; }
+
+  /* ── 25일 · 시장 (금색 예외) ─────────────────── */
+  .market { background: var(--lucat-soft); border-radius: 24px; padding: 28px 20px; margin-top: 40px; }
+  @media (min-width: 860px) { .market { padding: 40px; } }
+  .market-grid { display: grid; gap: 16px; }
+  @media (min-width: 860px) { .market-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .coin {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--lucat); color: #fff;
+    display: grid; place-items: center; font-weight: 800; font-size: 20px;
+    border: 3px solid #f3cf7a;
+  }
+  .principle { display: flex; gap: 16px; align-items: center; margin-bottom: 24px; }
+  .principle p { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--lucat-ink); max-width: 30ch; }
+  .market .ph { background: rgba(255, 255, 255, 0.6); }
+
+  /* ── 30일 · 같은 자리 ───────────────────────── */
+  .mosaic { margin-top: 40px; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .mosaic .big { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+  .mosaic .sq { aspect-ratio: 4 / 3; }
+  @media (min-width: 860px) {
+    .mosaic { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+    .mosaic .big { grid-column: 1; grid-row: 1 / 3; aspect-ratio: auto; min-height: 420px; }
+  }
+  .facts { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (min-width: 860px) { .facts { grid-template-columns: repeat(4, 1fr); } }
+  .fact { padding: 18px; }
+  .fact b { display: block; font-size: 30px; letter-spacing: -0.04em; font-weight: 700; }
+  .fact b small { font-size: 16px; font-weight: 600; margin-left: 2px; }
+  .fact span { font-size: 14px; color: var(--ink-soft); }
+  .asof { margin-top: 8px; font-size: 12px; color: var(--ink-faint); text-align: right; }
+
+  .log { margin-top: 40px; padding: 22px; }
+  .log ol { list-style: none; margin: 14px 0 0; padding: 0; }
+  .log li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--separator); font-size: 15px; }
+  .log time { font-family: ui-monospace, monospace; font-size: 13px; color: var(--accent-ink); padding-top: 2px; }
+
+  /* ── 다음 달 1일 · 문의 ─────────────────────── */
+  .next { margin-top: 40px; display: grid; gap: 16px; }
+  @media (min-width: 860px) { .next { grid-template-columns: 1.4fr 1fr; align-items: stretch; } }
+  .form-slot { padding: 28px 22px; place-items: stretch; display: block; }
+  @media (min-width: 860px) { .form-slot { padding: 36px; } }
+  .form-slot h3 { font-size: 20px; color: var(--ink); }
+  .fields { margin-top: 20px; display: grid; gap: 12px; }
+  @media (min-width: 640px) { .fields { grid-template-columns: 1fr 1fr; } }
+  label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+  input, select {
+    font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; padding: 0 14px;
+    border: 1px solid var(--edge); border-radius: var(--r-control); background: var(--surface); color: var(--ink);
+    width: 100%;
+  }
+  .form-actions { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .form-actions small { color: var(--ink-soft); font-size: 14px; }
+  .soon { display: grid; gap: 12px; align-content: start; }
+  .soon .card { padding: 20px; }
+  .soon .kicker + p { margin-top: 6px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+  .soon .sub { margin-top: 4px; font-size: 14px; color: var(--ink-soft); }
+
+  footer { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; font-size: 13px; color: var(--ink-faint); border-top: 1px solid var(--separator); }
+  footer p + p { margin-top: 4px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#">렛츠코딩</a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#">소개</a>
+      <a href="#">솔루션</a>
+      <a href="#">소식</a>
+    </nav>
+    <a class="btn btn-accent btn-sm" href="#d-next">온라인 설명회</a>
+  </div>
+</header>
+
+<main id="main" class="month">
+
+  <!-- ═══ 1일 · 히어로: 이달의 과제가 열린다 ═══════════════════ -->
+  <section class="day" aria-labelledby="h-1">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">9월 1일</span></div>
+    <div>
+      <div class="hero-top">
+        <div>
+          <p class="kicker">코딩학원 · 공부방 · 교습소를 위한 AI 시대 커리큘럼</p>
+          <h1 id="h-1" style="margin-top:14px">매달 새로 열리는<br />코딩 수업</h1>
+          <p class="lead">아이들이 스스로 정하고, 만들고, 세상에 내놓는 수업입니다.</p>
+          <div class="hero-actions">
+            <a class="btn btn-accent" href="#d-next">4주 무료 파일럿 상담</a>
+            <a class="btn" href="https://lounge.letscoding.kr/works" target="_blank" rel="noopener">실제 운영 중인 라운지 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 작품 격자. 실제 작품 썸네일과 무음 루프 영상이 들어간다. 한 칸은 빈 점선 칸. -->
+      <div class="wall" id="wall" data-playing="true">
+        <div class="ph ph-video" role="img" aria-label="작품 플레이 영상 자리" data-asset="작품 플레이 녹화 1"><span class="ph-tag" data-kind="capture">녹화 예정</span><span class="ph-label">작품 플레이 루프</span></div>
+        <div class="ph" role="img" aria-label="작품 썸네일 자리" data-asset="01-works-grid.jpg 조각"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph hide-sm" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph ph-video hide-sm" role="img" aria-label="수업 장면 영상 자리" data-asset="수업 장면 루프"><span class="ph-tag" data-kind="shoot">촬영 예정</span><span class="ph-label">수업 장면 루프</span></div>
+
+        <div class="ph" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph ph-video" role="img" aria-label="작품 플레이 영상 자리" data-asset="작품 플레이 녹화 2"><span class="ph-tag" data-kind="capture">녹화 예정</span><span class="ph-label">작품 플레이 루프</span></div>
+        <div class="ph" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph hide-sm" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph hide-sm" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+
+        <div class="ph hide-sm" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <div class="ph hide-sm ph-video" role="img" aria-label="작품 플레이 영상 자리" data-asset="작품 플레이 녹화 3"><span class="ph-tag" data-kind="capture">녹화 예정</span><span class="ph-label">작품 플레이 루프</span></div>
+        <div class="ph hide-sm" role="img" aria-label="작품 썸네일 자리"><span class="ph-tag" data-kind="capture">캡처</span><span class="ph-label">작품 썸네일</span></div>
+        <!-- 빈 칸: 원장님 학원의 자리. 글로 설명하지 않는다. 마지막 섹션의 문의 칸과 같은 모양이다. -->
+        <a class="slot" href="#d-next" aria-label="우리 학원도 함께하기 — 도입 문의로 이동"><span class="slot-plus" aria-hidden="true">+</span></a>
+
+        <!-- 이달의 과제 — 격자 위에 떠 있다 -->
+        <article class="card task-card" aria-labelledby="h-task">
+          <p class="kicker" id="h-task">2026년 9월의 과제</p>
+          <ol>
+            <li>음력 날짜에 따라 달의 모양이 바뀌는 시뮬레이션</li>
+            <li>확률 실험을 반복하고 결과를 비교하는 프로그램</li>
+            <li>전통놀이를 재해석한 게임</li>
+            <li>내가 만든 수식이 시각적인 패턴이 되는 프로그램</li>
+            <li>색상값을 활용한 프로그램</li>
+          </ol>
+        </article>
+
+        <button class="btn btn-sm pause" type="button" id="pause" aria-pressed="false">영상 일시정지</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 3일 · 상담실의 질문 ═════════════════════════════ -->
+  <section class="day" aria-labelledby="h-3" style="padding-top:120px">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">3일</span></div>
+    <div>
+      <h2 id="h-3">커리큘럼은 왜<br />1년을 못 넘길까요</h2>
+
+      <blockquote class="memo">
+        “이제 AI가 코딩 다 해주는데, 왜 배워요?”
+        <small>상담실에서 가장 자주 받는 질문</small>
+      </blockquote>
+
+      <div class="cals">
+        <!-- 진도표 달력: 12칸이 문법 단원으로 차 있다가 13번째 달부터 비어 있다 -->
+        <article class="card cal" aria-labelledby="h-cal-a">
+          <h3 id="h-cal-a">진도표 커리큘럼</h3>
+          <p class="sub">정해진 분량을 다 나가면, 다음이 없습니다.</p>
+          <div class="grid-m" role="list">
+            <div class="m m-fill" role="listitem"><span class="m-n">1개월</span><span class="m-t">변수</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">2개월</span><span class="m-t">조건문</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">3개월</span><span class="m-t">반복문</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">4개월</span><span class="m-t">리스트</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">5개월</span><span class="m-t">함수</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">6개월</span><span class="m-t">문자열</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">7개월</span><span class="m-t">딕셔너리</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">8개월</span><span class="m-t">파일</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">9개월</span><span class="m-t">클래스</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">10개월</span><span class="m-t">모듈</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">11개월</span><span class="m-t">복습</span></div>
+            <div class="m m-fill" role="listitem"><span class="m-n">12개월</span><span class="m-t">총정리</span></div>
+            <div class="m m-empty" role="listitem"><span class="m-n">13개월</span><span class="m-t">—</span></div>
+            <div class="m m-empty" role="listitem"><span class="m-n">14개월</span><span class="m-t">—</span></div>
+            <div class="m m-empty" role="listitem"><span class="m-n">15개월</span><span class="m-t">—</span></div>
+            <div class="m m-empty" role="listitem"><span class="m-n">16개월</span><span class="m-t">—</span></div>
+          </div>
+        </article>
+
+        <!-- 라운지 달력: 매달 새 과제가 열리고, 다음 달 칸은 점선으로 열려 있다.
+             TODO(데이터): 지난 달 과제 제목은 라운지 추천 과제 데이터에서 가져온다. 지금은 개수만 적었다. -->
+        <article class="card cal" aria-labelledby="h-cal-b">
+          <h3 id="h-cal-b">렛츠코딩 라운지</h3>
+          <p class="sub">한 달에 다섯 개씩, 새 과제가 열립니다.</p>
+          <div class="grid-m" role="list">
+            <div class="m m-fill" role="listitem" data-todo="6월 과제 제목"><span class="m-n">6월</span><span class="m-t">과제 5개</span></div>
+            <div class="m m-fill" role="listitem" data-todo="7월 과제 제목"><span class="m-n">7월</span><span class="m-t">과제 5개</span></div>
+            <div class="m m-fill" role="listitem" data-todo="8월 과제 제목"><span class="m-n">8월</span><span class="m-t">과제 5개</span></div>
+            <div class="m m-now" role="listitem"><span class="m-n">9월 · 지금</span><span class="m-t">전통놀이 게임 외 4개</span></div>
+            <div class="m m-next" role="listitem"><span class="m-n">10월</span><span class="m-t">곧 열림</span></div>
+            <div class="m m-next" role="listitem"><span class="m-n">11월</span><span class="m-t">곧 열림</span></div>
+            <div class="m m-next" role="listitem"><span class="m-n">12월</span><span class="m-t">곧 열림</span></div>
+            <div class="m m-next" role="listitem"><span class="m-n">1월</span><span class="m-t">곧 열림</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 10일 · 만든다 ═════════════════════════════════ -->
+  <section class="day" aria-labelledby="h-10">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">10일</span></div>
+    <div>
+      <h2 id="h-10">라운지에 올라온 게임,<br />지금 해 보세요</h2>
+      <p class="lead">링크 하나면 휴대폰에서도 바로 열립니다.</p>
+
+      <div class="play">
+        <!-- TODO: 라운지 play origin 의 iframe 허용(CSP frame-ancestors) 확인 후 iframe. 막히면 플레이 영상. -->
+        <div class="ph ph-video play-main" role="img" aria-label="학생 작품 텐팡 플레이 자리" data-asset="iframe: lounge.letscoding.kr/works/nana/ten-pang 또는 플레이 영상">
+          <span class="ph-tag" data-kind="capture">iframe 또는 녹화</span>
+          <span class="ph-label"><b>텐팡</b>페이지 안에서 바로 플레이</span>
+        </div>
+        <div class="play-side">
+          <div class="card url"><span class="mono">lounge.letscoding.kr/works/nana/ten-pang</span></div>
+          <div class="ph" style="aspect-ratio:4/3" role="img" aria-label="개발일기 화면 자리" data-asset="06-dev-log.png">
+            <span class="ph-tag" data-kind="real">실제 화면</span>
+            <span class="ph-label"><b>이 게임의 개발일기</b>06-dev-log.png</span>
+          </div>
+          <a class="btn" href="https://lounge.letscoding.kr/works/nana/ten-pang" target="_blank" rel="noopener">새 창에서 해 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 20일 · 함께 다듬는다 ═════════════════════════════ -->
+  <section class="day" aria-labelledby="h-20">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">20일</span></div>
+    <div>
+      <h2 id="h-20">반응이 돌아오고,<br />다시 고칩니다</h2>
+
+      <div class="fig">
+        <div class="ph fig-main" role="img" aria-label="그림 1 라운지 확장 모델 자리" data-asset="그림 1 라운지 확장 모델">
+          <span class="ph-tag" data-kind="figure">그림 1</span>
+          <span class="ph-label"><b>라운지 확장 모델</b>나 → 우리 → 공동체 → 기록</span>
+        </div>
+        <div class="fig-notes">
+          <div class="card note">
+            <span class="note-n" aria-hidden="true">1</span>
+            <div>
+              <p>만들어서 링크로 내놓는다</p>
+              <div class="ph" role="img" aria-label="작품 상세 화면 자리" data-asset="07-game-detail.jpg"><span class="ph-tag" data-kind="real">실제 화면</span><span class="ph-label">07-game-detail.jpg</span></div>
+            </div>
+          </div>
+          <div class="card note">
+            <span class="note-n" aria-hidden="true">2</span>
+            <div>
+              <p>동료·코치·AI의 피드백을 골라 고친다</p>
+              <div class="ph" role="img" aria-label="제작 이야기 화면 자리" data-asset="09-deep-step-project-story.jpg"><span class="ph-tag" data-kind="real">실제 화면</span><span class="ph-label">09-deep-step-project-story.jpg</span></div>
+            </div>
+          </div>
+          <div class="card note">
+            <span class="note-n" aria-hidden="true">3</span>
+            <div>
+              <p>구경하던 아이가 후배를 돕는다</p>
+              <div class="ph" role="img" aria-label="랭킹 화면 자리" data-asset="10-ranking.png"><span class="ph-tag" data-kind="real">실제 화면</span><span class="ph-label">10-ranking.png</span></div>
+            </div>
+          </div>
+          <div class="card note">
+            <span class="note-n" aria-hidden="true">4</span>
+            <div>
+              <p>기록이 쌓여 다음 작품의 출발점이 된다</p>
+              <div class="ph" role="img" aria-label="프로필 화면 자리" data-asset="07-profile.jpg"><span class="ph-tag" data-kind="real">실제 화면</span><span class="ph-label">07-profile.jpg</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 25일 · 시장이 열린다 (금색 예외 한 자리) ═════════════ -->
+  <section class="day" aria-labelledby="h-25">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">25일</span></div>
+    <div>
+      <h2 id="h-25">친구들이<br />가치를 매깁니다</h2>
+
+      <div class="market">
+        <div class="principle">
+          <span class="coin" aria-hidden="true">L</span>
+          <p>가장 큰 루캣은 과제가 아니라, 친구들이 내 작품에 보낸 관심에서 나옵니다.</p>
+        </div>
+        <div class="market-grid">
+          <div class="ph" style="aspect-ratio:3/4" role="img" aria-label="그림 2 라운지 경제 모델 자리" data-asset="그림 2 라운지 경제 모델 (ECONOMY-FIGURE-PLAN.md)">
+            <span class="ph-tag" data-kind="figure">그림 2</span>
+            <span class="ph-label"><b>라운지 경제 모델</b>벌다 → 만든다 → 시장 → 쓰고 굴린다</span>
+          </div>
+          <div style="display:grid;gap:16px;align-content:start">
+            <div class="ph" style="aspect-ratio:4/3" role="img" aria-label="작품 주가 화면 자리" data-asset="실제 투자 화면 캡처 (학생 실명 없음)">
+              <span class="ph-tag" data-kind="capture">캡처 예정</span>
+              <span class="ph-label"><b>작품 한 개의 주가</b>실제 투자 화면</span>
+            </div>
+            <div class="ph" style="aspect-ratio:4/3" role="img" aria-label="스티커 상점 화면 자리" data-asset="스티커 상점 캡처">
+              <span class="ph-tag" data-kind="capture">캡처 예정</span>
+              <span class="ph-label"><b>학생이 만든 스티커가 팔리는 상점</b>실제 화면</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 30일 · 우리도 같은 자리에 있습니다 ═══════════════════ -->
+  <section class="day" aria-labelledby="h-30">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">30일</span></div>
+    <div>
+      <h2 id="h-30">우리도 같은 자리에<br />있습니다</h2>
+      <p class="lead">전북 혁신도시에서 7년째 코딩학원을 하고 있습니다.</p>
+
+      <div class="mosaic">
+        <div class="ph ph-video big" role="img" aria-label="학원 교실 전경 자리" data-asset="학원 전경 사진 또는 수업 루프 영상">
+          <span class="ph-tag" data-kind="shoot">촬영 예정</span>
+          <span class="ph-label"><b>우리 학원 교실</b>전경 또는 수업 장면 루프</span>
+        </div>
+        <div class="ph sq" role="img" aria-label="수상 사진 자리" data-asset="02-award.jpg">
+          <span class="ph-tag" data-kind="real">실사</span>
+          <span class="ph-label"><b>2022 메타버스 개발자 경진대회</b>학생부문 최우수상</span>
+        </div>
+        <div class="ph sq" role="img" aria-label="선생님 워크숍 사진 자리" data-asset="13-workshop.jpg">
+          <span class="ph-tag" data-kind="real">실사</span>
+          <span class="ph-label"><b>선생님을 먼저 가르칩니다</b>워크숍</span>
+        </div>
+        <div class="ph sq" role="img" aria-label="코칭 장면 사진 자리" data-asset="코칭 사진 (05-coaching-session.jpg 는 생성 이미지라 대체)">
+          <span class="ph-tag" data-kind="shoot">촬영 예정</span>
+          <span class="ph-label"><b>학생 곁에서 코칭</b></span>
+        </div>
+        <div class="ph sq" role="img" aria-label="학원 외관 사진 자리" data-asset="학원 외관">
+          <span class="ph-tag" data-kind="shoot">촬영 예정</span>
+          <span class="ph-label"><b>학원 외관</b></span>
+        </div>
+      </div>
+
+      <!-- TODO(데이터): 실시간 수치로 바꾸거나 기준일을 갱신한다. -->
+      <div class="facts">
+        <div class="card fact"><b>196<small>건</small></b><span>등록된 학생 작품</span></div>
+        <div class="card fact"><b>44<small>명</small></b><span>작품을 올린 학생</span></div>
+        <div class="card fact"><b>6,093<small>회</small></b><span>작품 조회</span></div>
+        <div class="card fact"><b>342<small>개</small></b><span>작품에 달린 댓글</span></div>
+      </div>
+      <p class="asof">2026년 8월 24일 기준</p>
+
+      <!-- 젊음·진취성은 문장이 아니라 날짜의 촘촘함으로 보여 준다. /news/updates 와 같은 원천을 쓴다. -->
+      <article class="card log" aria-labelledby="h-log">
+        <p class="kicker" id="h-log">최근 라운지에 생긴 것</p>
+        <ol>
+          <li><time datetime="2026-09-23">09.23</time><span>스티커 상점에서 바로 구입</span></li>
+          <li><time datetime="2026-09-21">09.21</time><span>렛츠코딩 페스티벌 제1회 「전통놀이」 개막</span></li>
+          <li><time datetime="2026-09-20">09.20</time><span>작품 조회 보상을 라운지 구성원 조회 기준으로 개선</span></li>
+          <li><time datetime="2026-09-19">09.19</time><span>납품한 스티커의 검토 상태와 반려 사유 표시</span></li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══ 다음 달 1일 · 문의 ══════════════════════════════
+       파란 점선이 여기서 끝난다. 히어로의 빈 칸이 다시 나오고, 그 칸이 곧 문의 폼이다. -->
+  <section class="day" id="d-next" aria-labelledby="h-next">
+    <div class="date"><span class="date-dot" aria-hidden="true"></span><span class="date-d">10월 1일</span></div>
+    <div>
+      <h2 id="h-next">다음 회차는<br />원장님 학원에서</h2>
+
+      <div class="next">
+        <form class="slot form-slot" action="#" onsubmit="event.preventDefault()">
+          <h3>4주 무료 파일럿 상담</h3>
+          <div class="fields">
+            <label>학원 이름<input name="academy" autocomplete="organization" /></label>
+            <label>원장님 성함<input name="name" autocomplete="name" /></label>
+            <label>연락처<input name="tel" type="tel" autocomplete="tel" inputmode="tel" /></label>
+            <label>지역<input name="region" autocomplete="address-level1" /></label>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-accent" type="submit">상담 신청</button>
+            <small>또는 contact@letscoding.kr · 010-5679-0072</small>
+          </div>
+        </form>
+
+        <div class="soon">
+          <div class="card">
+            <p class="kicker">10월의 과제</p>
+            <p>곧 열립니다</p>
+            <p class="sub">매달 1일, 다섯 개의 새 주제</p>
+          </div>
+          <div class="card">
+            <p class="kicker">렛츠코딩 페스티벌 제2회</p>
+            <p>「동화」</p>
+            <p class="sub">11월 1일 접수 시작</p>
+          </div>
+          <a class="btn" href="#">온라인 설명회 일정 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>주식회사 렛츠코딩</p>
+  <p>contact@letscoding.kr · 010-5679-0072</p>
+</footer>
+
+<script>
+  // 루프 영상 일시정지 (WCAG 2.2.2). 실제 <video> 가 들어오면 여기서 play/pause 한다.
+  // prefers-reduced-motion 이면 처음부터 멈춘 상태로 시작한다.
+  (function () {
+    var wall = document.getElementById("wall");
+    var btn = document.getElementById("pause");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function set(playing) {
+      wall.dataset.playing = String(playing);
+      btn.setAttribute("aria-pressed", String(!playing));
+      btn.textContent = playing ? "영상 일시정지" : "영상 재생";
+      wall.querySelectorAll("video").forEach(function (v) { playing ? v.play() : v.pause(); });
+    }
+    set(!reduce);
+    btn.addEventListener("click", function () { set(wall.dataset.playing !== "true"); });
+  })();
+</script>
+</body>
+</html>

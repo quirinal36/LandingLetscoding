@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;width:1280px;height:800px;background:#1e2230;font-family:ui-monospace,Menlo,monospace;color:#c9d1e3;font-size:26px;line-height:1.6}
+.top{height:52px;background:#171a25;display:flex;align-items:center;padding:0 24px;gap:10px}
+.dot{width:14px;height:14px;border-radius:50%;background:#3a4054}
+.tab{margin-left:20px;background:#1e2230;padding:10px 20px;border-radius:10px 10px 0 0;font-size:20px;color:#e7ecf7}
+pre{margin:0;padding:28px 36px}
+.n{color:#5b6378;display:inline-block;width:48px}
+.k{color:#8fb4ff}.s{color:#f0c674}.c{color:#6f7a93}.f{color:#7ee0b8}
+</style></head><body><div class="top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="tab">tenpang.js</span></div>
+<pre><span class="n">1</span><span class="c">// 풍선이 터질 때 효과를 더 크게</span>
+<span class="n">2</span><span class="k">function</span> <span class="f">pop</span>(balloon) {
+<span class="n">3</span>  balloon.<span class="f">burst</span>({ size: <span class="s">1.6</span>, sparkle: <span class="k">true</span> });
+<span class="n">4</span>  score += <span class="s">1</span>;
+<span class="n">5</span>  <span class="f">nextBalloon</span>();
+<span class="n">6</span>}
+<span class="n">7</span>
+<span class="n">8</span><span class="c">// 친구 의견: 시간을 조금 더 주기</span>
+<span class="n">9</span><span class="k">const</span> TIME_LIMIT = <span class="s">70</span>;</pre></body></html>

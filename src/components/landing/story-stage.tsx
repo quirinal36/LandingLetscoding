@@ -14,6 +14,10 @@ import { BOUNCE, EI, EO, Frame, STORY_T, fadeUp, kf, run } from "@/components/la
 
   모든 위치는 무대(4:3)의 % 좌표다. translateY 는 요소 자신의 높이 기준이라
   아래 상수로 무대 높이와 맞춰 둔다.
+
+  동작 줄이기: 움직이는 요소마다 .calm-* 클래스를 붙인다. landing.css 가 그 클래스의
+  transform 만 걷어 내어(배치용 transform 은 되살려) 밝기 변화만 남긴다.
+  그래서 숨김을 transform 만으로 표현하면 안 된다. 나타나는 요소는 반드시 opacity 도 함께 움직인다.
 */
 
 const CEIL_FROM_BOTTOM = 52; // 천장 높이 (무대 높이의 %)
@@ -137,7 +141,7 @@ export function StoryCaptions() {
       {CAPTIONS.map((c, i) => {
         const last = i === CAPTIONS.length - 1;
         return (
-          <div key={c.title} className="story-caption absolute inset-x-0 top-0" style={{ ...run(`st-cap-${i}`), opacity: last ? 1 : 0 }} aria-hidden={last ? undefined : true}>
+          <div key={c.title} className="calm-none story-caption absolute inset-x-0 top-0" style={{ ...run(`st-cap-${i}`), opacity: last ? 1 : 0 }} aria-hidden={last ? undefined : true}>
             <p className="text-[0.9375rem] font-semibold text-accent-ink md:text-lg">{c.kicker}</p>
             <p className={`display mt-2 text-[2.25rem] whitespace-pre-line md:text-[3.75rem] ${c.tone === "glow" ? "text-glow" : "text-metal"}`}>{c.title}</p>
           </div>
@@ -205,8 +209,8 @@ export function StoryStage() {
       [BREAK_AT + 0.8, "opacity:0.35"],
     ]),
     kf("st-strike", [
-      [BREAK_AT + 0.2, "transform:scaleX(0)", EO],
-      [BREAK_AT + 0.7, "transform:scaleX(1)"],
+      [BREAK_AT + 0.2, "opacity:0;transform:scaleX(0)", EO],
+      [BREAK_AT + 0.7, "opacity:1;transform:scaleX(1)"],
     ]),
     kf("st-tick", [
       [TICK_AT, "opacity:0;transform:scaleY(0)", EO],
@@ -248,8 +252,8 @@ export function StoryStage() {
       <div className="absolute inset-x-[4%] bottom-[5.5%] h-px bg-white/15" aria-hidden="true" />
 
       {/* 2026.1 눈금 */}
-      <div className="absolute bottom-[5.5%] left-[54%] w-px origin-bottom bg-accent-ink/60" style={{ height: `${CEIL_FROM_BOTTOM + 30}%`, ...run("st-tick") }} aria-hidden="true" />
-      <p className="absolute bottom-[1%] left-[54%] translate-x-2 text-[0.6875rem] font-semibold text-accent-ink md:text-xs" style={run("st-tick-label")} aria-hidden="true">
+      <div className="calm-none absolute bottom-[5.5%] left-[54%] w-px origin-bottom bg-accent-ink/60" style={{ height: `${CEIL_FROM_BOTTOM + 30}%`, ...run("st-tick") }} aria-hidden="true" />
+      <p className="calm-x2 absolute bottom-[1%] left-[54%] translate-x-2 text-[0.6875rem] font-semibold text-accent-ink md:text-xs" style={run("st-tick-label")} aria-hidden="true">
         2026.1 바이브코딩 시작
       </p>
 
@@ -262,26 +266,26 @@ export function StoryStage() {
                 {c === " " ? " " : c}
               </span>
             ))}
-            <span className="absolute inset-x-0 top-1/2 h-px origin-left bg-[#ffb454]" style={run("st-strike")} />
+            <span className="calm-none absolute inset-x-0 top-1/2 h-px origin-left bg-[#ffb454]" style={run("st-strike")} />
           </span>
         </p>
         <div className="relative h-2.5" style={run("st-ceil-dim")}>
-          <div className="ceiling absolute inset-y-0 left-0 w-[52%] origin-right" style={run("st-ceil-l")} />
-          <div className="ceiling absolute inset-y-0 right-0 w-[46%] origin-left" style={run("st-ceil-r")} />
+          <div className="calm-none ceiling absolute inset-y-0 left-0 w-[52%] origin-right" style={run("st-ceil-l")} />
+          <div className="calm-none ceiling absolute inset-y-0 right-0 w-[46%] origin-left" style={run("st-ceil-r")} />
         </div>
         {/* 번쩍 */}
-        <div className="flash absolute top-1/2 left-[62%] size-[28%] -translate-x-1/2 -translate-y-1/2" style={{ ...run("st-flash"), opacity: 0 }} />
+        <div className="calm-center flash absolute top-1/2 left-[62%] size-[28%] -translate-x-1/2 -translate-y-1/2" style={{ ...run("st-flash"), opacity: 0 }} />
       </div>
 
       {/* 교구 상자 */}
       {KITS.map((k, i) => (
         <div key={k.name} className="absolute" style={{ left: `${k.x}%`, bottom: `${KIT_BOTTOM}%`, width: "11%", height: `${KIT_H}%` }} aria-hidden="true">
-          <div className="size-full" style={run(`st-kit-${i}`)}>
+          <div className="calm-none size-full" style={run(`st-kit-${i}`)}>
             <div className="kit grid size-full place-items-center" style={run(`st-kit-skin-${i}`)}>
               <RobotIcon />
             </div>
           </div>
-          <p className="absolute top-full left-1/2 mt-2 -translate-x-1/2 text-[0.6875rem] whitespace-nowrap text-white/55 md:text-xs" style={run(`st-kit-label-${i}`)}>
+          <p className="calm-cx absolute top-full left-1/2 mt-2 -translate-x-1/2 text-[0.6875rem] whitespace-nowrap text-white/55 md:text-xs" style={run(`st-kit-label-${i}`)}>
             {k.name}
           </p>
         </div>
@@ -295,11 +299,11 @@ export function StoryStage() {
           style={{ left: `${TOWER_X + c.dx}%`, bottom: `${cardBottom(i)}%`, height: `${CARD_H}%`, aspectRatio: "16 / 9" }}
           aria-hidden="true"
         >
-          <div className="relative size-full" style={run(`st-card-${i}`)}>
+          <div className="calm-none relative size-full" style={run(`st-card-${i}`)}>
             <div className="work-card relative size-full overflow-hidden rounded-[10px] md:rounded-[14px]">
               <Image src={`/landing/works/${c.slug}.webp`} alt="" fill sizes="220px" className="object-cover" />
             </div>
-            <span className="skill-chip absolute top-1/2 right-full mr-2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap" style={run(`st-chip-${i}`)}>
+            <span className="calm-cy skill-chip absolute top-1/2 right-full mr-2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap" style={run(`st-chip-${i}`)}>
               {ICONS[c.skill]}
               {c.skill}
             </span>
@@ -310,7 +314,7 @@ export function StoryStage() {
       {/* 다음 칸 */}
       <a
         href="/seminar/inquiry"
-        className="next-slot absolute grid place-items-center text-accent-ink"
+        className="calm-none next-slot absolute grid place-items-center text-accent-ink"
         style={{ left: `${TOWER_X}%`, bottom: `${cardBottom(CARDS.length)}%`, height: `${CARD_H}%`, aspectRatio: "16 / 9", ...run("st-next") }}
         aria-label="다음 칸은 원장님 학원에서. 도입 문의로 이동"
       >
