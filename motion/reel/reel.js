@@ -234,7 +234,7 @@
     ctx.stroke();
     ctx.restore();
   }
-  /** 브랜드 마크 — 실행 화살표(src/components/brand.tsx와 같은 path). progress로 그려 나간다. */
+  /** 브랜드 마크 — 실행 화살표(사이트가 처음 쓰던 로고의 path). progress로 그려 나간다. */
   function chevron(ctx, x, y, size, color, progress) {
     if (progress <= 0) return;
     const s = size / 16;

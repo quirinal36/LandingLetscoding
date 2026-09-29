@@ -45,7 +45,7 @@
     ctx.arcTo(x, y, x + w, y, r);
     ctx.closePath();
   }
-  /** 브랜드 마크 — 실행 화살표(src/components/brand.tsx와 같은 path)를 둥근 사각 위에. */
+  /** 브랜드 마크 — 실행 화살표(사이트가 처음 쓰던 로고의 path)를 둥근 사각 위에. */
   function mark(ctx, x, y, size, bg, fg) {
     ctx.fillStyle = bg;
     roundRect(ctx, x, y, size, size, size * 0.24);
