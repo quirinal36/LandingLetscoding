@@ -189,16 +189,6 @@
     pointer-events: none;
   }
 
-  /* 마지막 계단 — 화면에 들어오면 그어진다 */
-  .final-draw {
-    stroke-dasharray: 1 1.1;
-    stroke-dashoffset: 0;
-    transition: stroke-dashoffset 1.6s var(--ease-out) 0.2s;
-  }
-  .js .final-stairs:not([data-shown]) .final-draw {
-    stroke-dashoffset: 1.02;
-  }
-
   /* 운영 구조도 — 양방향 흐름과 엇박자의 호흡. 글자는 움직이지 않는다. */
   .loop-draw {
     stroke-opacity: 0.24;
@@ -250,6 +240,23 @@
     0%, 15% { transform: scale(1); opacity: 0; }
     35% { opacity: 0.5; }
     85%, 100% { transform: scale(1.22); opacity: 0; }
+  }
+
+  /* ── 무한 실행 — 뚫린 8, 그 너머로 지나가는 캐릭터들 (infinity-window.tsx) ── */
+  .infinity-draw {
+    stroke-dasharray: 1 1.1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.8s var(--ease-out) 0.2s;
+  }
+  .js .infinity:not([data-shown]) .infinity-draw {
+    stroke-dashoffset: 1.02;
+  }
+  .infinity-rim {
+    filter: drop-shadow(0 0 10px rgba(255, 200, 87, 0.45));
+  }
+  /* 사진 띠(세로 1352)가 창(세로 280)보다 1072 길다. p 0→1 동안 띠가 위에서 아래로 흘러간다 */
+  .infinity-photo {
+    transform: translateY(calc((var(--p, 0.5) - 1) * 1072px));
   }
 
   /* ── 성장 장면 — 종이 팝업북 (growth-stage.tsx) ─────────────── */
@@ -612,11 +619,18 @@
   .lm-step-item {
     transform: none;
   }
-  .final-draw,
   .loop-draw {
     transition: none;
   }
-  .js .final-stairs:not([data-shown]) .final-draw,
+  .infinity-photo {
+    transform: translateY(-536px);
+  }
+  .infinity-draw {
+    transition: none;
+  }
+  .js .infinity:not([data-shown]) .infinity-draw {
+    stroke-dashoffset: 0;
+  }
   .js .loop:not([data-shown]) .loop-draw {
     stroke-dashoffset: 0;
   }

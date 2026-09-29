@@ -6,9 +6,9 @@ import { CardRiver } from "@/components/landing/card-river";
 import { GROWTH_T, GrowthCaptions, GrowthStage } from "@/components/landing/growth-stage";
 import { LoopDiagram } from "@/components/landing/loop-diagram";
 import { PhoneVideo } from "@/components/landing/phone-video";
-import { Rail } from "@/components/landing/rail";
 import { RevealObserver } from "@/components/landing/reveal-observer";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
+import { InfinityWindow } from "@/components/landing/infinity-window";
 import { ScrollScene } from "@/components/landing/scroll-scene";
 import { Container, Eyebrow, intro, reveal } from "@/components/landing/section";
 import { COMPANY } from "@/lib/nav";
@@ -25,7 +25,7 @@ import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
     5. 결론        렛츠코딩 라운지. 5-1 작품 목록 · 5-2 세 축 · 5-3 하이라이트 · 5-4 한 달 영상
     6. 숫자        우리 학원의 실제 운영 수치
     7. 시작        파일럿 · 가격 · 코칭
-    8. 끝          다음 칸은 원장님 학원에서
+    8. 끝          다음 스타트업은 원장님 학원에서. 히어로 헤드라인과 수미상관
 
   옮겨 간 것: 천장 장면 전체와 2024년 장고 이야기 → /about(브랜드 스토리),
   라운지 확장 모델 도식과 이론 → /about/philosophy(교육 철학).
@@ -230,19 +230,24 @@ export default function Home() {
             ))}
           </ul>
 
-          <div className="mt-24 md:mt-32" {...reveal()}>
-            <h3 className="display text-metal max-w-[16ch] text-[2.25rem] md:text-[4rem]">무한한 지식의 시대를 지나, 무한 실행의 시대로.</h3>
-            <p className="mt-6 max-w-[40ch] text-lg leading-relaxed text-ink-soft md:text-[1.375rem]">
-              문법은 AI가 압니다. 채용도 이제 아는 것을 묻지 않고, 해내는 것을 봅니다. 남는 것은 무엇을 만들지 정하고, 끝까지 만드는 힘입니다.
-            </p>
+          <div className="mt-24 md:mt-32">
+            {/* 앞은 검은 바탕, 누워 있는 8 모양으로만 뚫려 있다. 그 너머로 무한히 만들어질 캐릭터들 */}
+            <InfinityWindow src="/landing/characters-crowd.jpg" />
+
+            <div className="mt-12 text-center md:mt-16" {...reveal(120)}>
+              <h3 className="display text-metal mx-auto max-w-[20ch] text-[2.25rem] md:text-[4rem]">무한한 지식의 시대를 지나, 무한한 실행의 시대로 나아갑니다.</h3>
+              <p className="mx-auto mt-6 max-w-[40ch] text-lg leading-relaxed text-balance text-ink-soft md:text-[1.375rem]">
+                채용도 이제 아는 것을 묻지 않고, 해내는 것을 봅니다. 남는 것은 무엇을 만들지 정하고, 끝까지 만드는 힘입니다.
+              </p>
+            </div>
+            <ul className="mt-10 flex flex-wrap justify-center gap-3">
+              {ABILITIES.map((a, i) => (
+                <li key={a} className="glass pill px-5 py-3 text-lg font-semibold md:text-xl" {...reveal(i * 90)}>
+                  {a}
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-3">
-            {ABILITIES.map((a, i) => (
-              <li key={a} className="glass pill px-5 py-3 text-lg font-semibold md:text-xl" {...reveal(i * 90)}>
-                {a}
-              </li>
-            ))}
-          </ul>
         </Container>
       </section>
 
@@ -364,18 +369,16 @@ export default function Home() {
           </div>
         </Container>
 
-        {/* 5-3. 하이라이트 */}
-        <div className="mt-24">
-          <Container>
-            <h3 className="display mb-8 text-[1.75rem] md:text-[2.5rem]" {...reveal()}>
-              하이라이트 살펴보기
-            </h3>
-          </Container>
-          <Rail label="렛츠코딩 라운지 하이라이트">
+        {/* 5-3. 라운지 핵심기능 */}
+        <Container className="mt-24">
+          <h3 className="display mb-8 text-[1.75rem] md:text-[2.5rem]" {...reveal()}>
+            라운지 핵심기능
+          </h3>
+          <ul aria-label="렛츠코딩 라운지 핵심기능" className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {HIGHLIGHTS.map((h, i) => (
-              <li key={h.title} className="flex w-[82vw] max-w-[22rem] shrink-0 flex-col overflow-hidden rounded-[28px] bg-white" {...reveal(i * 110)}>
+              <li key={h.title} className="flex flex-col overflow-hidden rounded-[28px] bg-white" {...reveal((i % 3) * 110)}>
                 <div className="hl-media relative h-64 bg-[#eef0f4]">
-                  {h.image ? <Image src={h.image.src} alt={h.image.alt} fill sizes="352px" className={h.image.fit === "contain" ? "object-contain p-4" : "object-cover object-top"} /> : h.art}
+                  {h.image ? <Image src={h.image.src} alt={h.image.alt} fill sizes="(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw" className={h.image.fit === "contain" ? "object-contain p-4" : "object-cover object-top"} /> : h.art}
                 </div>
                 <div className="flex flex-1 flex-col p-7">
                   <p className="text-[1.375rem] font-bold tracking-[-0.025em]">{h.title}</p>
@@ -383,8 +386,8 @@ export default function Home() {
                 </div>
               </li>
             ))}
-          </Rail>
-        </div>
+          </ul>
+        </Container>
       </section>
 
       {/* ═══ 5-4. 영상 — 한 달 동안 학생이 하는 일 ═══════════════════════ */}
@@ -434,7 +437,7 @@ export default function Home() {
           <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
             {PROOF.map((p, i) => (
               <div key={p.label} {...reveal(i * 120)}>
-                <dd className="display text-gold text-[3.25rem] tabular-nums md:text-[5rem]">
+                <dd className="display text-gold whitespace-nowrap text-[clamp(2.5rem,12vw,3.25rem)] tabular-nums md:text-[clamp(3rem,6vw,4.5rem)]">
                   <span data-count={p.value}>{p.value.toLocaleString("ko-KR")}</span>
                   <span className="ml-1 text-[0.4em] text-ink-soft [-webkit-text-fill-color:var(--color-ink-soft)]">{p.unit}</span>
                 </dd>
@@ -468,18 +471,14 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 8. 다음 칸 ═════════════════════════════════════════════ */}
+      {/* ═══ 8. 끝 — 다음 스타트업 ════════════════════════════════════ */}
       <section className="tone-dark relative overflow-hidden py-32 text-center md:py-48">
         <div className="halo top-[20%]" aria-hidden="true" />
         <Container className="relative">
-          <svg viewBox="0 0 240 120" className="final-stairs mx-auto w-48 md:w-64" fill="none" aria-hidden="true" {...reveal()}>
-            <path d="M10 110 V90 H50 V70 H90 V50 H130 V30 H170" stroke="var(--color-ink)" strokeWidth="3" strokeLinejoin="round" pathLength={1} className="final-draw" />
-            <path d="M170 30 V10 H230" stroke="var(--color-accent-ink)" strokeWidth="3" strokeDasharray="6 7" />
-          </svg>
-          <h2 className="display text-glow mx-auto mt-10 text-[3rem] md:text-[6.5rem]" {...reveal(120)}>
-            다음 칸은,
+          <h2 className="display text-glow mx-auto text-[3rem] md:text-[6.5rem]" {...reveal()}>
+            다음 스타트업은,
             <br />
-            원장님 학원에서.
+            원장님 학원에서 나옵니다.
           </h2>
           <p className="mx-auto mt-6 max-w-[36ch] text-lg text-ink-soft md:text-[1.375rem]" {...reveal(220)}>
             결정하실 것은 구매가 아니라, 우리 학원에 맞는지 4주 동안 확인해 볼지입니다.
