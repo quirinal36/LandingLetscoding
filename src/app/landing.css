@@ -478,6 +478,137 @@
     background: rgba(59, 111, 224, 0.2);
   }
 
+  /* ── 교구 상자 압축판 — 지금 쓰는 곳 없음 ──
+     랜딩 3번에 있던 것. 2026-09-29 진화 장면(evolve-stage.tsx)으로 바뀌면서 페이지에서 빠졌다.
+     커밋 전 작업이라 되살릴 수 있게 남겨 둔다. 필요 없으면 이 블록과 동작 줄이기의 .ceiling-* 줄을 함께 지운다.
+     기본값이 마지막 프레임이다: 기울어진 채 회색으로 누운 상자. 자바스크립트가 없거나
+     동작 줄이기면 그 상태로 보인다. 화면에 들어와 data-shown 이 붙으면 상자 셋이
+     차례로 떠올라 한계선에 부딪히고(찌그러짐 + 번쩍) 떨어진 뒤 회색이 된다.
+     상자 i 의 출발 = --t0 + i × --step. 부딪힘은 출발 + 0.55s, 착지는 출발 + 1.05s.
+     기하는 --rise 하나로 맞춘다: 한계선 밑면 = 라벨 + 상자 + --rise, 상자는 딱 --rise 만큼 오른다. */
+  .ceiling-scene {
+    --kit-h: 6rem; /* 상자 높이 */
+    --label-h: 1.875rem; /* 상자 아래 라벨 자리 */
+    --rise: 3.25rem; /* 상자 윗면에서 한계선 밑면까지 */
+    --ceil: calc(var(--label-h) + var(--kit-h) + var(--rise)); /* 한계선 밑면 (무대 바닥 기준) */
+    --t0: 0.9s; /* 나타난 뒤 첫 상자가 출발하기까지 — 상자가 화면 안에 들어올 시간 */
+    --step: 0.55s; /* 상자 사이 시차 */
+  }
+  @media (min-width: 768px) {
+    .ceiling-scene {
+      --kit-h: 7rem;
+      --rise: 3.75rem;
+    }
+  }
+  .ceiling-stage {
+    height: calc(var(--ceil) + 2.75rem); /* 위 2.75rem: 한계선 라벨 자리 */
+  }
+  .ceiling-bar {
+    bottom: var(--ceil);
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(59, 111, 224, 0.65), rgba(59, 111, 224, 0.22));
+    box-shadow: 0 0 20px rgba(59, 111, 224, 0.28);
+  }
+  .ceiling-bar-label {
+    bottom: calc(var(--ceil) + 0.875rem);
+  }
+  .ceiling-row {
+    bottom: var(--label-h);
+  }
+  .ceiling-kit {
+    height: var(--kit-h);
+    transform: rotate(var(--tilt));
+  }
+  .ceiling-scene .kit {
+    transform-origin: 50% 0; /* 찌그러질 때 윗면은 한계선에 붙어 있다 */
+    box-shadow:
+      inset 0 -6px 0 rgba(0, 0, 0, 0.12),
+      0 10px 22px rgba(217, 140, 30, 0.3);
+    filter: grayscale(1);
+    opacity: 0.55;
+  }
+  .ceiling-bonk {
+    position: absolute;
+    top: calc(-1 * var(--rise)); /* 상자 윗면이 한계선에 닿는 자리 */
+    left: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: -1.75rem 0 0 -1.75rem;
+    border-radius: 999px;
+    background: radial-gradient(circle, #fff 0%, #a9c1f6 30%, rgba(59, 111, 224, 0) 70%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ceiling-scene[data-shown] .ceiling-kit {
+    animation: ceiling-bump 1.05s both;
+    animation-delay: calc(var(--t0) + var(--i) * var(--step));
+  }
+  .ceiling-scene[data-shown] .kit {
+    animation:
+      ceiling-squash 1.05s both,
+      ceiling-fade 0.5s var(--ease-out) both;
+    animation-delay:
+      calc(var(--t0) + var(--i) * var(--step)),
+      calc(var(--t0) + var(--i) * var(--step) + 1.05s);
+  }
+  .ceiling-scene[data-shown] .ceiling-bonk {
+    animation: ceiling-bonk 0.4s ease-out both;
+    animation-delay: calc(var(--t0) + var(--i) * var(--step) + 0.5s);
+  }
+  @keyframes ceiling-bump {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      animation-timing-function: cubic-bezier(0.4, 0, 0.7, 0.6); /* 속도를 붙여 부딪힌다 */
+    }
+    52%,
+    71% {
+      transform: translateY(calc(-1 * var(--rise))) rotate(0deg);
+      animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.4); /* 떨어짐 */
+    }
+    100% {
+      transform: translateY(0) rotate(var(--tilt));
+    }
+  }
+  @keyframes ceiling-squash {
+    0%,
+    52% {
+      transform: scale(1);
+    }
+    58% {
+      transform: scale(1.08, 0.86);
+      animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); /* 튕겨 돌아옴 */
+    }
+    70%,
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes ceiling-fade {
+    from {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+    to {
+      filter: grayscale(1);
+      opacity: 0.55;
+    }
+  }
+  @keyframes ceiling-bonk {
+    0% {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    25% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+  }
+
   /* ── 폰 ─────────────────────────────────────────────────── */
   .phone {
     position: relative;
@@ -569,7 +700,10 @@
   .text-glow,
   .loop-particle,
   .loop-node,
-  .loop-halo {
+  .loop-halo,
+  .ceiling-kit,
+  .ceiling-scene .kit,
+  .ceiling-bonk {
     animation: none !important;
   }
   .loop-flow,
@@ -630,21 +764,10 @@
 
   /* 이야기 장면: keyframes 는 그대로 스크롤로 감되, transform·blur 만 걷어 낸다.
      !important 가 애니메이션 값보다 세다. opacity 는 손대지 않아 밝기 변화가 남는다.
-     배치용 transform 을 함께 쓰는 요소는 그 값만 되살린다. */
+     배치(-translate-x-1/2 등)는 Tailwind v4 에서 transform 이 아니라 translate 속성이라 따로 남는다.
+     그래서 .calm-none 하나면 된다. 예전의 .calm-cx 처럼 배치 값을 transform 으로 되살리면 반 칸 더 밀린다. */
   .calm-none {
     transform: none !important;
-  }
-  .calm-cx {
-    transform: translateX(-50%) !important;
-  }
-  .calm-cy {
-    transform: translateY(-50%) !important;
-  }
-  .calm-center {
-    transform: translate(-50%, -50%) !important;
-  }
-  .calm-x2 {
-    transform: translateX(0.5rem) !important;
   }
   .story-caption {
     filter: none !important;

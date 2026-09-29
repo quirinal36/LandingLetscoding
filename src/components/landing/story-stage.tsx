@@ -1,26 +1,27 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import { BOUNCE, EI, EO, Frame, STORY_T, fadeUp, kf, run } from "@/components/landing/timeline";
+import { RobotIcon } from "@/components/landing/robot-icon";
 
 /*
-  이야기 무대 — MYPROBLEM.md 2번(문제)과 6번(천장)을 진짜 카드로 보여 준다.
+  이야기 무대 — MYPROBLEM.md 2번(문제)과 6번(바이브코딩으로 넘은 한계)을 진짜 카드로 보여 준다.
   설계 원문은 HERO-MOTION-PLAN.md. 이 파일은 그 타임라인을 선 대신 물건으로 그린 것이다.
 
-  0.0–5.6  교구 상자 셋이 차례로 떠올라 유리 천장에 부딪히고 떨어진다. 떨어진 상자는 회색으로 남는다.
+  0.0–5.6  교구 상자 셋이 차례로 떠올라 유리 한계선에 부딪히고 떨어진다. 떨어진 상자는 회색으로 남는다.
   5.6–6.4  바닥에 "2026.1 바이브코딩" 눈금이 박힌다.
   6.4–10.4 학생 작품 카드가 오른쪽에서 날아와 한 장씩 쌓인다. 카드마다 그때 필요해진 기술 칩이 붙는다.
-  9.3      넷째 카드가 천장을 지나는 순간 천장이 갈라지며 번쩍인다.
+  9.3      넷째 카드가 한계선을 지나는 순간 선이 갈라지며 번쩍인다.
   10.6     탑 꼭대기에 파란 점선 빈 칸이 열린다. 다음 칸은 원장님 학원.
 
   모든 위치는 무대(4:3)의 % 좌표다. translateY 는 요소 자신의 높이 기준이라
   아래 상수로 무대 높이와 맞춰 둔다.
 
-  동작 줄이기: 움직이는 요소마다 .calm-* 클래스를 붙인다. landing.css 가 그 클래스의
-  transform 만 걷어 내어(배치용 transform 은 되살려) 밝기 변화만 남긴다.
+  동작 줄이기: transform 을 움직이는 요소마다 .calm-none 을 붙인다. landing.css 가 transform 만 걷어 내어
+  밝기 변화만 남긴다. 배치(-translate-x-1/2 등)는 Tailwind v4 에서 transform 이 아니라 translate 속성이라 그대로 남는다.
   그래서 숨김을 transform 만으로 표현하면 안 된다. 나타나는 요소는 반드시 opacity 도 함께 움직인다.
 */
 
-const CEIL_FROM_BOTTOM = 52; // 천장 높이 (무대 높이의 %)
+const CEIL_FROM_BOTTOM = 52; // 한계선 높이 (무대 높이의 %)
 
 // 교구 상자
 const KITS = [
@@ -52,7 +53,7 @@ const STACK_START = 6.6;
 const STEP = 0.8;
 const cardStart = (i: number) => STACK_START + STEP * i;
 const LAND = 0.45;
-const BREAK_AT = cardStart(3) + LAND - 0.1; // 넷째 카드가 천장을 지나는 순간
+const BREAK_AT = cardStart(3) + LAND - 0.1; // 넷째 카드가 한계선을 지나는 순간
 const TICK_AT = 6.0;
 const NEXT_AT = 10.6;
 const CEIL_LABEL_AT = KIT_START[2] + RISE;
@@ -98,25 +99,13 @@ const ICONS: Record<string, ReactNode> = {
   ),
 };
 
-function RobotIcon() {
-  return (
-    <svg viewBox="0 0 48 48" className="size-[46%]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="10" y="16" width="28" height="22" rx="5" />
-      <path d="M24 16v-5M20 8h8M4 24v8M44 24v8" />
-      <circle cx="18" cy="26" r="2.5" fill="currentColor" stroke="none" />
-      <circle cx="30" cy="26" r="2.5" fill="currentColor" stroke="none" />
-      <path d="M18 33h12" />
-    </svg>
-  );
-}
-
 // ── 자막 ──────────────────────────────────────────────────────────
 const CAPTIONS: { from: number; to: number; kicker: string; title: string; tone?: "glow" }[] = [
   { from: 0, to: 2.45, kicker: "2019 · 프랜차이즈 교구", title: "로봇 A.\n6개월이면 끝." },
   { from: 2.45, to: 3.95, kicker: "새 교구를 들였습니다", title: "로봇 B.\n다시 처음부터." },
   { from: 3.95, to: 5.9, kicker: "학생은 자랐는데", title: "새 교구.\n또 초보 단계." },
   { from: 5.9, to: 7.9, kicker: "2026년 1월", title: "학생들과\n바이브코딩을 시작." },
-  { from: 7.9, to: 9.7, kicker: "만들수록 필요한 기술이 생깁니다", title: "천장을\n뚫었습니다.", tone: "glow" },
+  { from: 7.9, to: 9.7, kicker: "만들수록 필요한 기술이 생깁니다", title: "한계를\n넘었습니다.", tone: "glow" },
   { from: 9.7, to: 11.0, kicker: "마지막 칸", title: "학생이 가져온\n자기 문제." },
   { from: 11.0, to: STORY_T, kicker: "그리고", title: "다음 칸은,\n원장님 학원에서.", tone: "glow" },
 ];
@@ -152,12 +141,12 @@ export function StoryCaptions() {
 }
 
 // ── 무대 ──────────────────────────────────────────────────────────
-const CEIL_LABEL = "초보 단계 천장";
+const CEIL_LABEL = "초보 단계 한계선";
 
 export function StoryStage() {
   const css: string[] = [];
 
-  // 교구 상자: 떠오름 → 천장에 부딪혀 찌그러짐 → 떨어져 회색으로
+  // 교구 상자: 떠오름 → 한계선에 부딪혀 찌그러짐 → 떨어져 회색으로
   KITS.forEach((k, i) => {
     const r0 = KIT_START[i];
     const top = r0 + RISE;
@@ -180,7 +169,7 @@ export function StoryStage() {
     );
   });
 
-  // 천장: 라벨 타이핑, 셋째 카드가 닿을 때 갈라짐
+  // 한계선: 라벨 타이핑, 넷째 카드가 닿을 때 갈라짐
   [...CEIL_LABEL].forEach((_, j) => {
     const t = CEIL_LABEL_AT + 0.06 * j;
     css.push(
@@ -241,7 +230,7 @@ export function StoryStage() {
     <div
       className="story-stage relative aspect-[4/3] w-full overflow-hidden rounded-[28px] bg-[#0b0d14]"
       role="img"
-      aria-label="같은 학생의 7년. 로봇 A, 로봇 B, 새 교구를 들일 때마다 초보 단계라는 유리 천장에 부딪혀 떨어지고, 떨어진 교구는 회색으로 쌓인다. 2026년 1월 바이브코딩을 시작한 뒤로는 학생이 만든 작품 카드가 첫 작품, 로그인, DB, API, 내 문제 순서로 탑처럼 쌓이며 그 천장을 깨고 올라간다. 탑 꼭대기에 다음 칸이 비어 있다."
+      aria-label="같은 학생의 7년. 로봇 A, 로봇 B, 새 교구를 들일 때마다 초보 단계라는 한계선에 부딪혀 떨어지고, 떨어진 교구는 회색으로 쌓인다. 2026년 1월 바이브코딩을 시작한 뒤로는 학생이 만든 작품 카드가 첫 작품, 로그인, DB, API, 내 문제 순서로 탑처럼 쌓이며 그 선을 깨고 올라간다. 탑 꼭대기에 다음 칸이 비어 있다."
     >
       <style dangerouslySetInnerHTML={{ __html: css.join("\n") }} />
 
@@ -253,11 +242,11 @@ export function StoryStage() {
 
       {/* 2026.1 눈금 */}
       <div className="calm-none absolute bottom-[5.5%] left-[54%] w-px origin-bottom bg-accent-ink/60" style={{ height: `${CEIL_FROM_BOTTOM + 30}%`, ...run("st-tick") }} aria-hidden="true" />
-      <p className="calm-x2 absolute bottom-[1%] left-[54%] translate-x-2 text-[0.6875rem] font-semibold text-accent-ink md:text-xs" style={run("st-tick-label")} aria-hidden="true">
+      <p className="calm-none absolute bottom-[1%] left-[54%] translate-x-2 text-[0.6875rem] font-semibold text-accent-ink md:text-xs" style={run("st-tick-label")} aria-hidden="true">
         2026.1 바이브코딩 시작
       </p>
 
-      {/* 유리 천장 */}
+      {/* 유리 한계선 */}
       <div className="absolute inset-x-[4%]" style={{ top: `${ceilTop}%` }} aria-hidden="true">
         <p className="absolute -top-6 left-0 flex text-[0.6875rem] font-semibold tracking-wide text-white/60 md:text-xs">
           <span className="relative">
@@ -274,7 +263,7 @@ export function StoryStage() {
           <div className="calm-none ceiling absolute inset-y-0 right-0 w-[46%] origin-left" style={run("st-ceil-r")} />
         </div>
         {/* 번쩍 */}
-        <div className="calm-center flash absolute top-1/2 left-[62%] size-[28%] -translate-x-1/2 -translate-y-1/2" style={{ ...run("st-flash"), opacity: 0 }} />
+        <div className="calm-none flash absolute top-1/2 left-[62%] size-[28%] -translate-x-1/2 -translate-y-1/2" style={{ ...run("st-flash"), opacity: 0 }} />
       </div>
 
       {/* 교구 상자 */}
@@ -285,7 +274,7 @@ export function StoryStage() {
               <RobotIcon />
             </div>
           </div>
-          <p className="calm-cx absolute top-full left-1/2 mt-2 -translate-x-1/2 text-[0.6875rem] whitespace-nowrap text-white/55 md:text-xs" style={run(`st-kit-label-${i}`)}>
+          <p className="calm-none absolute top-full left-1/2 mt-2 -translate-x-1/2 text-[0.6875rem] whitespace-nowrap text-white/55 md:text-xs" style={run(`st-kit-label-${i}`)}>
             {k.name}
           </p>
         </div>
@@ -303,7 +292,7 @@ export function StoryStage() {
             <div className="work-card relative size-full overflow-hidden rounded-[10px] md:rounded-[14px]">
               <Image src={`/landing/works/${c.slug}.webp`} alt="" fill sizes="220px" className="object-cover" />
             </div>
-            <span className="calm-cy skill-chip absolute top-1/2 right-full mr-2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap" style={run(`st-chip-${i}`)}>
+            <span className="calm-none skill-chip absolute top-1/2 right-full mr-2 flex -translate-y-1/2 items-center gap-1 whitespace-nowrap" style={run(`st-chip-${i}`)}>
               {ICONS[c.skill]}
               {c.skill}
             </span>

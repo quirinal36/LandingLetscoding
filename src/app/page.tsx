@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ButtonLink } from "@/components/ui";
 import { CardRiver } from "@/components/landing/card-river";
+import { EVOLVE_T, EvolveCaptions, EvolveStage } from "@/components/landing/evolve-stage";
 import { GROWTH_T, GrowthCaptions, GrowthStage } from "@/components/landing/growth-stage";
 import { LoopDiagram } from "@/components/landing/loop-diagram";
 import { PhoneVideo } from "@/components/landing/phone-video";
@@ -19,15 +20,15 @@ import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
 
   선언 → 왜 → 그래서 → 어떻게 → 어디서. 각 섹션의 마지막 줄이 다음 섹션의 질문이다.
     1. 히어로      주제1 선언. 학생 한 명이, 스타트업이 됩니다. 아래로 실제 학생 작품 카드가 흐른다
-    2. 시대        주제2. 무한한 지식의 시대를 지나 무한 실행의 시대로. 코딩테스트 폐지가 증거
-    3. 교육        주제3. 지식을 쌓는 커리큘럼은 천장을 만난다. 문단 스크럽 + 천장 압축판(전체는 /about)
+    2. 시대        주제2. 무한한 지식의 시대를 지나 무한 실행의 시대로. 채용 사례는 블로그 활용을 위해 숨김
+    3. 교육        주제3. 교구는 진화해도 초보 단계로 돌아오고 학생만 자란다. 진화 장면(evolve-stage.tsx) + 문단 스크럽
     4. 모습        주제1 구체화. 만든다 → 다듬는다 → 자란다 → 남는다 팝업북 (growth-stage.tsx)
     5. 결론        렛츠코딩 라운지. 5-1 작품 목록 · 5-2 세 축 · 5-3 하이라이트 · 5-4 한 달 영상
     6. 숫자        우리 학원의 실제 운영 수치
     7. 시작        파일럿 · 가격 · 코칭
     8. 끝          다음 스타트업은 원장님 학원에서. 히어로 헤드라인과 수미상관
 
-  옮겨 간 것: 천장 장면 전체와 2024년 장고 이야기 → /about(브랜드 스토리),
+  옮겨 간 것: 7년 이야기 장면(story-stage.tsx)과 2024년 장고 이야기 → /about(브랜드 스토리),
   라운지 확장 모델 도식과 이론 → /about/philosophy(교육 철학).
 
   사실의 경계: 숫자는 기준일이 있는 실측만. 효과(재원율·매출)는 약속하지 않는다.
@@ -119,13 +120,6 @@ const HIRING = [
 ];
 const ABILITIES = ["기획", "문제 정의", "AI 활용", "생각 근육", "공감 근육", "회복탄력성"];
 
-/** 3번 천장 압축판 — 브랜드 스토리의 천장 장면(story-stage.tsx)을 정지 화면 한 장으로 줄였다 */
-const KITS = [
-  { name: "로봇 A", when: "2019" },
-  { name: "로봇 B", when: "다음 교구" },
-  { name: "새 교구", when: "또 다음" },
-];
-
 /** 영상 옆 — 학생이 한 달 동안 하는 일 */
 const MONTH = [
   { n: "01", t: "고른다", d: "이달의 문제 5개 중 하나, 또는 자기 문제" },
@@ -215,34 +209,37 @@ export default function Home() {
       {/* ═══ 2. 시대 — 무한 지식에서 무한 실행으로 (주제2) ══════════════ */}
       <section className="tone-dark border-t border-white/10 py-28 md:py-44">
         <Container>
-          <div {...reveal()}>
-            <Eyebrow>학부모님이 가장 날카롭게 묻는 질문</Eyebrow>
-            <p className="mt-3 text-xl text-ink-soft md:text-2xl">&ldquo;AI가 코딩 다 해 주는데, 왜 배워요?&rdquo;</p>
+          {/* 학부모 질문과 채용 사례는 추후 블로그에서 활용하기 위해 보관 */}
+          <div hidden>
+            <div {...reveal()}>
+              <Eyebrow>학부모님이 가장 날카롭게 묻는 질문</Eyebrow>
+              <p className="mt-3 text-xl text-ink-soft md:text-2xl">&ldquo;AI가 코딩 다 해 주는데, 왜 배워요?&rdquo;</p>
+            </div>
+            <h2 className="display text-glow mt-10 text-[3rem] md:text-[7rem]" {...reveal(120)}>
+              코딩테스트가
+              <br />
+              사라지고 있습니다.
+            </h2>
+
+            <ul className="mt-14 grid gap-4 md:grid-cols-2">
+              {HIRING.map((h, i) => (
+                <li key={h.who} className="card flex flex-col p-7 md:p-9" {...reveal(i * 140)}>
+                  <p className="text-2xl font-bold tracking-[-0.02em]">{h.who}</p>
+                  <p className="mt-3 flex-1 text-[1.0625rem] leading-relaxed text-ink-soft">{h.what}</p>
+                  <a href={h.href} target="_blank" rel="noopener" className="link-chevron mt-4 text-[0.9375rem]">
+                    {h.source}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <h2 className="display text-glow mt-10 text-[3rem] md:text-[7rem]" {...reveal(120)}>
-            코딩테스트가
-            <br />
-            사라지고 있습니다.
-          </h2>
 
-          <ul className="mt-14 grid gap-4 md:grid-cols-2">
-            {HIRING.map((h, i) => (
-              <li key={h.who} className="card flex flex-col p-7 md:p-9" {...reveal(i * 140)}>
-                <p className="text-2xl font-bold tracking-[-0.02em]">{h.who}</p>
-                <p className="mt-3 flex-1 text-[1.0625rem] leading-relaxed text-ink-soft">{h.what}</p>
-                <a href={h.href} target="_blank" rel="noopener" className="link-chevron mt-4 text-[0.9375rem]">
-                  {h.source}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-24 md:mt-32">
+          <div>
             {/* 앞은 검은 바탕, 누워 있는 8 모양으로만 뚫려 있다. 그 너머로 무한히 만들어질 캐릭터들 */}
             <InfinityWindow src="/landing/characters-crowd.jpg" />
 
             <div className="mt-12 text-center md:mt-16" {...reveal(120)}>
-              <h3 className="display text-metal mx-auto max-w-[20ch] text-[2.25rem] md:text-[4rem]">무한한 지식의 시대를 지나, 무한한 실행의 시대로 나아갑니다.</h3>
+              <h2 className="display text-metal mx-auto max-w-[20ch] text-[2.25rem] md:text-[4rem]">무한한 지식의 시대를 지나, 무한한 실행의 시대로 나아갑니다.</h2>
               <p className="mx-auto mt-6 max-w-[40ch] text-lg leading-relaxed text-balance text-ink-soft md:text-[1.375rem]">
                 채용도 이제 아는 것을 묻지 않고, 해내는 것을 봅니다. 남는 것은 무엇을 만들지 정하고, 끝까지 만드는 힘입니다.
               </p>
@@ -258,7 +255,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 3. 교육 — 지식을 쌓는 커리큘럼은 천장을 만난다 (주제3) ═══════ */}
+      {/* ═══ 3. 교육 — 교구는 진화해도 초보 단계로 돌아온다 (주제3, EVOLVE-SCENE-PLAN.md) ═ */}
       <section className="tone-paper pt-28 md:pt-40">
         <Container>
           <div {...reveal()}>
@@ -267,6 +264,13 @@ export default function Home() {
           </div>
         </Container>
       </section>
+      {/* 보여 주고(진화 장면) 나서 말한다(문단). 문단이 먼저 오면 "다시 첫 번째 단계로"가 장면의 반전을 미리 말해 버린다 */}
+      <ScrollScene length={4.5} mode="timeline" duration={EVOLVE_T} className="tone-paper" pinClassName="flex items-center">
+        <Container className="grid items-center gap-6 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <EvolveCaptions />
+          <EvolveStage />
+        </Container>
+      </ScrollScene>
       <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
         <Container>
           <p className="display max-w-[24em] text-[1.625rem] leading-[1.3] md:text-[2.5rem]">
@@ -288,28 +292,11 @@ export default function Home() {
 
       <section className="tone-paper pb-28 md:pb-40">
         <Container>
-          <figure className="rounded-[28px] bg-white p-6 md:p-10" {...reveal()}>
-            <div className="relative h-56 md:h-64" aria-hidden="true">
-              <div className="absolute inset-x-0 top-[22%] border-t-2 border-dashed border-edge" />
-              <p className="absolute top-[22%] right-0 -translate-y-[130%] text-[0.8125rem] font-semibold text-ink-faint">초보 6단계</p>
-              <ul className="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-3 md:gap-6">
-                {KITS.map((k) => (
-                  <li key={k.name} className="flex flex-col items-center gap-2">
-                    <span className="grid h-24 w-full max-w-[9rem] place-items-center rounded-2xl bg-fill text-[1rem] font-bold text-ink-soft md:h-28 md:text-lg">
-                      {k.name}
-                    </span>
-                    <span className="text-[0.8125rem] text-ink-faint">{k.when}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <figcaption className="mt-6 max-w-[44ch] text-[1.0625rem] leading-relaxed text-ink-soft">
-              교구를 바꿔도 다시 1단계부터였습니다. 6개월이면 학생이 먼저 지루해졌습니다.{" "}
-              <Link href="/about" className="link-chevron whitespace-nowrap">
-                7년 이야기 전체 보기
-              </Link>
-            </figcaption>
-          </figure>
+          <p className="text-[1.0625rem] text-ink-soft" {...reveal()}>
+            <Link href="/about" className="link-chevron whitespace-nowrap">
+              7년 이야기 전체 보기
+            </Link>
+          </p>
 
           <p className="display mt-24 max-w-[20ch] text-[1.875rem] leading-[1.25] md:mt-32 md:text-[3rem]" {...reveal()}>
             교육이 시대를 따라 바뀌어야 한다면,

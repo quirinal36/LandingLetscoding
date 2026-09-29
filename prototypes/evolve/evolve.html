@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>진화 장면 — 도형 프로토타입</title>
+<!--
+  EVOLVE-SCENE-PLAN.md 9번의 1단계. 그림 없이 도형만으로 타임라인을 굴려 본다.
+  - 장치는 저장소의 ScrollScene(mode="timeline") + timeline.ts 규칙을 바닐라 JS 로 옮긴 것이다.
+    모든 요소가 EVOLVE_T(11초) 타임라인 위에 자기 keyframes 를 갖고, 스크롤이 재생 위치를 맞춘다.
+    기본 스타일 = 마지막 프레임. 스크립트가 못 돌아도 6학년 + 아기 로봇 + 펀치라인이 남는다.
+  - 학생 셋(초2·초4·초6)과 로봇은 public/landing/evolve/*.webp 종이 컷아웃이다 (1차 도형 버전은 git 이력에).
+    컷아웃을 바꾸면 cut.mjs 가 찍어 주는 가로/세로 비와, 모눈 미리보기에서 잰 손 좌표(handsY)만 KIDS 에 다시 적는다.
+  - 오른쪽 위 HUD 에 t·p·박자 이름이 뜬다. 아래 슬라이더와 ←→ 키(0.1초, Shift 면 1초)로 감을 수 있다.
+  - 실제 페이지에서는 tone-paper 섹션. 색은 DESIGN.md 토큰을 그대로 옮겼다.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'" />
+<style>
+  :root {
+    --bg: #e9edf3;
+    --surface: #ffffff;
+    --fill: #dde3ec;
+    --ink: #1b2333;
+    --ink-soft: #55607a;
+    --ink-faint: #5e6880;
+    --separator: #d5dbe4;
+    --accent: #3b6fe0;
+    --accent-ink: #2a53b0;
+    --gold: #ffd166;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: auto; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+
+  /* 앞뒤 여백 — 실제 페이지에서 2번·스크럽 문단이 오는 자리 */
+  .spacer { min-height: 70svh; display: flex; align-items: center; }
+  .spacer .kicker { font-size: 1rem; }
+  .spacer h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0.5rem 0 0; }
+  .spacer p { color: var(--ink-soft); max-width: 44ch; line-height: 1.6; }
+  .spacer.end { min-height: 60svh; }
+
+  /* 고정 장면 */
+  .scene { position: relative; height: 450svh; }
+  .scene-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; }
+  .grid { display: grid; gap: 1.5rem; align-items: center; width: 100%; }
+  @media (min-width: 1024px) { .grid { grid-template-columns: 0.8fr 1.2fr; gap: 3rem; } }
+
+  /* 왼쪽 자막 — 원장 목소리 */
+  .captions { position: relative; min-height: 8rem; }
+  @media (min-width: 768px) { .captions { min-height: 15rem; } }
+  .cap { position: absolute; inset-inline: 0; top: 0; opacity: 0; }
+  .kicker { font-size: 1rem; font-weight: 600; color: var(--accent-ink); margin: 0; }
+  .title { margin: 0.5rem 0 0; font-size: 2rem; line-height: 1.08; letter-spacing: -0.03em; font-weight: 800; white-space: pre-line; }
+  @media (min-width: 768px) { .title { font-size: 3.25rem; } }
+  .title.glow { color: var(--accent-ink); }
+
+  /* 무대 4:3 — 빈 종이 바탕 */
+  .stage {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    border-radius: 28px;
+    background: var(--surface);
+    overflow: hidden;
+    container-type: inline-size;
+  }
+  .floor { position: absolute; left: 6%; right: 6%; bottom: 14%; height: 1px; background: var(--separator); }
+
+  /* 종이 그림자 — 팝업북과 같은 방식(drop-shadow). 그림 안에 그림자를 굽지 않는다 */
+  .stage { --ds: drop-shadow(0 5px 6px rgba(27, 35, 51, 0.2)); }
+  .kid { position: absolute; bottom: 14%; transform-origin: 50% 100%; } /* bottom = FEET */
+  .kid img { display: block; width: 100%; height: 100%; object-fit: contain; filter: var(--ds); }
+
+  /* 너비·margin-left 는 로봇 그림의 가로/세로 비로 JS 가 계산해 인라인으로 넣는다 */
+  .robot-pos { position: absolute; left: 50%; height: 15%; }
+  /* 부풀기 기준점은 로봇 중심. 바닥(손) 기준으로 두면 3.8배가 무대 위로 잘린다. 중심이면 학생 몸을 덮으며 위아래로 퍼진다 */
+  .robot-wrap { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  .robot { position: absolute; inset: 0; filter: var(--ds); }
+  .robot img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* 실루엣 상자: 로봇 폭의 3배 × 높이의 2배. 로봇 그림이 세로로 길어서(0.65) 폭 2배로 두면 정사각 viewBox 가 폭에 맞춰 줄어들고 뿔이 머리 뒤에 숨는다 */
+  .sil { position: absolute; left: -100%; top: -50%; width: 300%; height: 200%; transform-origin: 50% 62%; opacity: 0; }
+  .sil svg { display: block; width: 100%; height: 100%; }
+
+  .dim { position: absolute; inset: 0; background: var(--ink); opacity: 0; pointer-events: none; }
+  .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+  .puff { position: absolute; left: 50%; top: 50%; width: 70%; aspect-ratio: 1; margin: -35% 0 0 -35%; border-radius: 50%; background: #cfd6e2; opacity: 0; }
+
+  /* 이름표 — 게임 HUD 처럼 */
+  .tag {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; background: var(--ink); color: #fff;
+    border-radius: 999px; padding: 0.35em 0.9em;
+    font-size: 2.4cqw; font-weight: 700; letter-spacing: -0.01em; opacity: 0;
+  }
+  .tag b { color: var(--gold); margin-left: 0.4em; font-variant-numeric: tabular-nums; }
+  /* 로봇 이름표는 머리 위가 아니라 옆에. 위에 두면 학생 얼굴을 가린다 */
+  .tag-side { left: 118%; top: 50%; transform: translateY(-50%); }
+  .tag-side::before { content: ""; position: absolute; right: 100%; top: 50%; width: 0.9em; height: 2px; margin-top: -1px; background: var(--ink); }
+
+  /* 메시지 박스 — 게임 목소리 */
+  .msg {
+    position: absolute; left: 4%; right: 4%; bottom: 3%; height: 10%;
+    border-radius: 14px; background: var(--ink); color: #fff;
+    font-size: 3cqw; font-weight: 600; opacity: 0;
+  }
+  .msg span { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 3.5cqw; opacity: 0; white-space: nowrap; }
+
+  .bar { position: absolute; inset-inline: 0; bottom: 0; height: 3px; background: rgba(27, 35, 51, 0.12); }
+  .bar i { display: block; height: 100%; transform-origin: left; background: var(--accent); transform: scaleX(var(--p, 1)); }
+
+  /* 튜닝용 */
+  .hud {
+    position: fixed; top: 0.75rem; right: 0.75rem; z-index: 10;
+    background: var(--surface); border-radius: 12px; padding: 0.5rem 0.75rem;
+    font: 600 0.8125rem/1.4 ui-monospace, "IBM Plex Mono", Menlo, monospace; color: var(--ink);
+    outline: 1px solid var(--separator);
+  }
+  .slider {
+    position: fixed; bottom: 0.75rem; left: 50%; transform: translateX(-50%); z-index: 10;
+    width: min(40rem, 80vw); margin: 0; accent-color: var(--accent);
+  }
+
+  /* 포스터 모드(?t=) — 한 화면에 그 시각의 프레임만 */
+  .poster .spacer, .poster .slider { display: none; }
+  .poster .scene { height: 100svh; }
+
+  /* 동작 줄이기 — landing.css 와 같은 규칙. transform 만 걷어 내고 밝기 변화는 남긴다 */
+  @media (prefers-reduced-motion: reduce) {
+    .calm-none { transform: none !important; }
+    .calm-cx { transform: translateX(-50%) !important; }
+    .calm-cy { transform: translateY(-50%) !important; }
+  }
+</style>
+<style id="kf"></style>
+</head>
+<body>
+
+<div class="wrap spacer">
+  <div>
+    <p class="kicker">3 · 교육 — 진화 장면 · 도형 프로토타입</p>
+    <h1>스크롤하면 재생됩니다.</h1>
+    <p>교구는 세 번 진화해서 세 번 아기로 돌아오고, 학생은 초2 → 초4 → 초6으로 자랍니다. 그림은 아직 도형입니다. 박자와 배율부터 맞춥니다.</p>
+  </div>
+</div>
+
+<section class="scene" id="scene">
+  <div class="scene-pin">
+    <div class="wrap grid">
+      <div class="captions" id="captions"></div>
+      <div class="stage" id="stage" role="img" aria-label="초등학생이 아기 로봇을 안고 있다. 로봇은 세 번 요란하게 진화하지만 세 번 다 똑같은 아기로 돌아오고, 그 사이 학생만 2학년에서 6학년으로 자란다."></div>
+    </div>
+    <div class="bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<div class="wrap spacer end">
+  <div>
+    <p class="kicker">다음 자리</p>
+    <h1>학원은 영업이 어렵습니다.</h1>
+    <p>여기에 스크럽 문단이 오고, 마지막 줄 "진짜 진화는 교구가 아니라 학생이 합니다."로 팝업북에 넘깁니다.</p>
+  </div>
+</div>
+
+<div class="hud" id="hud" aria-live="off">t 0.00s</div>
+<input class="slider" id="slider" type="range" min="0" max="1000" value="0" aria-label="재생 위치" />
+
+<script>
+/* ── timeline.ts 를 옮긴 것 ─────────────────────────────────────── */
+const T = 11; // EVOLVE_T
+const EO = "cubic-bezier(0.32, 0.72, 0.35, 1)";
+const EI = "cubic-bezier(0.55, 0, 0.9, 0.4)";
+const BOUNCE = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+const CSS = [];
+const pct = (t) => Number(((t / T) * 100).toFixed(3)) + "%";
+function kf(name, frames) {
+  const first = frames[0], last = frames[frames.length - 1];
+  const all = [[0, first[1]], ...frames, [T, last[1]]];
+  CSS.push(`@keyframes ${name}{${all.map(([t, c, e]) => `${pct(t)}{${c}${e ? ";animation-timing-function:" + e : ""}}`).join("")}}`);
+  return name;
+}
+const run = (...names) => names.map((n) => `${n} ${T}s linear both`).join(",");
+
+/* ── 무대 상수 (EVOLVE-SCENE-PLAN.md 2·4·5) ──────────────────────── */
+const FEET = 14; // 발 위치 (무대 높이 %). CSS .kid/.floor 의 bottom 과 같아야 한다
+const ROBOT_H = 15; // 로봇 높이 (무대 높이 %)
+const ROBOT_SINK = 0.5; // 로봇 발이 손 중심보다 얼마나 아래로 (무대 높이 %). 손 위쪽 절반을 로봇이 덮어야 "받쳐 든" 것으로 읽힌다
+
+// 학생 셋 — public/landing/evolve/kid-*.webp (prototypes/evolve/cut.mjs 로 자른 것).
+// H = 키(무대 높이 %), aspect = 가로/세로(cut.mjs 가 찍어 준 값), handsY = 받쳐 든 손 중심(이미지 위에서 %, 모눈 미리보기로 잰다)
+const ART = "../../public/landing/evolve/";
+const KIDS = [
+  { lv: 2, src: "kid-2.webp", H: 47, aspect: 0.3613, handsY: 48 },
+  { lv: 4, src: "kid-4.webp", H: 61, aspect: 0.3174, handsY: 44 },
+  { lv: 6, src: "kid-6.webp", H: 75, aspect: 0.3208, handsY: 41 },
+];
+KIDS.forEach((k) => {
+  k.W = k.H * k.aspect * 0.75; // 너비 (무대 너비 %). 무대가 4:3 이라 높이 1% = 너비 0.75%
+  k.hands = FEET + k.H * (1 - k.handsY / 100); // 손 높이 (무대 높이 %)
+});
+const ROBOT = { src: "robot.webp", aspect: 0.6476 };
+const ROBOT_W = ROBOT_H * ROBOT.aspect * 0.75; // 무대 너비 %
+const robotBottom = (k) => k.hands - ROBOT_SINK;
+
+// 진화 셋. t 부풀기 시작, d 부풀기 길이, s 최대 배율, lean 학생이 젖혀지는 각도
+const EV = [
+  { t: 1.4, d: 1.0, s: 2.6, lean: -4, name: "로봇 A" },
+  { t: 4.3, d: 1.0, s: 3.2, lean: -5, name: "로봇 B" },
+  { t: 7.2, d: 1.2, s: 3.8, lean: -6, name: "새 교구", tail: true },
+];
+EV.forEach((e) => {
+  e.flash = e.t + e.d; // 번쩍 시작
+  e.pop = e.flash + 0.1; // 펑
+  e.end = e.pop + 0.4; // 아기로 자리 잡음 → 이름표
+});
+const ROBOT_NAMES = ["로봇 A", "로봇 B", "새 교구", "또 새 교구"];
+
+// 성장 둘. 로봇이 조용할 때만
+const GROW = [
+  { t: 3.4, from: 0, to: 1 },
+  { t: 6.3, from: 1, to: 2 },
+];
+const GD = 0.5;
+
+const MSGS = [
+  [1.4, "어…? 로봇 A의 상태가…!"],
+  [2.9, "로봇 A는 로봇 B로 진화했다!"],
+  [3.4, "학생은 Lv.4가 되었다!"],
+  [4.3, "어…? 로봇 B의 상태가…!"],
+  [5.8, "로봇 B는 새 교구로 진화했다!"],
+  [6.3, "학생은 Lv.6이 되었다!"],
+  [7.2, "어…? 새 교구의 상태가…!"],
+  [8.9, "새 교구는 또 새 교구로 진화했다!"],
+  [9.4, "…교구는 여전히 Lv.1이다."],
+];
+const CAPS = [
+  { at: 0.8, kicker: "2019 · 프랜차이즈 교구", title: "로봇 A.\n초등 2학년." },
+  { at: 2.9, kicker: "새 교구를 들였습니다", title: "다시 처음부터." },
+  { at: 5.8, kicker: "또 새 교구를 들였습니다", title: "또 초보 단계." },
+  { at: 9.4, kicker: "7년 동안 겪은 일", title: "학생은 자랐는데,\n커리큘럼은 제자리였습니다.", glow: true },
+];
+const BEATS = [
+  [0, "등장"], [0.8, "이름표"], [1.4, "진화 1 부풀기"], [2.4, "번쩍"], [2.5, "펑"], [2.9, "로봇 B"],
+  [3.4, "성장 → 초4"], [3.9, "Lv.4"], [4.3, "진화 2 부풀기"], [5.3, "번쩍"], [5.4, "펑"], [5.8, "새 교구"],
+  [6.3, "성장 → 초6"], [6.8, "Lv.6"], [7.2, "진화 3 부풀기"], [8.4, "번쩍"], [8.5, "펑"], [8.9, "또 새 교구"],
+  [9.2, "펀치라인 홀드"],
+];
+
+/* ── 그림 ─────────────────────────────────────────────────────────── */
+const img = (src) => `<img src="${ART}${src}" alt="" draggable="false">`;
+// 실루엣 조각 — viewBox 200×200, 로봇은 가운데 50..150. 검은 단색이라 그림 생성이 필요 없다
+const SIL = "#141a2b";
+const silMain = `<svg viewBox="0 0 200 200" aria-hidden="true">
+  <path d="M78 70 L66 18 L98 60 Z" fill="${SIL}"/><path d="M122 70 L134 18 L102 60 Z" fill="${SIL}"/>
+  <path d="M62 95 L4 54 L30 100 L0 146 L60 132 Z" fill="${SIL}"/><path d="M138 95 L196 54 L170 100 L200 146 L140 132 Z" fill="${SIL}"/>
+</svg>`;
+const silTail = `<svg viewBox="0 0 200 200" aria-hidden="true">
+  <path d="M132 148 Q172 160 178 194 L192 176 L200 200 L170 200 Q160 170 128 158 Z" fill="${SIL}"/>
+</svg>`;
+
+/* ── keyframes ─────────────────────────────────────────────────── */
+// 로봇: 부풀기(배율 + 흔들림) → 번쩍 동안 유지 → 펑(BOUNCE 로 아기)
+const wrap = [];
+EV.forEach((e) => {
+  wrap.push([e.t, "transform:none", "linear"]);
+  const n = Math.round(e.d / 0.1);
+  for (let i = 1; i <= n; i++) {
+    const u = i / n;
+    const s = 1 + (e.s - 1) * u * u;
+    const rot = (i % 2 ? 1 : -1) * (2 + 3 * u);
+    wrap.push([e.t + i * 0.1, `transform:scale(${s.toFixed(3)}) rotate(${rot.toFixed(1)}deg)`, "linear"]);
+  }
+  wrap.push([e.pop, `transform:scale(${e.s})`, BOUNCE], [e.end, "transform:none"]);
+});
+kf("ev-wrap", wrap);
+
+// 종이 그림자(--ds)는 검게 변하는 동안에도 유지한다. filter 는 한 속성이라 같이 적어야 한다
+const filt = [];
+EV.forEach((e) => filt.push([e.t, "filter:brightness(1) var(--ds)", EO], [e.t + 0.35, "filter:brightness(0) var(--ds)"], [e.pop, "filter:brightness(0) var(--ds)"], [e.pop + 0.05, "filter:brightness(1) var(--ds)"]));
+kf("ev-filter", filt);
+kf("ev-robot-in", [[0.3, "opacity:0", EO], [0.7, "opacity:1"]]);
+
+const silFrames = (list) => {
+  const f = [];
+  list.forEach((e) => f.push([e.t + 0.35, "opacity:0;transform:scale(0.2)", BOUNCE], [e.t + e.d * 0.85, "opacity:1;transform:scale(1)"], [e.pop, "opacity:1;transform:scale(1)"], [e.pop + 0.05, "opacity:0;transform:scale(0.2)"]));
+  return f;
+};
+kf("ev-sil", silFrames(EV));
+kf("ev-sil-tail", silFrames(EV.filter((e) => e.tail)));
+
+const dim = [], flash = [];
+EV.forEach((e) => {
+  dim.push([e.t, "opacity:0", EO], [e.t + 0.6, "opacity:0.82"], [e.pop, "opacity:0.82", EO], [e.pop + 0.3, "opacity:0"]);
+  flash.push([e.flash, "opacity:0", EO], [e.flash + 0.1, "opacity:1", EO], [e.flash + 0.5, "opacity:0"]);
+});
+kf("ev-dim", dim);
+kf("ev-flash", flash);
+
+const PUFFS = 5;
+for (let i = 0; i < PUFFS; i++) {
+  const a = ((i * 72 - 90) * Math.PI) / 180;
+  const dx = Math.cos(a) * 130, dy = Math.sin(a) * 130;
+  const f = [];
+  EV.forEach((e) => f.push([e.pop, "opacity:0;transform:translate(0,0) scale(0.3)", EO], [e.pop + 0.06, "opacity:1;transform:translate(0,0) scale(0.6)", EO], [e.end + 0.15, `opacity:0;transform:translate(${dx.toFixed(0)}%,${dy.toFixed(0)}%) scale(1.4)`]));
+  kf("ev-puff-" + i, f);
+}
+
+// 로봇 자리: 학생이 자랄 때 손과 함께 올라간다. 기본값(마지막 프레임)은 초6 손
+const pos = [];
+GROW.forEach((g) => pos.push([g.t, `bottom:${robotBottom(KIDS[g.from]).toFixed(2)}%`, EO], [g.t + GD, `bottom:${robotBottom(KIDS[g.to]).toFixed(2)}%`]));
+kf("ev-pos", pos);
+
+// 학생: 등장/성장(BOUNCE) → 진화 때 젖혀짐 → 다음 성장 때 사라짐
+KIDS.forEach((k, i) => {
+  const f = [];
+  if (i === 0) f.push([0, "opacity:0;transform:scale(0.9)", BOUNCE], [0.8, "opacity:1;transform:none"]);
+  else {
+    const g = GROW[i - 1];
+    f.push([g.t, "opacity:0;transform:scale(0.94)", BOUNCE], [g.t + GD, "opacity:1;transform:none"]);
+  }
+  const e = EV[i];
+  f.push([e.t, "opacity:1;transform:none", EO], [e.flash, `opacity:1;transform:rotate(${e.lean}deg)`], [e.pop, `opacity:1;transform:rotate(${e.lean}deg)`, BOUNCE], [e.pop + 0.3, "opacity:1;transform:none"]);
+  if (i < GROW.length) {
+    const g = GROW[i];
+    f.push([g.t, "opacity:1;transform:none", EO], [g.t + 0.25, "opacity:0;transform:none"]);
+  }
+  kf("ev-kid-" + i, f);
+
+  // 학생 이름표
+  const tf = [];
+  const show = i === 0 ? 0.8 : GROW[i - 1].t + GD;
+  tf.push([show, "opacity:0", EO], [show + 0.3, "opacity:1"]);
+  if (i < GROW.length) tf.push([GROW[i].t, "opacity:1", EO], [GROW[i].t + 0.15, "opacity:0"]);
+  kf("ev-stag-" + i, tf);
+});
+
+// 로봇 이름표: 부풀기 동안 숨고, 펑 뒤에 새 이름
+ROBOT_NAMES.forEach((_, j) => {
+  const f = [];
+  const show = j === 0 ? 0.8 : EV[j - 1].end;
+  f.push([show, "opacity:0", EO], [show + 0.3, "opacity:1"]);
+  if (j < EV.length) f.push([EV[j].t, "opacity:1", EO], [EV[j].t + 0.15, "opacity:0"]);
+  kf("ev-rtag-" + j, f);
+});
+
+// 메시지 박스
+kf("ev-msg", [[1.2, "opacity:0", EO], [1.5, "opacity:1"]]);
+MSGS.forEach(([t], i) => {
+  const f = [[t, "opacity:0", EO], [t + 0.12, "opacity:1"]];
+  const next = MSGS[i + 1];
+  if (next) f.push([next[0], "opacity:1", EO], [next[0] + 0.08, "opacity:0"]);
+  kf("ev-msg-" + i, f);
+});
+
+// 자막
+CAPS.forEach((c, i) => {
+  const f = [[c.at, "opacity:0;transform:translateY(24px)", EO], [c.at + 0.35, "opacity:1;transform:none"]];
+  const next = CAPS[i + 1];
+  if (next) f.push([next.at - 0.3, "opacity:1;transform:none", EO], [next.at, "opacity:0;transform:translateY(-24px)"]);
+  kf("ev-cap-" + i, f);
+});
+
+document.getElementById("kf").textContent = CSS.join("\n");
+
+/* ── DOM ───────────────────────────────────────────────────────── */
+const stage = document.getElementById("stage");
+stage.innerHTML = `
+  <div class="floor" aria-hidden="true"></div>
+  ${KIDS.map((k, i) => `<div class="kid calm-none" style="left:${(50 - k.W / 2).toFixed(3)}%;height:${k.H}%;width:${k.W.toFixed(3)}%;animation:${run("ev-kid-" + i)}">${img(k.src)}</div>`).join("")}
+  ${KIDS.map((k, i) => `<div class="tag calm-cx" style="bottom:${(FEET + k.H + 2.5).toFixed(1)}%;animation:${run("ev-stag-" + i)}">학생<b>Lv.${k.lv}</b></div>`).join("")}
+  <div class="dim" style="animation:${run("ev-dim")}" aria-hidden="true"></div>
+  <div class="robot-pos" style="width:${ROBOT_W.toFixed(3)}%;margin-left:-${(ROBOT_W / 2).toFixed(3)}%;animation:${run("ev-pos")}">
+    <div class="robot-wrap calm-none" style="animation:${run("ev-wrap")}">
+      <div class="sil calm-none" style="animation:${run("ev-sil")}">${silMain}</div>
+      <div class="sil calm-none" style="animation:${run("ev-sil-tail")}">${silTail}</div>
+      <div class="robot" style="animation:${run("ev-filter", "ev-robot-in")}">${img(ROBOT.src)}</div>
+    </div>
+    ${Array.from({ length: PUFFS }, (_, i) => `<div class="puff calm-none" style="animation:${run("ev-puff-" + i)}" aria-hidden="true"></div>`).join("")}
+    ${ROBOT_NAMES.map((n, j) => `<div class="tag tag-side calm-cy" style="animation:${run("ev-rtag-" + j)}">${n}<b>Lv.1</b></div>`).join("")}
+  </div>
+  <div class="flash" style="animation:${run("ev-flash")}" aria-hidden="true"></div>
+  <div class="msg" style="animation:${run("ev-msg")}">${MSGS.map((m, i) => `<span style="animation:${run("ev-msg-" + i)}">${m[1]}</span>`).join("")}</div>
+`;
+document.getElementById("captions").innerHTML = CAPS.map((c, i) => `
+  <div class="cap calm-none" style="animation:${run("ev-cap-" + i)}">
+    <p class="kicker">${c.kicker}</p>
+    <p class="title${c.glow ? " glow" : ""}">${c.title}</p>
+  </div>`).join("");
+
+/* ── 스크럽 (scroll-scene.tsx 와 같은 방식) ───────────────────────── */
+const scene = document.getElementById("scene");
+const hud = document.getElementById("hud");
+const slider = document.getElementById("slider");
+const anims = scene.getAnimations({ subtree: true });
+anims.forEach((a) => a.pause());
+
+const beatName = (t) => {
+  let name = BEATS[0][1];
+  for (const [at, n] of BEATS) if (t >= at) name = n;
+  return name;
+};
+const span = () => scene.offsetHeight - window.innerHeight;
+
+let frame = 0;
+function update() {
+  frame = 0;
+  const rect = scene.getBoundingClientRect();
+  const s = rect.height - window.innerHeight;
+  const p = s > 0 ? Math.min(1, Math.max(0, -rect.top / s)) : 1;
+  scene.style.setProperty("--p", p.toFixed(4));
+  const t = p * T;
+  for (const a of anims) a.currentTime = t * 1000;
+  hud.textContent = `t ${t.toFixed(2)}s · p ${p.toFixed(3)} · ${beatName(t)}`;
+  slider.value = Math.round(p * 1000);
+}
+const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+
+// ?t=2.45 → 포스터 모드. 앞뒤 여백을 걷고 장면을 한 화면에 고정한 뒤 그 시각의 프레임만 보여 준다. 스크린샷·튜닝용
+// 스크롤·리사이즈 갱신은 붙이지 않는다 (헤드리스가 리사이즈를 쏘면 p=1 로 덮어쓴다).
+const jump = parseFloat(new URLSearchParams(location.search).get("t"));
+if (!Number.isNaN(jump)) {
+  document.body.classList.add("poster");
+  const t = Math.min(T, Math.max(0, jump));
+  for (const a of anims) a.currentTime = t * 1000;
+  scene.style.setProperty("--p", (t / T).toFixed(4));
+  hud.textContent = `t ${t.toFixed(2)}s · ${beatName(t)} · poster`;
+} else {
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  update();
+}
+
+slider.addEventListener("input", () => {
+  window.scrollTo({ top: scene.offsetTop + (span() * slider.value) / 1000 });
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+  const dt = e.shiftKey ? 1 : 0.1;
+  window.scrollBy(0, ((e.key === "ArrowRight" ? 1 : -1) * dt * span()) / T);
+  e.preventDefault();
+});
+</script>
+</body>
+</html>

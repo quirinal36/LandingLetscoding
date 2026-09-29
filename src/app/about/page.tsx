@@ -9,8 +9,8 @@ import { StoryCaptions, StoryStage } from "@/components/landing/story-stage";
 import { STORY_T } from "@/components/landing/timeline";
 
 /*
-  브랜드 스토리 — MYPROBLEM.md 의 이야기. 랜딩 3번의 천장 압축판이 여기로 이어진다.
-  천장 장면(story-stage.tsx)은 원래 랜딩 8번에 있던 것을 그대로 옮겼다.
+  브랜드 스토리 — MYPROBLEM.md 의 이야기. 랜딩 3번의 진화 장면이 여기로 이어진다.
+  7년 이야기 장면(story-stage.tsx)은 원래 랜딩 8번에 있던 것을 그대로 옮겼다.
   사실의 경계: 프랜차이즈 이름은 쓰지 않는다. 연도와 학년은 MYPROBLEM.md 그대로.
   사진은 전부 실사(public/about). 학생 얼굴은 가리거나 뒷모습만 쓴다.
   workshop.jpg 는 참석자 얼굴 6곳을 HyperFrames 정지 컴포지션(흐린 사본 + 타원 마스크)으로 흐리게 한 뒤 뽑은 것이다.
@@ -19,10 +19,10 @@ import { STORY_T } from "@/components/landing/timeline";
 export const metadata: Metadata = {
   title: "브랜드 스토리",
   description:
-    "7년째 코딩학원을 운영하며 교구와 교재의 천장에 부딪힌 원장이, 학생들과 바이브코딩을 시작하고 렛츠코딩 라운지를 만들기까지의 이야기입니다.",
+    "7년째 코딩학원을 운영하며 교구와 교재의 한계에 부딪힌 원장이, 학생들과 바이브코딩을 시작하고 렛츠코딩 라운지를 만들기까지의 이야기입니다.",
 };
 
-type Photo = { src: string; alt: string; w: number; h: number; caption: string };
+type Photo = { src: string; alt: string; w: number; h: number; caption: string; videoSrc?: string };
 type Chapter = { when: string; title: string; body: string; photo?: Photo };
 
 const CHAPTERS: Chapter[] = [
@@ -61,12 +61,13 @@ const CHAPTERS: Chapter[] = [
   {
     when: "지금",
     title: "팔기 전에, 우리 학원에서 먼저 매일 씁니다.",
-    body: "라운지는 우리 학원이 부딪힌 문제에서 나왔습니다. 같은 천장 앞에 선 원장님들께, 우리가 쓰고 있는 그대로 엽니다.",
+    body: "라운지는 우리 학원이 부딪힌 문제에서 나왔습니다. 같은 한계 앞에 선 원장님들께, 우리가 쓰고 있는 그대로 엽니다.",
     photo: {
-      src: "/about/academy-class.jpg",
+      src: "/about/academy-class.png",
+      videoSrc: "/about/academy-class.mp4",
       alt: "렛츠코딩앤플레이학원 교실. 학생들이 모니터 앞에 앉아 작업하는 뒷모습",
-      w: 2000,
-      h: 1126,
+      w: 2752,
+      h: 1536,
       caption: "렛츠코딩앤플레이학원 교실",
     },
   },
@@ -82,7 +83,7 @@ export default function Page() {
         <Container className="relative grid items-end gap-10 md:grid-cols-[1fr_auto] md:gap-14">
           <div>
             <Eyebrow>브랜드 스토리</Eyebrow>
-            <h1 className="display text-metal mt-4 max-w-[14ch] text-[2.75rem] md:text-[5.5rem]">천장을 만난 학원이, 천장을 뚫기까지.</h1>
+            <h1 className="display text-metal mt-4 max-w-[14ch] text-[2.75rem] md:text-[5.5rem]">한계를 만난 학원이, 한계를 넘기까지.</h1>
             <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-ink-soft md:text-[1.375rem]">
               렛츠코딩 라운지는 팔려고 먼저 만든 제품이 아닙니다. 7년째 코딩학원을 운영하며 부딪힌 문제에서 나왔습니다.
             </p>
@@ -128,14 +129,33 @@ export default function Page() {
                   <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-ink-soft md:text-lg">{c.body}</p>
                   {c.photo && (
                     <figure className="mt-8">
-                      <Image
-                        src={c.photo.src}
-                        alt={c.photo.alt}
-                        width={c.photo.w}
-                        height={c.photo.h}
-                        sizes="(min-width: 1088px) 800px, 92vw"
-                        className="h-auto w-full rounded-[28px]"
-                      />
+                      {c.photo.videoSrc ? (
+                        <video
+                          src={c.photo.videoSrc}
+                          poster={c.photo.src}
+                          width={c.photo.w}
+                          height={c.photo.h}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          controls
+                          preload="metadata"
+                          aria-label={c.photo.alt}
+                          className="h-auto w-full rounded-[28px]"
+                        >
+                          <a href={c.photo.videoSrc}>교실 영상 보기</a>
+                        </video>
+                      ) : (
+                        <Image
+                          src={c.photo.src}
+                          alt={c.photo.alt}
+                          width={c.photo.w}
+                          height={c.photo.h}
+                          sizes="(min-width: 1088px) 800px, 92vw"
+                          className="h-auto w-full rounded-[28px]"
+                        />
+                      )}
                       <figcaption className="mt-3 text-[0.8125rem] text-ink-faint">{c.photo.caption}</figcaption>
                     </figure>
                   )}
