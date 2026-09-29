@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui";
 import { RevealObserver } from "@/components/landing/reveal-observer";
 import { ScrollScene } from "@/components/landing/scroll-scene";
 import { Container, Eyebrow, reveal } from "@/components/landing/section";
-import { StoryCaptions, StoryStage } from "@/components/landing/story-stage";
-import { STORY_T } from "@/components/landing/timeline";
+import { EVOLVE_T, EvolveCaptions, EvolveStage } from "@/components/landing/evolve-stage";
 
 /*
-  브랜드 스토리 — MYPROBLEM.md 의 이야기. 랜딩 3번의 진화 장면이 여기로 이어진다.
-  7년 이야기 장면(story-stage.tsx)은 원래 랜딩 8번에 있던 것을 그대로 옮겼다.
+  브랜드 스토리 — MYPROBLEM.md 의 이야기.
+  두 번째 구간은 랜딩에서 옮긴 교육 장면(evolve-stage.tsx).
   사실의 경계: 프랜차이즈 이름은 쓰지 않는다. 연도와 학년은 MYPROBLEM.md 그대로.
   사진은 전부 실사(public/about). 학생 얼굴은 가리거나 뒷모습만 쓴다.
   workshop.jpg 는 참석자 얼굴 6곳을 HyperFrames 정지 컴포지션(흐린 사본 + 타원 마스크)으로 흐리게 한 뒤 뽑은 것이다.
@@ -21,6 +21,18 @@ export const metadata: Metadata = {
   description:
     "7년째 코딩학원을 운영하며 교구와 교재의 한계에 부딪힌 원장이, 학생들과 바이브코딩을 시작하고 렛츠코딩 라운지를 만들기까지의 이야기입니다.",
 };
+
+/* 스크롤에 따라 각 줄의 단어가 차례로 또렷해진다 */
+const PARAGRAPH = [
+  "계단처럼 상승하는 단계별 교육이 이뤄져야 하는데,",
+  "로봇이나 교구가 바뀌면 다시 첫 번째 단계로 돌아갑니다.",
+  "반면에 학생들은 계속해서 성장하기 원합니다.",
+  "학생들의 무한한 상상력을",
+  "하나의 작품으로, 다음 도전으로 이어 갈 수 있도록,",
+  "렛츠코딩 라운지를 만들게 되었습니다.",
+];
+const PARAGRAPH_LINES = PARAGRAPH.map((line) => line.split(" "));
+const PARAGRAPH_COUNT = PARAGRAPH_LINES.flat().length;
 
 type Photo = { src: string; alt: string; w: number; h: number; caption: string; videoSrc?: string };
 type Chapter = { when: string; title: string; body: string; photo?: Photo };
@@ -100,22 +112,39 @@ export default function Page() {
         </Container>
       </section>
 
-      <ScrollScene length={5} mode="timeline" duration={STORY_T} className="tone-dark" pinClassName="flex items-center">
-        <Container className="grid items-center gap-8 pt-16 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="mb-5 text-[0.8125rem] font-medium tracking-[0.08em] text-ink-faint uppercase">7년 동안 겪은 일</p>
-            <StoryCaptions />
-          </div>
-          <div className="relative">
-            <div className="halo opacity-60" aria-hidden="true" />
-            <div className="relative">
-              <StoryStage />
-            </div>
+      {/* ═══ 3. 교육 — 교구는 진화해도 초보 단계로 돌아온다 (주제3, EVOLVE-SCENE-PLAN.md) ═ */}
+      <section className="tone-paper pt-28 md:pt-40">
+        <Container>
+          <div {...reveal()}>
+            <Eyebrow>코딩교육을 하는 사람들의 고민</Eyebrow>
+            <h2 className="display text-ink-gradient mt-3 max-w-[16ch] text-[2.25rem] md:text-[4rem]">기존의 교구와 로봇 커리큘럼은 유한합니다.</h2>
           </div>
         </Container>
-        <div className="absolute inset-x-0 bottom-0 h-[3px] bg-white/10" aria-hidden="true">
-          <div className="h-full origin-left bg-accent" style={{ transform: "scaleX(var(--p, 1))" }} />
-        </div>
+      </section>
+      {/* 보여 주고(진화 장면) 나서 말한다(문단). 문단이 먼저 오면 "다시 첫 번째 단계로"가 장면의 반전을 미리 말해 버린다 */}
+      <ScrollScene length={4.5} mode="timeline" duration={EVOLVE_T} className="tone-paper" pinClassName="flex items-center">
+        <Container className="grid items-center gap-6 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <EvolveCaptions />
+          <EvolveStage />
+        </Container>
+      </ScrollScene>
+      <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
+        <Container>
+          <p className="display max-w-[24em] text-[1.625rem] leading-[1.3] md:text-[2.5rem]">
+            {PARAGRAPH_LINES.map((words, li) => {
+              const offset = PARAGRAPH_LINES.slice(0, li).reduce((n, ws) => n + ws.length, 0);
+              return (
+                <span key={li} className="block text-balance">
+                  {words.map((w, wi) => (
+                    <span key={wi} className="scrub-word" style={{ "--i": offset + wi, "--n": PARAGRAPH_COUNT } as CSSProperties}>
+                      {w === "렛츠코딩" ? <span className="text-accent-ink">렛츠코딩</span> : w === "라운지를" ? <><span className="text-accent-ink">라운지</span>를</> : w}{" "}
+                    </span>
+                  ))}
+                </span>
+              );
+            })}
+          </p>
+        </Container>
       </ScrollScene>
 
       <section className="tone-paper py-28 md:py-40">

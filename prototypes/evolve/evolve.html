@@ -204,7 +204,7 @@ KIDS.forEach((k) => {
   k.W = k.H * k.aspect * 0.75; // 너비 (무대 너비 %). 무대가 4:3 이라 높이 1% = 너비 0.75%
   k.hands = FEET + k.H * (1 - k.handsY / 100); // 손 높이 (무대 높이 %)
 });
-const ROBOT = { src: "robot.webp", aspect: 0.6476 };
+const ROBOT = { src: "kit-1.webp", aspect: 0.8324 }; // v1 스토리(한 교구가 세 번 아기로) 기록용. 지금 스토리는 src/components/landing/evolve-stage.tsx
 const ROBOT_W = ROBOT_H * ROBOT.aspect * 0.75; // 무대 너비 %
 const robotBottom = (k) => k.hands - ROBOT_SINK;
 

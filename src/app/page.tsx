@@ -1,16 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { ButtonLink } from "@/components/ui";
-import { CardRiver } from "@/components/landing/card-river";
-import { EVOLVE_T, EvolveCaptions, EvolveStage } from "@/components/landing/evolve-stage";
 import { GROWTH_T, GrowthCaptions, GrowthStage } from "@/components/landing/growth-stage";
+import { ScrollScene } from "@/components/landing/scroll-scene";
+import { CardRiver } from "@/components/landing/card-river";
 import { LoopDiagram } from "@/components/landing/loop-diagram";
 import { PhoneVideo } from "@/components/landing/phone-video";
 import { RevealObserver } from "@/components/landing/reveal-observer";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { InfinityWindow } from "@/components/landing/infinity-window";
-import { ScrollScene } from "@/components/landing/scroll-scene";
 import { Container, Eyebrow, intro, reveal } from "@/components/landing/section";
 import { COMPANY } from "@/lib/nav";
 import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
@@ -21,14 +19,14 @@ import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
   선언 → 왜 → 그래서 → 어떻게 → 어디서. 각 섹션의 마지막 줄이 다음 섹션의 질문이다.
     1. 히어로      주제1 선언. 학생 한 명이, 스타트업이 됩니다. 아래로 실제 학생 작품 카드가 흐른다
     2. 시대        주제2. 무한한 지식의 시대를 지나 무한 실행의 시대로. 채용 사례는 블로그 활용을 위해 숨김
-    3. 교육        주제3. 교구는 진화해도 초보 단계로 돌아오고 학생만 자란다. 진화 장면(evolve-stage.tsx) + 문단 스크럽
-    4. 모습        주제1 구체화. 만든다 → 다듬는다 → 자란다 → 남는다 팝업북 (growth-stage.tsx)
+    기존 3번 교육 장면은 /about 두 번째 구간으로 이동.
+    4. 모습        만든다 → 다듬는다 → 자란다 → 기록하기 팝업북 (growth-stage.tsx)
     5. 결론        렛츠코딩 라운지. 5-1 작품 목록 · 5-2 세 축 · 5-3 하이라이트 · 5-4 한 달 영상
     6. 숫자        우리 학원의 실제 운영 수치
     7. 시작        파일럿 · 가격 · 코칭
     8. 끝          다음 스타트업은 원장님 학원에서. 히어로 헤드라인과 수미상관
 
-  옮겨 간 것: 7년 이야기 장면(story-stage.tsx)과 2024년 장고 이야기 → /about(브랜드 스토리),
+  옮겨 간 것: 교육 장면과 2024년 장고 이야기 → /about(브랜드 스토리),
   라운지 확장 모델 도식과 이론 → /about/philosophy(교육 철학).
 
   사실의 경계: 숫자는 기준일이 있는 실측만. 효과(재원율·매출)는 약속하지 않는다.
@@ -93,16 +91,6 @@ const JSON_LD = {
     },
   ],
 };
-
-/* 한 줄이 한 문장. 스크롤에 따라 단어가 차례로 또렷해진다 */
-const PARAGRAPH = [
-  "계단처럼 상승하는 단계별 교육이 이뤄지지 않습니다.",
-  "로봇이나 교구가 바뀌면 다시 첫 번째 단계로 돌아갑니다.",
-  "반면에 학생들은 계속해서 자라고 있습니다.",
-  "학생들의 상상력은 무한하고, 구현해\u00a0줄 훌륭한 환경이 준비되었습니다.",
-];
-const PARAGRAPH_LINES = PARAGRAPH.map((line) => line.split(" "));
-const PARAGRAPH_COUNT = PARAGRAPH_LINES.flat().length;
 
 const HIRING = [
   {
@@ -252,57 +240,6 @@ export default function Home() {
               ))}
             </ul>
           </div>
-        </Container>
-      </section>
-
-      {/* ═══ 3. 교육 — 교구는 진화해도 초보 단계로 돌아온다 (주제3, EVOLVE-SCENE-PLAN.md) ═ */}
-      <section className="tone-paper pt-28 md:pt-40">
-        <Container>
-          <div {...reveal()}>
-            <Eyebrow>코딩교육을 하는 사람들의 고민</Eyebrow>
-            <h2 className="display text-ink-gradient mt-3 max-w-[16ch] text-[2.25rem] md:text-[4rem]">기존의 교구와 로봇 커리큘럼은 유한합니다.</h2>
-          </div>
-        </Container>
-      </section>
-      {/* 보여 주고(진화 장면) 나서 말한다(문단). 문단이 먼저 오면 "다시 첫 번째 단계로"가 장면의 반전을 미리 말해 버린다 */}
-      <ScrollScene length={4.5} mode="timeline" duration={EVOLVE_T} className="tone-paper" pinClassName="flex items-center">
-        <Container className="grid items-center gap-6 md:gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <EvolveCaptions />
-          <EvolveStage />
-        </Container>
-      </ScrollScene>
-      <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
-        <Container>
-          <p className="display max-w-[24em] text-[1.625rem] leading-[1.3] md:text-[2.5rem]">
-            {PARAGRAPH_LINES.map((words, li) => {
-              const offset = PARAGRAPH_LINES.slice(0, li).reduce((n, ws) => n + ws.length, 0);
-              return (
-                <span key={li} className="block text-balance">
-                  {words.map((w, wi) => (
-                    <span key={wi} className="scrub-word" style={{ "--i": offset + wi, "--n": PARAGRAPH_COUNT } as CSSProperties}>
-                      {w}{" "}
-                    </span>
-                  ))}
-                </span>
-              );
-            })}
-          </p>
-        </Container>
-      </ScrollScene>
-
-      <section className="tone-paper pb-28 md:pb-40">
-        <Container>
-          <p className="text-[1.0625rem] text-ink-soft" {...reveal()}>
-            <Link href="/about" className="link-chevron whitespace-nowrap">
-              7년 이야기 전체 보기
-            </Link>
-          </p>
-
-          <p className="display mt-24 max-w-[20ch] text-[1.875rem] leading-[1.25] md:mt-32 md:text-[3rem]" {...reveal()}>
-            교육이 시대를 따라 바뀌어야 한다면,
-            <br />
-            그 모양은 무엇일까요.
-          </p>
         </Container>
       </section>
 
