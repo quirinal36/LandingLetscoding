@@ -93,8 +93,15 @@ const JSON_LD = {
   ],
 };
 
-const PARAGRAPH =
-  "학원은 영업이 어렵습니다. 한 명을 지켜 1년, 3년을 쌓아야 합니다. 그런데 제가 써 본 교구도, 서점의 교재도 모두 초보 1단계에서 6단계까지만 다뤘습니다. 학생은 자라는데, 커리큘럼은 제자리였습니다.";
+/* 한 줄이 한 문장. 스크롤에 따라 단어가 차례로 또렷해진다 */
+const PARAGRAPH = [
+  "계단처럼 상승하는 단계별 교육이 이뤄지지 않습니다.",
+  "로봇이나 교구가 바뀌면 다시 첫 번째 단계로 돌아갑니다.",
+  "반면에 학생들은 계속해서 자라고 있습니다.",
+  "학생들의 상상력은 무한하고, 구현해\u00a0줄 훌륭한 환경이 준비되었습니다.",
+];
+const PARAGRAPH_LINES = PARAGRAPH.map((line) => line.split(" "));
+const PARAGRAPH_COUNT = PARAGRAPH_LINES.flat().length;
 
 const HIRING = [
   {
@@ -255,19 +262,26 @@ export default function Home() {
       <section className="tone-paper pt-28 md:pt-40">
         <Container>
           <div {...reveal()}>
-            <Eyebrow>그런데, 원장님이라면 아실 겁니다</Eyebrow>
-            <h2 className="display text-ink-gradient mt-3 max-w-[16ch] text-[2.25rem] md:text-[4rem]">그 힘을, 지금의 커리큘럼은 키우지 못합니다.</h2>
+            <Eyebrow>코딩교육을 하는 사람들의 고민</Eyebrow>
+            <h2 className="display text-ink-gradient mt-3 max-w-[16ch] text-[2.25rem] md:text-[4rem]">기존의 교구와 로봇 커리큘럼은 유한합니다.</h2>
           </div>
         </Container>
       </section>
       <ScrollScene length={2.4} className="tone-paper" pinClassName="flex items-center">
         <Container>
-          <p className="display max-w-[22ch] text-[1.875rem] leading-[1.25] md:text-[3.25rem]">
-            {PARAGRAPH.split(" ").map((w, i, all) => (
-              <span key={i} className="scrub-word" style={{ "--i": i, "--n": all.length } as CSSProperties}>
-                {w}{" "}
-              </span>
-            ))}
+          <p className="display max-w-[24em] text-[1.625rem] leading-[1.3] md:text-[2.5rem]">
+            {PARAGRAPH_LINES.map((words, li) => {
+              const offset = PARAGRAPH_LINES.slice(0, li).reduce((n, ws) => n + ws.length, 0);
+              return (
+                <span key={li} className="block text-balance">
+                  {words.map((w, wi) => (
+                    <span key={wi} className="scrub-word" style={{ "--i": offset + wi, "--n": PARAGRAPH_COUNT } as CSSProperties}>
+                      {w}{" "}
+                    </span>
+                  ))}
+                </span>
+              );
+            })}
           </p>
         </Container>
       </ScrollScene>

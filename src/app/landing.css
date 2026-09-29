@@ -39,13 +39,6 @@
 }
 
 /* 다크 톤 위에서 하드코딩된 밝은 값들을 뒤집는다 */
-.tone-dark .bar,
-.bar.tone-dark {
-  background-color: rgba(0, 0, 0, 0.72);
-}
-.bar.tone-dark[data-scrolled="true"] {
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-}
 @media (hover: hover) and (pointer: fine) {
   .tone-dark .control:hover {
     background-color: #2a2a2e;

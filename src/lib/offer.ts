@@ -2,8 +2,7 @@
 export const CONTACT = {
   email: "contact@letscoding.kr",
   tel: "010-5679-0072",
-  // 1:1 채팅이 켜지면 끝에 /chat 을 붙이고, 도입문의의 "전화나 이메일로" 문구에 카카오톡을 넣는다.
-  kakao: "https://pf.kakao.com/_BpVxiX",
+  kakao: "https://pf.kakao.com/_BpVxiX/chat",
 };
 
 export const START = [

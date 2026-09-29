@@ -55,12 +55,13 @@
 - [홈](https://www.letscoding.kr/): 회사와 라운지 소개
 - [렛츠코딩 라운지 소개](https://www.letscoding.kr/solutions/lounge): 기능, 도입 절차, 자주 묻는 질문
 - [렛츠코딩 파이썬 소개](https://www.letscoding.kr/solutions/python): 커리큘럼, 기능, 도입 절차
-- [도입문의](https://www.letscoding.kr/seminar/inquiry): 전화·이메일 상담
+- [도입문의](https://www.letscoding.kr/seminar/inquiry): 카카오톡·전화·이메일 상담
 - [블로그](https://www.letscoding.kr/blog): 칼럼과 정보 글 (RSS: https://www.letscoding.kr/blog/feed.xml)
 - [렛츠코딩 라운지](https://lounge.letscoding.kr/works): 실제 학생 작품 목록
 - [렛츠코딩 파이썬](https://python.letscoding.kr): 파이썬 학습 플랫폼
 
 ## 연락처
 
+- [카카오톡 1:1 채팅](https://pf.kakao.com/_BpVxiX/chat)
 - 이메일: contact@letscoding.kr
 - 전화: 010-5679-0072

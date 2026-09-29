@@ -8,6 +8,20 @@ import { Dot } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { NAV, type NavGroup } from "@/lib/nav";
 
+/* 상단 바는 그 페이지 첫 섹션의 바탕색으로 시작해, 스크롤하면 지금 보이는 섹션의 톤을 따라간다 */
+type Tone = "dark" | "paper" | null;
+const FIRST_TONE: Record<string, Tone> = { "/": "dark", "/about": "dark", "/about/philosophy": "paper" };
+
+/** 바 바로 아래 지점에 놓인 섹션의 톤을 읽는다 */
+function toneBelow(bar: HTMLElement): Tone {
+  const y = bar.getBoundingClientRect().bottom + 1;
+  const hit = document.elementFromPoint(window.innerWidth / 2, y);
+  if (!hit || bar.contains(hit)) return null;
+  const toned = hit.closest(".tone-dark, .tone-paper");
+  if (!toned) return null;
+  return toned.classList.contains("tone-dark") ? "dark" : "paper";
+}
+
 const TRACK_GROUPS = NAV.filter((g) => !g.accent);
 const ACCENT_GROUP = NAV.find((g) => g.accent);
 
@@ -113,6 +127,9 @@ export function SiteHeader() {
   const [openLayer, setOpenLayer] = useState<number | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [tone, setTone] = useState<Tone>(() => FIRST_TONE[pathname] ?? null);
+  const barRef = useRef<HTMLElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -129,15 +146,26 @@ export function SiteHeader() {
     setSheetOpen(false);
   }, [closeLayer]);
 
-  // 내용이 상단 바 아래로 들어가면 헤어라인 한 줄이 그어진다.
+  // 내리면 숨고, 조금이라도 올리면 다시 나온다. 맨 위 근처에서는 늘 보인다.
   useEffect(() => {
+    let last = window.scrollY;
     function onScroll() {
-      setScrolled(window.scrollY > 4);
+      const y = window.scrollY;
+      setScrolled(y > 4);
+      if (barRef.current) setTone(y < 4 ? FIRST_TONE[pathname] ?? null : toneBelow(barRef.current));
+      if (y < 80) setHidden(false);
+      else if (y > last + 6) setHidden(true);
+      else if (y < last - 6) setHidden(false);
+      if (Math.abs(y - last) > 6) last = y;
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     window.addEventListener("popstate", closeAll);
@@ -227,7 +255,13 @@ export function SiteHeader() {
   }
 
   return (
-    <header className={cn("bar sticky top-0 z-50", pathname === "/" && "tone-dark")} data-scrolled={scrolled}>
+    <header
+      ref={barRef}
+      className={cn("bar sticky top-0 z-50", tone === "dark" && "tone-dark", tone === "paper" && "tone-paper")}
+      data-scrolled={scrolled}
+      data-hidden={hidden && openLayer === null && !sheetOpen}
+      onFocusCapture={() => setHidden(false)}
+    >
       <a
         href="#main"
         className="control sr-only px-4 py-2 focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-10"
