@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>렛츠코딩 유튜브 썸네일</title>
+<link rel="stylesheet" href="plex.css">
+<link rel="stylesheet" href="fonts.css">
+<style>
+  html, body { margin: 0; background: #0c111d; }
+  canvas { display: block; max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<!-- 유튜브 썸네일 1280×720. 배경은 릴의 한 장면(02 IDEA 소용돌이)을 그대로 쓴다.
+     뽑기: node motion/scripts/thumbnail.mjs → motion/out/youtube-thumbnail.jpg · .png -->
+<canvas id="thumb" width="1280" height="720"></canvas>
+<script src="reel.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── 문구 — 바꿀 때는 여기만 ───────────────────────────── */
+  var T = {
+    lines: [
+      { text: '코딩학원', color: '#ffffff' },
+      { text: 'AI 체질개선', color: '#ffd43b' },
+    ],
+    sub: '무한한 커리큘럼, 함께하면 가벼워집니다',
+    brand: '렛츠코딩 라운지',
+    scene: 2.775, // 배경으로 쓸 릴의 시점(초). 2.775초 = 02 IDEA 씬의 파티클 소용돌이
+  };
+
+  var C = { ink: '#1b2333', night: '#0c111d', blue: '#3b6fe0', yellow: '#ffd43b', white: '#ffffff' };
+  var SANS = '"Pretendard Variable", Pretendard, "Apple SD Gothic Neo", system-ui, sans-serif';
+  var W = 1280;
+  var H = 720;
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  /** 브랜드 마크 — 실행 화살표(사이트가 처음 쓰던 로고의 path)를 둥근 사각 위에. */
+  function mark(ctx, x, y, size, bg, fg) {
+    ctx.fillStyle = bg;
+    roundRect(ctx, x, y, size, size, size * 0.24);
+    ctx.fill();
+    var s = (size * 0.68) / 16;
+    ctx.save();
+    ctx.translate(x + size * 0.16, y + size * 0.16);
+    ctx.scale(s, s);
+    ctx.strokeStyle = fg;
+    ctx.lineWidth = 2.25;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(5.5, 3.25);
+    ctx.lineTo(10.25, 8);
+    ctx.lineTo(5.5, 12.75);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  async function draw() {
+    var R = window.LetsCodingReel;
+    await R.loadFonts();
+    await document.fonts.load('900 100px ' + SANS, T.lines.map(function (l) { return l.text; }).join('') + T.sub + T.brand);
+
+    var ctx = document.getElementById('thumb').getContext('2d');
+
+    // 배경: 릴 장면을 HUD 없이 그려 소용돌이 중심이 오른쪽으로 오게 민다
+    var off = document.createElement('canvas');
+    off.width = W;
+    off.height = H;
+    R.create(off).render(T.scene, { hud: false });
+    var shift = 330;
+    ctx.fillStyle = C.night;
+    ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(off, shift, 0);
+
+    // 왼쪽 글자 판 — 사선 가장자리에 노란 선
+    var topX = 800;
+    var botX = 676;
+    var edgeAt = function (y) { return topX + ((botX - topX) * y) / H; };
+    ctx.fillStyle = C.ink;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(topX, 0);
+    ctx.lineTo(botX, H);
+    ctx.lineTo(0, H);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = C.yellow;
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.moveTo(topX, -10);
+    ctx.lineTo(botX, H + 10);
+    ctx.stroke();
+
+    // 소용돌이 한가운데 실행 화살표 — 작게 보여도 재생 버튼처럼 읽힌다
+    var ms = 236;
+    mark(ctx, shift + W / 2 - ms / 2, H / 2 - ms / 2, ms, C.yellow, C.ink);
+
+    // 헤드라인 — 두 줄 모두 판 안에 들어가는 가장 큰 크기(최대 150px)
+    var x0 = 72;
+    var base1 = 268;
+    var gap = 1.1;
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '-0.02em';
+    var size = 150;
+    for (var pass = 0; pass < 2; pass++) {
+      T.lines.forEach(function (l, i) {
+        ctx.font = '900 100px ' + SANS;
+        var w = ctx.measureText(l.text).width;
+        var room = edgeAt(base1 + i * size * gap) - x0 - 40;
+        size = Math.min(size, (100 * room) / w);
+      });
+    }
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = '900 ' + size.toFixed(1) + 'px ' + SANS;
+    T.lines.forEach(function (l, i) {
+      ctx.fillStyle = l.color;
+      ctx.fillText(l.text, x0, base1 + i * size * gap);
+    });
+    var lastBase = base1 + (T.lines.length - 1) * size * gap;
+
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+    ctx.font = '700 36px ' + SANS;
+    ctx.fillStyle = 'rgba(255,255,255,0.86)';
+    ctx.fillText(T.sub, x0, lastBase + 76);
+
+    // 브랜드 — 왼쪽 아래(오른쪽 아래는 유튜브 재생 시간 표시가 덮는다)
+    var bs = 58;
+    var by = H - 64 - bs;
+    mark(ctx, x0, by, bs, C.blue, C.white);
+    ctx.font = '800 40px ' + SANS;
+    ctx.fillStyle = C.white;
+    ctx.fillText(T.brand, x0 + bs + 18, by + bs * 0.74);
+
+    window.THUMB = { ready: true, fonts: R.fontStatus(), headlineSize: Math.round(size) };
+  }
+
+  draw();
+})();
+</script>
+</body>
+</html>
