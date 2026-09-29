@@ -133,10 +133,10 @@ const PENCIL = { left: 42.5, bottom: 31.5, width: 5.2, aspect: 0.8318, at: S2 + 
 // ── 자막 ──────────────────────────────────────────────────────
 // GROWTH-SCENE-PLAN.md 5절. 장면이 붙을 때마다 아래로 쌓이고, 지난 자막은 흐려진다.
 const CAPTIONS = [
-  { at: 1.8, title: "만든다", body: "무한한 지식의 시대를 지나\n무한 실행의 시대가 열렸다." },
+  { at: 1.8, title: "만든다", body: "AI와 함께 만들고,\n링크 하나로 세상에 내놓는다." },
   { at: S2 + 1.5, title: "다듬는다", body: "시장이 반응하는 지점을\n찾아나선다." },
-  { at: S3 + 1.6, title: "자란다", body: "함께 플레이하고,\n함께 성장해 나간다." },
-  { at: S4 + 1.3, title: "남는다", body: "개발 일지와 결과보고서" },
+  { at: S3 + 1.6, title: "자란다", body: "친구가 써 보고, 투자하고,\n함께 성장해 나간다." },
+  { at: S4 + 1.3, title: "남는다", body: "개발일지와 결과보고서.\n다음 작품의 출발점." },
 ];
 
 export function GrowthCaptions() {

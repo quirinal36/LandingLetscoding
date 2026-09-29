@@ -19,7 +19,7 @@ export const NAV: NavGroup[] = [
     label: "소개",
     layer: 1,
     items: [
-      { label: "회사 소개", href: "/about", note: "렛츠코딩이 하는 일" },
+      { label: "브랜드 스토리", href: "/about", note: "천장을 만난 학원이 라운지를 만들기까지" },
       { label: "교육 철학", href: "/about/philosophy", note: "우리가 코딩을 가르치는 방식" },
     ],
   },
