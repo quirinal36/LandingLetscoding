@@ -29,6 +29,6 @@ export const getViewer = cache(async () => {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (!user) return { supabase, user: null, isAdmin: false, error: authError && authError.name !== "AuthSessionMissingError" ? "로그인 상태를 확인하지 못했습니다." : null };
-  const { data, error } = await supabase.rpc("is_platform_admin");
+  const { data, error } = await supabase.schema("landing").rpc("can_manage_blog");
   return { supabase, user, isAdmin: !error && data === true, error: error ? "관리자 권한을 확인하지 못했습니다." : null };
 });

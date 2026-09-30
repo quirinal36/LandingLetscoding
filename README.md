@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## 블로그 데이터 연결
 
-블로그는 Supabase의 `landing.blog_posts`에서 공개 글을 읽습니다. 목록·상세·RSS·사이트맵은 요청 시 DB를 조회하므로 글 변경에는 재빌드가 필요하지 않습니다. 블로그에서 카카오 로그인한 플랫폼 관리자만 작성·수정·삭제할 수 있습니다.
+블로그는 Supabase의 `landing.blog_posts`에서 공개 글을 읽습니다. 목록·상세·RSS·사이트맵은 요청 시 DB를 조회하므로 글 변경에는 재빌드가 필요하지 않습니다. 블로그에서 카카오 로그인한 플랫폼 관리자와 지정 블로그 관리자만 작성·수정·삭제할 수 있습니다.
 
 서버 환경변수는 `LETSCODING_LOUNGE_SUPABASE_URL`, `LETSCODING_LOUNGE_SUPABASE_ANON_KEY`입니다. Data API의 Exposed schemas에 `landing`이 등록되어 있어야 합니다. 조회에 service-role 키는 사용하지 않습니다.
 
@@ -52,10 +52,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ### 관리자 로그인과 편집
 
-- `/blog`에서 카카오 로그인하면 플랫폼 관리자에게 글 작성 버튼과 초안 목록이 보입니다. 공개 글 상세에는 수정·삭제 버튼이 보입니다.
+- `/blog`에서 카카오 로그인하면 플랫폼 관리자와 지정 블로그 관리자에게 글 작성 버튼과 초안 목록이 보입니다. 공개 글 상세에는 수정·삭제 버튼이 보입니다.
 - `/blog/editor`에서 작성하고 `/blog/editor?slug=글주소`에서 수정합니다. 텍스트·이미지 URL·코드 블록의 순서 변경, 대표 이미지, 카테고리, 공개/초안 저장을 지원합니다. 이미지 파일 업로드는 아직 지원하지 않습니다.
 - 삭제 전 확인하며, 저장 실패 시 폼 입력을 유지합니다. 수정 시각을 비교해 다른 곳에서 바뀐 글을 덮어쓰거나 삭제하지 않습니다.
-- Supabase SSR PKCE와 호스트 전용 HttpOnly 쿠키를 사용합니다. `.letscoding.kr` 전체로 쿠키를 공유하지 않습니다. 서버 액션마다 사용자와 플랫폼 관리자 권한을 확인하고, 사용자 JWT로 DB에 접근해 RLS도 적용합니다.
+- Supabase SSR PKCE와 호스트 전용 HttpOnly 쿠키를 사용합니다. `.letscoding.kr` 전체로 쿠키를 공유하지 않습니다. 서버 액션마다 사용자와 블로그 관리 권한을 확인하고, 사용자 JWT로 DB에 접근해 RLS도 적용합니다.
 - 등록된 콜백은 `https://www.letscoding.kr/auth/callback`과 localhost/127.0.0.1의 3000·3100 포트입니다. 공용 Supabase의 기존 Kakao provider·site URL·다른 앱 콜백은 유지합니다.
 - 인증 검증: 빌드 후 `npm run start -- --port 3100`을 실행하고 `node scripts/check-blog-auth.mjs`. 입력 검증: `node scripts/check-blog.mjs`.
 - 브라우저에서 카카오 인증 화면 이동까지 확인했습니다. 실제 관리자 계정으로 로그인한 뒤 작성·수정·삭제하는 최종 확인과 사이트 배포는 별도입니다.
+
+블로그 전용 관리자는 UUID `41f00437-af2e-4bc7-a720-b6a70f4db4f7` 계정입니다. `landing.can_manage_blog()`가 지정 계정 또는 기존 플랫폼 관리자에게만 권한을 허용하며, 지정 계정의 `public.profiles.role`은 `teacher`로 유지합니다. 이메일 변경으로 권한이 이동하지 않습니다.

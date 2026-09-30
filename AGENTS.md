@@ -21,4 +21,4 @@ index(`/`) 랜딩 페이지의 섹션 구성과 번호는 [LANDING-PLAN.md](LAND
 
 ## 블로그 데이터 원본
 
-블로그는 `landing.blog_posts`를 요청 시 조회한다. `content/blog/*.md`는 이전 자료이며 현재 글 수정 대상으로 사용하지 않는다. 연결·본문 형식·검증 방법은 [README.md](README.md)의 블로그 데이터 연결 절을 참고한다. 블로그 목록의 카카오 로그인 후 플랫폼 관리자만 글 작성·수정·삭제와 초안 관리가 가능하다. 권한은 서버의 `getUser()` 및 `public.is_platform_admin()`과 DB RLS로 검증한다.
+블로그는 `landing.blog_posts`를 요청 시 조회한다. `content/blog/*.md`는 이전 자료이며 현재 글 수정 대상으로 사용하지 않는다. 연결·본문 형식·검증 방법은 [README.md](README.md)의 블로그 데이터 연결 절을 참고한다. 블로그 목록의 카카오 로그인 후 플랫폼 관리자와 지정 블로그 관리자만 글 작성·수정·삭제와 초안 관리가 가능하다. 권한은 서버의 `getUser()` 및 `landing.can_manage_blog()`과 DB RLS로 검증한다.
