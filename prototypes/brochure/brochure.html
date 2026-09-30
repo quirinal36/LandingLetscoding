@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>렛츠코딩 라운지 소개서 · 7쪽 인쇄 원본</title>
+  <link rel="stylesheet" href="fonts.css">
+  <!-- B 선택안 확장. 기존 자산과 현재 랜딩 내용으로 구성한 가로 A4 7쪽 인쇄 원본. -->
+  <style>
+    :root {
+      --ink: #1b2333;
+      --blue: #2a53b0;
+      --muted: #55607a;
+      --line: #c9d1df;
+      --paper: #fff;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #e9edf3;
+      color: var(--ink);
+      font-family: "Pretendard Variable", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      word-break: keep-all;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    h1, h2, h3, p, figure { margin: 0; }
+    img { display: block; }
+    .sheet {
+      width: 297mm;
+      height: 210mm;
+      padding: 14mm;
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      break-after: page;
+    }
+    .sheet + .sheet { margin-top: 24px; }
+    .sheet:last-child { break-after: auto; }
+    .page-head {
+      height: 18mm;
+      flex: none;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 0.3mm solid var(--ink);
+    }
+    .brand { display: flex; align-items: center; gap: 3mm; }
+    .brand img { width: 18mm; height: 12mm; object-fit: contain; }
+    .brand-name { font-size: 21px; font-weight: 740; letter-spacing: -0.02em; }
+    .service-name {
+      padding-top: 2.6mm;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+    }
+    .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6mm; }
+    .kicker { color: var(--blue); font-size: 16px; font-weight: 650; line-height: 1.4; }
+    .cover-lead { margin-top: 12mm; }
+    .cover-title { grid-column: span 5; }
+    .cover-title .kicker { margin-bottom: 5mm; }
+    h1 {
+      font-size: 44pt;
+      line-height: 1.14;
+      font-weight: 680;
+      letter-spacing: -0.04em;
+    }
+    .cover-intro { grid-column: span 3; align-self: end; padding-bottom: 0.5mm; }
+    .promise { color: var(--blue); font-size: 24px; line-height: 1.42; font-weight: 590; }
+    .description { margin-top: 5mm; font-size: 16px; line-height: 1.55; }
+    .cover-works { margin-top: 15mm; }
+    .evidence-label { margin-bottom: 3mm; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .work-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+    .work-strip img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .work-strip figcaption { margin-top: 2.5mm; font-size: 15px; line-height: 1.4; font-weight: 560; }
+    .page-foot {
+      margin-top: auto;
+      border-top: 0.3mm solid var(--line);
+      padding-top: 3.5mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .page-number { color: var(--muted); font-variant-numeric: tabular-nums; }
+    .body-lead { margin-top: 10mm; }
+    .body-title { grid-column: span 5; }
+    .body-title .kicker { margin-bottom: 4mm; }
+    h2 {
+      font-size: 32pt;
+      line-height: 1.16;
+      font-weight: 650;
+      letter-spacing: -0.035em;
+    }
+    .body-intro { grid-column: span 3; align-self: end; padding-bottom: 0.5mm; font-size: 17px; line-height: 1.55; }
+    .feature-layout { margin-top: 8mm; align-items: start; }
+    .product-evidence { grid-column: span 4; }
+    .product-evidence img {
+      width: 100%;
+      height: 82mm;
+      object-fit: cover;
+      object-position: left top;
+      border: 0.25mm solid var(--line);
+    }
+    .product-evidence figcaption { margin-top: 2.5mm; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .feature-list { grid-column: span 4; }
+    .feature {
+      min-height: 27.3mm;
+      display: grid;
+      grid-template-columns: 7mm 1fr;
+      column-gap: 3mm;
+      padding: 3.5mm 0;
+      border-top: 0.3mm solid var(--line);
+    }
+    .feature:first-child { border-top-color: var(--blue); padding-top: 0; }
+    .feature-index { padding-top: 1mm; color: var(--blue); font-size: 13px; font-weight: 600; }
+    h3 { margin-bottom: 2mm; font-size: 21px; font-weight: 650; line-height: 1.3; }
+    .feature p { font-size: 16px; line-height: 1.5; text-wrap: pretty; }
+    .cycle-foot { border-top-color: var(--blue); }
+    .cycle { color: var(--blue); font-size: 16px; font-weight: 600; }
+    .pilot { font-size: 14px; }
+    .body-page-number { margin-left: 4mm; color: var(--muted); font-size: 13px; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .education-layout { margin-top: 10mm; align-items: start; }
+    .education-statement { grid-column: span 3; padding-top: 4mm; border-top: .3mm solid var(--blue); }
+    .education-statement strong { display: block; color: var(--blue); font-size: 28px; line-height: 1.45; font-weight: 590; }
+    .education-statement p { margin-top: 6mm; font-size: 16px; line-height: 1.6; }
+    .ability-list { grid-column: span 5; display: grid; grid-template-columns: repeat(2, 1fr); gap: 5mm 6mm; }
+    .ability { min-height: 24mm; border-top: .3mm solid var(--line); padding-top: 3mm; }
+    .ability p { font-size: 16px; line-height: 1.5; }
+    .month-flow { list-style: none; padding: 0; margin: 8mm 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; }
+    .month-flow li { border-top: .3mm solid var(--blue); padding-top: 3mm; }
+    .month-flow .step-label { display: flex; gap: 3mm; align-items: baseline; margin-bottom: 2mm; }
+    .month-flow h3 { margin: 0; }
+    .month-flow p { font-size: 16px; line-height: 1.5; }
+    .project-layout { margin-top: 7mm; align-items: start; }
+    .monthly-evidence { grid-column: span 4; }
+    .monthly-evidence img { width: 100%; height: 52mm; object-fit: contain; object-position: left top; border: .25mm solid var(--line); }
+    .monthly-evidence figcaption { margin-top: 2mm; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .project-record { grid-column: span 4; }
+    .project-record > p { font-size: 16px; line-height: 1.5; }
+    .completion { list-style: none; margin: 4mm 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+    .completion li { border-top: .3mm solid var(--line); padding-top: 2mm; font-size: 14px; line-height: 1.4; }
+    .completion span { display: block; color: var(--blue); font-size: 12px; font-weight: 650; margin-bottom: 1mm; }
+    .completion-note { margin-top: 3mm; color: var(--blue); font-size: 14px !important; }
+    .public-works { margin-top: 8mm; }
+    .proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; margin: 6mm 0 0; padding: 0; }
+    .proof > div { border-top: .3mm solid var(--blue); padding-top: 3mm; }
+    .proof dt { font-size: 15px; line-height: 1.4; }
+    .proof dd { margin: 1mm 0 0; color: var(--blue); font-size: 36px; line-height: 1.2; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
+    .proof dd span { margin-left: 1mm; font-size: 16px; font-weight: 550; }
+    .proof-source { margin-top: 3mm; color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .timing-intro { max-width: 190mm; margin-top: 12mm; font-size: 20px; line-height: 1.65; }
+    .timing-examples { margin-top: 12mm; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8mm; }
+    .timing-example { border-top: .3mm solid var(--blue); padding-top: 4mm; }
+    .timing-example h3 { font-size: 25px; }
+    .timing-example p { margin-top: 3mm; font-size: 18px; line-height: 1.55; }
+    .timing-close { margin-top: 13mm; color: var(--blue); font-size: 23px; line-height: 1.55; font-weight: 600; }
+    .start-options { margin-top: 8mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+    .start-option { border-top: .3mm solid var(--blue); padding-top: 3mm; }
+    .start-option .kicker { font-size: 14px; margin-bottom: 2mm; }
+    .start-option h3 { font-size: 28px; line-height: 1.25; font-weight: 620; min-height: 19mm; }
+    .start-option > p:last-child { margin-top: 2mm; font-size: 16px; line-height: 1.5; }
+    .start-context { margin-top: 5mm; font-size: 14px; color: var(--muted); }
+    .contact-layout { margin-top: 6mm; padding-top: 5mm; border-top: .3mm solid var(--line); align-items: start; }
+    .contact-block { grid-column: span 4; }
+    .contact-block h3 { font-size: 22px; margin-bottom: 3mm; }
+    .contact-block p { font-size: 17px; line-height: 1.6; }
+    .contact-block .contact-name { font-size: 14px; margin-top: 4mm; color: var(--muted); }
+    .qr-block { grid-column: span 2; }
+    .qr-block h3 { font-size: 16px; margin-bottom: 2mm; }
+    .qr-block img { width: 28mm; height: 28mm; }
+    .qr-block p { margin-top: 2mm; font-size: 13px; line-height: 1.45; color: var(--muted); }
+    .edition { font-size: 12px; color: var(--muted); }
+    @page { size: A4 landscape; margin: 0; }
+    @media print {
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .sheet, .sheet + .sheet { margin: 0; box-shadow: none; }
+      .sheet { break-inside: avoid; page-break-after: always; }
+      .sheet:last-child { break-after: auto; page-break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+  <section class="sheet cover" id="cover" data-page="01" aria-label="소개서 1쪽 표지">
+    <header class="page-head">
+      <div class="brand">
+        <img src="../../src/assets/logo.png" alt="렛츠코딩 로고">
+        <span class="brand-name">렛츠코딩</span>
+      </div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+
+    <div class="cover-lead grid">
+      <div class="cover-title">
+        <p class="kicker">코딩학원을 위한 AI 시대 커리큘럼</p>
+        <h1>학생 한 명이,<br>스타트업이 됩니다.</h1>
+      </div>
+      <div class="cover-intro">
+        <p class="promise">만들고, 알리고,<br>투자를 받습니다.</p>
+        <p class="description">7년차 코딩학원이 만들어<br>매일 쓰는 렛츠코딩 라운지</p>
+      </div>
+    </div>
+
+    <div class="cover-works">
+      <p class="evidence-label">라운지에 공개된 작품 예시 · 나나쌤 작품</p>
+      <div class="work-strip">
+        <figure>
+          <img src="../../public/landing/works/english.webp" alt="삐약! 영어 탐험 작품 썸네일">
+          <figcaption>삐약! 영어 탐험</figcaption>
+        </figure>
+        <figure>
+          <img src="../../public/landing/works/absolute-pitch.webp" alt="절대음감 테스트 작품 썸네일">
+          <figcaption>절대음감 테스트</figcaption>
+        </figure>
+        <figure>
+          <img src="../../public/landing/works/pixel-art-maker.webp" alt="픽셀아트 변환기 작품 썸네일">
+          <figcaption>픽셀아트 변환기</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <footer class="page-foot">
+      <p>www.letscoding.kr</p>
+      <p class="page-number">1</p>
+    </footer>
+  </section>
+
+  <section class="sheet" id="page2" data-page="02" aria-label="소개서 2쪽 교육 변화">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">AI 시대의 코딩 교육</p><h2>무한한 지식을 넘어,<br>무한한 실행의 시대로.</h2></div>
+      <p class="body-intro">AI와 함께 만드는 시대.<br>학생은 무엇을 만들지 정하고, 자기 작품을 끝까지 완성하는 경험을 합니다.</p>
+    </div>
+    <div class="education-layout grid">
+      <div class="education-statement">
+        <strong>문제를 정하고,<br>AI와 만들고,<br>끝까지 설명합니다.</strong>
+        <p>문법을 배우는 데서 한 걸음 더.<br>자기 아이디어를 실제 작품으로 만들며 여섯 가지 힘을 연습합니다.</p>
+      </div>
+      <div class="ability-list">
+        <div class="ability"><h3>기획</h3><p>무엇을 만들지 정하고,<br>완성까지의 순서를 세웁니다.</p></div>
+        <div class="ability"><h3>문제 정의</h3><p>누구의 어떤 불편을 해결할지<br>구체적인 말로 정리합니다.</p></div>
+        <div class="ability"><h3>AI 활용</h3><p>AI에 요청하고 결과를 확인하며<br>필요한 부분을 고쳐 갑니다.</p></div>
+        <div class="ability"><h3>생각 근육</h3><p>여러 방법을 비교하고,<br>선택한 이유를 설명합니다.</p></div>
+        <div class="ability"><h3>공감 근육</h3><p>친구가 쓰는 모습을 살피고,<br>사용자의 반응을 듣습니다.</p></div>
+        <div class="ability"><h3>회복탄력성</h3><p>막히는 과정을 기록하고,<br>다음 방법을 시도합니다.</p></div>
+      </div>
+    </div>
+    <footer class="page-foot"><p>무엇을 아는지에서, 무엇을 만들어 내는지로.</p><p class="page-number">2</p></footer>
+  </section>
+
+  <section class="sheet" id="page3" data-page="03" aria-label="소개서 3쪽 학생의 한 달">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">4주 프로젝트</p><h2>만들고 공유하기,<br>성장하고 기록하기.</h2></div>
+      <p class="body-intro">매달 새로운 문제를 만납니다.<br>만들기에서 게시와 소개까지, 한 달의 경험이 기록으로 남습니다.</p>
+    </div>
+    <ol class="month-flow">
+      <li><div class="step-label"><span class="feature-index">01</span><h3>고른다</h3></div><p>이달의 문제 5개 중 하나,<br>또는 자기 문제</p></li>
+      <li><div class="step-label"><span class="feature-index">02</span><h3>만든다</h3></div><p>AI와 함께. 막히는 곳은<br>개발일지에</p></li>
+      <li><div class="step-label"><span class="feature-index">03</span><h3>올린다</h3></div><p>작품이 주소를 갖는다.<br>친구 폰에서 열린다</p></li>
+      <li><div class="step-label"><span class="feature-index">04</span><h3>설명한다</h3></div><p>가이드 영상으로<br>자기 작품을 소개</p></li>
+    </ol>
+    <div class="project-layout grid">
+      <figure class="monthly-evidence">
+        <img src="../../public/landing/monthly.png" alt="2026년 9월 라운지 이달의 추천 과제 5개 화면">
+        <figcaption>이달의 추천 과제 실제 화면 · 2026년 9월</figcaption>
+      </figure>
+      <div class="project-record">
+        <h3>제작 과정도 학생의 포트폴리오로.</h3>
+        <p>개발일지에 문제와 해결을 기록합니다.<br>완료 보고서와 작품소개 영상까지 함께 남깁니다.</p>
+        <ol class="completion" aria-label="프로젝트 완료 5단계">
+          <li><span>01</span>아이디어 구상</li>
+          <li><span>02</span>문제와 해결 정리</li>
+          <li><span>03</span>제작 완료</li>
+          <li><span>04</span>라운지 게시</li>
+          <li><span>05</span>가이드 영상</li>
+        </ol>
+        <p class="completion-note">공유하고 설명하는 것까지가 프로젝트의 완성입니다.</p>
+      </div>
+    </div>
+    <footer class="page-foot"><p>새 문제 → 제작과 기록 → 게시와 소개 → 다음 도전</p><p class="page-number">3</p></footer>
+  </section>
+
+  <section class="sheet" id="page4" data-page="04" aria-label="소개서 4쪽 라운지 기능">
+    <header class="page-head">
+      <div class="brand">
+        <img src="../../src/assets/logo.png" alt="렛츠코딩 로고">
+        <span class="brand-name">렛츠코딩</span>
+      </div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+
+    <div class="body-lead grid">
+      <div class="body-title">
+        <p class="kicker">렛츠코딩 라운지</p>
+        <h2>작품이 수업을 넘어,<br>성장으로 이어지는 공간.</h2>
+      </div>
+      <p class="body-intro">작품공유 · 가상경제 · 과제관리, 세 축이 하나의 교육 사이클로 연결됩니다.</p>
+    </div>
+
+    <div class="feature-layout grid">
+      <figure class="product-evidence">
+        <img src="../../public/landing/works-grid.jpg" alt="렛츠코딩 라운지 실제 작품 목록의 상단 화면">
+        <figcaption>라운지 실제 작품 목록 · 공개 사용이 허용된 나나쌤 작품</figcaption>
+      </figure>
+      <div class="feature-list">
+        <div class="feature">
+          <span class="feature-index">01</span>
+          <div>
+            <h3>작품공유</h3>
+            <p>내가 만든 게임과 웹사이트를 올리고, 서로 플레이하며 반응을 주고받습니다.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-index">02</span>
+          <div>
+            <h3>가상경제</h3>
+            <p>작품 조회와 과제 완료로 루캣이 쌓이고, 친구의 작품에 투자하며 경제를 경험합니다.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-index">03</span>
+          <div>
+            <h3>과제관리</h3>
+            <p>매달 5개의 새 문제와 학습과제 193개. 제작부터 게시와 소개 영상까지 이어집니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-foot cycle-foot">
+      <p class="cycle">만들기 → 공유하기 → 반응과 투자 → 다음 작품</p>
+      <p class="pilot">4주 무료 파일럿 · 반 하나로 시작할 수 있습니다.<span class="body-page-number">4</span></p>
+    </footer>
+  </section>
+  <section class="sheet" id="page5" data-page="05" aria-label="소개서 5쪽 실제 작품과 활동">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">실제 작품과 활동</p><h2>아이디어가 작품과<br>기록으로 남습니다.</h2></div>
+      <p class="body-intro">게임, 웹사이트, 생활 도구까지.<br>만든 작품을 공개하고, 서로의 작품을 쓰며 반응을 주고받습니다.</p>
+    </div>
+    <div class="public-works">
+      <p class="evidence-label">라운지 공개 작품 예시 · 공개 사용이 허용된 나나쌤 작품</p>
+      <div class="work-strip">
+        <figure><img src="../../public/landing/works/ten-pang.webp" alt="텐팡 숫자 게임 작품 썸네일"><figcaption>텐팡 · 웹 게임</figcaption></figure>
+        <figure><img src="../../public/landing/works/image-editor.webp" alt="이미지 편집기 작품 썸네일"><figcaption>이미지 편집기 · 웹사이트</figcaption></figure>
+        <figure><img src="../../public/landing/works/songpyeon.webp" alt="뀨의 송편 가게 작품 썸네일"><figcaption>뀨의 송편 가게 · 웹 게임</figcaption></figure>
+      </div>
+    </div>
+    <dl class="proof" aria-label="라운지 전체 공개 작품 운영 실측">
+      <div><dt>공개된 학생 작품</dt><dd>224<span>건</span></dd></div>
+      <div><dt>작품을 올린 사람</dt><dd>45<span>명</span></dd></div>
+      <div><dt>작품 조회</dt><dd>8,689<span>회</span></dd></div>
+      <div><dt>작품에 달린 댓글</dt><dd>419<span>개</span></dd></div>
+    </dl>
+    <p class="proof-source">렛츠코딩 라운지 전체 공개 작품 · 2026.4.6 – 9.25 등록분 · 2026.9.28 집계</p>
+    <footer class="page-foot"><p>작품과 활동 기록은 학생의 포트폴리오에 쌓입니다.</p><p class="page-number">5</p></footer>
+  </section>
+
+  <section class="sheet" id="page6" data-page="06" aria-label="소개서 6쪽 라운지를 시작할 때">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">렛츠코딩 라운지를 시작할 때</p><h2>배운 것을, 나만의<br>작품으로 만들 시간.</h2></div>
+    </div>
+    <p class="timing-intro">렛츠코딩 라운지는 지금 사용하고 계신 교구나 교재를 대체하려는 것이 아닙니다. 기존 수업에서 배운 내용을 학생 자신의 아이디어로 이어가는 공간입니다.</p>
+    <div class="timing-examples">
+      <div class="timing-example"><h3>파이썬 수업 다음에는</h3><p>파이썬 알고리즘 자격증을 준비하며 익힌 문법으로 나만의 프로그램을 만들 때.</p></div>
+      <div class="timing-example"><h3>로블록스 실습 다음에는</h3><p>로블록스 스튜디오 교재와 실습을 마치고 나만의 게임을 만드는 프로젝트 수업을 시작할 때.</p></div>
+    </div>
+    <p class="timing-close">배운 대로 따라 만드는 것을 넘어, 학생 스스로 상상하고 구현해 볼 때가<br>렛츠코딩 라운지를 시작하기 가장 좋은 순간입니다.</p>
+    <footer class="page-foot"><p>기존 수업에서 배운 내용을 학생 자신의 아이디어로.</p><p class="page-number">6</p></footer>
+  </section>
+
+  <section class="sheet" id="page7" data-page="07" aria-label="소개서 7쪽 도입과 연락처">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">렛츠코딩 라운지 도입 안내</p><h2>반 하나로 충분합니다.</h2></div>
+      <p class="body-intro">우리 학원의 첫 반에서 시작해 보세요.<br>다음 스타트업의 탄생을 기다립니다.</p>
+    </div>
+    <div class="start-options">
+      <div class="start-option"><p class="kicker">파일럿</p><h3>4주 무료</h3><p>인원 수와 관계없이<br>첫 반 하나로 먼저 써 보세요.</p></div>
+      <div class="start-option"><p class="kicker">가격</p><h3>학생 1명<br>월 11,000원</h3><p>부가세 포함. 원장님이<br>수강료에 포함해 결제합니다.</p></div>
+      <div class="start-option"><p class="kicker">코칭</p><h3>첫 수업은<br>함께</h3><p>렛츠코딩 팀이 바이브코딩<br>수업 진행을 코칭합니다.</p></div>
+    </div>
+    <p class="start-context">학생 수에 따라 이용하는 구독 방식입니다. 상담 후 학원 공간을 개설하고, 4주 사용 뒤 도입을 결정합니다.</p>
+    <div class="contact-layout grid">
+      <div class="contact-block">
+        <h3>첫 수업을 함께 준비하겠습니다.</h3>
+        <p><a href="tel:01056790072">010-5679-0072</a><br><a href="mailto:contact@letscoding.kr">contact@letscoding.kr</a></p>
+        <p class="contact-name">주식회사 렛츠코딩<br><a href="https://www.letscoding.kr">www.letscoding.kr</a></p>
+      </div>
+      <div class="qr-block">
+        <h3>도입 상담 신청</h3>
+        <a href="https://www.letscoding.kr/seminar/inquiry" aria-label="렛츠코딩 라운지 도입 상담 신청"><img src="assets/inquiry-qr.svg" alt="도입 상담 신청 QR 코드"></a>
+        <p><a href="https://www.letscoding.kr/seminar/inquiry">www.letscoding.kr/<br>seminar/inquiry</a></p>
+      </div>
+      <div class="qr-block">
+        <h3>실제 라운지 둘러보기</h3>
+        <a href="https://lounge.letscoding.kr/works" aria-label="렛츠코딩 라운지 공개 작품 둘러보기"><img src="assets/lounge-qr.svg" alt="렛츠코딩 라운지 공개 작품 QR 코드"></a>
+        <p><a href="https://lounge.letscoding.kr/works">lounge.letscoding.kr/<br>works</a></p>
+      </div>
+    </div>
+    <footer class="page-foot"><p><span class="edition">2026.09 제작 · 도입 조건은 상담 시 확인하실 수 있습니다.</span></p><p class="page-number">7</p></footer>
+  </section>
+
+</body>
+</html>

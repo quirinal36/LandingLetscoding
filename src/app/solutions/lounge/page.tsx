@@ -109,6 +109,12 @@ export default function Page() {
     <div className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
       <p className="text-sm font-semibold text-accent-ink">솔루션</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-[-0.025em] md:text-4xl">렛츠코딩 라운지</h1>
+      <div className="mt-6 space-y-4 leading-relaxed">
+        <h2 className="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">배운 것을, 나만의 작품으로 만들 시간.</h2>
+        <p>렛츠코딩 라운지는 지금 사용하고 계신 교구나 교재를 대체하려는 것이 아닙니다. 기존 수업에서 배운 내용을 학생 자신의 아이디어로 이어가는 공간입니다.</p>
+        <p>파이썬 알고리즘 자격증을 준비하며 익힌 문법으로 나만의 프로그램을 만들 때, 로블록스 스튜디오 교재와 실습을 마치고 나만의 게임을 만드는 프로젝트 수업을 시작할 때.</p>
+        <p className="font-semibold">배운 대로 따라 만드는 것을 넘어, 학생 스스로 상상하고 구현해 볼 때가 렛츠코딩 라운지를 시작하기 가장 좋은 순간입니다.</p>
+      </div>
       <p className="mt-4 max-w-[46ch] text-lg leading-relaxed text-ink-soft">
         학생 작품을 링크로 공개하고 쌓아 두는 코딩학원용 플랫폼입니다. 수업에서 만든 웹 게임, 웹사이트, 로블록스, 블록 코딩 작품을
         올리면 공개 주소가 생기고, 친구와 학부모가 휴대폰에서 바로 실행해 봅니다.
