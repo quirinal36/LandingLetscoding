@@ -5,7 +5,7 @@ import { BOUNCE, EI, EO, Frame, kf, run } from "@/components/landing/timeline";
 /*
   성장 장면 — 라운지 확장 모델(만든다 → 다듬는다 → 자란다 → 남는다)을
   여러 겹의 종이 컷아웃이 스크롤에 따라 일어나는 팝업북으로 보여 준다.
-  기획: GROWTH-SCENE-PLAN.md · 모형: lounge_model.md
+  기획: docs/GROWTH-SCENE-PLAN.md · 모형: docs/lounge_model.md
 
   장면 1(만든다) → 장면 2(다듬는다) → 장면 3(자란다) → 장면 4(남는다).
     - 레이어마다 서는 시각(at)과 눕는 시각(out)을 갖는다. out 이 있는 레이어는 마지막 프레임이 "누워 사라짐"이라
@@ -131,7 +131,7 @@ const LOOP_AT = S4 + 3.4;
 const PENCIL = { left: 42.5, bottom: 31.5, width: 5.2, aspect: 0.8318, at: S2 + 3.7, out: 9.25 };
 
 // ── 자막 ──────────────────────────────────────────────────────
-// GROWTH-SCENE-PLAN.md 5절. 장면이 붙을 때마다 아래로 쌓이고, 지난 자막은 흐려진다.
+// docs/GROWTH-SCENE-PLAN.md 5절. 장면이 붙을 때마다 아래로 쌓이고, 지난 자막은 흐려진다.
 const CAPTIONS = [
   { at: 1.8, title: "만들고", body: "AI와 함께 만들고,\n링크 하나로 세상에 내놓는다." },
   { at: S2 + 1.5, title: "공유하기", body: "시장이 반응하는 지점을\n찾아나선다." },

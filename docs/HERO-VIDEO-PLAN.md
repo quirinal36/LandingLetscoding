@@ -1,7 +1,7 @@
 # 히어로 루프 영상 기획 — "내가 만든 게임을 친구가 한다"
 
 랜딩 히어로의 작품 격자 안, 가장 큰 칸(2×2)에 들어가는 무음 루프 영상이다.
-([LANDING-PLAN.md](./LANDING-PLAN.md) 1일 섹션, [시안](./prototypes/landing-month.html))
+([LANDING-PLAN.md](./LANDING-PLAN.md) 1일 섹션, [시안](../prototypes/landing-month.html))
 
 ## 확정 사항
 

@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 랜딩 페이지 참고 문서
 
-index(`/`) 랜딩 페이지의 섹션 구성과 번호는 [LANDING-PLAN.md](LANDING-PLAN.md)를 먼저 참고한다. 사용자와 대화할 때 섹션 번호는 이 문서의 코드 주석 기준 번호를 뜻한다. 섹션 구성이나 번호를 변경하면 문서도 함께 갱신하고, 문서와 실제 코드가 다르면 현재 코드를 확인한다.
+index(`/`) 랜딩 페이지의 섹션 구성과 번호는 [LANDING-PLAN.md](docs/LANDING-PLAN.md)를 먼저 참고한다. 사용자와 대화할 때 섹션 번호는 이 문서의 코드 주석 기준 번호를 뜻한다. 섹션 구성이나 번호를 변경하면 문서도 함께 갱신하고, 문서와 실제 코드가 다르면 현재 코드를 확인한다.
 
 ## Supabase 스키마와 마이그레이션 관리
 

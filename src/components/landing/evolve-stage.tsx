@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { BOUNCE, EO, Frame, kf, run } from "@/components/landing/timeline";
 
 /*
-  진화 장면 — 랜딩 3번. 교구는 진화할 때마다 다음 초보용 교구로 바뀌고, 그때마다 학생이 자라 레벨이 오른다. (EVOLVE-SCENE-PLAN.md)
+  진화 장면 — 랜딩 3번. 교구는 진화할 때마다 다음 초보용 교구로 바뀌고, 그때마다 학생이 자라 레벨이 오른다. (docs/EVOLVE-SCENE-PLAN.md)
 
   0.0–0.8   학생 Lv.1(초2)이 왕초보용 코딩로봇(눈에 불 켜진 로봇)을 두 손으로 받쳐 들고 선다.
   1.4–2.9   진화 1: 검은 실루엣으로 2.6배 부풀고 뿔·날개, 가운데 "레벨업!"이 커진다 → 번쩍 → 펑.

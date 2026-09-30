@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /*
-  폰 안에서 도는 무음 영상. 원장님이 만든 30초 라운지 쇼츠다.
+  폰 안에서 도는 무음 영상. 원본 쇼츠의 17–21초 활동 장면을 잘라 반복한다.
   - 화면에 들어오면 재생, 나가면 멈춘다.
   - 소리는 없다. 소리 켜기 버튼도 없다. 영상은 분위기이지 설명이 아니다.
   - 동작 줄이기 설정이면 저절로 돌지 않는다. 포스터 위에 재생 버튼을 두고, 누르면 돈다.
@@ -57,7 +57,7 @@ export function PhoneVideo({ src, poster }: { src: string; poster: string }) {
           className="size-full object-cover"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
-          aria-label="렛츠코딩 라운지 소개 영상. 학생들이 만든 게임과 웹사이트가 차례로 나온다"
+          aria-label="렛츠코딩 라운지 활동 영상. 만들고, 올리고, 함께 즐기고"
         />
         {manual && (
           <button

@@ -112,7 +112,7 @@ export default function Page() {
         </Container>
       </section>
 
-      {/* ═══ 3. 교육 — 교구는 진화해도 초보 단계로 돌아온다 (주제3, EVOLVE-SCENE-PLAN.md) ═ */}
+      {/* ═══ 3. 교육 — 교구는 진화해도 초보 단계로 돌아온다 (주제3, docs/EVOLVE-SCENE-PLAN.md) ═ */}
       <section className="tone-paper pt-28 md:pt-40">
         <Container>
           <div {...reveal()}>

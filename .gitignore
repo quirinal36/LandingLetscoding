@@ -51,6 +51,7 @@ prototypes/**/*.webm
 
 # 개인 메모
 MYPROBLEM.md
+/docs/private/
 
 # Graphify local runtime and cache
 /graphify-out/cache/

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { COMPANY } from "@/lib/nav";
-import logo from "../../logo.png";
+import logo from "@/assets/logo.png";
 
 export function Brand() {
   return (

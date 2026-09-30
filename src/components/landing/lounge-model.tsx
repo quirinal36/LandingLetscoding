@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { LoungeModelScrub } from "@/components/landing/lounge-model-scrub";
 
 /*
-  라운지 확장 모델 — lounge_model.jpg 를 HTML·CSS 로 다시 짠 도식. (내용: lounge_model.md 4절)
+  라운지 확장 모델 — docs/assets/lounge_model.jpg 를 HTML·CSS 로 다시 짠 도식. (내용: docs/lounge_model.md 4절)
 
     ① 나 — 만든다        구성주의(constructionism), Papert          창작 → 공개
     ② 우리 — 다듬는다    사회적 구성주의(social constructivism), Vygotsky   피드백 → 수정

@@ -5,7 +5,7 @@ import { RobotIcon } from "@/components/landing/robot-icon";
 
 /*
   이야기 무대 — MYPROBLEM.md 2번(문제)과 6번(바이브코딩으로 넘은 한계)을 진짜 카드로 보여 준다.
-  설계 원문은 HERO-MOTION-PLAN.md. 이 파일은 그 타임라인을 선 대신 물건으로 그린 것이다.
+  설계 원문은 docs/HERO-MOTION-PLAN.md. 이 파일은 그 타임라인을 선 대신 물건으로 그린 것이다.
 
   0.0–5.6  교구 상자 셋이 차례로 떠올라 유리 한계선에 부딪히고 떨어진다. 떨어진 상자는 회색으로 남는다.
   5.6–6.4  바닥에 "2026.1 바이브코딩" 눈금이 박힌다.

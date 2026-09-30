@@ -6,8 +6,8 @@ import { RevealObserver } from "@/components/landing/reveal-observer";
 import { Container, Eyebrow, reveal } from "@/components/landing/section";
 
 /*
-  교육 철학 — lounge_model.md 를 원장님이 읽을 말로 옮긴 것. 도식은 원래 랜딩 4번에 있던 것을 그대로 옮겼다.
-  원어 병기 규칙(lounge_model.md 7절): 구성주의는 constructionism 을 붙여 Piaget 의 constructivism 과 구분한다.
+  교육 철학 — docs/lounge_model.md 를 원장님이 읽을 말로 옮긴 것. 도식은 원래 랜딩 4번에 있던 것을 그대로 옮겼다.
+  원어 병기 규칙(docs/lounge_model.md 7절): 구성주의는 constructionism 을 붙여 Piaget 의 constructivism 과 구분한다.
 */
 
 export const metadata: Metadata = {

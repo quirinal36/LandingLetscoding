@@ -61,3 +61,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - 브라우저에서 카카오 인증 화면 이동까지 확인했습니다. 실제 관리자 계정으로 로그인한 뒤 작성·수정·삭제하는 최종 확인과 사이트 배포는 별도입니다.
 
 블로그 전용 관리자는 UUID `41f00437-af2e-4bc7-a720-b6a70f4db4f7` 계정입니다. `landing.can_manage_blog()`가 지정 계정 또는 기존 플랫폼 관리자에게만 권한을 허용하며, 지정 계정의 `public.profiles.role`은 `teacher`로 유지합니다. 이메일 변경으로 권한이 이동하지 않습니다.
+
+## 프로젝트 문서와 이미지
+
+- [랜딩 섹션 구성](docs/LANDING-PLAN.md) · [초기 요구사항](docs/PRD.md) · [디자인 시스템](docs/DESIGN.md)
+- 장면 기획: [성장](docs/GROWTH-SCENE-PLAN.md), [진화](docs/EVOLVE-SCENE-PLAN.md), [히어로 모션](docs/HERO-MOTION-PLAN.md), [히어로 영상](docs/HERO-VIDEO-PLAN.md)
+- 교육 모델: [라운지 확장 모델](docs/lounge_model.md), [경제 모델 근거](docs/ECONOMY-RESEARCH.md), [경제 모델 그림](docs/ECONOMY-FIGURE-PLAN.md)
+- 영상 제작 자료는 [motion/README.md](motion/README.md), 시안·생성 원본은 `prototypes/`에 보관합니다.
+
+사이트 로고 원본은 `src/assets/logo.png`, 교육 모델 도식은 `docs/assets/`에 있습니다. 서비스 이미지는 `public/`, Next.js 아이콘은 `src/app/`에서 관리합니다. 개인 메모는 Git에 포함하지 않는 `docs/private/`에 보관합니다.
