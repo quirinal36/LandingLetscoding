@@ -1,5 +1,5 @@
+import { AuthControls } from "@/components/blog/auth-controls";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleBody } from "@/components/blog/article-body";
@@ -10,18 +10,11 @@ import { COMPANY } from "@/lib/nav";
 
 type Props = { params: Promise<{ slug: string }> };
 
-/** 글은 빌드 때 전부 굽는다. 목록에 없는 slug는 404. */
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return getPosts().map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPost((await params).slug);
+  const post = await getPost((await params).slug);
   if (!post) return {};
   // openGraph·twitter는 레이아웃 값과 합쳐지지 않고 통째로 바뀐다. 그래서 siteName·locale·card까지 다시 쓴다.
-  const image = post.cover ? { url: post.cover.src, ...post.cover.size } : { url: "/landing/og.jpg", width: 1897, height: 990 };
+  const image = post.cover ? { url: post.cover.src } : { url: "/landing/og.jpg", width: 1897, height: 990 };
   return {
     title: post.title,
     description: post.summary,
@@ -42,11 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const post = getPost((await params).slug);
+  const post = await getPost((await params).slug);
   if (!post) notFound();
 
   const url = `${COMPANY.url}/blog/${post.slug}`;
-  const others = getPosts().filter((p) => p.slug !== post.slug).slice(0, 3);
+  const posts = await getPosts();
+  const others = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-20">
@@ -62,7 +56,7 @@ export default async function Page({ params }: Props) {
           articleSection: BLOG_CATEGORIES[post.category].label,
           datePublished: post.publishedAt,
           dateModified: post.updatedAt,
-          ...(post.cover && { image: [`${COMPANY.url}${post.cover.src}`] }),
+          ...(post.cover && { image: [new URL(post.cover.src, COMPANY.url).href] }),
           author: { "@type": "Person", name: post.author, jobTitle: post.authorTitle },
           publisher: { "@type": "Organization", "@id": `${COMPANY.url}/#organization`, name: COMPANY.name, url: COMPANY.url, logo: `${COMPANY.url}/icon.png` },
         }}
@@ -71,6 +65,8 @@ export default async function Page({ params }: Props) {
       <Link href="/blog" className="text-sm text-ink-soft hover:text-ink">
         ← 렛츠코딩 블로그
       </Link>
+
+      <div className="mt-6"><AuthControls slug={post.slug} /></div>
 
       <header className="mt-8 mb-10">
         <p className="text-sm font-semibold text-accent-ink">{BLOG_CATEGORIES[post.category].label}</p>
@@ -87,18 +83,16 @@ export default async function Page({ params }: Props) {
       </header>
 
       {post.cover && (
-        <Image
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
           src={post.cover.src}
           alt=""
-          width={post.cover.size.width}
-          height={post.cover.size.height}
-          sizes="(min-width: 768px) 720px, 100vw"
-          priority
+          fetchPriority="high"
           className="mb-12 w-full rounded-2xl"
         />
       )}
 
-      <ArticleBody body={post.body} />
+      <ArticleBody body={post.body} posts={posts} />
 
       <footer className="mt-16 border-t border-black/10 pt-10">
         <div className="card p-7">

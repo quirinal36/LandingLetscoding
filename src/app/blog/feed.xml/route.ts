@@ -1,13 +1,12 @@
 import { getPosts } from "@/lib/blog";
 import { COMPANY } from "@/lib/nav";
 
-/** 블로그 RSS. 빌드 때 한 번 만든다. 네이버 서치어드바이저에 RSS로도 제출할 수 있다. */
-export const dynamic = "force-static";
+/** 블로그 RSS. 요청할 때 공개 글을 조회한다. 네이버 서치어드바이저에 RSS로도 제출할 수 있다. */
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-export function GET() {
-  const posts = getPosts();
+export async function GET() {
+  const posts = await getPosts();
   const items = posts
     .map((p) => {
       const link = `${COMPANY.url}/blog/${p.slug}`;
@@ -22,7 +21,7 @@ export function GET() {
 <atom:link href="${COMPANY.url}/blog/feed.xml" rel="self" type="application/rss+xml"/>
 <description>AI 시대 코딩 교육에 대해 코딩 학원 원장이 현장에서 보고 겪은 것을 씁니다.</description>
 <language>ko</language>
-<lastBuildDate>${new Date(posts[0]?.updatedAt ?? Date.now()).toUTCString()}</lastBuildDate>
+<lastBuildDate>${new Date(posts.length ? Math.max(...posts.map((p) => Date.parse(p.updatedAt))) : Date.now()).toUTCString()}</lastBuildDate>
 ${items}
 </channel>
 </rss>`;

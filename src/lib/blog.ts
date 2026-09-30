@@ -1,29 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
-
-/*
-  블로그 — content/blog/<slug>.md 한 파일이 글 한 편이다. 빌드 때 읽어 정적 HTML로 굽는다.
-  2026.9 렛츠코딩 라운지(lounge.letscoding.kr/blog)에서 옮겨 왔고, slug를 그대로 두어 라운지가
-  /blog/<slug> → www.letscoding.kr/blog/<slug> 로 1:1 영구 이동할 수 있게 했다.
-
-  파일 모양:
-    ---
-    title: "..."            ← 값은 JSON 문자열
-    summary: "..."          ← 목록 카드·meta description·og:description
-    category: "column"      ← column(칼럼) | info(정보)
-    author: "..."
-    authorTitle: "..."
-    publishedAt: "ISO"
-    updatedAt: "ISO"
-    cover: "/blog/<slug>/1.png"   (선택)
-    coverSize: "1800x1004"        (cover가 있으면 필수)
-    ---
-    본문 — 라운지 편집기의 최소 문법을 그대로 쓴다.
-      ## 소제목 / > 인용 / 빈 줄로 문단 구분
-      ![설명](/blog/<slug>/2.png "1800x1268")   이미지 한 줄. 따옴표 안은 가로x세로
-      ``` 로 감싼 블록 — 프롬프트·코드
-*/
-
 export const BLOG_CATEGORIES = {
   column: { label: "칼럼", description: "코딩 교육 현장에서 보고 겪은 것을 원장이 직접 씁니다." },
   info: { label: "정보", description: "도구와 서비스가 실제로 어떻게 동작하는지 확인해서 정리합니다." },
@@ -33,13 +7,11 @@ export type BlogCategory = keyof typeof BLOG_CATEGORIES;
 /** 목록 맨 위에 고정하는 교육 사명 선언서. 없는 slug면 고정 배너가 나오지 않는다. */
 export const PINNED_SLUG = "why-we-teach";
 
-export type Size = { width: number; height: number };
-
 export type Segment =
   | { kind: "heading"; text: string }
   | { kind: "quote"; text: string }
   | { kind: "paragraph"; text: string }
-  | { kind: "image"; src: string; alt: string; size: Size }
+  | { kind: "image"; src: string; alt: string }
   | { kind: "code"; text: string };
 
 export type BlogPost = {
@@ -51,17 +23,10 @@ export type BlogPost = {
   authorTitle: string;
   publishedAt: string;
   updatedAt: string;
-  cover: { src: string; size: Size } | null;
+  cover: { src: string } | null;
   body: Segment[];
   readingMinutes: number;
 };
-
-const DIR = path.join(process.cwd(), "content/blog");
-
-function parseSize(value: string): Size {
-  const [width, height] = value.split("x").map(Number);
-  return { width, height };
-}
 
 const IMAGE_LINE = /^!\[(.*)\]\((\S+) "(\d+x\d+)"\)$/;
 
@@ -89,7 +54,7 @@ export function parseBody(body: string): Segment[] {
       code = [];
     } else if (image) {
       flush();
-      segments.push({ kind: "image", alt: image[1], src: image[2], size: parseSize(image[3]) });
+      segments.push({ kind: "image", alt: image[1], src: imageUrl(image[2]) });
     } else if (line.startsWith("## ")) {
       flush();
       segments.push({ kind: "heading", text: line.slice(3).trim() });
@@ -99,6 +64,7 @@ export function parseBody(body: string): Segment[] {
     } else if (line.trim() === "") flush();
     else paragraph.push(line);
   }
+  if (code) throw new Error("Unclosed blog code block");
   flush();
   return segments;
 }
@@ -109,47 +75,126 @@ function readingMinutes(body: Segment[]) {
   return Math.max(1, Math.round(chars / 500));
 }
 
-function readPost(slug: string): BlogPost {
-  const raw = fs.readFileSync(path.join(DIR, `${slug}.md`), "utf8");
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n/);
-  if (!match) throw new Error(`content/blog/${slug}.md: 머리말(---)이 없습니다`);
-  const meta: Record<string, string> = {};
-  for (const line of match[1].split("\n")) {
-    const i = line.indexOf(": ");
-    if (i > 0) meta[line.slice(0, i)] = JSON.parse(line.slice(i + 2));
+/** DB 이미지 URL은 사이트 내부 경로 또는 HTTPS만 렌더링한다. */
+function imageUrl(value: unknown): string {
+  if (typeof value !== "string" || !value || (!/^\/(?!\/)/.test(value) && !/^https:\/\//.test(value))) {
+    throw new Error("Invalid blog image URL");
   }
-  const body = parseBody(raw.slice(match[0].length));
+  return value;
+}
+
+export function decodePost(value: unknown): BlogPost {
+  if (!value || typeof value !== "object") throw new Error("Invalid blog post");
+  const row = value as Record<string, unknown>;
+  const text = (key: string) => {
+    if (typeof row[key] !== "string") throw new Error(`Invalid blog field: ${key}`);
+    return row[key] as string;
+  };
+  const slug = text("slug");
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) throw new Error("Invalid blog slug");
+  const category = text("category");
+  if (category !== "column" && category !== "info") throw new Error("Invalid blog category");
+  if (!Array.isArray(row.blocks)) throw new Error("Invalid blog blocks");
+  const body = row.blocks.flatMap((value: unknown): Segment[] => {
+    if (!value || typeof value !== "object") throw new Error("Invalid blog block");
+    const block = value as Record<string, unknown>;
+    if (block.type === "image") return [{ kind: "image", src: imageUrl(block.url), alt: typeof block.alt === "string" ? block.alt : "" }];
+    if (typeof block.content !== "string") throw new Error("Invalid blog block content");
+    if (block.type === "text") return parseBody(block.content);
+    if (block.type === "prompt") return [{ kind: "code", text: block.content }];
+    throw new Error("Unsupported blog block type");
+  });
+  const publishedAt = row.published_at ?? row.created_at;
+  const updatedAt = text("updated_at");
+  if (typeof publishedAt !== "string" || !Number.isFinite(Date.parse(publishedAt)) || !Number.isFinite(Date.parse(updatedAt))) {
+    throw new Error("Invalid blog date");
+  }
   return {
-    slug,
-    title: meta.title,
-    summary: meta.summary,
-    category: meta.category as BlogCategory,
-    author: meta.author,
-    authorTitle: meta.authorTitle,
-    publishedAt: meta.publishedAt,
-    updatedAt: meta.updatedAt,
-    cover: meta.cover ? { src: meta.cover, size: parseSize(meta.coverSize) } : null,
-    body,
-    readingMinutes: readingMinutes(body),
+    slug, title: text("title"), summary: text("summary"), category,
+    author: text("author_name"), authorTitle: text("author_title"), publishedAt, updatedAt,
+    cover: row.cover_image_url == null ? null : { src: imageUrl(row.cover_image_url) },
+    body, readingMinutes: readingMinutes(body),
   };
 }
 
-let cache: BlogPost[] | null = null;
-
-/** 발행일 최신순. */
-export function getPosts(): BlogPost[] {
-  cache ??= fs
-    .readdirSync(DIR)
-    .filter((f) => f.endsWith(".md"))
-    .map((f) => readPost(f.slice(0, -3)))
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-  return cache;
+/** 공개 글만 요청마다 읽는다. DB 장애를 빈 목록/404로 숨기지 않는다. */
+export async function getPosts(): Promise<BlogPost[]> {
+  const base = process.env.LETSCODING_LOUNGE_SUPABASE_URL;
+  const key = process.env.LETSCODING_LOUNGE_SUPABASE_ANON_KEY;
+  if (!base || !key) throw new Error("Missing blog Supabase environment variables");
+  const url = new URL("/rest/v1/blog_posts", base);
+  url.searchParams.set("select", "slug,title,summary,category,blocks,cover_image_url,author_name,author_title,published_at,created_at,updated_at");
+  url.searchParams.set("is_published", "eq.true");
+  url.searchParams.set("order", "published_at.desc.nullslast,slug.asc");
+  const posts: BlogPost[] = [];
+  // PostgREST의 응답 상한에 걸려 오래된 글이 목록·사이트맵에서 빠지지 않도록 나눠 읽는다.
+  const limit = 100;
+  for (let offset = 0; ; offset += limit) {
+    url.searchParams.set("limit", String(limit));
+    url.searchParams.set("offset", String(offset));
+    const response = await fetch(url, {
+      headers: { apikey: key, "Accept-Profile": "landing" }, cache: "no-store",
+    });
+    if (!response.ok) throw new Error(`Blog database request failed (${response.status})`);
+    const rows: unknown = await response.json();
+    if (!Array.isArray(rows)) throw new Error("Invalid blog database response");
+    posts.push(...rows.map(decodePost));
+    if (rows.length < limit) return posts;
+  }
 }
 
-export function getPost(slug: string): BlogPost | undefined {
-  return getPosts().find((p) => p.slug === slug);
+export async function getPost(slug: string): Promise<BlogPost | undefined> {
+  return (await getPosts()).find((p) => p.slug === slug);
 }
 
 export function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric", timeZone: "Asia/Seoul" });
+}
+
+export type Block = { type: "text" | "image" | "prompt"; content?: string; url?: string; alt?: string };
+export type EditorValues = {
+  slug: string; title: string; summary: string; category: "column" | "info";
+  author_name: string; author_title: string; cover_image_url: string;
+  is_published: boolean; blocks: Block[];
+};
+export type EditablePost = EditorValues & { id: string; updated_at: string };
+export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function imageURL(value: string) {
+  if (value.startsWith("/") && !value.startsWith("//") && !value.includes("\\")) return value;
+  try { if (new URL(value).protocol === "https:") return value; } catch {}
+  throw new Error("이미지는 사이트 내부 경로나 HTTPS 주소를 입력해 주세요.");
+}
+
+export function validatePost(payload: unknown) {
+  if (!payload || typeof payload !== "object") throw new Error("글 내용을 확인해 주세요.");
+  const p = payload as Record<string, unknown>;
+  const text = (key: string, max: number, required = false) => {
+    if (typeof p[key] !== "string") throw new Error("입력한 글 정보를 확인해 주세요.");
+    const value = (p[key] as string).trim();
+    if (value.length > max || (required && !value)) throw new Error(`${key}: 필수 값과 최대 길이(${max}자)를 확인해 주세요.`);
+    return value;
+  };
+  const slug = text("slug", 80, true);
+  if (slug.length < 3 || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug) || slug === "editor") throw new Error("글 주소는 3~80자의 영문 소문자·숫자·하이픈으로 입력해 주세요. editor는 사용할 수 없습니다.");
+  if (p.category !== "column" && p.category !== "info") throw new Error("글 갈래를 선택해 주세요.");
+  if (typeof p.is_published !== "boolean") throw new Error("공개 여부를 확인해 주세요.");
+  if (!Array.isArray(p.blocks) || !p.blocks.length || p.blocks.length > 100 || JSON.stringify(p.blocks).length > 300_000) throw new Error("본문은 1~100개 블록, 총 30만 자 이내로 작성해 주세요.");
+  const blocks: Block[] = p.blocks.map((b: unknown) => {
+    if (!b || typeof b !== "object") throw new Error("본문 블록을 확인해 주세요.");
+    const block = b as Record<string, unknown>;
+    if (block.type === "image" && typeof block.url === "string") {
+      if (block.alt != null && (typeof block.alt !== "string" || block.alt.length > 1000)) throw new Error("이미지 설명은 1,000자 이내로 입력해 주세요.");
+      return { type: "image", url: imageURL(block.url.trim()), alt: (block.alt as string) ?? "" };
+    }
+    if ((block.type !== "text" && block.type !== "prompt") || typeof block.content !== "string" || !block.content.trim()) throw new Error("비어 있는 본문 블록을 채우거나 삭제해 주세요.");
+    if (block.type === "text") {
+      try { parseBody(block.content); } catch { throw new Error("본문의 코드 블록 또는 이미지 문법을 확인해 주세요."); }
+    }
+    return { type: block.type, content: block.content };
+  });
+  const cover = text("cover_image_url", 4000);
+  return { slug, title: text("title", 200, true), summary: text("summary", 1000), category: p.category,
+    author_name: text("author_name", 100, true), author_title: text("author_title", 100),
+    cover_image_url: cover ? imageURL(cover) : null, is_published: p.is_published, blocks };
 }

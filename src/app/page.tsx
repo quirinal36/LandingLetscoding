@@ -20,7 +20,7 @@ import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
     1. 히어로      주제1 선언. 학생 한 명이, 스타트업이 됩니다. 아래로 실제 학생 작품 카드가 흐른다
     2. 시대        주제2. 무한한 지식의 시대를 지나 무한 실행의 시대로. 채용 사례는 블로그 활용을 위해 숨김
     기존 3번 교육 장면은 /about 두 번째 구간으로 이동.
-    4. 모습        만든다 → 다듬는다 → 자란다 → 기록하기 팝업북 (growth-stage.tsx)
+    4. 모습        만들고 → 공유하기 → 성장하고 → 기록하기 팝업북 (growth-stage.tsx)
     5. 결론        렛츠코딩 라운지. 5-1 작품 목록 · 5-2 세 축 · 5-3 하이라이트 · 5-4 한 달 영상
     6. 숫자        우리 학원의 실제 운영 수치
     7. 시작        파일럿 · 가격 · 코칭
@@ -248,7 +248,7 @@ export default function Home() {
         <Container>
           <div {...reveal()}>
             <Eyebrow>학생 한 명이 스타트업이 되는 네 단계</Eyebrow>
-            <h2 className="display text-ink-gradient mt-3 max-w-[18ch] text-[2.25rem] md:text-[4rem]">만들고, 다듬고, 자라고, 남깁니다.</h2>
+            <h2 className="display text-ink-gradient mt-3 max-w-[18ch] text-[2.25rem] md:text-[4rem]">만들고 공유하기, 성장하고 기록하기</h2>
             <p className="mt-6 max-w-[40ch] text-lg leading-relaxed text-ink-soft md:text-[1.375rem]">
               혼자 만들고 끝나지 않습니다. 친구가 써 보고, 반응하고, 투자합니다. 그 힘은 공동체 안에서 자랍니다.
             </p>
