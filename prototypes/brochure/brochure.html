@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>렛츠코딩 라운지 소개서 · 7쪽 인쇄 원본</title>
+  <title>렛츠코딩 라운지 소개서 · 8쪽 인쇄 원본</title>
   <link rel="stylesheet" href="fonts.css">
-  <!-- B 선택안 확장. 기존 자산과 현재 랜딩 내용으로 구성한 가로 A4 7쪽 인쇄 원본. -->
+  <!-- B 선택안 확장. 기존 자산과 현재 랜딩 내용으로 구성한 가로 A4 8쪽 인쇄 원본. -->
   <style>
     :root {
       --ink: #1b2333;
@@ -157,12 +157,6 @@
     .proof dd { margin: 1mm 0 0; color: var(--blue); font-size: 36px; line-height: 1.2; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
     .proof dd span { margin-left: 1mm; font-size: 16px; font-weight: 550; }
     .proof-source { margin-top: 3mm; color: var(--muted); font-size: 13px; line-height: 1.4; }
-    .timing-intro { max-width: 190mm; margin-top: 12mm; font-size: 20px; line-height: 1.65; }
-    .timing-examples { margin-top: 12mm; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8mm; }
-    .timing-example { border-top: .3mm solid var(--blue); padding-top: 4mm; }
-    .timing-example h3 { font-size: 25px; }
-    .timing-example p { margin-top: 3mm; font-size: 18px; line-height: 1.55; }
-    .timing-close { margin-top: 13mm; color: var(--blue); font-size: 23px; line-height: 1.55; font-weight: 600; }
     .start-options { margin-top: 8mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
     .start-option { border-top: .3mm solid var(--blue); padding-top: 3mm; }
     .start-option .kicker { font-size: 14px; margin-bottom: 2mm; }
@@ -179,6 +173,27 @@
     .qr-block img { width: 28mm; height: 28mm; }
     .qr-block p { margin-top: 2mm; font-size: 13px; line-height: 1.45; color: var(--muted); }
     .edition { font-size: 12px; color: var(--muted); }
+    .lounge-learning { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; margin-top: 8mm; }
+    .lounge-learning > div { border-top: .3mm solid var(--blue); padding-top: 4mm; }
+    .lounge-learning h3 { font-size: 22px; min-height: 17mm; }
+    .lounge-learning p { font-size: 18px; line-height: 1.6; }
+    .lounge-bridge { margin-top: 8mm; padding: 5mm 8mm; background: #e9edf3; display: flex; align-items: center; justify-content: space-between; gap: 6mm; font-size: 25px; }
+    .lounge-bridge b { color: var(--blue); font-weight: 500; }
+    .lounge-bridge strong { color: var(--blue); font-size: 29px; font-weight: 650; }
+    .lounge-outcomes { margin-top: 5mm; font-size: 20px; line-height: 1.7; color: var(--muted); }
+    .lounge-supply { display: grid; grid-template-columns: 1fr 1fr; gap: 12mm; margin-top: 7mm; align-items: center; }
+    .lounge-ideas > div { border-top: .3mm solid var(--line); padding-top: 4mm; }
+    .lounge-ideas > div + div { margin-top: 7mm; }
+    .lounge-ideas h3 { font-size: 24px; }
+    .lounge-ideas p { font-size: 18px; line-height: 1.65; margin-top: 3mm; }
+    .lounge-five { padding: 4mm 8mm; background: #e9edf3; }
+    .lounge-five p { font-size: 17px; line-height: 1.7; }
+    .lounge-five strong { display: block; font-size: 130px; color: var(--blue); font-weight: 650; line-height: 1.1; letter-spacing: -.07em; margin: 2mm 0; }
+    .lounge-five strong span { font-size: 23px; letter-spacing: -.02em; margin-left: 4mm; }
+    .lounge-repeat { list-style: none; padding: 0; margin: 6mm 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm; }
+    .lounge-repeat li { border-top: .3mm solid var(--blue); padding-top: 4mm; }
+    .lounge-repeat span { display: block; font-size: 15px; color: var(--blue); margin-bottom: 2mm; }
+    .lounge-repeat strong { font-size: 21px; font-weight: 600; }
     @page { size: A4 landscape; margin: 0; }
     @media print {
       html, body { margin: 0; padding: 0; background: #fff; }
@@ -295,7 +310,59 @@
     <footer class="page-foot"><p>새 문제 → 제작과 기록 → 게시와 소개 → 다음 도전</p><p class="page-number">3</p></footer>
   </section>
 
-  <section class="sheet" id="page4" data-page="04" aria-label="소개서 4쪽 라운지 기능">
+  <section class="sheet" id="page4" data-page="04" aria-label="소개서 4쪽 실제 작품과 활동">
+    <header class="page-head">
+      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
+      <p class="service-name">LETSCODING LOUNGE</p>
+    </header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">실제 작품과 활동</p><h2>아이디어가 작품과<br>기록으로 남습니다.</h2></div>
+      <p class="body-intro">게임, 웹사이트, 생활 도구까지.<br>만든 작품을 공개하고, 서로의 작품을 쓰며 반응을 주고받습니다.</p>
+    </div>
+    <div class="public-works">
+      <p class="evidence-label">라운지 공개 작품 예시 · 공개 사용이 허용된 나나쌤 작품</p>
+      <div class="work-strip">
+        <figure><img src="../../public/landing/works/ten-pang.webp" alt="텐팡 숫자 게임 작품 썸네일"><figcaption>텐팡 · 웹 게임</figcaption></figure>
+        <figure><img src="../../public/landing/works/image-editor.webp" alt="이미지 편집기 작품 썸네일"><figcaption>이미지 편집기 · 웹사이트</figcaption></figure>
+        <figure><img src="../../public/landing/works/songpyeon.webp" alt="뀨의 송편 가게 작품 썸네일"><figcaption>뀨의 송편 가게 · 웹 게임</figcaption></figure>
+      </div>
+    </div>
+    <dl class="proof" aria-label="라운지 전체 공개 작품 운영 실측">
+      <div><dt>공개된 학생 작품</dt><dd>224<span>건</span></dd></div>
+      <div><dt>작품을 올린 사람</dt><dd>45<span>명</span></dd></div>
+      <div><dt>작품 조회</dt><dd>8,689<span>회</span></dd></div>
+      <div><dt>작품에 달린 댓글</dt><dd>419<span>개</span></dd></div>
+    </dl>
+    <p class="proof-source">렛츠코딩 라운지 전체 공개 작품 · 2026.4.6 – 9.25 등록분 · 2026.9.28 집계</p>
+    <footer class="page-foot"><p>작품과 활동 기록은 학생의 포트폴리오에 쌓입니다.</p><p class="page-number">4</p></footer>
+  </section>
+
+  <section class="sheet" id="page5" data-page="05" aria-label="소개서 5쪽 라운지로 이어지는 수업">
+    <header class="page-head"><div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div><p class="service-name">LETSCODING LOUNGE</p></header>
+    <div class="body-lead grid"><div class="body-title"><p class="kicker">렛츠코딩 라운지 · 기존 교육에서 확장</p><h2>다음 달도, 그다음 달도.<br>이어지는 프로젝트 수업.</h2></div><p class="body-intro">지금 가르치는 코딩이 출발점입니다.<br>AI와 바이브코딩으로 학생이 만들고 싶은 작품에 도전합니다.</p></div>
+    <div class="lounge-learning">
+      <div><h3>로블록스 · Lua</h3><p>모델링과 코딩에서,<br>나만의 게임으로.</p></div>
+      <div><h3>파이썬 · 알고리즘</h3><p>문법과 문제 풀이에서,<br>직접 쓰는 프로그램으로.</p></div>
+      <div><h3>웹 개발</h3><p>따라 만드는 실습에서,<br>나만의 웹 작품으로.</p></div>
+      <div><h3>다양한 코딩교육 · 교구</h3><p>익숙한 배움을,<br>새로운 아이디어의 출발점으로.</p></div>
+    </div>
+    <div class="lounge-bridge"><span>배운 코딩</span><b aria-hidden="true">＋</b><span>AI · 바이브코딩</span><b aria-hidden="true">→</b><strong>나만의 작품</strong></div>
+    <p class="lounge-outcomes">로블록스 게임부터 웹게임, 웹사이트, 인터랙티브 작품까지.<br>공유하고 함께 플레이하며, 만드는 과정과 경험을 다음 수업으로 이어갑니다.</p>
+    <footer class="page-foot"><p>지금까지 배운 것이 끝이 아니라, 다음 프로젝트의 출발점이 됩니다.</p><p class="page-number">5</p></footer>
+  </section>
+
+  <section class="sheet" id="page6" data-page="06" aria-label="소개서 6쪽 매달 이어지는 프로젝트 주제">
+    <header class="page-head"><div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div><p class="service-name">LETSCODING LOUNGE</p></header>
+    <div class="body-lead grid"><div class="body-title"><p class="kicker">렛츠코딩 라운지 · 매달 이어지는 주제</p><h2>다음 프로젝트의 주제,<br>혼자 고민하지 마세요.</h2></div><p class="body-intro">학생의 아이디어가 막히는 날에도,<br>라운지의 이달의 문제에서<br>다음 수업을 시작할 수 있습니다.</p></div>
+    <div class="lounge-supply">
+      <div class="lounge-ideas"><div><h3>학생의 아이디어와 열정</h3><p>직접 만들고 싶은 것, 친구와 함께 즐기고 싶은 재미.</p></div><div><h3>지역사회의 불편과 문제</h3><p>학교와 동네의 작은 불편, 코딩으로 해결하고 싶은 일.</p></div></div>
+      <div class="lounge-five"><p>라운지가 제공하는 이달의 문제</p><strong>5<span>개 / 매달</span></strong><p>주제를 고르고, 우리 반의 프로젝트로.<br>다음 달에도 새로운 문제 5개가 찾아옵니다.</p></div>
+    </div>
+    <ol class="lounge-repeat"><li><span>이번 달</span><strong>만들고 · 공유하고</strong></li><li><span>다음 달</span><strong>새 주제에 경험 더하기</strong></li><li><span>그다음 달</span><strong>쌓인 경험으로 다시 도전</strong></li></ol>
+    <footer class="page-foot"><p>새로운 주제 → 제작과 공유 → 피드백과 기록 → 다음 프로젝트</p><p class="page-number">6</p></footer>
+  </section>
+
+  <section class="sheet" id="page7" data-page="07" aria-label="소개서 7쪽 라운지 기능">
     <header class="page-head">
       <div class="brand">
         <img src="../../src/assets/logo.png" alt="렛츠코딩 로고">
@@ -344,54 +411,11 @@
 
     <footer class="page-foot cycle-foot">
       <p class="cycle">만들기 → 공유하기 → 반응과 투자 → 다음 작품</p>
-      <p class="pilot">4주 무료 파일럿 · 반 하나로 시작할 수 있습니다.<span class="body-page-number">4</span></p>
+      <p class="pilot">4주 무료 파일럿 · 반 하나로 시작할 수 있습니다.<span class="body-page-number">7</span></p>
     </footer>
   </section>
-  <section class="sheet" id="page5" data-page="05" aria-label="소개서 5쪽 실제 작품과 활동">
-    <header class="page-head">
-      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
-      <p class="service-name">LETSCODING LOUNGE</p>
-    </header>
-    <div class="body-lead grid">
-      <div class="body-title"><p class="kicker">실제 작품과 활동</p><h2>아이디어가 작품과<br>기록으로 남습니다.</h2></div>
-      <p class="body-intro">게임, 웹사이트, 생활 도구까지.<br>만든 작품을 공개하고, 서로의 작품을 쓰며 반응을 주고받습니다.</p>
-    </div>
-    <div class="public-works">
-      <p class="evidence-label">라운지 공개 작품 예시 · 공개 사용이 허용된 나나쌤 작품</p>
-      <div class="work-strip">
-        <figure><img src="../../public/landing/works/ten-pang.webp" alt="텐팡 숫자 게임 작품 썸네일"><figcaption>텐팡 · 웹 게임</figcaption></figure>
-        <figure><img src="../../public/landing/works/image-editor.webp" alt="이미지 편집기 작품 썸네일"><figcaption>이미지 편집기 · 웹사이트</figcaption></figure>
-        <figure><img src="../../public/landing/works/songpyeon.webp" alt="뀨의 송편 가게 작품 썸네일"><figcaption>뀨의 송편 가게 · 웹 게임</figcaption></figure>
-      </div>
-    </div>
-    <dl class="proof" aria-label="라운지 전체 공개 작품 운영 실측">
-      <div><dt>공개된 학생 작품</dt><dd>224<span>건</span></dd></div>
-      <div><dt>작품을 올린 사람</dt><dd>45<span>명</span></dd></div>
-      <div><dt>작품 조회</dt><dd>8,689<span>회</span></dd></div>
-      <div><dt>작품에 달린 댓글</dt><dd>419<span>개</span></dd></div>
-    </dl>
-    <p class="proof-source">렛츠코딩 라운지 전체 공개 작품 · 2026.4.6 – 9.25 등록분 · 2026.9.28 집계</p>
-    <footer class="page-foot"><p>작품과 활동 기록은 학생의 포트폴리오에 쌓입니다.</p><p class="page-number">5</p></footer>
-  </section>
 
-  <section class="sheet" id="page6" data-page="06" aria-label="소개서 6쪽 라운지를 시작할 때">
-    <header class="page-head">
-      <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
-      <p class="service-name">LETSCODING LOUNGE</p>
-    </header>
-    <div class="body-lead grid">
-      <div class="body-title"><p class="kicker">렛츠코딩 라운지를 시작할 때</p><h2>배운 것을, 나만의<br>작품으로 만들 시간.</h2></div>
-    </div>
-    <p class="timing-intro">렛츠코딩 라운지는 지금 사용하고 계신 교구나 교재를 대체하려는 것이 아닙니다. 기존 수업에서 배운 내용을 학생 자신의 아이디어로 이어가는 공간입니다.</p>
-    <div class="timing-examples">
-      <div class="timing-example"><h3>파이썬 수업 다음에는</h3><p>파이썬 알고리즘 자격증을 준비하며 익힌 문법으로 나만의 프로그램을 만들 때.</p></div>
-      <div class="timing-example"><h3>로블록스 실습 다음에는</h3><p>로블록스 스튜디오 교재와 실습을 마치고 나만의 게임을 만드는 프로젝트 수업을 시작할 때.</p></div>
-    </div>
-    <p class="timing-close">배운 대로 따라 만드는 것을 넘어, 학생 스스로 상상하고 구현해 볼 때가<br>렛츠코딩 라운지를 시작하기 가장 좋은 순간입니다.</p>
-    <footer class="page-foot"><p>기존 수업에서 배운 내용을 학생 자신의 아이디어로.</p><p class="page-number">6</p></footer>
-  </section>
-
-  <section class="sheet" id="page7" data-page="07" aria-label="소개서 7쪽 도입과 연락처">
+  <section class="sheet" id="page8" data-page="08" aria-label="소개서 8쪽 도입과 연락처">
     <header class="page-head">
       <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
       <p class="service-name">LETSCODING LOUNGE</p>
@@ -423,8 +447,7 @@
         <p><a href="https://lounge.letscoding.kr/works">lounge.letscoding.kr/<br>works</a></p>
       </div>
     </div>
-    <footer class="page-foot"><p><span class="edition">2026.09 제작 · 도입 조건은 상담 시 확인하실 수 있습니다.</span></p><p class="page-number">7</p></footer>
+    <footer class="page-foot"><p><span class="edition">2026.09 제작 · 도입 조건은 상담 시 확인하실 수 있습니다.</span></p><p class="page-number">8</p></footer>
   </section>
-
 </body>
 </html>

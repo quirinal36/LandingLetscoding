@@ -64,6 +64,10 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## 프로젝트 문서와 이미지
 
+- 브로셔 웹 경로: `/brochure`. 8쪽을 세로로 이어 보고 `인쇄하기`로 가로 A4 한 쪽씩 출력합니다. `PDF 다운로드`는 `/brochure/pdf`입니다.
+- 인쇄 원본은 `prototypes/brochure/brochure.html`, PDF는 `output/pdf/letscoding-lounge-brochure.pdf`입니다. 배포 시 원본으로 정적 경로를 생성하며 별도 앱 헤더는 포함하지 않습니다.
+- 브로셔 검증: Playwright 경로를 `BROCHURE_PLAYWRIGHT`, Chrome 경로를 `BROCHURE_CHROME`, 실행 중인 페이지 주소를 `BROCHURE_URL`로 지정하고 `node prototypes/brochure/check.cjs`를 실행합니다.
+
 - [랜딩 섹션 구성](docs/LANDING-PLAN.md) · [초기 요구사항](docs/PRD.md) · [디자인 시스템](docs/DESIGN.md)
 - 장면 기획: [성장](docs/GROWTH-SCENE-PLAN.md), [진화](docs/EVOLVE-SCENE-PLAN.md), [히어로 모션](docs/HERO-MOTION-PLAN.md), [히어로 영상](docs/HERO-VIDEO-PLAN.md)
 - 교육 모델: [라운지 확장 모델](docs/lounge_model.md), [경제 모델 근거](docs/ECONOMY-RESEARCH.md), [경제 모델 그림](docs/ECONOMY-FIGURE-PLAN.md)
