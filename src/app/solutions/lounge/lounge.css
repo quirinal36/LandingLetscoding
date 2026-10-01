@@ -1,0 +1,171 @@
+.lounge-solution { background: #e9edf3; color: #1b2333; }
+.lounge-solution .ls-container { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+.lounge-solution .ls-scene { min-height: calc(100svh - 72px); padding: 120px 0; display: flex; align-items: center; scroll-margin-top: 72px; }
+.lounge-solution .ls-white { background: #fff; }
+.lounge-solution .ls-kicker { font-size: 17px; font-weight: 650; color: #2a53b0; margin-bottom: 30px; }
+.lounge-solution h1, .lounge-solution h2, .lounge-solution h3 { letter-spacing: -.045em; font-weight: 720; text-wrap: balance; }
+.lounge-solution h1 { font-size: clamp(54px, 6.1vw, 88px); line-height: 1.14; }
+.lounge-solution h2 { font-size: clamp(42px, 4.7vw, 68px); line-height: 1.22; }
+.lounge-solution em { font-style: normal; color: #3b6fe0; }
+.lounge-solution .ls-lead { font-size: 24px; line-height: 1.8; color: #55607a; margin-top: 34px; }
+.lounge-solution .ls-text-link { display: inline-flex; align-items: center; gap: 30px; font-size: 19px; font-weight: 650; min-height: 48px; color: #2a53b0; }
+.lounge-solution .ls-text-link:focus-visible, .lounge-solution button:focus-visible, .lounge-solution summary:focus-visible { outline: 3px solid #3b6fe0; outline-offset: 6px; }
+.lounge-solution .ls-hero { padding-block: 88px 64px; }
+.lounge-solution .ls-hero .ls-text-link { margin-top: 30px; }
+.lounge-solution .ls-mobile-break { display: none; }
+.lounge-solution .ls-month-line { display: flex; align-items: center; gap: 24px; max-width: 920px; margin-top: 72px; font-size: 22px; font-weight: 600; color: #55607a; }
+.lounge-solution .ls-month-line i { flex: 1; height: 1px; background: #9daeca; }
+.lounge-solution .ls-month-line span:first-child { color: #2a53b0; }
+.lounge-solution .ls-month-line b { color: #3b6fe0; font-size: 32px; }
+.lounge-solution .ls-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.lounge-solution .ls-learning-list > div { padding: 26px 0; border-bottom: 1px solid #d5dbe4; }
+.lounge-solution .ls-learning-list > div:first-child { border-top: 1px solid #d5dbe4; }
+.lounge-solution .ls-learning-list span { font-size: 30px; font-weight: 650; letter-spacing: -.035em; }
+.lounge-solution .ls-learning-list p { font-size: 20px; line-height: 1.7; color: #55607a; margin-top: 8px; }
+.lounge-solution .ls-learning-list .ls-learning-result { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; font-size: 18px; margin-top: 30px; }
+.lounge-solution .ls-learning-result strong { color: #2a53b0; font-size: 26px; }
+.lounge-solution .ls-source-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 64px; }
+.lounge-solution .ls-source-grid article { border-top: 1px solid #aeb9ca; padding-top: 30px; }
+.lounge-solution .ls-source-number { font-size: 18px; color: #2a53b0; }
+.lounge-solution .ls-source-grid h3 { font-size: 32px; margin-top: 18px; }
+.lounge-solution .ls-source-grid p { font-size: 23px; color: #55607a; line-height: 1.9; margin-top: 24px; }
+.lounge-solution .ls-source-grid strong { display: block; font-size: 23px; font-weight: 600; margin-top: 30px; }
+.lounge-solution .ls-blue { background: #3b6fe0; color: white; }
+.lounge-solution .ls-blue .ls-kicker, .lounge-solution .ls-blue .ls-lead { color: white; }
+.lounge-solution .ls-monthly-hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: center; }
+.lounge-solution .ls-five { display: flex; flex-direction: column; align-items: center; }
+.lounge-solution .ls-five > span { font-size: 24px; }
+.lounge-solution .ls-five strong { font-size: clamp(190px, 20vw, 280px); font-weight: 700; letter-spacing: -.08em; line-height: 1.12; }
+.lounge-solution .ls-five small { font-size: 42px; letter-spacing: -.04em; margin-left: 20px; }
+.lounge-solution .ls-five-problems { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 64px; }
+.lounge-solution .ls-five-problems > div { border-top: 1px solid #ffffff80; padding-top: 22px; }
+.lounge-solution .ls-five-problems span { font-size: 18px; display: block; }
+.lounge-solution .ls-five-problems b { display: block; font-size: 48px; font-weight: 600; margin-top: 14px; }
+.lounge-solution .ls-monthly-note { font-size: 23px; line-height: 1.7; margin-top: 48px; display: flex; justify-content: space-between; gap: 20px; }
+.lounge-solution .ls-months { margin-top: 64px; }
+.lounge-solution button { cursor: pointer; font: inherit; }
+.lounge-solution .ls-month-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.lounge-solution .ls-month-picker button { text-align: left; background: #e9edf3; border: 1px solid transparent; border-radius: 10px; padding: 24px 28px; font-size: 25px; font-weight: 650; }
+.lounge-solution .ls-month-picker button span { display: block; font-size: 17px; font-weight: 450; margin-top: 10px; color: #55607a; }
+.lounge-solution .ls-month-picker button[aria-pressed="true"] { background: #1b2333; color: white; }
+.lounge-solution .ls-month-picker button[aria-pressed="true"] span { color: #d5dbe4; }
+.lounge-solution .ls-project { margin-top: 40px; border: 1px solid #d5dbe4; border-radius: 12px; overflow: hidden; }
+.lounge-solution .ls-project-heading { font-size: 24px; font-weight: 650; padding: 28px 36px; border-bottom: 1px solid #d5dbe4; }
+.lounge-solution .ls-stage-picker { display: grid; grid-template-columns: repeat(4, 1fr); padding: 24px 36px; gap: 24px; }
+.lounge-solution .ls-stage-picker button { border: 0; border-bottom: 2px solid #d5dbe4; background: transparent; text-align: left; padding: 12px 0 16px; font-size: 24px; font-weight: 650; position: relative; }
+.lounge-solution .ls-stage-picker span { display: block; font-size: 16px; font-weight: 450; margin-bottom: 12px; color: #55607a; }
+.lounge-solution .ls-stage-picker i { position: absolute; right: -20px; bottom: 17px; font-style: normal; color: #3b6fe0; }
+.lounge-solution .ls-stage-picker button:last-child i { display: none; }
+.lounge-solution .ls-stage-picker button[aria-pressed="true"] { border-color: #3b6fe0; color: #2a53b0; }
+.lounge-solution .ls-stage-detail { padding: 52px 48px; background: #f3f6fc; display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 56px; min-height: 360px; }
+.lounge-solution .ls-stage-word { font-size: clamp(52px, 6vw, 82px); color: #3b6fe0; letter-spacing: -.065em; font-weight: 750; overflow-wrap: normal; }
+.lounge-solution .ls-stage-detail h3 { font-size: 40px; line-height: 1.3; }
+.lounge-solution .ls-stage-detail p { font-size: 22px; line-height: 1.85; margin-top: 24px; color: #55607a; }
+.lounge-solution .ls-next { width: 100%; text-align: left; background: white; border: 0; border-top: 1px solid #d5dbe4; padding: 24px 36px; font-size: 19px; font-weight: 650; color: #2a53b0; display: flex; justify-content: space-between; }
+.lounge-solution .ls-records { list-style: none; counter-reset: record; }
+.lounge-solution .ls-records li { position: relative; padding: 28px 0 32px 48px; border-bottom: 1px solid #aeb9ca; counter-increment: record; }
+.lounge-solution .ls-records li::before { content: "0" counter(record); position: absolute; left: 0; top: 31px; font-size: 16px; color: #2a53b0; }
+.lounge-solution .ls-records span { display: block; color: #55607a; font-size: 18px; margin-bottom: 14px; }
+.lounge-solution .ls-records strong { font-size: 27px; font-weight: 650; line-height: 1.5; }
+.lounge-solution .ls-proof { display: grid; grid-template-columns: 1fr 1fr; gap: 56px 80px; margin-top: 72px; }
+.lounge-solution .ls-proof > div { border-top: 1px solid #d5dbe4; padding-top: 22px; }
+.lounge-solution .ls-proof dd { font-size: 72px; font-weight: 700; letter-spacing: -.045em; line-height: 1.3; }
+.lounge-solution .ls-proof dd span { font-size: 26px; font-weight: 450; margin-left: 8px; }
+.lounge-solution .ls-proof dt { color: #55607a; font-size: 23px; margin-top: 10px; }
+.lounge-solution .ls-proof-date { font-size: 16px; color: #55607a; line-height: 1.7; margin: 36px 0 20px; }
+.lounge-solution .ls-feature-list { margin-top: 64px; }
+.lounge-solution .ls-feature-list details { border-bottom: 1px solid #aeb9ca; }
+.lounge-solution .ls-feature-list summary { display: flex; justify-content: space-between; gap: 24px; cursor: pointer; padding: 30px 0; font-size: 27px; font-weight: 600; list-style: none; }
+.lounge-solution summary::-webkit-details-marker { display: none; }
+.lounge-solution .ls-feature-list summary span { color: #2a53b0; }
+.lounge-solution details[open] summary span { transform: rotate(45deg); }
+.lounge-solution .ls-feature-list ul { padding: 0 0 36px 25px; max-width: 960px; list-style: disc; font-size: 21px; color: #55607a; line-height: 1.8; }
+.lounge-solution .ls-feature-list li + li { margin-top: 14px; }
+.lounge-solution .ls-cta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 24px 36px; margin-top: 36px; }
+.lounge-solution .ls-cta-row .control { font-size: 20px; min-height: 64px; padding-inline: 30px; }
+.lounge-solution .ls-start .ls-container { max-width: 1100px; }
+.lounge-solution .ls-start section { margin-top: 88px; }
+.lounge-solution .ls-start section h2, .lounge-solution .ls-questions h2 { font-size: 38px; }
+.lounge-solution .ls-start .card { background: #e9edf3; padding: 32px; }
+.lounge-solution .ls-start .card dt { font-size: 18px; }
+.lounge-solution .ls-start .card dd { font-size: 30px; margin-top: 18px; }
+.lounge-solution .ls-start .card dd:last-child { font-size: 19px; line-height: 1.8; }
+.lounge-solution .ls-start li.card { margin-bottom: 16px; font-size: 22px; }
+.lounge-solution .ls-start li.card > span:last-child > span:last-child { font-size: 20px; margin-top: 14px; }
+.lounge-solution .ls-questions .ls-container { max-width: 1100px; }
+.lounge-solution .ls-questions section { margin-top: 0; }
+.lounge-solution .ls-questions details { padding: 28px 32px; }
+.lounge-solution .ls-questions summary { font-size: 23px; line-height: 1.5; }
+.lounge-solution .ls-questions details p { font-size: 20px; line-height: 1.8; margin-top: 24px; }
+
+@media (max-width: 1000px) {
+  .lounge-solution .ls-container { width: calc(100% - 64px); }
+  .lounge-solution .ls-split { grid-template-columns: 1fr; gap: 56px; }
+  .lounge-solution .ls-stage-detail { grid-template-columns: 1fr; gap: 24px; }
+  .lounge-solution .ls-stage-word { font-size: 54px; }
+  .lounge-solution .ls-monthly-hero { gap: 36px; }
+  .lounge-solution .ls-five strong { font-size: 190px; }
+  .lounge-solution .ls-source-grid { gap: 36px; }
+}
+@media (max-width: 600px) {
+  .lounge-solution .ls-container { width: calc(100% - 40px); }
+  .lounge-solution .ls-scene { padding: 80px 0; min-height: calc(100svh - 64px); scroll-margin-top: 64px; }
+  .lounge-solution .ls-hero { padding: 56px 0 48px; }
+  .lounge-solution .ls-kicker { font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+  .lounge-solution h1 { font-size: clamp(38px, 10.7vw, 58px); line-height: 1.2; }
+  .lounge-solution h2 { font-size: clamp(32px, 9.2vw, 46px); line-height: 1.3; }
+  .lounge-solution .ls-lead { font-size: 19px; line-height: 1.9; margin-top: 28px; }
+  .lounge-solution .ls-mobile-break { display: initial; }
+  .lounge-solution .ls-text-link { font-size: 17px; gap: 16px; }
+  .lounge-solution .ls-month-line { gap: 12px; font-size: 16px; margin-top: 48px; }
+  .lounge-solution .ls-month-line b { font-size: 22px; }
+  .lounge-solution .ls-learning-list span { font-size: 25px; }
+  .lounge-solution .ls-learning-list p { font-size: 18px; }
+  .lounge-solution .ls-learning-list .ls-learning-result { font-size: 17px; }
+  .lounge-solution .ls-source-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
+  .lounge-solution .ls-source-grid h3 { font-size: 27px; }
+  .lounge-solution .ls-source-grid p, .lounge-solution .ls-source-grid strong { font-size: 20px; }
+  .lounge-solution .ls-monthly-hero { grid-template-columns: 1fr; gap: 48px; }
+  .lounge-solution .ls-five { align-items: flex-start; }
+  .lounge-solution .ls-five > span { font-size: 20px; }
+  .lounge-solution .ls-five strong { font-size: 180px; }
+  .lounge-solution .ls-five small { font-size: 36px; }
+  .lounge-solution .ls-five-problems { gap: 12px; margin-top: 48px; }
+  .lounge-solution .ls-five-problems span { font-size: 14px; }
+  .lounge-solution .ls-five-problems b { font-size: 30px; }
+  .lounge-solution .ls-monthly-note { font-size: 19px; margin-top: 32px; }
+  .lounge-solution .ls-months { margin-top: 48px; }
+  .lounge-solution .ls-month-picker { gap: 8px; }
+  .lounge-solution .ls-month-picker button { padding: 18px 10px; font-size: 18px; }
+  .lounge-solution .ls-month-picker button span { font-size: 14px; line-height: 1.6; }
+  .lounge-solution .ls-project { margin-top: 24px; }
+  .lounge-solution .ls-project-heading { padding: 22px; font-size: 20px; line-height: 1.6; }
+  .lounge-solution .ls-stage-picker { padding: 18px 22px; gap: 18px; grid-template-columns: 1fr 1fr; }
+  .lounge-solution .ls-stage-picker button { font-size: 21px; }
+  .lounge-solution .ls-stage-picker i { display: none; }
+  .lounge-solution .ls-stage-detail { padding: 32px 22px; min-height: 440px; }
+  .lounge-solution .ls-stage-word { font-size: 48px; }
+  .lounge-solution .ls-stage-detail h3 { font-size: 30px; }
+  .lounge-solution .ls-stage-detail p { font-size: 19px; line-height: 1.8; }
+  .lounge-solution .ls-next { padding: 22px; font-size: 18px; }
+  .lounge-solution .ls-records li { padding-left: 36px; }
+  .lounge-solution .ls-records strong { font-size: 22px; }
+  .lounge-solution .ls-proof { gap: 32px 20px; margin-top: 48px; }
+  .lounge-solution .ls-proof dd { font-size: 42px; }
+  .lounge-solution .ls-proof dd span { font-size: 20px; }
+  .lounge-solution .ls-proof dt { font-size: 18px; }
+  .lounge-solution .ls-proof-date { font-size: 14px; }
+  .lounge-solution .ls-feature-list { margin-top: 48px; }
+  .lounge-solution .ls-feature-list summary { font-size: 23px; line-height: 1.5; }
+  .lounge-solution .ls-feature-list ul { font-size: 19px; padding-left: 20px; }
+  .lounge-solution .ls-cta-row .control { width: 100%; font-size: 19px; }
+  .lounge-solution .ls-start section { margin-top: 64px; }
+  .lounge-solution .ls-start section h2, .lounge-solution .ls-questions h2 { font-size: 30px; }
+  .lounge-solution .ls-start .card { padding: 24px; }
+  .lounge-solution .ls-start .card dd { font-size: 28px; }
+  .lounge-solution .ls-start li.card { font-size: 21px; }
+  .lounge-solution .ls-start li.card > span:last-child > span:last-child { font-size: 19px; }
+  .lounge-solution .ls-questions details { padding: 24px; }
+  .lounge-solution .ls-questions summary { font-size: 20px; }
+  .lounge-solution .ls-questions details p { font-size: 19px; }
+}

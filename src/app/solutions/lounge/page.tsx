@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Faq, Features, OfferCards, Section, Steps, type Qa } from "@/components/product";
+import { Faq, OfferCards, Section, Steps, type Qa } from "@/components/product";
 import { ButtonLink } from "@/components/ui";
 import { PROOF, PROOF_ASOF } from "@/lib/offer";
+import { ProjectMonths } from "./project-months";
+import "./lounge.css";
 
 /* 사실 출처: yudanah/letscoding_lounge 저장소와 운영 DB(2026.9.28 anon 집계). 코드에 없는 기능·효과는 쓰지 않는다. */
 
@@ -106,54 +108,70 @@ const FAQ: Qa[] = [
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
-      <p className="text-sm font-semibold text-accent-ink">솔루션</p>
-      <h1 className="mt-2 text-3xl font-semibold tracking-[-0.025em] md:text-4xl">렛츠코딩 라운지</h1>
-      <div className="mt-6 space-y-4 leading-relaxed">
-        <h2 className="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">배운 것을, 나만의 작품으로 만들 시간.</h2>
-        <p>렛츠코딩 라운지는 지금 사용하고 계신 교구나 교재를 대체하려는 것이 아닙니다. 기존 수업에서 배운 내용을 학생 자신의 아이디어로 이어가는 공간입니다.</p>
-        <p>파이썬 알고리즘 자격증을 준비하며 익힌 문법으로 나만의 프로그램을 만들 때, 로블록스 스튜디오 교재와 실습을 마치고 나만의 게임을 만드는 프로젝트 수업을 시작할 때.</p>
-        <p className="font-semibold">배운 대로 따라 만드는 것을 넘어, 학생 스스로 상상하고 구현해 볼 때가 렛츠코딩 라운지를 시작하기 가장 좋은 순간입니다.</p>
-      </div>
-      <p className="mt-4 max-w-[46ch] text-lg leading-relaxed text-ink-soft">
-        학생 작품을 링크로 공개하고 쌓아 두는 코딩학원용 플랫폼입니다. 수업에서 만든 웹 게임, 웹사이트, 로블록스, 블록 코딩 작품을
-        올리면 공개 주소가 생기고, 친구와 학부모가 휴대폰에서 바로 실행해 봅니다.
-      </p>
-      <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <ButtonLink href="/seminar/inquiry" tone="accent" className="pill">
-          4주 무료 파일럿 신청
-        </ButtonLink>
-        <a href={`${LOUNGE}/works`} target="_blank" rel="noopener" className="link-chevron">
-          실제 라운지 둘러보기
-        </a>
-      </div>
+    <div className="lounge-solution">
+      {/* C안: 매달 이어지는 수업. 각 장면은 하나의 메시지만 다룬다. */}
+      <section className="ls-scene ls-hero" aria-labelledby="lounge-title">
+        <div className="ls-container">
+          <p className="ls-kicker">렛츠코딩 라운지 · 코딩학원을 위한 솔루션</p>
+          <h1 id="lounge-title">다음 달도,<br />그다음 달도.<br /><em>이어지는<br className="ls-mobile-break" /> 프로젝트 수업.</em></h1>
+          <p className="ls-lead">지금 가르치는 코딩을 출발점으로.<br />새로운 주제와 만드는 경험이<br className="ls-mobile-break" /> 우리 학원의 다음 수업이 됩니다.</p>
+          <a className="ls-text-link" href="#learning">수업이 이어지는 흐름 살펴보기 <span aria-hidden="true">↓</span></a>
+          <div className="ls-month-line" aria-label="이번 달에서 다음 달, 그다음 달로 이어지는 프로젝트 수업"><span>이번 달</span><i aria-hidden="true" /><span>다음 달</span><i aria-hidden="true" /><span>그다음 달</span><b aria-hidden="true">→</b></div>
+        </div>
+      </section>
 
-      <dl className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-        {PROOF.map((p) => (
-          <div key={p.label} className="card p-5">
-            <dd className="text-2xl font-semibold tabular-nums">
-              {p.value.toLocaleString("ko-KR")}
-              <span className="ml-0.5 text-base text-ink-soft">{p.unit}</span>
-            </dd>
-            <dt className="mt-1 text-sm text-ink-soft">{p.label}</dt>
+      <section id="learning" className="ls-scene ls-white" aria-labelledby="learning-title">
+        <div className="ls-container ls-split">
+          <div><p className="ls-kicker">01 · 지금의 교육에서 출발</p><h2 id="learning-title">무엇을 배웠든,<br />어떤 교구를 쓰든.<br /><em>그다음이 있습니다.</em></h2><p className="ls-lead">지금까지 배운 것을 활용해<br />학생이 만들고 싶은 프로젝트로 이어갑니다.</p></div>
+          <div className="ls-learning-list">
+            <div><span>로블록스 · Lua</span><p>모델링과 코딩에서, 나만의 게임으로.</p></div>
+            <div><span>파이썬 · 알고리즘</span><p>문법과 문제 풀이에서, 직접 쓰는 프로그램으로.</p></div>
+            <div><span>웹 개발</span><p>따라 만드는 실습에서, 나만의 웹 작품으로.</p></div>
+            <div><span>다양한 코딩교육 · 교구</span><p>익숙한 배움을 새로운 아이디어의 출발점으로.</p></div>
+            <p className="ls-learning-result">배운 코딩 <b aria-hidden="true">＋</b> AI · 바이브코딩 <b aria-hidden="true">→</b><strong>나만의 작품</strong></p>
           </div>
-        ))}
-      </dl>
-      <p className="mt-3 text-[0.8125rem] text-ink-faint">{PROOF_ASOF}</p>
+        </div>
+      </section>
 
-      <Section title="무엇을 하나요">
-        <Features items={FEATURES} />
-      </Section>
+      <section className="ls-scene" aria-labelledby="ideas-title">
+        <div className="ls-container"><p className="ls-kicker">02 · 계속 생기는 프로젝트 주제</p><h2 id="ideas-title">다음 프로젝트는<br /><em>가까운 곳에 있습니다.</em></h2><p className="ls-lead">학생이 만들고 싶은 재미도,<br />우리 동네의 작은 불편도 수업의 주제가 됩니다.</p>
+          <div className="ls-source-grid">
+            <article><span className="ls-source-number" aria-hidden="true">01</span><h3>학생의 아이디어와 열정</h3><p>직접 만들고 싶은 것.<br />친구와 함께 즐기고 싶은 것.<br />더 재미있게 바꿔 보고 싶은 것.</p><strong>“이런 것도 만들 수 있어요?”</strong></article>
+            <article><span className="ls-source-number" aria-hidden="true">02</span><h3>지역사회의 불편과 문제</h3><p>학교와 동네에서 마주친 불편.<br />주변 사람을 돕고 싶은 마음.<br />코딩으로 해결해 보고 싶은 일.</p><strong>“이걸 바꾸면 더 편하지 않을까요?”</strong></article>
+          </div>
+        </div>
+      </section>
 
-      <Section title="도입 절차">
-        <Steps items={STEPS} />
-      </Section>
+      <section className="ls-scene ls-blue" aria-labelledby="monthly-title">
+        <div className="ls-container">
+          <p className="ls-kicker">03 · 라운지가 매달 제공하는 주제</p>
+          <div className="ls-monthly-hero"><div><h2 id="monthly-title">아이디어가 막히면,<br />이달의 문제에서<br />시작하세요.</h2><p className="ls-lead">매달 새로운 5개의 문제.<br />주제를 고르고, 우리 반의 프로젝트로 이어갑니다.</p></div><div className="ls-five"><span>이달의 문제, 매달</span><strong>5<small>개</small></strong></div></div>
+          <div className="ls-five-problems" aria-label="매달 제공되는 다섯 개 이달의 문제">{[1, 2, 3, 4, 5].map((number) => <div key={number}><span>이달의 문제</span><b>0{number}</b></div>)}</div>
+          <p className="ls-monthly-note">다음 달에도, 새로운 문제 5개가 찾아옵니다. <span aria-hidden="true">→</span></p>
+        </div>
+      </section>
 
-      <Section title="도입 조건">
-        <OfferCards />
-      </Section>
+      <section id="projects" className="ls-scene ls-white" aria-labelledby="projects-title">
+        <div className="ls-container"><p className="ls-kicker">04 · 우리 학원의 프로젝트 수업</p><h2 id="projects-title">만들고, 함께 즐기고.<br /><em>그 경험으로 다시 도전합니다.</em></h2><p className="ls-lead">AI와 바이브코딩으로 로블록스 게임부터 웹게임,<br />웹사이트와 다양한 인터랙티브 작품까지.</p><ProjectMonths /></div>
+      </section>
 
-      <Faq items={FAQ} />
+      <section className="ls-scene" aria-labelledby="records-title">
+        <div className="ls-container ls-split">
+          <div><p className="ls-kicker">05 · 과정이 쌓이는 수업</p><h2 id="records-title">완성한 작품만큼,<br /><em>만들어 온 과정도<br />남습니다.</em></h2><p className="ls-lead">어떤 아이디어로 시작했는지,<br />무엇이 막혔고 어떻게 해결했는지.<br />개발일지와 결과물 기록으로 경험이 쌓입니다.</p></div>
+          <ol className="ls-records"><li><span>아이디어</span><strong>무엇을 만들고 싶은가?</strong></li><li><span>개발일지</span><strong>어떤 문제를 어떻게 해결했나?</strong></li><li><span>작품 공개</span><strong>누가 즐겼고, 어떤 반응이 있었나?</strong></li><li><span>다음 프로젝트</span><strong>이번 경험으로 무엇을 더 해 볼까?</strong></li></ol>
+        </div>
+      </section>
+
+      <section className="ls-scene ls-white" aria-labelledby="proof-title">
+        <div className="ls-container"><p className="ls-kicker">라운지에서 이어지고 있는 활동</p><h2 id="proof-title">작품을 만들고,<br /><em>서로의 작품을 만나고 있습니다.</em></h2>
+          <dl className="ls-proof">{PROOF.map((p) => <div key={p.label}><dd>{p.value.toLocaleString("ko-KR")}<span>{p.unit}</span></dd><dt>{p.label}</dt></div>)}</dl><p className="ls-proof-date">{PROOF_ASOF}</p><a className="ls-text-link" href={`${LOUNGE}/works`} target="_blank" rel="noopener">실제 라운지 작품 둘러보기 <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <div className="ls-scene ls-operations"><div className="ls-container"><p className="ls-kicker">학원 운영을 위한 기능</p><h2>수업을 이어가는 도구도,<br /><em>함께 준비되어 있습니다.</em></h2><div className="ls-feature-list">{FEATURES.map((feature) => <details key={feature.t}><summary>{feature.t}<span aria-hidden="true">＋</span></summary><ul>{feature.d.map((line) => <li key={line}>{line}</li>)}</ul></details>)}</div></div></div>
+
+      <section className="ls-scene ls-white ls-start" aria-labelledby="start-title"><div className="ls-container"><p className="ls-kicker">우리 학원에서 시작하기</p><h2 id="start-title">다음 수업의 가능성,<br /><em>반 하나로 시작하세요.</em></h2><p className="ls-lead">4주 동안 학생이 만든 작품과 기록을 보며<br />우리 학원에 맞는지 확인해 보세요.</p><div className="ls-cta-row"><ButtonLink href="/seminar/inquiry" tone="accent" size="lg">4주 무료 파일럿 신청</ButtonLink><a className="ls-text-link" href={`${LOUNGE}/works`} target="_blank" rel="noopener">라운지 둘러보기 ↗</a></div><Section title="도입 조건"><OfferCards /></Section><Section title="도입 절차"><Steps items={STEPS} /></Section></div></section>
+      <div className="ls-scene ls-questions"><div className="ls-container"><Faq items={FAQ} /></div></div>
     </div>
   );
 }
