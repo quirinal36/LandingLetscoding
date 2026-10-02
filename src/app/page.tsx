@@ -5,13 +5,13 @@ import { GROWTH_T, GrowthCaptions, GrowthStage } from "@/components/landing/grow
 import { ScrollScene } from "@/components/landing/scroll-scene";
 import { CardRiver } from "@/components/landing/card-river";
 import { LoopDiagram } from "@/components/landing/loop-diagram";
-import { PhoneVideo } from "@/components/landing/phone-video";
+import { MonthOfMaking, TeacherSupport, GrowthPortfolio, BeforeYouBegin, StartSmall } from "@/components/landing/classroom-sections";
 import { RevealObserver } from "@/components/landing/reveal-observer";
 import { ScrollProgress } from "@/components/landing/scroll-progress";
 import { InfinityWindow } from "@/components/landing/infinity-window";
 import { Container, Eyebrow, intro, reveal } from "@/components/landing/section";
 import { COMPANY } from "@/lib/nav";
-import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
+import { CONTACT, PROOF, PROOF_ASOF } from "@/lib/offer";
 
 /*
   랜딩 — 원장님이 스크롤을 내리며 따라가는 한 줄 이야기. (docs/LANDING-PLAN.md v2)
@@ -23,10 +23,13 @@ import { CONTACT, PROOF, PROOF_ASOF, START } from "@/lib/offer";
     4. 공간        공동체가 함께 소통하는 라운지와 작품 목록
     5. 사이클      작품공유 · 가상경제 · 과제관리
     6. 기능        라운지 기능소개
-    7. 활동        한 달 프로젝트와 짧은 반복 영상
-    8. 숫자        기준일이 있는 운영 실측
-    9. 시작        파일럿 · 가격 · 코칭 (기존 유지)
-    10. 끝         다음 스타트업의 탄생을 기다립니다.
+    7. 한 달 수업   과제 193개 · 매달 5개 · 활동 영상 · 4주 운영 예시
+    8. 선생님 지원 역할 세 가지 · 코칭 · 제작 도구 안내
+    9. 상담 결과물 작품 링크와 공개 프로필
+    10. 숫자       기준일이 있는 운영 실측
+    11. 시작       파일럿 · 가격 · 코칭
+    12. 질문       도입 전 FAQ
+    13. 끝         다음 스타트업의 탄생을 기다립니다.
 
   옮겨 간 것: 교육 장면과 2024년 장고 이야기 → /about(브랜드 스토리),
   라운지 확장 모델 도식과 이론 → /about/philosophy(교육 철학).
@@ -110,35 +113,10 @@ const HIRING = [
 ];
 const ABILITIES = ["기획", "문제 정의", "AI 활용", "생각 근육", "공감 근육", "회복탄력성"];
 
-/** 영상 옆 — 학생이 한 달 동안 하는 일 */
-const MONTH = [
-  { n: "01", t: "고른다", d: "이달의 문제 5개 중 하나, 또는 자기 문제" },
-  { n: "02", t: "만든다", d: "AI와 함께. 막히는 곳은 개발일지에" },
-  { n: "03", t: "올린다", d: "작품이 주소를 갖는다. 친구 폰에서 열린다" },
-  { n: "04", t: "설명한다", d: "가이드 영상으로 자기 작품을 소개" },
-];
-
 type Highlight = { title: string; body: string; image?: { src: string; alt: string; fit?: "cover" | "contain" }; art?: ReactNode };
-const STEPS = ["아이디어 구상", "문제와 해결 정리", "제작 완료", "라운지 게시", "가이드 영상"];
 const HIGHLIGHTS: Highlight[] = [
-  { title: "매달 5개의 새 문제", body: "이달의 문제가 매달 새로 열립니다. 학생은 하나를 골라 4주 프로젝트로 만듭니다.", image: { src: "/landing/monthly.png", alt: "라운지의 이달의 추천 과제 목록 화면", fit: "contain" } },
-  { title: "학습과제 193개", body: "이달의 문제 대신 과제로 4주 수업을 꾸릴 수 있습니다. 선생님이 골라 반 학생들에게 배정합니다.", image: { src: "/landing/learning.png", alt: "컴퓨터 과학 학습과제 목록 화면", fit: "contain" } },
   { title: "작품이 주소를 갖습니다", body: "라운지에 올린 작품은 링크 하나로 친구 휴대폰에서 바로 실행됩니다.", image: { src: "/landing/play.jpg", alt: "라운지에 올라간 코딩 게임의 실행 화면" } },
   { title: "진도표 대신 포트폴리오", body: "만든 작품이 프로필에 쌓입니다. 상담에서 무엇을 만들었는지 한 화면으로 보여 줍니다.", image: { src: "/landing/profile.jpg", alt: "작품이 쌓인 라운지 공개 프로필 화면" } },
-  {
-    title: "끝까지 가는 5단계",
-    body: "제작 완료는 3단계입니다. 남에게 보여 주고 직접 설명하는 데까지 가야 과제가 끝납니다.",
-    art: (
-      <ol className="grid h-full content-center gap-2 p-6">
-        {STEPS.map((s, i) => (
-          <li key={s} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-2.5 text-[0.9375rem] font-semibold">
-            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#1b2333] text-[0.75rem] text-white">{i + 1}</span>
-            {s}
-          </li>
-        ))}
-      </ol>
-    ),
-  },
   {
     title: "뱃지와 학원 화폐 루캣",
     body: "꾸준히 만들고 반응을 받으면 뱃지가 쌓입니다. 루캣으로 친구 작품에 투자하며 서로의 작품을 봅니다.",
@@ -330,44 +308,16 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 7. 영상 — 한 달 동안 학생이 하는 일 ═══════════════════════ */}
-      <section className="tone-dark relative overflow-hidden py-24 md:py-36">
-        <div className="halo top-[10%] opacity-70" aria-hidden="true" />
-        <Container className="relative grid items-center gap-12 lg:grid-cols-[1fr_auto_1fr]">
-          <div {...reveal()}>
-            <Eyebrow>렛츠코딩라운지 활동</Eyebrow>
-            <h2 className="display text-metal mt-3 text-[2.5rem] md:text-[4rem]">
-              문법 대신,
-              <br />
-              자기 작품을<br />만듭니다.
-            </h2>
-            <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-ink-soft">
-              이달의 문제 5개 중 하나를 선택해<br />4주동안 프로젝트를 진행합니다.<br />이 과정이 개발일지와 작품소개영상으로 남습니다.
-            </p>
-          </div>
+      <div className="landing-v2">
+        {/* ═══ 7. 한 달 수업 — 활동 영상과 4주 운영 예시 ═══ */}
+        <MonthOfMaking withVideo />
+        {/* ═══ 8. 선생님의 역할과 지원 ═══ */}
+        <TeacherSupport />
+        {/* ═══ 9. 상담에서 보여 주는 결과물 ═══ */}
+        <GrowthPortfolio />
+      </div>
 
-          <div className="relative mx-auto" {...reveal(150)}>
-            <div className="halo inset-[-20%] opacity-80" aria-hidden="true" />
-            <div className="relative -rotate-3 transition-transform duration-500 hover:rotate-0">
-              <PhoneVideo src="/landing/video/lounge-activity-loop.mp4" poster="/landing/video/lounge-activity-loop-poster.jpg" />
-            </div>
-          </div>
-
-          <ol className="grid gap-4">
-            {MONTH.map((m, i) => (
-              <li key={m.n} className="glass flex items-start gap-4 rounded-2xl px-5 py-4" {...reveal(200 + i * 110)}>
-                <span className="font-mono text-[0.75rem] text-accent-ink">{m.n}</span>
-                <span>
-                  <span className="block text-lg font-bold">{m.t}</span>
-                  <span className="mt-0.5 block text-[0.9375rem] text-ink-soft">{m.d}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      {/* ═══ 8. 운영 수치 ═══════════════════════════════════════════ */}
+      {/* ═══ 10. 운영 수치 ═══════════════════════════════════════════ */}
       <section className="tone-dark border-t border-white/10 py-28 md:py-40">
         <Container>
           <div {...reveal()}>
@@ -389,29 +339,17 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ═══ 9. 시작 ══════════════════════════════════════════════ */}
-      <section className="tone-paper py-28 md:py-40">
-        <Container>
-          <div {...reveal()}>
-            <Eyebrow>시작하는 법</Eyebrow>
-            <h2 className="display text-ink-gradient mt-3 max-w-[14ch] text-[2.5rem] md:text-[4.5rem]">반 하나로 충분합니다.</h2>
-          </div>
-          <ul className="mt-14 grid gap-4 md:grid-cols-3">
-            {START.map((s, i) => (
-              <li key={s.kicker} className="flex flex-col rounded-[28px] bg-white p-8 md:p-10" {...reveal(i * 120)}>
-                <p className="text-[0.9375rem] font-semibold text-accent-ink">{s.kicker}</p>
-                <p className="display mt-3 text-[2.25rem] whitespace-pre-line md:text-[2.5rem]">{s.title}</p>
-                <p className="mt-5 text-[1.0625rem] leading-relaxed text-ink-soft">{s.body}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-8 text-[1.0625rem] text-ink-soft" {...reveal()}>
-            가맹 계약이 아닙니다. 학생 수만큼 이용권을 사서 쓰는 구독입니다.
-          </p>
-        </Container>
-      </section>
+      {/* ═══ 11. 시작 — 다크·골드 파일럿 카드 ═══ */}
+      <div className="landing-v2">
+        <StartSmall />
+      </div>
 
-      {/* ═══ 10. 끝 — 다음 스타트업 ════════════════════════════════════ */}
+      {/* ═══ 12. 도입 전 질문 ═══ */}
+      <div className="landing-v2">
+        <BeforeYouBegin />
+      </div>
+
+      {/* ═══ 13. 끝 — 다음 스타트업 ════════════════════════════════════ */}
       <section className="tone-dark relative overflow-hidden py-32 text-center md:py-48">
         <div className="halo top-[20%]" aria-hidden="true" />
         <Container className="relative">

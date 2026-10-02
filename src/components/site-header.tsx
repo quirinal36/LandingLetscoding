@@ -10,7 +10,7 @@ import { NAV, type NavGroup } from "@/lib/nav";
 
 /* 상단 바는 그 페이지 첫 섹션의 바탕색으로 시작해, 스크롤하면 지금 보이는 섹션의 톤을 따라간다 */
 type Tone = "dark" | "paper" | null;
-const FIRST_TONE: Record<string, Tone> = { "/": "dark", "/about": "dark", "/about/philosophy": "paper" };
+const FIRST_TONE: Record<string, Tone> = { "/": "dark", "/v2": "dark", "/about": "dark", "/about/philosophy": "paper" };
 
 /** 바 바로 아래 지점에 놓인 섹션의 톤을 읽는다 */
 function toneBelow(bar: HTMLElement): Tone {
