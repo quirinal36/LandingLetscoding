@@ -61,24 +61,27 @@
     }
     .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6mm; }
     .kicker { color: var(--blue); font-size: 16px; font-weight: 650; line-height: 1.4; }
-    .cover-lead { margin-top: 12mm; }
-    .cover-title { grid-column: span 5; }
-    .cover-title .kicker { margin-bottom: 5mm; }
-    h1 {
-      font-size: 44pt;
-      line-height: 1.14;
-      font-weight: 680;
-      letter-spacing: -0.04em;
-    }
-    .cover-intro { grid-column: span 3; align-self: end; padding-bottom: 0.5mm; }
-    .promise { color: var(--blue); font-size: 24px; line-height: 1.42; font-weight: 590; }
-    .description { margin-top: 5mm; font-size: 16px; line-height: 1.55; }
-    .cover-works { margin-top: 15mm; }
+    .cover .page-head { height: 15mm; border-bottom: none; }
+    .cover-stage { display: grid; grid-template-columns: 1.22fr 1fr; gap: 10mm; margin-top: 8mm; align-items: center; }
+    .cover-title .kicker { margin-bottom: 3mm; }
+    .cover-service { color: var(--blue); font-size: 34px; font-weight: 740; letter-spacing: -.04em; margin-bottom: 8mm; }
+    h1 { font-size: 50pt; line-height: 1.12; font-weight: 740; letter-spacing: -.055em; }
+    .promise { margin-top: 7mm; font-size: 23px; line-height: 1.5; font-weight: 550; }
+    .description { margin-top: 6mm; font-size: 16px; line-height: 1.55; color: var(--muted); }
+    .cover-works { padding: 5mm; background: #edf1f8; border-radius: 3mm; }
+    .cover-works .work-strip { grid-template-columns: repeat(2, 1fr); gap: 5mm; }
+    .cover-works figure:first-child { grid-column: 1 / -1; }
+    .cover-works img { border-radius: 1.5mm; }
+    .record-scope { margin-top: 3mm; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .production-guide { margin-top: 5mm; padding: 4mm 5mm; border-left: 1mm solid var(--blue); background: #edf1f8; }
+    .production-guide h3 { font-size: 18px; margin-bottom: 2mm; }
+    .production-guide p { font-size: 16px; line-height: 1.5; }
+    .production-guide .tool-note { margin-top: 2mm; font-size: 13px; color: var(--muted); }
     .evidence-label { margin-bottom: 3mm; color: var(--muted); font-size: 13px; line-height: 1.5; }
     .work-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
     .work-strip img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
     .work-strip figcaption { margin-top: 2.5mm; font-size: 15px; line-height: 1.4; font-weight: 560; }
-    .cover-works figcaption span { display: block; margin-top: 1mm; color: var(--muted); font-size: 14px; font-weight: 400; }
+    .cover-works figcaption span { display: block; margin-top: 1mm; color: var(--muted); font-size: 12px; font-weight: 400; }
     .page-foot {
       margin-top: auto;
       border-top: 0.3mm solid var(--line);
@@ -189,6 +192,18 @@
     .lounge-repeat li { border-top: .3mm solid var(--blue); padding-top: 4mm; }
     .lounge-repeat span { display: block; font-size: 15px; color: var(--blue); margin-bottom: 2mm; }
     .lounge-repeat strong { font-size: 21px; font-weight: 600; }
+    #page3 .body-lead { margin-top: 6mm; }
+    #page3 .month-flow { margin-top: 4mm; }
+    #page3 .project-layout { margin-top: 5mm; }
+    .project-record .record-scope { font-size: 13px; line-height: 1.4; }
+    #page5 .lounge-learning { margin-top: 6mm; }
+    #page5 .lounge-bridge { margin-top: 5mm; padding-top: 4mm; padding-bottom: 4mm; }
+    #page8 .body-lead { margin-top: 7mm; }
+    #page8 .start-options { margin-top: 5mm; }
+    #page8 .start-context { margin-top: 3mm; }
+    #page8 .contact-layout { margin-top: 4mm; padding-top: 3mm; }
+    #page8 .contact-block .contact-name { margin-top: 2mm; }
+    #page8 .qr-block img { width: 24mm; height: 24mm; }
     @page { size: A4 landscape; margin: 0; }
     @media print {
       html, body { margin: 0; padding: 0; background: #fff; }
@@ -208,16 +223,14 @@
       <p class="service-name">LETSCODING LOUNGE</p>
     </header>
 
-    <div class="cover-lead grid">
+    <div class="cover-stage">
       <div class="cover-title">
         <p class="kicker">코딩학원을 위한 AI 시대 커리큘럼</p>
-        <h1>학생 한 명이,<br>스타트업이 됩니다.</h1>
+        <p class="cover-service">렛츠코딩라운지</p>
+        <h1>학생의 아이디어가,<br>실제 작품이<br>됩니다.</h1>
+        <p class="promise">만들고, 공유하고,<br>성장의 기록을 남깁니다.</p>
+        <p class="description">7년차 코딩학원이 만들어<br>매일 쓰는 프로젝트 수업 플랫폼</p>
       </div>
-      <div class="cover-intro">
-        <p class="promise">만들고, 알리고,<br>투자를 받습니다.</p>
-        <p class="description">7년차 코딩학원이 만들어<br>매일 쓰는 렛츠코딩 라운지</p>
-      </div>
-    </div>
 
     <div class="cover-works">
       <p class="evidence-label">라운지에 공개된 작품 예시 · 나나쌤 작품</p>
@@ -235,6 +248,8 @@
           <figcaption>이미지 편집기<span>유료 프로그램 대신 내가 직접 만들어 사용하기</span></figcaption>
         </figure>
       </div>
+    </div>
+
     </div>
 
     <footer class="page-foot">
@@ -299,6 +314,7 @@
           <li><span>04</span>라운지 게시</li>
           <li><span>05</span>가이드 영상</li>
         </ol>
+        <p class="record-scope">개발일지는 로그인한 같은 학원 회원이 열람합니다.<br>작품은 공개·링크로만·비공개 중 선택합니다.<br>제작 기록 전체가 외부 공개되는 것은 아닙니다.</p>
         <p class="completion-note">공유하고 설명하는 것까지가 프로젝트의 완성입니다.</p>
       </div>
     </div>
@@ -342,7 +358,11 @@
       <div><h3>다양한 코딩교육 · 교구</h3><p>익숙한 배움을,<br>새로운 아이디어의 출발점으로.</p></div>
     </div>
     <div class="lounge-bridge"><span>배운 코딩</span><b aria-hidden="true">＋</b><span>AI · 바이브코딩</span><b aria-hidden="true">→</b><strong>나만의 작품</strong></div>
-    <p class="lounge-outcomes">로블록스 게임부터 웹게임, 웹사이트, 인터랙티브 작품까지.<br>공유하고 함께 플레이하며, 만드는 과정과 경험을 다음 수업으로 이어갑니다.</p>
+    <div class="production-guide">
+      <h3>작품은 외부 AI 도구로 만들고, 라운지에서 공유합니다.</h3>
+      <p>Claude Code·Codex 등 외부 도구로 제작합니다.<br>웹 작품은 HTML·ZIP 파일로 올리거나, 공개 링크로 연결합니다.</p>
+      <p class="tool-note">라운지는 AI 편집기를 제공하지 않습니다. 도구의 계정·이용 조건과 별도 비용은 도입 상담에서 안내합니다.</p>
+    </div>
     <footer class="page-foot"><p>지금까지 배운 것이 끝이 아니라, 다음 프로젝트의 출발점이 됩니다.</p><p class="page-number">5</p></footer>
   </section>
 
@@ -354,7 +374,7 @@
       <div class="lounge-five"><p>라운지가 제공하는 이달의 문제</p><strong>5<span>개 / 매달</span></strong><p>주제를 고르고, 우리 반의 프로젝트로.<br>다음 달에도 새로운 문제 5개가 찾아옵니다.</p></div>
     </div>
     <ol class="lounge-repeat"><li><span>이번 달</span><strong>만들고 · 공유하고</strong></li><li><span>다음 달</span><strong>새 주제에 경험 더하기</strong></li><li><span>그다음 달</span><strong>쌓인 경험으로 다시 도전</strong></li></ol>
-    <footer class="page-foot"><p>새로운 주제 → 제작과 공유 → 피드백과 기록 → 다음 프로젝트</p><p class="page-number">6</p></footer>
+    <footer class="page-foot"><p>선생님은 방향을 잡아주고, 막힌 곳을 돕고, 더 나은 방법을 제안합니다.</p><p class="page-number">6</p></footer>
   </section>
 
   <section class="sheet" id="page7" data-page="07" aria-label="소개서 7쪽 라운지 기능">
@@ -450,14 +470,15 @@
     </header>
     <div class="body-lead grid">
       <div class="body-title"><p class="kicker">렛츠코딩 라운지 도입 안내</p><h2>반 하나로 충분합니다.</h2></div>
-      <p class="body-intro">우리 학원의 첫 반에서 시작해 보세요.<br>다음 스타트업의 탄생을 기다립니다.</p>
+      <p class="body-intro">원장님이 먼저 직접 만들어 보고,<br>우리 학원의 첫 반에서 시작해 보세요.</p>
     </div>
     <div class="start-options">
       <div class="start-option"><p class="kicker">파일럿</p><h3>4주 무료</h3><p>인원 수와 관계없이<br>첫 반 하나로 먼저 써 보세요.</p></div>
       <div class="start-option"><p class="kicker">가격</p><h3>학생 1명<br>월 11,000원</h3><p>부가세 포함. 원장님이<br>수강료에 포함해 결제합니다.</p></div>
-      <div class="start-option"><p class="kicker">코칭</p><h3>첫 수업은<br>함께</h3><p>렛츠코딩 팀이 바이브코딩<br>수업 진행을 코칭합니다.</p></div>
+      <div class="start-option"><p class="kicker">코칭</p><h3>첫 수업부터<br>매달 연수까지</h3><p>첫 수업 코칭과 매달 1회<br>원장·강사 온라인 연수를 안내합니다.</p></div>
     </div>
-    <p class="start-context">학생 수에 따라 이용하는 구독 방식입니다. 상담 후 학원 공간을 개설하고, 4주 사용 뒤 도입을 결정합니다.</p>
+    <p class="start-context">원장님 30분 제작 체험 → 반 하나로 4주 무료 파일럿 → 도입 결정.<br>자동 결제되지 않으며, 파일럿 중 만든 작품과 기록은 도입하지 않아도 남습니다.</p>
+    <p class="record-scope">운영 지원: 작품 데이터 매일 백업 · 개원 준비 가이드 · 제품 위키 · 메뉴 안내 챗봇.<br>외부 AI 도구 비용과 연수 비용·적용 조건은 상담에서 확인해 주세요.</p>
     <div class="contact-layout grid">
       <div class="contact-block">
         <h3>첫 수업을 함께 준비하겠습니다.</h3>

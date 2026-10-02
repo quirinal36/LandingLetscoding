@@ -35,7 +35,13 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
       }
     }
     assert.equal(await page.locator('.sheet').count(), 8, 'must have eight sheets');
+    assert.match(await page.locator('#cover').innerText(), /렛츠코딩라운지/);
+    assert.match(await page.locator('#cover h1').innerText(), /학생의 아이디어가,/);
+    assert.match(await page.locator('#page3 .record-scope').innerText(), /같은 학원 회원/);
     assert.match(await page.locator('#page5').innerText(), /이어지는 프로젝트 수업/);
+    assert.match(await page.locator('#page5').innerText(), /AI 편집기를 제공하지 않습니다/);
+    assert.match(await page.locator('#page8').innerText(), /자동 결제되지 않으며/);
+    assert.match(await page.locator('#page8').innerText(), /매달 1회/);
     assert.match(await page.locator('#page6').innerText(), /5개 \/ 매달/);
     assert.match(await page.locator('#page7').innerText(), /작품공유/);
     assert.equal(await page.locator('img').evaluateAll(images => images.filter(image => !image.complete || !image.naturalWidth).length), 0, 'missing image');
