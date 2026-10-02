@@ -57,3 +57,7 @@ MYPROBLEM.md
 /graphify-out/cache/
 /graphify-out/.graphify_python
 /graphify-out/.graphify_root
+
+# Regenerable validation screenshots and query logs
+/artifacts/
+/graphify-out/memory/

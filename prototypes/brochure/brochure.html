@@ -78,6 +78,7 @@
     .work-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
     .work-strip img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
     .work-strip figcaption { margin-top: 2.5mm; font-size: 15px; line-height: 1.4; font-weight: 560; }
+    .cover-works figcaption span { display: block; margin-top: 1mm; color: var(--muted); font-size: 14px; font-weight: 400; }
     .page-foot {
       margin-top: auto;
       border-top: 0.3mm solid var(--line);
@@ -101,13 +102,7 @@
     .body-intro { grid-column: span 3; align-self: end; padding-bottom: 0.5mm; font-size: 17px; line-height: 1.55; }
     .feature-layout { margin-top: 8mm; align-items: start; }
     .product-evidence { grid-column: span 4; }
-    .product-evidence img {
-      width: 100%;
-      height: 82mm;
-      object-fit: cover;
-      object-position: left top;
-      border: 0.25mm solid var(--line);
-    }
+    .product-evidence svg { display: block; width: 100%; height: auto; }
     .product-evidence figcaption { margin-top: 2.5mm; color: var(--muted); font-size: 13px; line-height: 1.45; }
     .feature-list { grid-column: span 4; }
     .feature {
@@ -228,16 +223,16 @@
       <p class="evidence-label">라운지에 공개된 작품 예시 · 나나쌤 작품</p>
       <div class="work-strip">
         <figure>
-          <img src="../../public/landing/works/english.webp" alt="삐약! 영어 탐험 작품 썸네일">
-          <figcaption>삐약! 영어 탐험</figcaption>
+          <img src="../../public/landing/works/word-racing.webp" alt="Word Racing 작품 썸네일">
+          <figcaption>Word Racing<span>영어단어 외우는 도움을 주는 게임</span></figcaption>
         </figure>
         <figure>
           <img src="../../public/landing/works/absolute-pitch.webp" alt="절대음감 테스트 작품 썸네일">
-          <figcaption>절대음감 테스트</figcaption>
+          <figcaption>절대음감 테스트<span>음악 감각을 훈련하는 데 도움을 주는 게임</span></figcaption>
         </figure>
         <figure>
-          <img src="../../public/landing/works/pixel-art-maker.webp" alt="픽셀아트 변환기 작품 썸네일">
-          <figcaption>픽셀아트 변환기</figcaption>
+          <img src="../../public/landing/works/image-editor.webp" alt="이미지 편집기 작품 썸네일">
+          <figcaption>이미지 편집기<span>유료 프로그램 대신 내가 직접 만들어 사용하기</span></figcaption>
         </figure>
       </div>
     </div>
@@ -280,7 +275,7 @@
       <p class="service-name">LETSCODING LOUNGE</p>
     </header>
     <div class="body-lead grid">
-      <div class="body-title"><p class="kicker">4주 프로젝트</p><h2>만들고 공유하기,<br>성장하고 기록하기.</h2></div>
+      <div class="body-title"><p class="kicker">끝없이 이어지는 프로젝트</p><h2>만들고 공유하기,<br>성장하고 기록하기.</h2></div>
       <p class="body-intro">매달 새로운 문제를 만납니다.<br>만들기에서 게시와 소개까지, 한 달의 경험이 기록으로 남습니다.</p>
     </div>
     <ol class="month-flow">
@@ -381,8 +376,41 @@
 
     <div class="feature-layout grid">
       <figure class="product-evidence">
-        <img src="../../public/landing/works-grid.jpg" alt="렛츠코딩 라운지 실제 작품 목록의 상단 화면">
-        <figcaption>라운지 실제 작품 목록 · 공개 사용이 허용된 나나쌤 작품</figcaption>
+        <svg viewBox="0 0 1000 680" role="img" aria-labelledby="brochure-loop-title">
+          <title id="brochure-loop-title">작품공유, 가상경제, 과제관리 세 축이 서로 연결되는 구조도</title>
+          <!-- 랜딩 LoopDiagram의 세 축과 연결 문구를 인쇄용으로 배치. -->
+          <g fill="#fff">
+            <rect x="20" y="260" width="380" height="56" />
+            <rect x="600" y="260" width="380" height="56" />
+          </g>
+          <g fill="none" stroke-width="18" stroke-linecap="round">
+            <path d="M500 140 210 500" stroke="#e0623b" />
+            <path d="M500 140 790 500" stroke="#3b6fe0" />
+            <path d="M210 500H790" stroke="#12a58e" />
+          </g>
+          <g fill="#fff" stroke="#d5dbe4" stroke-width="3">
+            <circle cx="500" cy="140" r="92" />
+            <circle cx="210" cy="500" r="92" />
+            <circle cx="790" cy="500" r="92" />
+          </g>
+          <g text-anchor="middle" fill="#1b2333" font-size="34" font-weight="800">
+            <text x="500" y="136">작품공유</text>
+            <text x="210" y="496">가상경제</text>
+            <text x="790" y="496">과제관리</text>
+          </g>
+          <g text-anchor="middle" fill="#55607a" font-size="26">
+            <text x="500" y="171">작품 게시 · 조회</text>
+            <text x="210" y="531">자산 · 광고 · 투자</text>
+            <text x="790" y="526">주제선정</text>
+            <text x="790" y="557">완료보고서</text>
+          </g>
+          <g text-anchor="middle" font-size="28" font-weight="650">
+            <text x="210" y="296" fill="#a8441b">조회수 → 수익</text>
+            <text x="790" y="296" fill="#2a53b0">주제선정 → 완료보고서</text>
+            <text x="500" y="642" fill="#0b7a69">과제 완료 → 자산 증가</text>
+          </g>
+        </svg>
+        <figcaption>작품공유 · 가상경제 · 과제관리, 모든 연결은 양방향으로 순환합니다.</figcaption>
       </figure>
       <div class="feature-list">
         <div class="feature">
