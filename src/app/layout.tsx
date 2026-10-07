@@ -11,13 +11,13 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const DESCRIPTION =
-  "AI가 코드를 쓰는 시대, 학원의 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 AI 시대에 맞춘 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.";
+  "AI가 코드를 쓰는 시대, 코딩 수업은 무엇을 가르쳐야 할까요. 렛츠코딩은 학교·학원 등 다양한 교육 현장에서 활용할 수 있는 커리큘럼과 수업 운영 도구를 제공합니다.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(COMPANY.url),
   alternates: { canonical: "./" },
   title: {
-    default: `${COMPANY.name} — AI 시대 코딩 학원을 위한 커리큘럼 솔루션`,
+    default: `${COMPANY.name} — 학교·학원 등 교육 현장을 위한 AI 시대 커리큘럼 솔루션`,
     template: `%s · ${COMPANY.short}`,
   },
   description: DESCRIPTION,

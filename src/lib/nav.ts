@@ -19,7 +19,7 @@ export const NAV: NavGroup[] = [
     label: "소개",
     layer: 1,
     items: [
-      { label: "브랜드 스토리", href: "/about", note: "한계를 만난 학원이 라운지를 만들기까지" },
+      { label: "브랜드 스토리", href: "/about", note: "교육 현장의 고민에서 라운지가 탄생하기까지" },
       { label: "교육 철학", href: "/about/philosophy", note: "우리가 코딩을 가르치는 방식" },
     ],
   },

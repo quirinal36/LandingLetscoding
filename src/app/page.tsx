@@ -14,7 +14,7 @@ import { COMPANY } from "@/lib/nav";
 import { CONTACT, PROOF, PROOF_ASOF } from "@/lib/offer";
 
 /*
-  랜딩 — 원장님이 스크롤을 내리며 따라가는 한 줄 이야기. (docs/LANDING-PLAN.md v2)
+  랜딩 — 교육자가 스크롤을 내리며 따라가는 한 줄 이야기. (docs/LANDING-PLAN.md v2)
 
   선언 → 왜 → 그래서 → 어떻게 → 어디서. 각 섹션의 마지막 줄이 다음 섹션의 질문이다.
     1. 히어로      주제1 선언. 학생 한 명이, 스타트업이 됩니다. 아래로 실제 학생 작품 카드가 흐른다
@@ -55,7 +55,7 @@ const JSON_LD = {
       logo: `${COMPANY.url}/icon.png`,
       email: CONTACT.email,
       telephone: `+82-${CONTACT.tel.slice(1)}`,
-      description: "7년차 코딩학원이 만들어 매일 쓰는 AI 시대 커리큘럼과 수업 운영 도구를 코딩 학원에 제공합니다.",
+      description: "학교·학원 등 다양한 교육 현장에서 활용할 수 있는 AI 시대 커리큘럼과 수업 운영 도구를 제공합니다.",
     },
     {
       "@type": "WebSite",
@@ -70,7 +70,7 @@ const JSON_LD = {
       name: "렛츠코딩 라운지",
       url: "https://lounge.letscoding.kr",
       provider: { "@id": ORG_ID },
-      audience: { "@type": "BusinessAudience", name: "코딩 학원" },
+      audience: { "@type": "BusinessAudience", name: "학교·학원 등 교육기관" },
       description: "학생들이 바이브코딩으로 만든 게임과 웹사이트를 올리고, 서로 해 보고, 반응을 주고받는 곳입니다.",
       offers: [
         {
@@ -83,10 +83,11 @@ const JSON_LD = {
         {
           "@type": "Offer",
           name: "학생 1명 월 이용료",
+          description: "자체 웹에디터와 AI LLM 토큰 비용 포함",
           priceCurrency: "KRW",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: 11000,
+            price: 29000,
             priceCurrency: "KRW",
             unitText: "학생 1명 월",
             valueAddedTaxIncluded: true,
@@ -115,10 +116,10 @@ const ABILITIES = ["기획", "문제 정의", "AI 활용", "생각 근육", "공
 
 type Highlight = { title: string; body: string; image?: { src: string; alt: string; fit?: "cover" | "contain" }; art?: ReactNode };
 const HIGHLIGHTS: Highlight[] = [
-  { title: "작품이 주소를 갖습니다", body: "라운지에 올린 작품은 링크 하나로 친구 휴대폰에서 바로 실행됩니다.", image: { src: "/landing/play.jpg", alt: "라운지에 올라간 코딩 게임의 실행 화면" } },
+  { title: "웹에디터에서 작품 링크까지", body: "제작·미리보기·배포를 한 환경에서 이어갑니다. 프로젝트를 다시 열어 수정하고, 같은 라운지 작품에 업데이트할 수 있습니다.", image: { src: "/landing/play.jpg", alt: "라운지에 올라간 코딩 게임의 실행 화면" } },
   { title: "진도표 대신 포트폴리오", body: "만든 작품이 프로필에 쌓입니다. 상담에서 무엇을 만들었는지 한 화면으로 보여 줍니다.", image: { src: "/landing/profile.jpg", alt: "작품이 쌓인 라운지 공개 프로필 화면" } },
   {
-    title: "뱃지와 학원 화폐 루캣",
+    title: "뱃지와 가상 화폐 루캣",
     body: "꾸준히 만들고 반응을 받으면 뱃지가 쌓입니다. 루캣으로 친구 작품에 투자하며 서로의 작품을 봅니다.",
     art: (
       <div className="grid h-full place-items-center">
@@ -145,7 +146,7 @@ export default function Home() {
         <div className="halo top-[30%]" aria-hidden="true" />
         <Container className="relative pt-[clamp(4rem,10vh,7rem)] text-center">
           <p className="intro text-[0.9375rem] font-semibold text-ink-soft md:text-lg" {...intro(0)}>
-            7년차 코딩학원이 만들어 매일 쓰는 AI 시대 커리큘럼
+            학교·학원 등 다양한 교육 현장을 위한 AI 시대 커리큘럼
           </p>
           <h1 className="display mt-4 text-[2.75rem] md:text-[5.75rem]">
             <span className="intro text-metal block" {...intro(120)}>
@@ -357,7 +358,7 @@ export default function Home() {
             다음 스타트업의 탄생을 기다립니다.
           </h2>
           <p className="mx-auto mt-6 max-w-[36ch] text-lg text-ink-soft md:text-[1.375rem]" {...reveal(220)}>
-            우리 학원의 이름으로 된 공간이 생기게 됩니다.<br />수업이 끝나 교실 밖을 나가는 순간부터,<br />렛츠코딩라운지의 진가가 시작됩니다.
+            우리 교육공동체의 이름으로 된 공간이 생깁니다.<br />수업이 끝나 교실 밖을 나가는 순간부터,<br />렛츠코딩라운지의 진가가 시작됩니다.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3" {...reveal(320)}>
             <ButtonLink href={INQUIRY} tone="accent" size="lg" className="pill">

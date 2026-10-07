@@ -21,7 +21,7 @@ const { mkdir } = require('node:fs/promises');
     assert.equal(new URL(page.url()).hash, '#works');
     await page.locator('.v2-faq summary').nth(1).click();
     assert.equal(await page.locator('.v2-faq details').nth(1).getAttribute('open'), '');
-    assert.match(await page.locator('.v2-faq details').nth(1).innerText(), /AI 코딩 편집기를 제공하지 않습니다/);
+    assert.match(await page.locator('.v2-faq details').nth(1).innerText(), /자체 웹에디터를 제공합니다/);
     await page.locator('.v2-faq summary').nth(1).press('Enter');
     assert.equal(await page.locator('.v2-faq details').nth(1).getAttribute('open'), null);
     for (const image of await page.locator('.landing-v2 img').all()) {

@@ -7,7 +7,7 @@ export const CONTACT = {
 
 export const START = [
   { kicker: "파일럿", title: "4주 무료", body: "인원 수와 관계없이 첫 반 하나로 먼저 써 보세요." },
-  { kicker: "가격", title: "학생 1명\n월 11,000원", body: "부가세 포함. 원장님이 수강료에 포함해 결제합니다." },
+  { kicker: "가격", title: "학생 1명\n월 29,000원", body: "AI LLM 토큰 비용·부가세 포함. 학생 수에 맞춰 이용권을 구매합니다." },
   { kicker: "코칭", title: "첫 수업은\n함께", body: "렛츠코딩 팀이 바이브코딩 수업 진행을 코칭합니다." },
 ];
 
