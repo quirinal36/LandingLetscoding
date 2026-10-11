@@ -37,9 +37,14 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
     assert.equal(await page.locator('.sheet').count(), 8, 'must have eight sheets');
     assert.match(await page.locator('#cover').innerText(), /렛츠코딩라운지/);
     assert.match(await page.locator('#cover h1').innerText(), /학생의 아이디어가,/);
-    assert.match(await page.locator('#page3 .record-scope').innerText(), /같은 학원 회원/);
+    assert.match(await page.locator('#page3 .record-scope').innerText(), /같은 교육기관 회원/);
     assert.match(await page.locator('#page5').innerText(), /이어지는 프로젝트 수업/);
-    assert.match(await page.locator('#page5').innerText(), /AI 편집기를 제공하지 않습니다/);
+    assert.match(await page.locator('#page5').innerText(), /자체 웹에디터에서 제작부터 배포까지/);
+    assert.match(await page.locator('#page5').innerText(), /같은 작품에 업데이트/);
+    assert.match(await page.locator('#page5').innerText(), /유해 요청을 제한/);
+    assert.match(await page.locator('#page5').innerText(), /AI 분석 리포트/);
+    assert.match(await page.locator('#page3').innerText(), /프로젝트별 코드·AI 대화·문서/);
+    assert.doesNotMatch(await page.locator('body').innerText(), /7년차 코딩학원|AI 편집기를 제공하지|11,000원|원장님/);
     assert.match(await page.locator('#page8').innerText(), /자동 결제되지 않으며/);
     assert.match(await page.locator('#page8').innerText(), /매달 1회/);
     assert.match(await page.locator('#page6').innerText(), /5개 \/ 매달/);
@@ -52,7 +57,7 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
     }
     assert.equal(await page.locator('.proof-source').innerText(), offer.match(/PROOF_ASOF = "([^"]+)"/)[1]);
     const page8 = await page.locator('#page8').innerText();
-    for (const text of ['4주 무료', '월 11,000원', '부가세 포함', 'contact@letscoding.kr', '010-5679-0072']) {
+    for (const text of ['4주 무료', '월 29,000원', 'AI LLM 토큰 비용·부가세 포함', 'contact@letscoding.kr', '010-5679-0072']) {
       assert(offer.includes(text) && page8.includes(text), `offer must match source: ${text}`);
     }
     assert.deepEqual(await page.locator('.qr-block > a').evaluateAll(links => links.map(link => link.href)), ['https://www.letscoding.kr/seminar/inquiry', 'https://lounge.letscoding.kr/works']);
