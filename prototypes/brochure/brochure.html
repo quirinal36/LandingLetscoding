@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>렛츠코딩 라운지 소개서 · 8쪽 인쇄 원본</title>
+  <title>렛츠코딩 라운지 소개서 · 10쪽 인쇄 원본</title>
   <link rel="stylesheet" href="fonts.css">
-  <!-- B 선택안 확장. 기존 자산과 현재 랜딩 내용으로 구성한 가로 A4 8쪽 인쇄 원본. -->
+  <!-- B 선택안 확장. 기존 자산과 현재 랜딩 내용으로 구성한 가로 A4 10쪽 인쇄 원본. -->
   <style>
     :root {
       --ink: #1b2333;
@@ -198,12 +198,19 @@
     .project-record .record-scope { font-size: 13px; line-height: 1.4; }
     #page5 .lounge-learning { margin-top: 6mm; }
     #page5 .lounge-bridge { margin-top: 5mm; padding-top: 4mm; padding-bottom: 4mm; }
-    #page8 .body-lead { margin-top: 7mm; }
-    #page8 .start-options { margin-top: 5mm; }
-    #page8 .start-context { margin-top: 3mm; }
-    #page8 .contact-layout { margin-top: 4mm; padding-top: 3mm; }
-    #page8 .contact-block .contact-name { margin-top: 2mm; }
-    #page8 .qr-block img { width: 24mm; height: 24mm; }
+    #page10 .body-lead { margin-top: 7mm; }
+    #page10 .start-options { margin-top: 5mm; }
+    #page10 .start-context { margin-top: 3mm; }
+    #page10 .contact-layout { margin-top: 4mm; padding-top: 3mm; }
+    #page10 .contact-block .contact-name { margin-top: 2mm; }
+    #page10 .qr-block img { width: 24mm; height: 24mm; }
+    .editor-page .body-lead { margin-top: 6mm; }
+    .editor-shot { grid-column: span 5; }
+    .editor-shot img { width: 100%; border: .25mm solid var(--line); }
+    .editor-shot figcaption, .editor-projects figcaption { margin-top: 2mm; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .editor-features { grid-column: span 3; }
+    .editor-projects { grid-column: span 5; }
+    .editor-projects img { width: 100%; height: 58mm; object-fit: cover; object-position: top; border: .25mm solid var(--line); }
     @page { size: A4 landscape; margin: 0; }
     @media print {
       html, body { margin: 0; padding: 0; background: #fff; }
@@ -463,7 +470,41 @@
     </footer>
   </section>
 
-  <section class="sheet" id="page8" data-page="08" aria-label="소개서 8쪽 도입과 연락처">
+  <section class="sheet editor-page" id="page8" data-page="08" aria-label="소개서 8쪽 에디터 제작 환경">
+    <header class="page-head"><div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div><p class="service-name">LET’S CODING STUDIO</p></header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">자체 웹에디터 · Let’s Coding Studio</p><h2>아이디어에서 배포까지,<br>하나의 제작 환경에서.</h2></div>
+      <p class="body-intro">코드와 AI 대화, 미리보기를 한 화면에서.<br>도구를 오가는 대신 만드는 일에 집중합니다.</p>
+    </div>
+    <div class="feature-layout grid">
+      <figure class="editor-shot"><img src="../../public/landing/studio-workspace.png" alt="렛츠코딩 스튜디오의 파일 탐색기, 스네이크 게임 미리보기, AI 도우미 대화 화면"><figcaption>실제 제품 사용 예시 · 기능 검증용 시험 프로젝트<br>왼쪽 파일 탐색기 · 가운데 미리보기 · 오른쪽 AI 도우미 LECO</figcaption></figure>
+      <div class="editor-features">
+        <div class="feature"><span class="feature-index">01</span><div><h3>AI와 함께 제작</h3><p>원하는 기능을 말로 요청하고, HTML·CSS·JavaScript를 직접 편집할 수 있습니다.</p></div></div>
+        <div class="feature"><span class="feature-index">02</span><div><h3>미리보기로 확인</h3><p>만든 게임과 웹사이트를 실행해 보고, 필요한 부분을 바로 고칩니다.</p></div></div>
+        <div class="feature"><span class="feature-index">03</span><div><h3>라운지로 배포</h3><p>작품을 라운지에 게시합니다. 이후 수정도 같은 작품에 업데이트할 수 있습니다.</p></div></div>
+      </div>
+    </div>
+    <footer class="page-foot"><p>제작 → 미리보기 → 배포 → 피드백 → 개선</p><p class="page-number">8</p></footer>
+  </section>
+
+  <section class="sheet editor-page" id="page9" data-page="09" aria-label="소개서 9쪽 에디터 프로젝트와 AI 활용 관리">
+    <header class="page-head"><div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div><p class="service-name">LET’S CODING STUDIO</p></header>
+    <div class="body-lead grid">
+      <div class="body-title"><p class="kicker">프로젝트 관리 · 교육을 위한 AI 활용</p><h2>작품은 이어서 만들고,<br>AI 활용은 살펴봅니다.</h2></div>
+      <p class="body-intro">결과물과 제작 과정은 프로젝트별로.<br>AI 사용은 기록과 분석을 바탕으로 지도합니다.</p>
+    </div>
+    <div class="feature-layout grid">
+      <figure class="editor-projects"><img src="../../public/landing/studio-projects.png" alt="렛츠코딩 스튜디오의 나의 프로젝트 목록과 새 프로젝트 만들기 화면"><figcaption>실제 프로젝트 목록 화면 · 기능 검증용 시험 프로젝트</figcaption><div class="production-guide"><h3>완성한 작품도, 다음 수업의 출발점.</h3><p>프로젝트를 다시 열어 작업을 이어갑니다.<br>친구의 피드백으로 작품을 고치며 발전시킵니다.</p></div></figure>
+      <div class="editor-features">
+        <div class="feature"><span class="feature-index">01</span><div><h3>프로젝트별 제작 기록</h3><p>코드·AI 대화·프로젝트 문서를 함께 보관합니다. 다음 수업에서도 작업을 이어갈 수 있습니다.</p></div></div>
+        <div class="feature"><span class="feature-index">02</span><div><h3>유해 요청 사용 제한</h3><p>도박·음란물 등 유해 요청을 제한해 윤리적 기준 안에서 AI를 활용하도록 돕습니다.</p></div></div>
+        <div class="feature"><span class="feature-index">03</span><div><h3>로그와 AI 분석 리포트</h3><p>AI 사용 결과를 로그로 남깁니다. AI가 분석한 리포트로 학생의 활용을 살펴보고 지도합니다.</p></div></div>
+      </div>
+    </div>
+    <footer class="page-foot"><p>학생 1명 월 29,000원 · AI LLM 토큰 비용·부가세 포함 · 사용 한도는 상담 시 안내</p><p class="page-number">9</p></footer>
+  </section>
+
+  <section class="sheet" id="page10" data-page="10" aria-label="소개서 10쪽 도입과 연락처">
     <header class="page-head">
       <div class="brand"><img src="../../src/assets/logo.png" alt="렛츠코딩 로고"><span class="brand-name">렛츠코딩</span></div>
       <p class="service-name">LETSCODING LOUNGE</p>
@@ -496,7 +537,7 @@
         <p><a href="https://lounge.letscoding.kr/works">lounge.letscoding.kr/<br>works</a></p>
       </div>
     </div>
-    <footer class="page-foot"><p><span class="edition">2026.10 수정 · 도입 조건은 상담 시 확인하실 수 있습니다.</span></p><p class="page-number">8</p></footer>
+    <footer class="page-foot"><p><span class="edition">2026.10 수정 · 도입 조건은 상담 시 확인하실 수 있습니다.</span></p><p class="page-number">10</p></footer>
   </section>
 </body>
 </html>

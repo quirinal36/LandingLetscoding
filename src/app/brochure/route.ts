@@ -32,7 +32,7 @@ export async function GET() {
       .brochure-pages .sheet + .sheet { margin-top:0; }
       @media print { .brochure-tools { display:none; } .brochure-pages { zoom:1!important; margin:0; } }
     </style></head>`)
-    .replace("<body>", `<body><header class="brochure-tools"><div><strong>렛츠코딩 라운지 소개서</strong><p>가로 A4 · 8쪽 · 양면 인쇄 시 짧은 쪽 넘김</p></div><nav aria-label="브로셔 인쇄와 다운로드"><button type="button" id="print-brochure">인쇄하기</button><a href="/brochure/pdf" download="letscoding-lounge-brochure.pdf">PDF 다운로드</a><a href="/">홈으로</a></nav></header><main class="brochure-pages">`)
+    .replace("<body>", `<body><header class="brochure-tools"><div><strong>렛츠코딩 라운지 소개서</strong><p>가로 A4 · 10쪽 · 양면 인쇄 시 짧은 쪽 넘김</p></div><nav aria-label="브로셔 인쇄와 다운로드"><button type="button" id="print-brochure">인쇄하기</button><a href="/brochure/pdf" download="letscoding-lounge-brochure.pdf">PDF 다운로드</a><a href="/">홈으로</a></nav></header><main class="brochure-pages">`)
     .replace("</body>", `</main><script>
       const pages = document.querySelector('.brochure-pages');
       function fitPages() { pages.style.zoom = Math.min(1, (document.documentElement.clientWidth - 24) / (297 * 96 / 25.4)); }

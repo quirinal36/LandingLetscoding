@@ -1,5 +1,5 @@
 // BROCHURE_PLAYWRIGHT=/path/to/playwright node prototypes/brochure/check.cjs
-// Exports the 8-page PDF; fails on changed source facts, missing assets or clipped print content.
+// Exports the 10-page PDF; fails on changed source facts, missing assets or clipped print content.
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const fs = require('node:fs/promises');
@@ -34,7 +34,8 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'live brochure must fit viewport');
       }
     }
-    assert.equal(await page.locator('.sheet').count(), 8, 'must have eight sheets');
+    assert.equal(await page.locator('.sheet').count(), 10, 'must have ten sheets');
+    assert.deepEqual(await page.locator('.sheet').evaluateAll(sheets => sheets.map(sheet => sheet.dataset.page)), ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']);
     assert.match(await page.locator('#cover').innerText(), /렛츠코딩라운지/);
     assert.match(await page.locator('#cover h1').innerText(), /학생의 아이디어가,/);
     assert.match(await page.locator('#page3 .record-scope').innerText(), /같은 교육기관 회원/);
@@ -45,10 +46,14 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
     assert.match(await page.locator('#page5').innerText(), /AI 분석 리포트/);
     assert.match(await page.locator('#page3').innerText(), /프로젝트별 코드·AI 대화·문서/);
     assert.doesNotMatch(await page.locator('body').innerText(), /7년차 코딩학원|AI 편집기를 제공하지|11,000원|원장님/);
-    assert.match(await page.locator('#page8').innerText(), /자동 결제되지 않으며/);
-    assert.match(await page.locator('#page8').innerText(), /매달 1회/);
+    assert.match(await page.locator('#page10').innerText(), /자동 결제되지 않으며/);
+    assert.match(await page.locator('#page10').innerText(), /매달 1회/);
     assert.match(await page.locator('#page6').innerText(), /5개 \/ 매달/);
     assert.match(await page.locator('#page7').innerText(), /작품공유/);
+    assert.match(await page.locator('#page8').innerText(), /하나의 제작 환경에서/);
+    assert.match(await page.locator('#page8').innerText(), /같은 작품에 업데이트/);
+    assert.match(await page.locator('#page9').innerText(), /유해 요청 사용 제한/);
+    assert.match(await page.locator('#page9').innerText(), /로그와 AI 분석 리포트/);
     assert.equal(await page.locator('img').evaluateAll(images => images.filter(image => !image.complete || !image.naturalWidth).length), 0, 'missing image');
     const offer = await fs.readFile(path.join(root, 'src/lib/offer.ts'), 'utf8');
     for (const match of offer.matchAll(/value: (\d+), unit: "([^"]+)", label: "([^"]+)"/g)) {
@@ -56,9 +61,9 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
       assert.equal((await stat.locator('dd').innerText()).replace(/[,\s]/g, ''), match[1] + match[2], 'proof must match source');
     }
     assert.equal(await page.locator('.proof-source').innerText(), offer.match(/PROOF_ASOF = "([^"]+)"/)[1]);
-    const page8 = await page.locator('#page8').innerText();
+    const page10 = await page.locator('#page10').innerText();
     for (const text of ['4주 무료', '월 29,000원', 'AI LLM 토큰 비용·부가세 포함', 'contact@letscoding.kr', '010-5679-0072']) {
-      assert(offer.includes(text) && page8.includes(text), `offer must match source: ${text}`);
+      assert(offer.includes(text) && page10.includes(text), `offer must match source: ${text}`);
     }
     assert.deepEqual(await page.locator('.qr-block > a').evaluateAll(links => links.map(link => link.href)), ['https://www.letscoding.kr/seminar/inquiry', 'https://lounge.letscoding.kr/works']);
     await page.emulateMedia({ media: 'print' });
@@ -83,12 +88,12 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
       return failures;
     }));
     assert.deepEqual(defects, [], 'print layout defects');
-    for (let index = 0; index < 8; index++) await page.locator('.sheet').nth(index).screenshot({ path: path.join(previews, `page-${index + 1}.png`) });
+    for (let index = 0; index < 10; index++) await page.locator('.sheet').nth(index).screenshot({ path: path.join(previews, `page-${index + 1}.png`) });
     await page.pdf({ path: path.join(output, 'letscoding-lounge-brochure.pdf'), printBackground: true, preferCSSPageSize: true, displayHeaderFooter: false, tagged: true });
     await page.emulateMedia({ media: 'screen' });
     await page.goto(pathToFileURL(path.join(__dirname, 'index.html')).href);
     await page.evaluate(() => document.fonts.ready);
-    assert.equal(await page.locator('.pages img').count(), 8);
+    assert.equal(await page.locator('.pages img').count(), 10);
     assert.equal(await page.locator('img').evaluateAll(images => images.filter(image => !image.complete || !image.naturalWidth).length), 0, 'missing preview');
     await page.setViewportSize({ width: 1440, height: 1100 });
     assert.ok(await page.locator('.pages figure').evaluateAll(figures => figures.every((figure, index) => !index || Math.abs(figure.getBoundingClientRect().top - figures[index - 1].getBoundingClientRect().bottom) < 1)), 'preview pages must connect in one column');
@@ -97,6 +102,6 @@ const { chromium } = require(process.env.BROCHURE_PLAYWRIGHT || 'playwright');
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'mobile preview must fit viewport');
     assert.deepEqual(errors, [], 'browser errors');
-    console.log('PASS: eight A4 pages, source facts, QR links, 12mm safe area, assets and mobile preview. PDF exported.');
+    console.log('PASS: ten A4 pages, source facts, QR links, 12mm safe area, assets and mobile preview. PDF exported.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

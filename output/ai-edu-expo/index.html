@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI EDU Expo 공교육 브로셔 · 렛츠코딩 라운지</title>
+<meta name="description" content="렛츠코딩 라운지 공교육 브로셔 8장 — 학생별 프로젝트 관리, 창작과 가치 경험, 안전한 AI 활용 교육.">
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+* {
+  box-sizing:border-box}
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:84px}
+body {
+  margin:0;
+  background:#e9edf2;
+  color:#151923;
+  font-family:"Pretendard Variable",Pretendard,sans-serif;
+  word-break:keep-all}
+h1,h2,p {
+  margin:0}
+.toolbar {
+  position:sticky;
+  top:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:14px max(20px,calc((100% - 1200px)/2));
+  background:#ffffffed;
+  border-bottom:1px solid #d8dee7;
+  backdrop-filter:blur(12px)}
+.toolbar strong {
+  font-size:15px}
+.toolbar nav {
+  display:flex;
+  gap:4px;
+  flex-wrap:wrap}
+.toolbar a {
+  display:grid;
+  place-items:center;
+  min-width:40px;
+  min-height:40px;
+  border-radius:6px;
+  color:#334155;
+  text-decoration:none;
+  font-size:14px}
+.toolbar a:hover {
+  background:#edf3fa}
+a:focus-visible {
+  outline:3px solid #1679cf;
+  outline-offset:2px}
+main {
+  width:min(1200px,100%);
+  margin:28px auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:28px}
+.slide {
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:white;
+  box-shadow:0 4px 20px #152b4610}
+.page-number {
+  position:absolute;
+  right:24px;
+  bottom:15px;
+  font-size:11px;
+  color:#718096;
+  letter-spacing:2px}
+.cover {
+  text-align:center;
+  padding:100px 48px 70px;
+  display:flex;
+  flex-direction:column;
+  align-items:center}
+.cover h1 {
+  font-size:64px;
+  letter-spacing:-3px;
+  font-weight:700;
+  margin-top:5px}
+.subtitle {
+  font-size:23px;
+  line-height:1.65;
+  margin-top:48px}
+.pillars {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:44px;
+  margin-top:120px;
+  width:100%;
+  font-size:23px;
+  font-weight:700;
+  line-height:1.55}
+.text-slide {
+  padding:48px 56px 42px;
+  display:flex;
+  flex-direction:column;
+  gap:24px}
+h2 {
+  font-size:32px;
+  line-height:1.4;
+  letter-spacing:-1px}
+.copy {
+  font-size:21px;
+  line-height:1.65;
+  display:grid;
+  gap:16px}
+.lead {
+  font-weight:600;
+  font-size:23px}
+.steps {
+  display:block;
+  max-width:84%;
+  max-height:155px;
+  object-fit:contain;
+  align-self:center;
+  margin-top:auto;
+  min-height:0}
+.image-slide {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 12px 30px}
+.image-slide>img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain}
+.pricing {
+  aspect-ratio:1491/1055;
+  padding:0 0 30px}
+.pricing>img {
+  height:auto}
+.image-slide .page-number {
+  bottom:9px}
+@media(max-width:900px) {
+  main {
+  margin:16px auto;
+  gap:16px}
+.slide {
+  aspect-ratio:auto}
+.cover {
+  padding:64px 28px}
+.cover h1 {
+  font-size:48px}
+.subtitle {
+  font-size:21px;
+  margin-top:24px}
+.pillars {
+  margin-top:64px;
+  gap:24px;
+  font-size:19px}
+.text-slide {
+  padding:36px 28px 48px}
+h2 {
+  font-size:28px}
+.copy {
+  font-size:19px}
+.lead {
+  font-size:21px}
+.steps {
+  margin-top:8px;
+  max-width:100%;
+  max-height:none;
+  width:100%}
+.image-slide>img {
+  height:auto}
+}
+@media(max-width:560px) {
+  .toolbar {
+  gap:8px;
+  padding:10px 14px}
+.toolbar strong {
+  font-size:13px}
+.toolbar a {
+  min-width:32px;
+  min-height:36px}
+.cover {
+  padding:52px 24px 64px}
+.cover h1 {
+  font-size:38px;
+  letter-spacing:-2px}
+.subtitle {
+  font-size:18px}
+.pillars {
+  grid-template-columns:1fr;
+  gap:28px;
+  margin-top:48px;
+  font-size:20px}
+.text-slide {
+  padding:32px 24px 46px}
+h2 {
+  font-size:25px}
+.copy {
+  font-size:17px;
+  line-height:1.75}
+.lead {
+  font-size:19px}
+.page-number {
+  right:16px}
+.image-slide {
+  padding:4px 4px 26px}
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+  scroll-behavior:auto}
+}
+@page {
+  size:320mm 180mm;
+  margin:0}
+@media print {
+  html,body {
+  background:white}
+.toolbar {
+  display:none}
+main {
+  width:1200px;
+  margin:0;
+  gap:0}
+.slide {
+  width:1200px;
+  height:675px;
+  aspect-ratio:auto;
+  box-shadow:none;
+  break-after:page;
+  break-inside:avoid}
+.slide:last-child {
+  break-after:auto}
+.pricing {
+  padding:8px 12px 26px}
+.pricing>img {
+  width:auto;
+  max-width:100%;
+  height:100%}
+}
+</style>
+</head>
+<body>
+<header class="toolbar"><strong>AI EDU Expo 공교육 브로셔</strong><nav aria-label="페이지 이동"><a href="#slide-1" aria-label="1쪽으로 이동">01</a><a href="#slide-2" aria-label="2쪽으로 이동">02</a><a href="#slide-3" aria-label="3쪽으로 이동">03</a><a href="#slide-4" aria-label="4쪽으로 이동">04</a><a href="#slide-5" aria-label="5쪽으로 이동">05</a><a href="#slide-6" aria-label="6쪽으로 이동">06</a><a href="#slide-7" aria-label="7쪽으로 이동">07</a><a href="#slide-8" aria-label="8쪽으로 이동">08</a></nav></header>
+<main>
+<section class="slide cover" id="slide-1" aria-labelledby="title-1">
+<h1 id="title-1">렛츠코딩 라운지</h1>
+<p class="subtitle">아이디어 기획부터 코딩, 결과물 공유, 경제 활동까지 하나의 플랫폼에서</p>
+<div class="pillars">
+<p>학생별 맞춤 프로젝트, 교사는 한눈에 관리</p>
+<p>작품 제작을 넘어, 경제적 가치까지 경험하는 교육</p>
+<p>AI 활용 과정까지 확인하는 안전한 교육 환경</p>
+</div><span class="page-number">01 / 08</span></section>
+<section class="slide text-slide" id="slide-2" aria-labelledby="title-2">
+<h2 id="title-2">01. 학생별 맞춤 프로젝트, 교사는 한눈에 관리</h2>
+<div class="copy">
+<p class="lead">모두가 똑같은 결과물을 만드는 수업에서, 각자의 아이디어를 실현하는 수업으로.</p>
+<p>바이브코딩은 학생 개개인의 관심사와 아이디어를 실제 프로그램으로 구현할 수 있도록 돕습니다. 하지만 한 명의 교사가 여러 학생의 서로 다른 프로젝트를 지도하고 관리하기는 쉽지 않습니다.</p>
+<p>렛츠코딩 라운지는 아이디어 기획부터 AI 코딩, 배포, 작품 공유까지 하나의 환경에서 지원합니다. 교사는 과제 관리 기능을 통해 학생별 진행 상황과 결과물을 한눈에 확인하고 체계적으로 지도할 수 있습니다.</p>
+</div>
+<img class="steps" src="assets/image1.png" alt="아이디어 기획, AI 코딩, 배포, 작품 공유의 네 단계">
+<span class="page-number">02 / 08</span></section>
+<section class="slide image-slide" id="slide-3" aria-label="프로젝트 제작과 관리">
+<img src="assets/image2.png" alt="렛츠코딩 라운지: 아이디어 기획 → AI 코딩 → 배포 → 작품 공유. 학생별 프로젝트의 진행 상황과 결과물을 교사가 한눈에 관리합니다.">
+<span class="page-number">03 / 08</span></section>
+<section class="slide text-slide" id="slide-4" aria-labelledby="title-4">
+<h2 id="title-4">02. 작품 제작을 넘어, 경제적 가치까지 경험하는 교육</h2>
+<div class="copy">
+<p class="lead">만드는 즐거움에서 공유하는 즐거움으로, 그리고 가치를 인정받는 경험으로.</p>
+<p>프로그램을 완성하는 것은 시작에 불과합니다. 학생들은 자신의 작품을 다른 사람에게 소개하고, 사용자들의 반응을 살펴보며, 더 나은 작품으로 발전시키는 과정을 경험합니다.</p>
+<p>렛츠코딩 라운지의 가상 경제 시스템과 배지 시스템은 작품 공유와 참여를 촉진합니다.</p>
+<p>학생들은 자신의 창작물이 다른 사람에게 어떤 가치를 제공하는지 고민하며, 창작·홍보·피드백·개선으로 이어지는 경제 활동의 기초를 경험할 수 있습니다.</p>
+</div>
+<img class="steps" src="assets/image3.png" alt="작품 완성, 작품 공유, 반응과 보상, 개선과 성장의 네 단계">
+<span class="page-number">04 / 08</span></section>
+<section class="slide image-slide" id="slide-5" aria-label="작품 공유와 가치 성장">
+<img src="assets/image4.png" alt="작품 공유와 가치 성장 경험: 작품 완성 → 작품 공유 → 반응과 보상 → 개선과 성장. 가상 경제와 배지 시스템을 통해 창작물의 가치를 경험합니다.">
+<span class="page-number">05 / 08</span></section>
+<section class="slide text-slide" id="slide-6" aria-labelledby="title-6">
+<h2 id="title-6">03. AI 활용 과정까지 확인하는 안전한 교육 환경</h2>
+<div class="copy">
+<p class="lead">AI를 사용하는 것에서 나아가, AI를 올바르게 활용하는 방법까지 지도합니다.</p>
+<p>학생들이 개별적으로 유료 AI 서비스를 구독할 필요 없이 학교에서 제공하는 환경을 통해 바이브코딩에 참여할 수 있습니다.</p>
+<p>교사는 AI 활용 분석 보고서를 통해 학생들이 AI를 어떤 목적으로, 어떻게 활용했는지 확인하고 지도할 수 있습니다.</p>
+<p>단순히 AI가 만들어 준 결과물이 아니라, 학생의 질문과 문제 해결 과정을 살펴보는 교육 환경을 제공합니다.</p>
+</div>
+<img class="steps" src="assets/image5.png" alt="학교 제공 AI 환경, 학생의 AI 활용, 활용 분석 보고서, 교사 지도의 네 단계">
+<span class="page-number">06 / 08</span></section>
+<section class="slide image-slide" id="slide-7" aria-label="AI 활용과 교사 지도">
+<img src="assets/image6.png" alt="AI 활용 과정까지 지도하는 교육 환경: 학교 제공 AI 환경 → 학생의 AI 활용 → 활용 분석 보고서 → 교사 지도. 학생의 질문과 문제 해결 과정을 확인합니다.">
+<span class="page-number">07 / 08</span></section>
+<section class="slide image-slide pricing" id="slide-8" aria-label="AI 바이브코딩 요금제">
+<img src="assets/image7.png" alt="렛츠코딩 라운지 AI 바이브코딩 요금제. 6개월 학생 1명 기준 Lite 37,900원, Plus 95,000원, Pro 5x 205,900원. 월 결제는 각각 7,900원, 19,800원, 42,900원. 요금별 기능 비교, 기관용 AI 사용량 초기화권, 학교 및 교육기관 관리 기능과 이용 안내.">
+<span class="page-number">08 / 08</span></section>
+</main>
+</body>
+</html>

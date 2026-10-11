@@ -1,0 +1,61 @@
+{
+  "width": 1200,
+  "height": 11337,
+  "sections": [
+    {
+      "file": "sections/01.png",
+      "width": 1200,
+      "height": 1150
+    },
+    {
+      "file": "sections/02.png",
+      "width": 1200,
+      "height": 1163
+    },
+    {
+      "file": "sections/03.png",
+      "width": 1200,
+      "height": 1606
+    },
+    {
+      "file": "sections/04.png",
+      "width": 1200,
+      "height": 828
+    },
+    {
+      "file": "sections/05.png",
+      "width": 1200,
+      "height": 933
+    },
+    {
+      "file": "sections/06.png",
+      "width": 1200,
+      "height": 1126
+    },
+    {
+      "file": "sections/07.png",
+      "width": 1200,
+      "height": 997
+    },
+    {
+      "file": "sections/08.png",
+      "width": 1200,
+      "height": 865
+    },
+    {
+      "file": "sections/09.png",
+      "width": 1200,
+      "height": 1263
+    },
+    {
+      "file": "sections/10.png",
+      "width": 1200,
+      "height": 1036
+    },
+    {
+      "file": "sections/11.png",
+      "width": 1200,
+      "height": 370
+    }
+  ]
+}
