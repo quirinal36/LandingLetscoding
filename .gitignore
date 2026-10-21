@@ -62,3 +62,8 @@ MYPROBLEM.md
 /artifacts/
 /graphify-out/memory/
 /output/lounge-detail/mobile-preview.png
+
+# Regenerable card-news exports and Graphify session reflections
+/output/cardnews/*/out/
+/graphify-out/.graphify_learning.json
+/graphify-out/reflections/

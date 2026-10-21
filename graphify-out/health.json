@@ -1,25 +1,25 @@
 {
-  "node_count": 641,
+  "node_count": 900,
   "unverified_node_count": 0,
-  "raw_edge_count": 1044,
+  "raw_edge_count": 1632,
   "non_object_edges": 0,
   "missing_endpoint_edges": 0,
-  "dangling_endpoint_edges": 94,
+  "dangling_endpoint_edges": 169,
   "self_loop_edges": 0,
-  "valid_candidate_edges": 950,
-  "exact_duplicate_edges": 0,
-  "directed_unique_endpoint_pairs": 929,
+  "valid_candidate_edges": 1463,
+  "exact_duplicate_edges": 3,
+  "directed_unique_endpoint_pairs": 1442,
   "directed_same_endpoint_collapsed_edges": 21,
-  "undirected_unique_endpoint_pairs": 928,
-  "undirected_same_endpoint_collapsed_edges": 22,
+  "undirected_unique_endpoint_pairs": 1442,
+  "undirected_same_endpoint_collapsed_edges": 21,
   "same_endpoint_group_count": 14,
-  "relation_variant_groups": 11,
+  "relation_variant_groups": 7,
   "source_file_variant_groups": 0,
-  "source_location_variant_groups": 4,
+  "source_location_variant_groups": 5,
   "context_variant_groups": 0,
   "post_build_graph_type": "Graph",
-  "post_build_node_count": 641,
-  "post_build_edge_count": 927,
+  "post_build_node_count": 900,
+  "post_build_edge_count": 1441,
   "post_build_error": "",
   "producer_suppression": {
     "path": "/Users/letscoding/.local/share/uv/tools/graphifyy/lib/python3.13/site-packages/graphify/extract.py",
@@ -165,6 +165,26 @@
       ]
     },
     {
+      "source": "scripts_check_blog",
+      "target": "src_lib_blog_getposts",
+      "edge_count": 2,
+      "relations": [
+        "imports",
+        "indirect_call"
+      ],
+      "source_files": [
+        "scripts/check-blog.mjs"
+      ],
+      "source_locations": [
+        "L2",
+        "L38"
+      ],
+      "contexts": [
+        "argument",
+        "import"
+      ]
+    },
+    {
       "source": "src_components_site_header_siteheader",
       "target": "src_components_site_header_siteheader_onscroll",
       "edge_count": 2,
@@ -182,26 +202,6 @@
       "contexts": [
         "",
         "call"
-      ]
-    },
-    {
-      "source": "src_components_site_header_siteheader",
-      "target": "src_components_site_header_siteheader_onpointerdown",
-      "edge_count": 2,
-      "relations": [
-        "contains",
-        "indirect_call"
-      ],
-      "source_files": [
-        "src/components/site-header.tsx"
-      ],
-      "source_locations": [
-        "L195",
-        "L198"
-      ],
-      "contexts": [
-        "",
-        "argument"
       ]
     }
   ]

@@ -52,5 +52,8 @@ export const COMPANY = {
   name: "주식회사 렛츠코딩",
   short: "렛츠코딩",
   latin: "LETSCODING",
+  /** 검색어와 같은 붙여쓴 표기. 구조화 데이터 alternateName과 소개 글에 쓴다. */
+  compact: "주식회사렛츠코딩",
+  product: "렛츠코딩라운지",
   url: "https://www.letscoding.kr",
 } as const;

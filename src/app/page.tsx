@@ -50,7 +50,7 @@ const JSON_LD = {
       "@type": "Organization",
       "@id": ORG_ID,
       name: COMPANY.name,
-      alternateName: [COMPANY.short, COMPANY.latin],
+      alternateName: [COMPANY.short, COMPANY.compact, COMPANY.latin],
       url: COMPANY.url,
       logo: `${COMPANY.url}/icon.png`,
       email: CONTACT.email,
@@ -67,7 +67,8 @@ const JSON_LD = {
     },
     {
       "@type": "Service",
-      name: "렛츠코딩 라운지",
+      name: COMPANY.product,
+      alternateName: ["렛츠코딩 라운지", "LETSCODING Lounge"],
       url: "https://lounge.letscoding.kr",
       provider: { "@id": ORG_ID },
       audience: { "@type": "BusinessAudience", name: "학교·학원 등 교육기관" },

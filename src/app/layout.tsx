@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(COMPANY.url),
   alternates: { canonical: "./" },
   title: {
-    default: `${COMPANY.name} — 학교·학원 등 교육 현장을 위한 AI 시대 커리큘럼 솔루션`,
+    default: `${COMPANY.name} — 렛츠코딩라운지 · 학교·학원 등 교육 현장을 위한 AI 시대 커리큘럼 솔루션`,
     template: `%s · ${COMPANY.short}`,
   },
   description: DESCRIPTION,

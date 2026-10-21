@@ -68,7 +68,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - 인쇄 원본은 `prototypes/brochure/brochure.html`, PDF는 `output/pdf/letscoding-lounge-brochure.pdf`입니다. 배포 시 원본으로 정적 경로를 생성하며 별도 앱 헤더는 포함하지 않습니다.
 - 브로셔 검증: Playwright 경로를 `BROCHURE_PLAYWRIGHT`, Chrome 경로를 `BROCHURE_CHROME`, 실행 중인 페이지 주소를 `BROCHURE_URL`로 지정하고 `node prototypes/brochure/check.cjs`를 실행합니다.
 - 학교용 세로 상세페이지: `prototypes/lounge-detail/index.html`이 편집 원본이며, 전달용 HTML·1200px 전체 이미지·분할 이미지는 `output/lounge-detail/`에서 관리합니다. 재출력 방법은 `prototypes/lounge-detail/README.md`를 참고합니다.
-- AI EDU Expo 8장 브로셔: `/ai-edu-expo`. 편집 원본·이미지·검증 스크립트·수정 제안서는 `output/ai-edu-expo/`에서 관리합니다. 기존 `/brochure`와 별도 자료입니다.
+- AI EDU Expo 공교육 브로셔(본문 8쪽 + 표지 4쪽, 총 12쪽): `/ai-edu-expo`. 편집 원본·이미지·검증 스크립트·수정 제안서는 `output/ai-edu-expo/`에서 관리합니다. 기존 `/brochure`와 별도 자료입니다.
 
 - [랜딩 섹션 구성](docs/LANDING-PLAN.md) · [초기 요구사항](docs/PRD.md) · [디자인 시스템](docs/DESIGN.md)
 - 장면 기획: [성장](docs/GROWTH-SCENE-PLAN.md), [진화](docs/EVOLVE-SCENE-PLAN.md), [히어로 모션](docs/HERO-MOTION-PLAN.md), [히어로 영상](docs/HERO-VIDEO-PLAN.md)

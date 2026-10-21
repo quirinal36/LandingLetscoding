@@ -8,9 +8,9 @@ import "./lounge.css";
 /* 사실 출처: yudanah/letscoding_lounge 저장소와 운영 DB(2026.9.28 anon 집계). 코드에 없는 기능·효과는 쓰지 않는다. */
 
 export const metadata: Metadata = {
-  title: "렛츠코딩 라운지 · 코딩학원 학생 작품 플랫폼",
+  title: "렛츠코딩라운지 · 코딩학원 학생 작품 플랫폼",
   description:
-    "렛츠코딩 라운지는 학생이 만든 웹 게임·웹사이트·로블록스·블록 코딩 작품을 링크로 공개하고 쌓아 두는 코딩학원용 플랫폼입니다. 4주 무료 파일럿, 학생 1명 월 29,000원(AI LLM 토큰 비용 포함).",
+    "렛츠코딩라운지는 주식회사 렛츠코딩이 운영하는 코딩학원용 플랫폼입니다. 학생이 만든 웹 게임·웹사이트·로블록스·블록 코딩 작품을 링크로 공개하고 쌓아 둡니다. 4주 무료 파일럿, 학생 1명 월 29,000원(AI LLM 토큰 비용 포함).",
 };
 
 const LOUNGE = "https://lounge.letscoding.kr";
@@ -112,7 +112,7 @@ export default function Page() {
       {/* C안: 매달 이어지는 수업. 각 장면은 하나의 메시지만 다룬다. */}
       <section className="ls-scene ls-hero" aria-labelledby="lounge-title">
         <div className="ls-container">
-          <p className="ls-kicker">렛츠코딩 라운지 · 코딩학원을 위한 솔루션</p>
+          <p className="ls-kicker">렛츠코딩라운지 · 코딩학원을 위한 솔루션</p>
           <h1 id="lounge-title">다음 달도,<br />그다음 달도.<br /><em>이어지는<br className="ls-mobile-break" /> 프로젝트 수업.</em></h1>
           <p className="ls-lead">지금 가르치는 코딩을 출발점으로.<br />새로운 주제와 만드는 경험이<br className="ls-mobile-break" /> 우리 학원의 다음 수업이 됩니다.</p>
           <a className="ls-text-link" href="#learning">수업이 이어지는 흐름 살펴보기 <span aria-hidden="true">↓</span></a>

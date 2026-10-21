@@ -19,7 +19,7 @@ import { EVOLVE_T, EvolveCaptions, EvolveStage } from "@/components/landing/evol
 export const metadata: Metadata = {
   title: "브랜드 스토리",
   description:
-    "7년째 코딩학원을 운영하며 교구와 교재의 한계에 부딪힌 원장이, 학생들과 바이브코딩을 시작하고 렛츠코딩 라운지를 만들기까지의 이야기입니다.",
+    "7년째 코딩학원을 운영하며 교구와 교재의 한계에 부딪힌 원장이, 학생들과 바이브코딩을 시작하고 렛츠코딩라운지를 만들기까지, 주식회사 렛츠코딩의 이야기입니다.",
 };
 
 /* 스크롤에 따라 각 줄의 단어가 차례로 또렷해진다 */
