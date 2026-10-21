@@ -15,3 +15,7 @@ Studio 글은 제공된 미리보기·레코 대화 스크린샷 두 장을 사�
 검증: 원고 형식, 저장된 블록의 `decodePost()` 처리, 공개 이미지 HTTP 응답, 세 상세 페이지의 제목·이미지·색인 허용, 블로그 목록·사이트맵·RSS의 세 글 포함 여부를 확인했다.
 
 구글 서치콘솔·네이버 서치어드바이저의 사이트맵 수동 재제출은 하지 않았다. 실제 검색 색인 여부는 별도로 확인해야 한다.
+
+## 2026-10-21 (표지 교체)
+
+`about-letscoding-company` 표지를 원장 수채화 일러스트로 바꿨다. 이미지는 `public/blog/about-letscoding-company/cover.jpg`(1253×705, 16:9)로 사이트에 함께 배포한다. 원고 assets의 `cover.jpg`도 같은 파일로 바꿨다. `uploaded.json`은 이전 업로드 기록이라 sha256이 달라졌고, 다시 발행하면 새로 업로드된다. DB의 `cover_image_url`은 블로그 편집 화면에서 `/blog/about-letscoding-company/cover.jpg`로 바꾼다.
