@@ -62,6 +62,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 블로그 전용 관리자는 UUID `41f00437-af2e-4bc7-a720-b6a70f4db4f7` 계정입니다. `landing.can_manage_blog()`가 지정 계정 또는 기존 플랫폼 관리자에게만 권한을 허용하며, 지정 계정의 `public.profiles.role`은 `teacher`로 유지합니다. 이메일 변경으로 권한이 이동하지 않습니다.
 
+## 온보딩 가이드 데이터 연결
+
+온보딩 가이드(`/guide`)는 Supabase `landing` 스키마의 `guide_sessions`(세션)와 `guide_lessons`(편)를 요청 시 읽습니다. 편의 `chapters`는 `[{ title, start, blocks }]` 배열이며 `start`는 유튜브 챕터 시작 초(없으면 null), `blocks`는 블로그와 같은 `text`·`image`·`prompt` 블록입니다. 텍스트 블록은 블로그 문법에 `- 목록`과 `1. 번호 목록`을 더해 지원합니다. 준비 중인 편(`is_complete = false`)도 누구나 볼 수 있고 목차에 `준비 중`으로 표시됩니다. 본문이 없는 편은 `noindex`이며 사이트맵에서도 뺍니다.
+
+- `/guide`는 표지와 전체 목차, `/guide/편주소`는 옆 목차·영상·교재 본문·이전/다음 편이 있는 읽기 화면입니다. 영상은 `youtube-nocookie.com` 임베드로 보여 주고 소제목을 누르면 그 시점부터 재생합니다.
+- 관리자(블로그와 같은 `landing.can_manage_blog()` 권한)는 카카오 로그인 후 `/guide/editor`에서 편을, `/guide/editor/session`에서 세션을 작성·수정·삭제합니다. 유튜브 주소(watch·youtu.be·shorts)를 붙여 넣으면 ID만 저장합니다. 촬영 메모는 관리자만 읽는 `guide_lesson_notes`에 저장됩니다.
+- 로그인·로그아웃 뒤 돌아갈 경로는 `landing-next` 쿠키(`/auth` 경로, 10분)로 전달하며 `/blog`·`/guide` 아래만 허용합니다.
+- 마이그레이션은 `../letscoding_lounge/supabase/migrations/`의 `20261024145722_create_landing_guide.sql`(테이블·RLS)과 `20261024145740_seed_landing_guide.sql`(초기 목차 18편·촬영 메모)입니다. 초안 문서는 `output/onboarding_guide/video-shooting-plan.md`이며 이후 수정은 DB가 기준입니다.
+
+검증: `node scripts/check-guide.mjs`, `npm run build`.
+
 ## 프로젝트 문서와 이미지
 
 - 브로셔 웹 경로: `/brochure`. 10쪽을 세로로 이어 보고 `인쇄하기`로 가로 A4 한 쪽씩 출력합니다. `PDF 다운로드`는 `/brochure/pdf`입니다.

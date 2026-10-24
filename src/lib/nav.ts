@@ -32,14 +32,21 @@ export const NAV: NavGroup[] = [
     ],
   },
   {
-    label: "온라인 설명회",
+    label: "가이드",
     layer: 3,
+    items: [
+      { label: "온보딩 가이드", href: "/guide", note: "도입 후 기관 설정부터 수업 운영까지 순서대로 따라 하기" },
+    ],
+  },
+  {
+    label: "온라인 설명회",
+    layer: 4,
     accent: true,
     items: [{ label: "도입문의", href: "/seminar/inquiry", note: "기관 도입 상담 신청" }],
   },
   {
     label: "소식",
-    layer: 4,
+    layer: 5,
     items: [
       { label: "블로그", href: "/blog" },
       { label: "업데이트 소식", href: "/news/updates" },
