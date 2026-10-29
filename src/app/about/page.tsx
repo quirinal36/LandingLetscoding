@@ -102,7 +102,7 @@ export default function Page() {
           </div>
           <figure className="w-44 md:w-60">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-white/5">
-              <Image src="/about/leehg-profile.jpg" alt="이형구 원장 프로필 사진" fill priority sizes="(min-width: 768px) 240px, 176px" className="object-cover" />
+              <Image src="/about/leehg-profile-cropped.jpg" alt="이형구 원장 프로필 사진" fill priority sizes="(min-width: 768px) 240px, 176px" className="object-cover" />
             </div>
             <figcaption className="mt-3">
               <span className="block text-lg font-bold">이형구</span>
