@@ -21,6 +21,7 @@ function PostCard({ post }: { post: BlogPost }) {
           alt=""
           loading="lazy"
           className="aspect-[16/9] w-full object-cover"
+          style={post.slug === "about-letscoding-company" ? { objectPosition: "center 25%" } : undefined}
         />
       )}
       <div className="flex flex-1 flex-col p-5">

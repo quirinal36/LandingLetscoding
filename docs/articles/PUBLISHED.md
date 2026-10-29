@@ -19,3 +19,9 @@ Studio 글은 제공된 미리보기·레코 대화 스크린샷 두 장을 사�
 ## 2026-10-21 (표지 교체)
 
 `about-letscoding-company` 표지를 원장 수채화 일러스트로 바꿨다. 이미지는 `public/blog/about-letscoding-company/cover.jpg`(1253×705, 16:9)로 사이트에 함께 배포한다. 원고 assets의 `cover.jpg`도 같은 파일로 바꿨다. `uploaded.json`은 이전 업로드 기록이라 sha256이 달라졌고, 다시 발행하면 새로 업로드된다. DB의 `cover_image_url`은 블로그 편집 화면에서 `/blog/about-letscoding-company/cover.jpg`로 바꾼다.
+
+## 2026-10-30 (프로필 사진 교체)
+
+브랜드스토리와 `about-letscoding-company` 표지를 사용자가 제공한 흑백 프로필 사진(898×1280)으로 교체했다. 브랜드스토리는 `public/about/leehg-profile.jpg`를 사용하고, 블로그 표지는 Supabase Storage에 새 파일로 업로드한 뒤 `landing.blog_posts.cover_image_url`을 갱신했다. 목록 카드에서는 얼굴이 잘리지 않도록 이 글의 이미지 위치를 조정했다.
+
+공개 글 13편의 대표·본문 이미지와 전체 글 목록(초안 없음)을 확인했다. 원장 프로필 사용처는 브랜드스토리와 위 글의 대표 이미지였다. 원고 assets와 `public/blog/about-letscoding-company/cover.jpg`도 첨부 원본으로 교체했고, `uploaded.json`에 새 해시와 URL을 기록했다. DB 본문과 다른 글은 변경하지 않았다.
