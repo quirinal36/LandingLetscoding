@@ -50,7 +50,7 @@ export function BlogEditor({ post }: { post?: EditablePost }) {
       </label>
       <label className="block text-sm font-medium">글 갈래
         <select className={fieldClass} value={values.category} onChange={e => setValues(v => ({ ...v, category: e.target.value as EditorValues["category"] }))}>
-          <option value="column">칼럼</option><option value="info">정보</option>
+          <option value="column">칼럼</option><option value="info">정보</option><option value="tools">도구</option>
         </select>
       </label>
       <label className="block text-sm font-medium">대표 이미지 주소

@@ -1,8 +1,18 @@
 export const BLOG_CATEGORIES = {
   column: { label: "칼럼", description: "코딩 교육 현장에서 보고 겪은 것을 원장이 직접 씁니다." },
   info: { label: "정보", description: "도구와 서비스가 실제로 어떻게 동작하는지 확인해서 정리합니다." },
+  tools: { label: "도구", description: "AI 영상 제작 수업에 쓰는 도구를 처음 쓰는 분도 따라 할 수 있게 설치 순서대로 정리합니다." },
 } as const;
 export type BlogCategory = keyof typeof BLOG_CATEGORIES;
+
+export function isBlogCategory(value: unknown): value is BlogCategory {
+  return typeof value === "string" && Object.hasOwn(BLOG_CATEGORIES, value);
+}
+
+/** 갈래 목록 주소. 칼럼은 블로그 첫 화면이다. */
+export function categoryHref(category: BlogCategory) {
+  return category === "column" ? "/blog" : `/blog/category/${category}`;
+}
 
 /** 목록 맨 위에 고정하는 교육 사명 선언서. 없는 slug면 고정 배너가 나오지 않는다. */
 export const PINNED_SLUG = "why-we-teach";
@@ -93,7 +103,7 @@ export function decodePost(value: unknown): BlogPost {
   const slug = text("slug");
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug)) throw new Error("Invalid blog slug");
   const category = text("category");
-  if (category !== "column" && category !== "info") throw new Error("Invalid blog category");
+  if (!isBlogCategory(category)) throw new Error("Invalid blog category");
   if (!Array.isArray(row.blocks)) throw new Error("Invalid blog blocks");
   const body = row.blocks.flatMap((value: unknown): Segment[] => {
     if (!value || typeof value !== "object") throw new Error("Invalid blog block");
@@ -153,7 +163,7 @@ export function formatDate(iso: string) {
 
 export type Block = { type: "text" | "image" | "prompt"; content?: string; url?: string; alt?: string };
 export type EditorValues = {
-  slug: string; title: string; summary: string; category: "column" | "info";
+  slug: string; title: string; summary: string; category: BlogCategory;
   author_name: string; author_title: string; cover_image_url: string;
   is_published: boolean; blocks: Block[];
 };
@@ -176,8 +186,8 @@ export function validatePost(payload: unknown) {
     return value;
   };
   const slug = text("slug", 80, true);
-  if (slug.length < 3 || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug) || slug === "editor") throw new Error("글 주소는 3~80자의 영문 소문자·숫자·하이픈으로 입력해 주세요. editor는 사용할 수 없습니다.");
-  if (p.category !== "column" && p.category !== "info") throw new Error("글 갈래를 선택해 주세요.");
+  if (slug.length < 3 || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug) || slug === "editor" || slug === "category") throw new Error("글 주소는 3~80자의 영문 소문자·숫자·하이픈으로 입력해 주세요. editor, category는 사용할 수 없습니다.");
+  if (!isBlogCategory(p.category)) throw new Error("글 갈래를 선택해 주세요.");
   if (typeof p.is_published !== "boolean") throw new Error("공개 여부를 확인해 주세요.");
   if (!Array.isArray(p.blocks) || !p.blocks.length || p.blocks.length > 100 || JSON.stringify(p.blocks).length > 300_000) throw new Error("본문은 1~100개 블록, 총 30만 자 이내로 작성해 주세요.");
   const blocks: Block[] = p.blocks.map((b: unknown) => {

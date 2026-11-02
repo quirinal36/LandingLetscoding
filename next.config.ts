@@ -6,7 +6,11 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.0.96", "192.168.0.*"],
   // 블로그는 /blog 로 옮겼다. 메뉴 초기 주소였던 /news/blog 를 영구 이동한다.
   async redirects() {
-    return [{ source: "/news/blog", destination: "/blog", permanent: true }];
+    return [
+      { source: "/news/blog", destination: "/blog", permanent: true },
+      // 수업 도구 안내는 블로그 '도구' 갈래로 옮겼다.
+      { source: "/tools", destination: "/blog/category/tools", permanent: true },
+    ];
   },
 };
 

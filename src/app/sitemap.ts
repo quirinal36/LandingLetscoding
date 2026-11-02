@@ -4,7 +4,7 @@ import { flattenGuide, getGuide, type Session } from "@/lib/guide";
 import { COMPANY } from "@/lib/nav";
 
 /** 색인할 페이지만 싣는다. 준비 중 페이지(STUB_ROBOTS)는 내용이 채워지면 여기에 추가한다. */
-const PAGES = ["/", "/about", "/about/philosophy", "/solutions/lounge", "/solutions/python", "/seminar/inquiry", "/blog", "/guide", "/tools"];
+const PAGES = ["/", "/about", "/about/philosophy", "/solutions/lounge", "/solutions/python", "/seminar/inquiry", "/blog", "/blog/category/info", "/blog/category/tools", "/guide"];
 
 // 빌드 때 미리 만들지 않고 요청마다 만든다. 빌드가 DB에 의존하지 않고, 새 글도 다음 배포 없이 실린다.
 export const dynamic = "force-dynamic";
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...PAGES.map((path) => ({
       url: new URL(path, COMPANY.url).toString(),
       lastModified:
-        path === "/blog" ? latest(posts.map((p) => p.updatedAt))
+        path.startsWith("/blog") ? latest(posts.map((p) => p.updatedAt))
         : path === "/guide" ? latest(lessons.map((r) => r.lesson.updatedAt))
         : new Date(),
     })),

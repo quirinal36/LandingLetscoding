@@ -1,5 +1,5 @@
 /* 「영상 제작을 위한 AI 활용」 수업 도구 안내 시리즈. 글 본문은 블로그(landing.blog_posts)에 있고,
-   여기에는 /tools 허브가 보여 줄 순서와 요약만 둔다. 기획: docs/TOOL-GUIDE-PLAN.md */
+   여기에는 블로그 '도구' 갈래(/blog/category/tools)가 보여 줄 순서와 요약만 둔다. 기획: docs/TOOL-GUIDE-PLAN.md */
 
 export type Tool = {
   slug: string;

@@ -1,6 +1,6 @@
 # 수업 도구 안내 블로그 시리즈 기획
 
-정리일: 2026-11-02 · 상태: 9편 공개, `/tools` 허브 배포. 글은 lounge 저장소 `20261102131107_seed_landing_tool_guides.sql`로 넣었고 이후 수정은 `/blog/editor`에서 한다. 6장 확인 사항은 실제 윈도우 PC 검수 때 반영한다.
+정리일: 2026-11-02 · 상태: 9편 공개. 2026-11-02 블로그 갈래를 칼럼·정보·도구로 나누고 시리즈를 '도구'(`tools`) 갈래 `/blog/category/tools`로 옮겼다(`/tools`는 영구 이동). 글은 lounge 저장소 `20261102131107_seed_landing_tool_guides.sql`로 넣었고 이후 수정은 `/blog/editor`에서 한다. 6장 확인 사항은 실제 윈도우 PC 검수 때 반영한다.
 
 ## 0. 목적과 확정 사항
 
@@ -10,8 +10,8 @@
 |---|---|
 | 기본 운영체제 | **Windows**. 모든 설치·명령은 윈도우(PowerShell) 기준으로 쓰고, 맥은 글 끝 짧은 절로 덧붙인다 |
 | Whisper | **공식 Python판**(`openai-whisper`). 그래서 Python 설치 글을 시리즈에 추가한다 |
-| 글 형식 | **전체 공개 블로그 글**(`landing.blog_posts`, 갈래 `info`), 주소 `/blog/<slug>` |
-| 모아 보기 | **`/tools`** 허브 페이지에서 시리즈 전체를 수업 순서대로 보여 준다 |
+| 글 형식 | **전체 공개 블로그 글**(`landing.blog_posts`, 갈래 `tools`), 주소 `/blog/<slug>` |
+| 모아 보기 | 블로그 왼쪽 메뉴의 **도구** 갈래(`/blog/category/tools`)에서 시리즈 전체를 수업 순서대로 보여 준다 |
 | 범위 | Node.js, FFmpeg, Git, Hyperframes, Whisper + Aside, Concat, kie.ai + 선행 도구 Python |
 | 선행 도구 | 먼저 설치해야 할 프로그램이 있으면 **글 앞쪽에 그 글의 링크를 둔다** |
 

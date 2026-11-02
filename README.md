@@ -53,7 +53,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ### 관리자 로그인과 편집
 
 - `/blog`에서 카카오 로그인하면 플랫폼 관리자와 지정 블로그 관리자에게 글 작성 버튼과 초안 목록이 보입니다. 공개 글 상세에는 수정·삭제 버튼이 보입니다.
-- `/blog/editor`에서 작성하고 `/blog/editor?slug=글주소`에서 수정합니다. 텍스트·이미지 URL·코드 블록의 순서 변경, 대표 이미지, 카테고리, 공개/초안 저장을 지원합니다. 이미지 파일 업로드는 아직 지원하지 않습니다.
+- `/blog/editor`에서 작성하고 `/blog/editor?slug=글주소`에서 수정합니다. 텍스트·이미지 URL·코드 블록의 순서 변경, 대표 이미지, 카테고리(칼럼 `column`·정보 `info`·도구 `tools`), 공개/초안 저장을 지원합니다. 목록은 왼쪽 메뉴로 갈래를 오가며 칼럼은 `/blog`, 나머지는 `/blog/category/<갈래>`입니다. 도구 갈래는 `src/lib/tools.ts`의 수업 순서로 보여 줍니다. 이미지 파일 업로드는 아직 지원하지 않습니다.
 - 삭제 전 확인하며, 저장 실패 시 폼 입력을 유지합니다. 수정 시각을 비교해 다른 곳에서 바뀐 글을 덮어쓰거나 삭제하지 않습니다.
 - Supabase SSR PKCE와 호스트 전용 HttpOnly 쿠키를 사용합니다. `.letscoding.kr` 전체로 쿠키를 공유하지 않습니다. 서버 액션마다 사용자와 블로그 관리 권한을 확인하고, 사용자 JWT로 DB에 접근해 RLS도 적용합니다.
 - 등록된 콜백은 `https://www.letscoding.kr/auth/callback`과 localhost/127.0.0.1의 3000·3100 포트입니다. 공용 Supabase의 기존 Kakao provider·site URL·다른 앱 콜백은 유지합니다.
