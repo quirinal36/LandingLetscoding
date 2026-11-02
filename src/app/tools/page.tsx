@@ -119,7 +119,7 @@ export default async function Page() {
           <code>{TOOLS.filter((t) => t.check).map((t) => t.check).join("\n")}</code>
         </pre>
         <p className="mt-3 text-sm text-ink-faint [word-break:keep-all]">
-          Node.js는 v22 이상, Python은 3.11이어야 합니다. Aside와 Concat은 설치 파일로 설치하고, kie.ai는 계정과 API 키만 준비합니다.
+          Node.js는 v22 이상, Python은 3.11이어야 합니다. npm -v에서 “스크립트를 실행할 수 없으므로” 오류가 나면 Node.js 글의 스크립트 실행 허용 단계를 진행하세요. Aside와 Concat은 설치 파일로 설치하고, kie.ai는 계정과 API 키만 준비합니다.
         </p>
       </section>
     </div>

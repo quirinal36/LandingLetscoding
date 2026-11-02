@@ -20,7 +20,7 @@ export const TOOLS_DESCRIPTION =
 
 /** 수업 시간표 순서. 선행 도구가 항상 앞에 온다. */
 export const TOOLS: Tool[] = [
-  { slug: "tools-nodejs", name: "Node.js", summary: "내 컴퓨터에서 자바스크립트 프로그램을 실행하는 엔진", when: "00:20 설치", requires: [], check: "node -v" },
+  { slug: "tools-nodejs", name: "Node.js", summary: "내 컴퓨터에서 자바스크립트 프로그램을 실행하는 엔진", when: "00:20 설치", requires: [], check: "node -v\nnpm -v" },
   { slug: "tools-ffmpeg", name: "FFmpeg", summary: "영상·음성 파일을 자르고 붙이고 변환하는 도구", when: "00:20 설치", requires: [], check: "ffmpeg -version" },
   { slug: "tools-git", name: "Git", summary: "파일 변경 이력을 저장하고 공개된 프로그램을 내려받는 도구", when: "00:20 설치", requires: [], check: "git --version" },
   { slug: "tools-hyperframes", name: "Hyperframes", summary: "HTML로 만든 장면을 시간 흐름에 맞춰 MP4 영상으로 만드는 도구", when: "01:10 모션그래픽 · 02:10 영상 제작", requires: ["tools-nodejs", "tools-ffmpeg"], check: "npx hyperframes doctor" },
