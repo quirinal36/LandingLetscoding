@@ -36,6 +36,7 @@ export const NAV: NavGroup[] = [
     layer: 3,
     items: [
       { label: "온보딩 가이드", href: "/guide", note: "도입 후 기관 설정부터 수업 운영까지 순서대로 따라 하기" },
+      { label: "수업 도구 안내", href: "/tools", note: "AI 영상 제작 수업에 쓰는 도구의 설치와 사용법" },
     ],
   },
   {
