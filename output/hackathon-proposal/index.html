@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해커톤 대회를 위한 AI바이브코딩 플랫폼 | 렛츠코딩</title>
+<meta name="description" content="참가자 100명의 2박 3일 해커톤. 렛츠코딩라운지 & 스튜디오로 AI 제작부터 데이터베이스, 배포, 상호 체험과 성과 공유까지 연결합니다.">
+<meta property="og:title" content="해커톤 대회를 위한 AI바이브코딩 플랫폼">
+<meta property="og:description" content="2박 3일 해커톤 운영사를 위한 렛츠코딩라운지 & 스튜디오 활용 제안">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#171a20">
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+:root{color-scheme:dark;--bg:#171a20;--paper:#f3f6f4;--ink:#f6f8f7;--muted:#bcc8c6;--mint:#a7f0d4;--line:#3c484a;--accent:#f0d996;font-family:'Pretendard Variable','Apple SD Gothic Neo',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#101217;color:var(--ink)}button,select,a{-webkit-tap-highlight-color:transparent}button,select{font:inherit}button,a,select{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.35}button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--mint);outline-offset:5px}a{color:inherit}p,h1,h2,h3,figure,ol,ul{margin:0}h1,h2,h3,p{word-break:keep-all;overflow-wrap:break-word}h1,h2{letter-spacing:-.055em;line-height:1.16;text-wrap:balance}h3{letter-spacing:-.035em}p{line-height:1.55}img{max-width:100%;display:block}button{color:inherit}.skip{position:fixed;left:16px;top:-80px;z-index:30;background:var(--mint);color:var(--bg);padding:12px}.skip:focus{top:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+main{max-width:1600px;margin:auto;padding:22px 22px 96px}.slide{container-type:inline-size;background:var(--bg);aspect-ratio:16/9;width:100%;position:relative;padding:3.8% 4.6% 3.4%;display:flex;flex-direction:column;overflow:hidden;margin-bottom:24px}.slide[hidden]{display:none}.slide.light{color:#18252b;background:var(--paper);--muted:#506369;--line:#cbd6d1;--mint:#12604e}.mast{display:flex;align-items:center;justify-content:space-between;font-size:1.03cqw;letter-spacing:.02em;margin-bottom:2.6cqw;color:var(--muted)}.mast b{color:var(--ink);font-size:1.12cqw;font-weight:650}.light .mast b{color:#25383a}.mast em{font-style:normal;color:var(--mint)}.kicker{font-size:1.03cqw;font-weight:600;letter-spacing:.14em;color:var(--mint);margin-bottom:1cqw}.slide h2{font-size:3.45cqw;font-weight:730;max-width:95%}.lead{font-size:1.55cqw;color:var(--muted);margin-top:1.2cqw;max-width:90%;line-height:1.55}.mint{color:var(--mint)}.gold{color:var(--accent)}.pagefoot{margin-top:auto;padding-top:1.2cqw;display:flex;justify-content:space-between;font-size:.9cqw;color:var(--muted)}.pagefoot a{text-underline-offset:4px}.source{font-size:.85cqw;color:var(--muted);line-height:1.4}.cover .mast{margin-bottom:5.2cqw}.cover h1{font-size:5.4cqw;max-width:90%;font-weight:750}.cover h1 span{display:block;color:var(--mint);margin-top:.4cqw}.cover .lead{font-size:1.9cqw;margin-top:2cqw}.cover-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:end;border-top:1px solid var(--line);padding-top:1.8cqw}.cover-bottom strong{font-size:2.3cqw;font-weight:600}.cover-bottom p{font-size:1.2cqw;color:var(--muted)}.hero-number{position:absolute;right:5%;top:19%;font-size:18cqw;font-weight:800;color:#a7f0d409;pointer-events:none;line-height:1}.cover h1,.cover .lead,.cover-bottom{z-index:1}
+.statement{font-size:4.7cqw;max-width:83%;margin:2.2cqw 0;font-weight:650;line-height:1.3;letter-spacing:-.05em}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5cqw;margin-top:3cqw}.flow li{list-style:none;border-top:1px solid var(--line);padding-top:1.2cqw}.flow small{font-size:1cqw;color:var(--mint);display:block;margin-bottom:1cqw}.flow h3{font-size:1.9cqw;margin-bottom:.7cqw}.flow p{font-size:1.22cqw;color:var(--muted)}.bottom-line{font-size:1.3cqw;margin-top:auto;padding-top:1.6cqw;color:var(--mint)}
+.split{display:grid;grid-template-columns:34% 1fr;gap:3cqw;align-items:center;flex:1;min-height:0;margin-top:1.8cqw}.split.wide-left{grid-template-columns:36% 1fr}.facts{display:grid;gap:1.7cqw}.facts dt{font-size:1.65cqw;font-weight:650;margin:0 0 .45cqw}.facts dd{margin:0;color:var(--muted);font-size:1.2cqw;line-height:1.65;word-break:keep-all}.capture{min-width:0}.zoom{padding:0;background:transparent;border:1px solid var(--line);display:block;width:100%;border-radius:4px;overflow:hidden}.zoom:hover{border-color:var(--mint)}.zoom img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}.capture figcaption{display:flex;gap:1cqw;justify-content:space-between;margin-top:.7cqw;font-size:.85cqw;color:var(--muted);line-height:1.4}.capture figcaption span:last-child{white-space:nowrap}.caption-strong{font-weight:600;color:var(--mint)}.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:3cqw;margin-top:2cqw;flex:1;min-height:0}.tool{display:grid;grid-template-columns:42% 1fr;gap:1.5cqw;min-height:0;align-items:center}.panel-crop{height:24cqw;width:100%;overflow:hidden;border:1px solid var(--line);border-radius:4px;background:#202329}.panel-crop img{height:100%;max-width:none;width:auto;object-fit:fill}.tool h3{font-size:1.9cqw;margin-bottom:1cqw}.tool p{font-size:1.2cqw;color:var(--muted);margin-bottom:1.2cqw}.large-number{font-size:8.7cqw;letter-spacing:-.08em;font-weight:730;line-height:1;color:var(--mint)}.large-number span{font-size:2.6cqw;margin-left:.7cqw;letter-spacing:-.04em}.aside-message{font-size:1.9cqw;line-height:1.4;letter-spacing:-.03em;margin:1.6cqw 0}.small-note{font-size:1cqw;color:var(--muted);margin-top:1.2cqw}.feature-line{display:flex;gap:1.2cqw;font-size:1.2cqw;color:var(--mint);margin-top:1.8cqw}.evaluation{border-collapse:collapse;width:100%;margin-top:2.1cqw;font-size:1.22cqw}.evaluation th{text-align:left;font-size:1.02cqw;color:var(--muted);font-weight:500;padding:.8cqw 1.1cqw;border-bottom:1px solid var(--line)}.evaluation td{padding:1.25cqw 1.1cqw;border-bottom:1px solid var(--line);line-height:1.45}.evaluation td:first-child{font-size:1.5cqw;font-weight:650;width:23%;color:var(--mint)}.evaluation td:nth-child(2){width:37%}.evaluation td:last-child{color:var(--muted)}.fineprint{font-size:1.02cqw;color:var(--muted);line-height:1.5;margin-top:1.2cqw}.schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;margin-top:2.7cqw}.schedule article{border-top:2px solid var(--mint);padding-top:1.4cqw}.schedule b{font-size:1.3cqw;color:var(--mint)}.schedule h3{font-size:2.45cqw;margin:1.2cqw 0}.schedule p{font-size:1.35cqw;color:var(--muted);line-height:1.9}.schedule strong{display:block;font-size:1.2cqw;margin-top:2cqw;font-weight:550}.budget{display:grid;grid-template-columns:1fr 1fr;gap:5cqw;margin-top:3cqw}.budget .scope{padding-bottom:1.5cqw;margin-bottom:1.4cqw;border-bottom:1px solid var(--line)}.scope p{font-size:1.15cqw;color:var(--muted)}.scope strong{font-size:2.7cqw;display:block;margin-top:.6cqw}.budget h3{font-size:1.9cqw;margin-bottom:1cqw}.plain-list{padding-left:1.2em;font-size:1.35cqw;line-height:1.8;color:var(--muted)}.plain-list li{margin-bottom:1cqw}.after{display:grid;grid-template-columns:1.1fr 1fr;gap:6cqw;margin-top:3cqw;align-items:center}.after .statement{font-size:3.5cqw;margin:0;max-width:none}.after .facts{gap:1.8cqw}.closing h2{font-size:4.5cqw;margin-top:1.8cqw}.closing .lead{font-size:1.8cqw;margin-top:1.8cqw}.closing-contact{display:grid;grid-template-columns:1fr 1fr;gap:4cqw;margin-top:auto;padding-top:2cqw;border-top:1px solid var(--line)}.closing-contact strong{font-size:1.3cqw;color:var(--muted)}.closing-contact a{display:block;width:fit-content;margin-top:.7cqw;font-size:2cqw;text-decoration-thickness:1px;text-underline-offset:6px}.closing-contact p{font-size:1.22cqw;color:var(--muted);margin-top:.7cqw}
+.toolbar{position:fixed;z-index:10;bottom:0;left:0;right:0;min-height:64px;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px max(22px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));background:#11151af5;border-top:1px solid #394547}.toolbar nav,.toolbar .actions{display:flex;align-items:center;gap:10px}.toolbar button,.toolbar select{border:1px solid #475456;border-radius:6px;padding:0 14px;min-height:44px;background:#20272e;font-size:14px;color:#f6f8f7}.toolbar button:hover:not(:disabled){background:#31433d}.toolbar label{font-size:13px;color:var(--muted)}.toolbar output{font-size:14px;font-variant-numeric:tabular-nums;min-width:56px;text-align:center}.toolbar .hint{font-size:12px;color:var(--muted)}.progress{height:3px;position:absolute;top:0;left:0;background:var(--mint);width:0;transition:width 180ms}.all-view main{max-width:1200px}.all-view .slide{margin-bottom:28px}.deck-ready:not(.all-view) main{min-height:calc(100dvh - 64px);display:grid;align-content:center;max-width:none;padding:14px 18px 82px}.deck-ready:not(.all-view) .slide{width:min(calc(100vw - 36px),calc((100dvh - 104px)*16/9));margin:0 auto}.slide h2:focus,.slide h1:focus{outline:none}dialog{width:min(96vw,1800px);max-width:none;max-height:96dvh;padding:12px;border:1px solid #536363;background:#171a20;border-radius:8px;color:#f6f8f7}dialog::backdrop{background:#000d}dialog header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:4px 4px 12px}dialog button{min-width:44px;min-height:44px;background:#263630;border:1px solid #536363;border-radius:5px;font:inherit}dialog img{margin:auto;width:auto;max-height:calc(96dvh - 90px);object-fit:contain}dialog p{font-size:14px}.error{position:fixed;right:20px;bottom:86px;max-width:min(420px,90vw);padding:12px 16px;background:#263630;border:1px solid var(--mint);z-index:20;font-size:14px}.error:empty{display:none}
+@media(max-width:900px){main,.deck-ready:not(.all-view) main{display:block;padding:12px 12px 142px}.slide,.deck-ready:not(.all-view) .slide{width:100%;aspect-ratio:auto;min-height:calc(100dvh - 150px);padding:25px 22px;overflow:visible;container-type:normal}.mast{font-size:10px;margin-bottom:26px;gap:10px}.mast b{font-size:12px}.kicker{font-size:11px;margin-bottom:14px}.slide h2{font-size:29px;max-width:100%;line-height:1.25}.lead{font-size:16px;margin-top:16px;max-width:100%}.pagefoot{font-size:10px;padding-top:30px;gap:14px}.source{font-size:10px}.cover .mast{margin-bottom:45px}.cover h1{font-size:37px;max-width:100%;line-height:1.25}.cover .lead{font-size:18px;margin-top:24px}.cover-bottom{margin-top:55px;padding-top:22px;display:block}.cover-bottom strong{font-size:24px}.cover-bottom p{font-size:13px;margin-top:12px}.hero-number{display:none}.statement{font-size:30px;max-width:100%;margin:24px 0}.flow{grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}.flow li{padding-top:14px}.flow small{font-size:11px;margin-bottom:12px}.flow h3{font-size:20px;margin-bottom:10px}.flow p{font-size:14px}.bottom-line{font-size:15px;padding-top:28px}.split,.split.wide-left{grid-template-columns:1fr;gap:26px;margin-top:24px}.facts{gap:22px}.facts dt{font-size:20px;margin-bottom:8px}.facts dd{font-size:15px}.capture figcaption{font-size:10px;margin-top:8px;gap:10px}.tools-grid{grid-template-columns:1fr;gap:28px;margin-top:26px}.tool{grid-template-columns:40% 1fr;gap:18px}.panel-crop{height:260px}.tool h3{font-size:21px;margin-bottom:12px}.tool p{font-size:14px;margin-bottom:12px}.large-number{font-size:84px}.large-number span{font-size:28px}.aside-message{font-size:22px;margin:20px 0}.small-note{font-size:12px;margin-top:14px}.feature-line{font-size:14px;gap:14px;margin-top:18px;flex-wrap:wrap}.evaluation{font-size:13px;margin-top:24px}.evaluation th{font-size:11px;padding:12px 7px}.evaluation td{padding:16px 7px}.evaluation td:first-child{font-size:15px;width:24%}.fineprint{font-size:12px;margin-top:20px}.schedule{grid-template-columns:1fr;gap:28px;margin-top:26px}.schedule article{padding-top:18px}.schedule b{font-size:14px}.schedule h3{font-size:25px;margin:12px 0}.schedule p{font-size:16px}.schedule strong{font-size:15px;margin-top:14px}.budget{grid-template-columns:1fr;gap:25px;margin-top:28px}.budget .scope{padding-bottom:18px;margin-bottom:18px}.scope p{font-size:14px}.scope strong{font-size:30px;margin-top:8px}.budget h3{font-size:23px;margin-bottom:16px}.plain-list{font-size:16px}.plain-list li{margin-bottom:14px}.after{grid-template-columns:1fr;gap:30px;margin-top:28px}.after .statement{font-size:32px}.after .facts{gap:25px}.closing h2{font-size:35px;margin-top:18px}.closing .lead{font-size:18px;margin-top:24px}.closing-contact{grid-template-columns:1fr;gap:25px;margin-top:45px;padding-top:24px}.closing-contact strong{font-size:14px}.closing-contact a{font-size:22px;margin-top:10px}.closing-contact p{font-size:14px;margin-top:10px}.toolbar{flex-wrap:wrap;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));justify-content:center}.toolbar nav{gap:8px}.toolbar .hint,.toolbar label{display:none}.toolbar .actions{gap:8px}.toolbar button,.toolbar select{font-size:12px;padding:0 10px}.toolbar output{font-size:12px;min-width:40px}.toolbar select{max-width:130px}.error{bottom:132px}.all-view .slide{margin-bottom:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media print{@page{size:A4 landscape;margin:0}html,body{background:white;print-color-adjust:exact;-webkit-print-color-adjust:exact}.toolbar,.skip,dialog,.error{display:none!important}main,.deck-ready:not(.all-view) main,.all-view main{display:block;padding:0;max-width:none}.slide,.slide[hidden],.deck-ready:not(.all-view) .slide{display:flex!important;container-type:inline-size;width:297mm;height:210mm;aspect-ratio:auto;padding:15mm 16mm 12mm;margin:0!important;overflow:hidden;break-after:page;break-inside:avoid}.slide:last-child{break-after:auto}.zoom{border:0}.zoom img{max-height:130mm;object-fit:contain}.cover-bottom{margin-top:auto}}
+.toolbar select{max-width:220px}
+@media(max-width:900px){.toolbar select{max-width:130px}}
+@media(max-width:360px){.toolbar select{max-width:100px}.toolbar button{padding:0 8px}}
+.toolbar[hidden],button[hidden]{display:none}
+.cover-bottom strong,.evaluation td{word-break:keep-all}
+</style>
+</head>
+<body>
+<a class="skip" href="#slides">본문으로 건너뛰기</a>
+<main id="slides" aria-label="해커톤 플랫폼 제안 슬라이드">
+<section class="slide cover" id="slide-1" aria-labelledby="title-1">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE & STUDIO</em></b><span>해커톤 운영사 제안</span></header>
+  <div class="hero-number" aria-hidden="true">100</div>
+  <p class="kicker">2박 3일, 참가자 100명의 아이디어가 제품이 되는 시간</p>
+  <h1 id="title-1" tabindex="-1">해커톤 대회를 위한<span>AI바이브코딩 플랫폼</span></h1>
+  <p class="lead">렛츠코딩라운지 & 스튜디오<br>제작부터 배포, 상호 피드백이 가능</p>
+  <div class="cover-bottom"><strong>작동하는 제품으로 경험하는 해커톤</strong><p>플랫폼 활용 및 운영 제안<br>주식회사 렛츠코딩</p></div>
+</section>
+
+<section class="slide" id="slide-2" aria-labelledby="title-2">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE & STUDIO</em></b><span>대회 활용 가치</span></header>
+  <p class="kicker">아이디어의 구현에 집중</p>
+  <h2 id="title-2" tabindex="-1">짧은 대회 기간<br><span class="mint">서비스 실현에만 집중하도록</span></h2>
+  <p class="lead">개발 경험이 없는 학생도<br>아이디어를 실현할 수 있습니다.</p>
+  <ol class="flow" aria-label="아이디어에서 배포까지">
+    <li><small>01</small><h3>아이디어</h3><p>어떤 문제를<br>해결할지 정하기</p></li>
+    <li><small>02</small><h3>바이브코딩</h3><p>AI와 함께<br>제품을 만들기</p></li>
+    <li><small>03</small><h3>데이터베이스</h3><p>외부 서비스 연동없이<br>DB 활용</p></li>
+    <li><small>04</small><h3>배포</h3><p>만들던 환경에서 공개하고<br>사용자의 반응을 즉시 확인</p></li>
+  </ol>
+  
+  <footer class="pagefoot"><span>AI와 함께 만드는 제작 환경</span><span>02 / 12</span></footer>
+</section>
+
+<section class="slide" id="slide-3" aria-labelledby="title-3">
+  <header class="mast"><b>LET’S CODING <em>STUDIO</em></b><span>AI 바이브코딩 특화 도구</span></header>
+  <h2 id="title-3" tabindex="-1">파일, 실행 화면, AI를<br><span class="mint">하나의 작업 공간에서</span></h2>
+  <div class="split">
+    <dl class="facts"><div><dt>LLM 모델과 대화</dt><dd>작업 목적에 맞는 AI를 활용해 필요한 기능을 만들고 수정합니다.</dd></div><div><dt>바로 확인하는 결과</dt><dd>코드와 미리보기를 오가며 의도대로 동작하는지 확인합니다.</dd></div><div><dt>제작에 필요한 도구</dt><dd>데이터베이스, 이미지생성과 준비된 음원까지 활용 범위를 넓힙니다.</dd></div></dl>
+    <figure class="capture"><button type="button" class="zoom" aria-label="Studio 편집기 화면 확대"><img src="../../public/hackathon/studio.png" width="1920" height="1080" alt="파일 탐색기, 실행 미리보기, LECO AI 채팅이 나란히 있는 Studio"></button><figcaption><span>실제 Studio 화면 · 「하늘을 나는 자동차」 강의 시연 작품</span><span>클릭하여 확대</span></figcaption></figure>
+  </div>
+  <footer class="pagefoot"><span>렛츠코딩 스튜디오</span><a href="https://lounge.letscoding.kr/studio" target="_blank" rel="noopener noreferrer">Studio 열기 ↗</a></footer>
+</section>
+
+<section class="slide" id="slide-4" aria-labelledby="title-4">
+  <header class="mast"><b>LET’S CODING <em>STUDIO</em></b><span>제품의 완성도를 높이는 도구</span></header>
+  <h2 id="title-4" tabindex="-1">데이터베이스, 준비된 음원</h2>
+  <div class="tools-grid">
+    <article class="tool"><button type="button" class="zoom panel-crop" aria-label="데이터베이스 화면 전체 확대"><img src="../../public/hackathon/database.png" width="1920" height="1080" alt="Studio 왼쪽 도구 영역의 데이터베이스 탐색기"></button><div><h3>데이터베이스</h3><p>기록을 저장하고 활용하는 기능까지 구현 범위를 확장합니다.</p><p>예: 점수 기록, 사용자 입력, 작품에 필요한 데이터</p><span class="source">실제 데이터베이스 탐색기<br>테이블 생성 전 화면</span></div></article>
+    <article class="tool"><button type="button" class="zoom panel-crop" aria-label="준비된 음원 화면 전체 확대"><img src="../../public/hackathon/audio.png" width="1920" height="1080" alt="배경음악과 효과음을 탐색하는 Studio 음원 패널"></button><div><h3>준비된 음원</h3><p>이미지 생성과 배경음악·효과음을 활용해 제품의 표현을 도와줍니다.</p><p>팀의 아이디어를 소개하고, 사용자에게 전달하는 경험을 만듭니다.</p><span class="source">실제 음원 탐색기<br>이미지생성은 별도 기능</span></div></article>
+  </div>
+  <footer class="pagefoot"><span>화면 클릭 시 원본 전체를 확인할 수 있습니다</span><span>04 / 12</span></footer>
+</section>
+
+<section class="slide" id="slide-5" aria-labelledby="title-5">
+  <header class="mast"><b>LET’S CODING <em>STUDIO → LOUNGE</em></b><span>제작과 배포의 연결</span></header>
+  <h2 id="title-5" tabindex="-1">코딩하던 환경에서<br><span class="mint">버튼 클릭으로 배포까지</span></h2>
+  <div class="split"><div><p class="aside-message">미리보기로 확인한 작품을<br>라운지에 공개합니다.</p><dl class="facts"><div><dt>제작 후 배포</dt><dd>사용자가 열 수 있는 작품으로 연결해, 대회 중에도 실제 사용 반응을 얻습니다.</dd></div><div><dt>피드백 후 개선</dt><dd>작품을 수정하고 변경사항을 반영하는 제작 흐름을 이어갑니다.</dd></div></dl></div>
+  <figure class="capture"><button type="button" class="zoom" aria-label="작품 실행 및 게시 도구 화면 확대"><img src="../../public/hackathon/preview.png" width="1920" height="1080" alt="실행 중인 시연 게임과 상단의 라운지에 변경사항 적용하기 버튼"></button><figcaption><span>상단의 「라운지에 변경사항 적용하기」 · 기존 게시 작품의 화면</span><span>클릭하여 확대</span></figcaption></figure></div>
+  <footer class="pagefoot"><span>제작 공간에서 실제 사용자가 있는 공간으로</span><span>05 / 12</span></footer>
+</section>
+
+<section class="slide light" id="slide-6" aria-labelledby="title-6">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE</em></b><span>참가자가 서로의 첫 사용자가 되는 대회</span></header>
+  <h2 id="title-6" tabindex="-1">모든 팀의 결과물을<br>한곳에서 둘러봅니다</h2>
+  <div class="split"><div><p class="large-number">100<span>명</span></p><p class="aside-message">참가자가 서로의<br>첫 번째 사용자가 됩니다.</p><p class="small-note">대회 작품을 모아 마켓플레이스처럼 탐색하고, 직접 사용한 뒤 의견을 남기는 운영을 제안합니다.</p><p class="small-note">참가자 100명 기준 운영안</p></div><figure class="capture"><button type="button" class="zoom" aria-label="라운지 작품 목록 화면 확대"><img src="../../public/hackathon/gallery.png" width="1920" height="1080" alt="Studio로 만든 여러 게임과 웹사이트가 모여 있는 라운지 작품 목록"></button><figcaption><span>실제 라운지 작품 목록 · 대회 전용 목록 예시가 아닌 운영 화면</span><span>클릭하여 확대</span></figcaption></figure></div>
+  <footer class="pagefoot"><span>팀별 발표 외에도, 모든 작품이 발견될 기회</span><a href="https://lounge.letscoding.kr/works?studio=1" target="_blank" rel="noopener noreferrer">작품 둘러보기 ↗</a></footer>
+</section>
+
+<section class="slide light" id="slide-7" aria-labelledby="title-7">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE</em></b><span>커뮤니티와 가상경제</span></header>
+  <h2 id="title-7" tabindex="-1">발표를 잘하는 팀에 더해,<br>사용하기 좋은 제품을 만든 팀도</h2>
+  <div class="split"><dl class="facts"><div><dt>조회와 댓글</dt><dd>얼마나 관심을 끌었는지, 사용자가 무엇을 느꼈는지 살펴봅니다.</dd></div><div><dt>가상자산으로 작품에 투자</dt><dd>참가자가 다른 팀의 작품에 관심과 선택을 표현합니다.</dd></div><div><dt>브랜딩과 마케팅</dt><dd>이름·썸네일·소개를 다듬고, 홍보 이후 달라지는 반응을 확인합니다.</dd></div></dl><figure class="capture"><button type="button" class="zoom" aria-label="작품 소개 및 커뮤니티 화면 확대"><img src="../../public/hackathon/work.png" width="1920" height="1080" alt="반응속도 테스트 작품의 조회와 댓글 지표, Play, 투자, 공유 버튼과 랭킹"></button><figcaption><span>공개 작품 「반응속도 테스트」 · 작성자 황도복숭아</span><span>클릭하여 확대</span></figcaption></figure></div>
+  <footer class="pagefoot"><span>가상 투자는 대회 참여 활동이며, 심사 점수와의 반영 방식은 사전에 정합니다</span><span>07 / 12</span></footer>
+</section>
+
+<section class="slide" id="slide-8" aria-labelledby="title-8">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE & STUDIO</em></b><span>평가 운영 제안</span></header>
+  <h2 id="title-8" tabindex="-1">AI 활용의 양보다,<br><span class="mint">문제를 해결한 과정을 평가합니다</span></h2>
+  <p class="lead">제품의 사용성과 사용자 반응, AI 활용 과정을 함께 보는 심사를 제안합니다.</p>
+  <table class="evaluation"><caption class="sr-only">해커톤 평가 관점과 확인 자료 제안</caption><thead><tr><th scope="col">평가 관점</th><th scope="col">심사에서 볼 내용</th><th scope="col">확인 자료</th></tr></thead><tbody>
+    <tr><td>제품 완성도</td><td>핵심 기능이 동작하고 사용하기 편한가</td><td>배포된 작품 직접 사용, 사용자 피드백</td></tr>
+    <tr><td>AI 활용 역량</td><td>의도를 설명하고, 결과를 검증·개선했는가</td><td>대표 AI 대화, 수정 전후, 팀의 선택 이유</td></tr>
+    <tr><td>브랜딩·마케팅</td><td>제품의 가치를 알리고 관심을 얻었는가</td><td>소개·썸네일, 기간 내 조회·댓글·가상 투자 반응</td></tr>
+    <tr><td>개선과 학습</td><td>피드백을 실제 수정으로 연결했는가</td><td>개발일지, 개선 내용, 최종 발표</td></tr>
+  </tbody></table>
+  <p class="fineprint">조회·댓글·투자 지표는 보조 자료로 활용합니다. 동일한 체험·홍보 시간과 공통 집계 기준을 정하고, 최종 평가는 심사위원의 제품 검토와 함께 진행합니다.</p>
+  <footer class="pagefoot"><span>배점과 집계 방식은 주최사와 협의 · 자동 평가 기능을 의미하지 않습니다</span><span>08 / 12</span></footer>
+</section>
+
+<section class="slide" id="slide-9" aria-labelledby="title-9">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE & STUDIO</em></b><span>2박 3일 운영안</span></header>
+  <h2 id="title-9" tabindex="-1">만들고, 사용해 보고,<br><span class="mint">고쳐서 발표하는 3일</span></h2>
+  <div class="schedule">
+    <article><b>DAY 01</b><h3>아이디어와 첫 구현</h3><p>플랫폼 온보딩<br>문제 정의와 팀 기획<br>AI를 활용한 핵심 기능 제작</p><strong>산출물: 동작하는 첫 프로토타입</strong></article>
+    <article><b>DAY 02</b><h3>배포와 상호 체험</h3><p>데이터·미디어 기능 보완<br>라운지 배포와 작품 소개<br>참가자 체험·댓글·가상 투자</p><strong>산출물: 공개 작품과 첫 피드백</strong></article>
+    <article><b>DAY 03</b><h3>개선과 최종 심사</h3><p>피드백 반영과 최종 수정<br>AI 활용 과정 및 반응 정리<br>작품 시연·심사·성과 공유</p><strong>산출물: 최종 작품과 개발 기록</strong></article>
+  </div>
+  <p class="bottom-line">대회 전: 계정·팀 구성, 기기·네트워크, AI 예산, 공개 범위와 평가 기준을 함께 준비합니다.</p>
+  <footer class="pagefoot"><span>주최사의 세부 일정에 맞춰 조정하는 운영 제안</span><span>09 / 12</span></footer>
+</section>
+
+<section class="slide" id="slide-10" aria-labelledby="title-10">
+  <header class="mast"><b>LET’S CODING <em>STUDIO</em></b><span>기간과 금액에 맞춘 AI 예산</span></header>
+  <h2 id="title-10" tabindex="-1">행사 기간과 예산을 정해<br><span class="mint">AI 사용 비용을 계획합니다</span></h2>
+  <div class="budget"><div><div class="scope"><p>사용 기간</p><strong>2박 3일 대회 일정</strong></div><div class="scope"><p>이용 대상</p><strong>참가자 100명</strong></div><div class="scope"><p>AI 토큰 비용</p><strong>사전 협의한 금액으로 책정</strong></div></div><div><h3>예산과 함께 정할 운영 기준</h3><ul class="plain-list"><li>참가자·팀별 AI 이용 범위와 예산 배분</li><li>LLM 모델과 이미지 등 생성 기능의 이용 범위</li><li>추가 사용 요청과 비용 처리 기준</li><li>대회 종료 이후 이용·보관 기간</li></ul><p class="fineprint">구체적인 금액과 제공 범위는 대회 구성에 맞춰 견적 협의합니다.</p></div></div>
+  <footer class="pagefoot"><span>특정 기간·금액의 토큰 비용 예산 책정 가능</span><span>10 / 12</span></footer>
+</section>
+
+<section class="slide light" id="slide-11" aria-labelledby="title-11">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE</em></b><span>대회 종료 후의 성과 활용</span></header>
+  <h2 id="title-11" tabindex="-1">대회가 끝난 뒤에도<br>성과를 다시 보여주기 쉽게</h2>
+  <div class="after"><p class="statement">발표 자료와 함께,<br><span class="mint">직접 열어 볼 수 있는<br>작품 링크를 남깁니다.</span></p><dl class="facts"><div><dt>주최사의 성과 공유</dt><dd>대표 작품과 참가자의 제작 과정을 모아 결과 보고와 다음 대회 소개에 활용합니다.</dd></div><div><dt>참가자의 포트폴리오</dt><dd>무엇을 만들었고 어떻게 개선했는지, 작품과 기록으로 설명할 수 있습니다.</dd></div><div><dt>후속 체험과 확산</dt><dd>행사에 참여하지 못한 관계자도 링크로 결과물을 살펴볼 수 있습니다.</dd></div></dl></div>
+  <p class="fineprint">종료 후 공개·보관 기간과 작품 활용 범위는 대회 시작 전에 합의합니다.</p>
+  <footer class="pagefoot"><span>행사 경험을 다음 참여로 연결하는 결과물</span><span>11 / 12</span></footer>
+</section>
+
+<section class="slide closing" id="slide-12" aria-labelledby="title-12">
+  <header class="mast"><b>LET’S CODING <em>LOUNGE & STUDIO</em></b><span>도입 협의</span></header>
+  <p class="kicker">제작 환경부터 결과물 공유까지</p>
+  <h2 id="title-12" tabindex="-1">참가자 100명이<br><span class="mint">만들고, 쓰고, 성장하는<br>2박 3일을 함께 준비합니다.</span></h2>
+  <p class="lead">대회 일정과 참가자 구성, AI 사용 예산을 알려 주세요.<br>주최사의 운영 방식에 맞춰 적용 범위를 구체화하겠습니다.</p>
+  <div class="closing-contact"><div><strong>플랫폼 도입 문의</strong><a href="mailto:contact@letscoding.kr">contact@letscoding.kr</a><p>주식회사 렛츠코딩</p></div><div><strong>실제 서비스 살펴보기</strong><a href="https://lounge.letscoding.kr/works" target="_blank" rel="noopener noreferrer">렛츠코딩 라운지 ↗</a><p>공개 작품을 직접 사용해 보세요.</p></div></div>
+</section>
+</main>
+<div class="toolbar" hidden>
+  <div class="progress" aria-hidden="true"></div>
+  <nav aria-label="슬라이드 이동"><button type="button" id="prev" aria-label="이전 슬라이드">← 이전</button><output id="counter" aria-live="polite"></output><button type="button" id="next" aria-label="다음 슬라이드">다음 →</button><label for="jump">이동</label><select id="jump" aria-label="슬라이드 선택"></select></nav>
+  <div class="actions"><span class="hint">← → 이동</span><button type="button" id="view-all" aria-pressed="false">전체 보기</button><button type="button" id="fullscreen">전체화면</button><button type="button" id="print">인쇄 / PDF</button></div>
+</div>
+<dialog id="image-dialog" aria-labelledby="image-title"><header><p id="image-title">화면 확대</p><button type="button" id="close-image" aria-label="확대 화면 닫기">닫기</button></header><img id="large-image" alt=""></dialog>
+<p id="status" class="error" role="status"></p>
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const jump = document.getElementById('jump');
+const allButton = document.getElementById('view-all');
+const dialog = document.getElementById('image-dialog');
+const status = document.getElementById('status');
+let index = 0;
+let all = false;
+function hashIndex() {
+  const match = /^#slide-(\d+)$/.exec(location.hash);
+  return match ? Math.min(slides.length - 1, Math.max(0, Number(match[1]) - 1)) : 0;
+}
+function show(value, focus = false) {
+  status.textContent = '';
+  index = Math.min(slides.length - 1, Math.max(0, value));
+  slides.forEach((slide, i) => { slide.hidden = !all && i !== index; });
+  prev.disabled = index === 0;
+  next.disabled = index === slides.length - 1;
+  jump.value = String(index);
+  document.getElementById('counter').textContent = `${index + 1} / ${slides.length}`;
+  document.querySelector('.progress').style.width = `${(index + 1) / slides.length * 100}%`;
+  if (focus) {
+    slides[index].querySelector('h1,h2').focus({preventScroll:true});
+    if (all) slides[index].scrollIntoView({block:'start'});
+    else window.scrollTo({top:0});
+  }
+}
+function go(value) {
+  const target = Math.min(slides.length - 1, Math.max(0, value));
+  const hash = `#slide-${target + 1}`;
+  if (location.hash === hash) show(target, true);
+  else location.hash = hash;
+}
+slides.forEach((slide, i) => {
+  const option = document.createElement('option');
+  option.value = i;
+  option.textContent = `${String(i + 1).padStart(2,'0')} · ${slide.querySelector('h1,h2').textContent}`;
+  jump.append(option);
+});
+prev.addEventListener('click', () => go(index - 1));
+next.addEventListener('click', () => go(index + 1));
+jump.addEventListener('change', () => go(Number(jump.value)));
+window.addEventListener('hashchange', () => show(hashIndex(), true));
+document.addEventListener('keydown', event => {
+  if (dialog.open || event.altKey || event.metaKey || event.ctrlKey || event.target.closest('input,textarea,select,button,a,[contenteditable]')) return;
+  const keys = {ArrowRight:index + 1,PageDown:index + 1,ArrowLeft:index - 1,PageUp:index - 1,Home:0,End:slides.length - 1};
+  if (event.key in keys) { event.preventDefault(); go(keys[event.key]); }
+});
+allButton.addEventListener('click', () => {
+  all = !all;
+  document.body.classList.toggle('all-view', all);
+  allButton.setAttribute('aria-pressed', String(all));
+  allButton.textContent = all ? '발표 보기' : '전체 보기';
+  show(index);
+  slides[index].scrollIntoView({block:'start'});
+});
+document.querySelectorAll('.zoom').forEach(button => button.addEventListener('click', () => {
+  const image = button.querySelector('img');
+  const large = document.getElementById('large-image');
+  large.src = image.src;
+  large.alt = image.alt;
+  document.getElementById('image-title').textContent = image.alt;
+  dialog.showModal();
+}));
+document.getElementById('close-image').addEventListener('click', () => dialog.close());
+dialog.addEventListener('click', event => { if (event.target === dialog) { const r=dialog.getBoundingClientRect(); if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom) dialog.close(); } });
+const fullscreen = document.getElementById('fullscreen');
+fullscreen.hidden = !document.fullscreenEnabled;
+fullscreen.addEventListener('click', async () => {
+  status.textContent = '';
+  try { if(document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); }
+  catch { status.textContent = '브라우저에서 전체화면을 허용하지 않았습니다. 브라우저의 전체화면 메뉴를 이용해 주세요.'; }
+});
+document.addEventListener('fullscreenchange', () => { fullscreen.textContent = document.fullscreenElement ? '전체화면 종료' : '전체화면'; });
+document.getElementById('print').addEventListener('click', async () => {
+  await document.fonts.ready;
+  await Promise.allSettled([...document.querySelectorAll('.slide img')].map(image => image.decode()));
+  window.print();
+});
+document.body.classList.add('deck-ready');
+document.querySelector('.toolbar').hidden = false;
+show(hashIndex());
+</script>
+</body>
+</html>
