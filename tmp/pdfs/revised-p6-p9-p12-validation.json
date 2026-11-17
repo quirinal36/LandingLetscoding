@@ -1,0 +1,116 @@
+[
+  {
+    "kind": "rgb",
+    "file": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/output/pdf/letscoding-school-brochure.pdf",
+    "bytes": 18429253,
+    "pages": 12,
+    "symbol_image": [
+      368,
+      0,
+      2400,
+      1120,
+      8,
+      "ICCBased"
+    ],
+    "background_samples": {
+      "outside": [
+        8,
+        9,
+        13
+      ],
+      "inside": [
+        [
+          8,
+          10,
+          14
+        ],
+        [
+          8,
+          10,
+          14
+        ],
+        [
+          8,
+          10,
+          14
+        ]
+      ]
+    }
+  },
+  {
+    "kind": "cmyk",
+    "file": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/output/pdf/letscoding-school-brochure-cmyk.pdf",
+    "bytes": 20219299,
+    "pages": 12,
+    "symbol_image": [
+      1705,
+      0,
+      2400,
+      1120,
+      8,
+      "DeviceCMYK"
+    ],
+    "background_samples": {
+      "outside": [
+        10,
+        9,
+        12
+      ],
+      "inside": [
+        [
+          10,
+          9,
+          12
+        ],
+        [
+          10,
+          9,
+          12
+        ],
+        [
+          10,
+          9,
+          12
+        ]
+      ]
+    }
+  },
+  {
+    "kind": "bleed",
+    "file": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/output/pdf/letscoding-school-brochure-cmyk-bleed-3mm.pdf",
+    "bytes": 20233763,
+    "pages": 12,
+    "symbol_image": [
+      1709,
+      0,
+      2400,
+      1120,
+      8,
+      "DeviceCMYK"
+    ],
+    "background_samples": {
+      "outside": [
+        10,
+        9,
+        12
+      ],
+      "inside": [
+        [
+          10,
+          9,
+          12
+        ],
+        [
+          10,
+          9,
+          12
+        ],
+        [
+          10,
+          9,
+          12
+        ]
+      ]
+    }
+  }
+]

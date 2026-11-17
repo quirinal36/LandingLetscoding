@@ -4,6 +4,8 @@
 
 2026년 11월 17일 활용 사례 4쪽(7 교육청·대학, 8 학교, 9 학원, 10 강사 에이전시)을 추가해 공개본을 12쪽으로 늘렸다. 도입 안내는 11쪽, 뒤표지는 12쪽이다. 숨긴 쪽은 `slide-13`~`slide-16`으로 번호를 옮겨 HTML에 보존한다. 8쪽의 화면 두 장(`public/landing/school-attendance.png`, `school-library-app.png`)은 AI로 생성한 활용 예시 이미지이고, 9쪽의 교실 그림도 AI로 생성했다. 같은 날 사용자가 선택한 두 번째 시안 `academy-projects-round-table.png`로 교체했다. 학생 다섯 명이 하나의 둥근 테이블에서 각자의 노트북으로 프로젝트를 만들며, 가운데 학생의 노트북은 화면이 학생을 향하도록 수정했다. 이전 이미지 `academy-projects.png`는 보존한다.
 
+같은 날 인쇄 전 수정으로 6쪽의 「한 번 완성한 작품에…」 설명과 「오늘의 작품과 기록이…」 하단 박스를 삭제했다. 9쪽의 세 항목은 사용자가 전달한 「지속가능한 수업운영」「수업준비 시간 단축」「상담과 홍보」 제목과 본문으로 교체했다. 12쪽의 무한대 이미지는 SVG 마스크 대신 `public/landing/brochure-infinity-static.png`를 쓴다. 기존 SVG와 `characters-crowd.jpg`의 모습을 브라우저에서 2400×1120px로 렌더링하고 배경색까지 합친 RGB PNG로, 애니메이션·알파 채널·마스크가 없다. PDF 변환이나 인쇄 장비에서 마스크가 사각형으로 출력되는 문제를 피하기 위한 교체다. 일반 RGB, 도련 없는 CMYK, 3mm 도련 CMYK를 모두 갱신한다.
+
 ## 편집과 확인
 
 학교 담당자에게 종이로 인쇄해 전달하는 브로셔다. HTML은 편집과 화면 검토에 사용하고, 글자 크기·간격·잘림 여부는 최종 가로 A4 PDF를 기준으로 확인한다.
@@ -51,7 +53,7 @@ EXPO_BLEED=3 EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome nod
 EXPO_BLEED=3 SRC=tmp/pdfs/letscoding-school-brochure-bleed-rgb.pdf OUT=output/pdf/letscoding-school-brochure-cmyk-bleed-3mm.pdf sh output/ai-edu-expo/export-cmyk.sh
 ```
 
-Aside에서 출력할 때도 print media를 적용하고 이미지·폰트 로딩이 끝난 뒤 `prepare-bleed.js`를 실행해 중간 RGB PDF를 만든다. Chromium의 종이 크기 반올림에 대비해 중간 파일은 약간 큰 용지로 출력하며, CMYK 변환 전에 정확한 303×216mm 영역만 크기 변경 없이 가져오고 TrimBox·BleedBox를 지정한다. 스크립트는 배경 확장 전의 A4 PDF를 입력하면 중단한다. 최종 파일의 12쪽 본문, 벡터 글자, CMYK 색공간, 페이지 박스, 1·5·12쪽 가장자리와 전체 페이지 렌더링을 확인했다. 기존 RGB·CMYK PDF는 변경하지 않았다.
+Aside에서 출력할 때도 print media를 적용하고 이미지·폰트 로딩이 끝난 뒤 `prepare-bleed.js`를 실행해 중간 RGB PDF를 만든다. Chromium의 종이 크기 반올림에 대비해 중간 파일은 약간 큰 용지로 출력하며, CMYK 변환 전에 정확한 303×216mm 영역만 크기 변경 없이 가져오고 TrimBox·BleedBox를 지정한다. 스크립트는 배경 확장 전의 A4 PDF를 입력하면 중단한다. 최종 파일의 12쪽 본문, 벡터 글자, CMYK 색공간, 페이지 박스, 1·5·12쪽 가장자리와 전체 페이지 렌더링을 확인했다. 본문 수정 시 일반 RGB·CMYK PDF와 도련본을 함께 다시 출력한다.
 
 HTML 상단의 `3mm 재단 가이드`로 화면용 가이드선을 켜고 끈다(기본 켜짐). 창 너비 1240px 이상에서 A4 완성 크기인 페이지 경계는 분홍 실선, 바깥 3mm 도련 범위는 분홍 점선, 안쪽 3mm 안전영역은 파란 점선으로 표시한다. 1200px 페이지 폭을 297mm로 환산하므로 3mm 간격은 약 12.12px이다. 반응형으로 재배치되는 작은 화면에서는 실제 판형과 혼동하지 않도록 가이드를 숨긴다. 가이드선은 인쇄와 PDF 출력에서 제외되며, 배경 확장이나 PDF의 실제 도련 추가는 하지 않는다.
 
