@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>렛츠코딩 간판 시안 · AI EDU Expo</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+/*
+  AI EDU Expo 간판 시안.
+  좌표는 원본 시안(1133×378)의 픽셀 단위다. 모든 크기는 --u(간판 폭의 1/1133)에 곱해 쓰므로
+  간판 폭이 바뀌어도 비율이 유지된다. 실제 간판 비율이 다르면 --w, --h만 고친다.
+
+  검은 띠: (0,0) → (583,0) → (1133,378) → (540,378)
+  왼쪽 아래 흰 삼각형 = 스튜디오(말한다), 오른쪽 위 흰 삼각형 = 라운지(작품이 된다)
+*/
+:root{
+  --w:1133; --h:378;
+  --indigo:#3c34c5; --violet:#7439f1; --coral:#fc6a77; --ink:#0b0b10;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:32px 24px;background:#e5e9ef;color:var(--ink);font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.note{max-width:1400px;margin:0 auto 14px;font-size:14px;color:#53617a}
+
+.sign{position:relative;max-width:1400px;margin:0 auto;aspect-ratio:var(--w)/var(--h);container-type:inline-size;background:#fff;overflow:hidden;box-shadow:0 10px 40px rgba(20,24,40,.18)}
+.sign > *{--u:calc(100cqw / var(--w))}
+.abs{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u))}
+
+/* ── 검은 띠와 가운데 로고 ─────────────────────────── */
+.band{position:absolute;inset:0;background:#000;clip-path:polygon(0 0,51.46% 0,100% 100%,47.66% 100%)}
+.brand{position:absolute;left:calc(318 * var(--u));top:calc(118 * var(--u));display:flex;align-items:center;color:#fff}
+.brand img{display:block;width:calc(184 * var(--u));height:auto;margin-right:calc(-8 * var(--u))}
+.brand strong{font-size:calc(64 * var(--u));font-weight:300;letter-spacing:.06em;line-height:1;white-space:nowrap}
+.tagline{position:absolute;left:calc(540 * var(--u));top:calc(226 * var(--u));margin:0;color:#fff;font-size:calc(21.5 * var(--u));font-weight:400;line-height:1.36;letter-spacing:.01em;white-space:nowrap}
+
+/* ── 퍼즐 조각 (로고에서 떨어져 나온 조각) ─────────── */
+.piece{display:block;height:auto;transform:rotate(var(--r,0deg))}
+
+/* ── 왼쪽 아래: 학생의 한마디 ─────────────────────── */
+.bubble{padding:calc(17 * var(--u)) calc(22 * var(--u)) calc(19 * var(--u));border-radius:calc(22 * var(--u));background:var(--indigo);color:#fff;font-size:calc(26.5 * var(--u));font-weight:700;line-height:1.32;letter-spacing:-.01em}
+.bubble::after{content:"";position:absolute;left:calc(26 * var(--u));bottom:calc(-13 * var(--u));width:calc(26 * var(--u));height:calc(26 * var(--u));background:var(--indigo);clip-path:polygon(0 0,100% 0,0 100%)}
+.bubble .caret{display:inline-block;width:calc(4 * var(--u));height:1em;margin-left:calc(5 * var(--u));border-radius:calc(2 * var(--u));background:var(--coral);vertical-align:-.12em}
+
+/* ── 오른쪽 위: 라운지에 올라간 작품 ───────────────── */
+.card{margin:0;padding:calc(5 * var(--u));border-radius:calc(12 * var(--u));background:#fff;box-shadow:0 calc(6 * var(--u)) calc(20 * var(--u)) rgba(28,22,90,.26),0 0 0 calc(1 * var(--u)) rgba(28,22,90,.08);transform:rotate(var(--r,0deg))}
+.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:calc(8 * var(--u))}
+.card figcaption{display:flex;align-items:center;justify-content:space-between;gap:calc(6 * var(--u));padding:calc(6 * var(--u)) calc(5 * var(--u)) calc(3 * var(--u));font-size:calc(var(--f,13) * var(--u));font-weight:700;line-height:1.1;white-space:nowrap}
+.card figcaption svg{flex:none;width:1.15em;height:1.15em;fill:var(--coral)}
+.heart{display:block;height:auto;fill:var(--coral);transform:rotate(var(--r,0deg))}
+
+@media print{
+  @page{size:1133px 378px;margin:0}
+  body{padding:0;background:#fff}
+  .note{display:none}
+  .sign{max-width:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<p class="note">AI EDU Expo 간판 시안 · 1133×378 비율 · 왼쪽 아래는 학생의 한마디(스튜디오), 오른쪽 위는 완성된 작품(라운지)</p>
+
+<div class="sign" role="img" aria-label="렛츠코딩. 라운지 &amp; 스튜디오, 안전한 AI 바이브코딩 교육 플랫폼. 학생의 한마디가 작품이 되는 과정을 보여 주는 간판 시안">
+
+  <div class="band">
+    <div class="brand">
+      <img src="../../src/assets/logo.png" alt="">
+      <strong>렛츠코딩</strong>
+    </div>
+    <p class="tagline">라운지 &amp; 스튜디오<br>안전한 AI 바이브코딩 교육 플랫폼</p>
+  </div>
+
+  <!-- 왼쪽 아래: 말한다 -->
+  <svg class="abs piece" style="--x:36;--y:150;--s:58;--r:-14deg" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <div class="abs bubble" style="--x:34;--y:244;--s:284">점프하는 고양이 게임<br>만들어 줘<span class="caret"></span></div>
+
+  <!-- 띠 경계에 걸친 조각: 말이 작품으로 넘어가는 자리 -->
+  <svg class="abs piece" style="--x:150;--y:108;--s:64;--r:35deg" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#fc6a77" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <svg class="abs piece" style="--x:930;--y:226;--s:56;--r:124deg" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+
+  <!-- 오른쪽 위: 작품이 된다 (나나쌤 공개 작품) -->
+  <figure class="abs card" style="--x:772;--y:14;--s:132;--r:-5deg;--f:11.5">
+    <img src="../../public/landing/works/songpyeon.webp" alt="">
+    <figcaption>뀨의 송편 가게<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.600 1.900 4.500 5.600 4.100c2-.2 3.800.8 4.900 2.300L12 8.300l1.500-1.900c1.100-1.500 2.900-2.500 4.900-2.300 3.700.4 5.300 4.500 3.600 7.700C19.500 16.400 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="abs card" style="--x:1000;--y:176;--s:116;--r:6deg;--f:10.5">
+    <img src="../../public/landing/works/image-editor.webp" alt="">
+    <figcaption>이미지 편집기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.600 1.900 4.500 5.600 4.100c2-.2 3.800.8 4.900 2.300L12 8.300l1.500-1.900c1.100-1.500 2.900-2.500 4.900-2.300 3.700.4 5.300 4.500 3.600 7.700C19.500 16.400 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="abs card" style="--x:912;--y:24;--s:194;--r:3deg;--f:15">
+    <img src="../../public/landing/works/ten-pang.webp" alt="">
+    <figcaption>텐팡<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.600 1.900 4.500 5.600 4.100c2-.2 3.800.8 4.900 2.300L12 8.300l1.500-1.900c1.100-1.500 2.900-2.500 4.900-2.300 3.700.4 5.300 4.500 3.600 7.700C19.500 16.400 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <svg class="abs heart" style="--x:848;--y:134;--s:30;--r:-12deg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.600 1.900 4.500 5.600 4.100c2-.2 3.800.8 4.900 2.300L12 8.300l1.500-1.900c1.100-1.500 2.900-2.500 4.900-2.300 3.700.4 5.300 4.500 3.600 7.700C19.500 16.400 12 21 12 21z"/></svg>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>렛츠코딩 스튜디오 · 500×500 구성 비교</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e9edf3;color:#1b2333;font-family:'Apple SD Gothic Neo',Pretendard,sans-serif}main{max-width:1680px;margin:auto;padding:36px 28px 48px}header{margin-bottom:30px}.eyebrow{font-size:13px;color:#55607a;letter-spacing:.1em}h1{font-size:30px;letter-spacing:-.055em;margin:10px 0}header p{font-size:16px;line-height:1.65;margin:8px 0;color:#55607a}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}article{min-width:0}h2{font-size:20px;margin:0 0 14px;letter-spacing:-.04em}h2 span{font-size:13px;color:#55607a;margin-left:8px;font-weight:500}.preview{position:relative;aspect-ratio:1;background:white;overflow:hidden}iframe{position:absolute;left:0;top:0;width:500px;height:500px;border:0;transform-origin:top left}article p{font-size:15px;line-height:1.65;letter-spacing:-.025em;color:#55607a;margin:15px 0 10px}a{display:inline-flex;align-items:center;min-height:44px;color:#2a53b0;text-underline-offset:4px;font-size:14px}a:focus-visible{outline:3px solid #3b6fe0;outline-offset:3px}.note{margin-top:28px;border-top:1px solid #c6cfdd;padding-top:20px;color:#55607a;font-size:14px;line-height:1.8}@media(max-width:1000px){.grid{grid-template-columns:1fr;max-width:500px;margin:auto}main{padding:24px 18px}h1{font-size:26px}article{margin-bottom:24px}}
+</style>
+</head>
+<body><main>
+<header><div class="eyebrow">LET’S CODING STUDIO / COMPOSITION STUDY</div><h1>AI와 대화하면, 내 아이디어가 작품으로.</h1><p>500×500 이미지로 전달할 세 가지 구성입니다. 문구를 클릭하면 직접 고쳐볼 수 있습니다.<br>표현 방식과 정보의 우선순위를 먼저 맞추는 HTML 시안입니다.</p></header>
+<p><a href="pop.html">새 시안 보기 — 이전 이미지의 3D 스타일과 입체 말풍선 ↗</a></p>
+<div class="grid">
+<article><h2>01 대화 중심<span>무엇을 할 수 있는지</span></h2><div class="preview"><iframe title="01 대화 중심 시안" src="design-demos/a-conversation.html"></iframe></div><p>내가 건넨 한마디와 AI의 응답을 크게 보여줍니다. 대화로 코딩한다는 기능을 가장 먼저 읽게 합니다.</p><a href="design-demos/a-conversation.html" target="_blank">500×500 원본으로 열기 ↗</a></article>
+<article><h2>02 실제 화면 중심<span>어디에서 만드는지</span></h2><div class="preview"><iframe title="02 실제 화면 중심 시안" src="design-demos/b-workspace.html"></iframe></div><p>실제 스튜디오 화면 위에 대화와 결과를 강조합니다. AI와 이야기하며 만드는 작업 공간을 보여줍니다.</p><a href="design-demos/b-workspace.html" target="_blank">500×500 원본으로 열기 ↗</a></article>
+<article><h2>03 변화 중심<span>무엇이 만들어지는지</span></h2><div class="preview"><iframe title="03 변화 중심 시안" src="design-demos/c-idea-to-game.html"></iframe></div><p>대화에서 출발해 직접 해볼 수 있는 게임으로 이어집니다. 아이디어가 결과물로 바뀌는 흐름을 보여줍니다.</p><a href="design-demos/c-idea-to-game.html" target="_blank">500×500 원본으로 열기 ↗</a></article>
+</div>
+<div class="note">02의 배경은 실제 서비스 화면입니다. 재구성한 대화와 게임 화면은 전달 방식을 검토하기 위한 예시입니다.<br>텍스트 수정은 현재 화면에서만 유지됩니다. 마음에 드는 번호와 바꿀 문구를 알려주시면 파일에 반영하겠습니다.</div>
+</main><script>
+// Keep each composition at 500×500 while fitting the review panel.
+const observer=new ResizeObserver(entries=>{for(const entry of entries)entry.target.querySelector('iframe').style.transform=`scale(${entry.contentRect.width/500})`});
+document.querySelectorAll('.preview').forEach(panel=>observer.observe(panel));
+</script></body></html>

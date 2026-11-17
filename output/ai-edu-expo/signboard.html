@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>렛츠코딩 간판 시안 · AI EDU Expo</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+/*
+  AI EDU Expo 부스 상호 간판 v4.
+  레이아웃: 1133×378 한 장. 가운데 어두운 띠에 로고·회사명·설명 문구만 둔다.
+           양쪽 모서리 삼각형은 로고의 보라와 코랄로 채워 멀리서도 색으로 구분된다.
+  멀리서 3초 안에 읽히는 것이 목적이라 말풍선·작품 카드·라벨·퍼즐 조각은 뺐다(v3는 signboard-v3.html).
+  좌표는 1133×378 기준이며 모든 크기에 --u(간판 폭의 1/1133)를 곱한다.
+  실제 간판 비율이 다르면 --w, --h만 고친다.
+
+  띠: (0,0) → (883,0) → (1133,378) → (250,378)
+*/
+:root{
+  --w:1133; --h:378;
+  --night:#0b0a24;      /* 가운데 띠: 로고 세 색이 모두 또렷한 남색 */
+  --violet:#7439f1; --indigo:#3c34c5; --coral:#fc6a77;  /* 로고 3색 */
+  --mist:#cfc9ff;       /* 제품명 줄 */
+  --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:32px 24px;background:#d9dce6;font-family:var(--font);word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.note{max-width:1400px;margin:0 auto 14px;font-size:14px;color:#4b5570}
+
+.sign{position:relative;max-width:1400px;margin:0 auto;aspect-ratio:var(--w)/var(--h);container-type:inline-size;overflow:hidden;color:#fff;
+  /* 모서리 색: 왼쪽 아래 보라, 오른쪽 위 코랄 */
+  background:linear-gradient(90deg,var(--violet) 0%,#4a35d0 22%,#c2457f 78%,var(--coral) 100%);
+  box-shadow:0 14px 50px rgba(10,9,32,.35)}
+.sign > *{--u:calc(100cqw / var(--w))}
+
+.band{position:absolute;inset:0;clip-path:polygon(0 0,77.93% 0,100% 100%,22.07% 100%);
+  background:radial-gradient(46% 78% at 50% 50%,#17154a 0%,var(--night) 78%)}
+
+/* ── 가운데 상호 ──────────────────────────────── */
+.lockup{position:absolute;left:50%;top:51.2%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;white-space:nowrap}
+.name{display:flex;align-items:center;gap:calc(22 * var(--u))}
+.name img{display:block;width:calc(214 * var(--u));height:auto}
+.name strong{font-size:calc(106 * var(--u));font-weight:800;letter-spacing:.01em;line-height:1}
+.products{margin:calc(20 * var(--u)) 0 0;font-size:calc(27 * var(--u));font-weight:600;letter-spacing:.2em;line-height:1.1;color:var(--mist)}
+.desc{margin:calc(10 * var(--u)) 0 0;font-size:calc(41 * var(--u));font-weight:600;letter-spacing:.01em;line-height:1.15}
+
+@media print{
+  @page{size:1133px 378px;margin:0}
+  body{padding:0;background:var(--night)}
+  .note{display:none}
+  .sign{max-width:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<p class="note">AI EDU Expo 부스 상호 간판 시안 v4 · 1133×378 비율 · 이전 안은 signboard-v3.html, signboard-v1.html</p>
+
+<div class="sign" role="img" aria-label="렛츠코딩. 라운지 &amp; 스튜디오, 안전한 AI 바이브코딩 교육 플랫폼">
+  <div class="band"></div>
+  <div class="lockup">
+    <div class="name">
+      <img src="assets/logo-mark.png" alt="">
+      <strong>렛츠코딩</strong>
+    </div>
+    <p class="products">라운지 &amp; 스튜디오</p>
+    <p class="desc">안전한 AI 바이브코딩 교육 플랫폼</p>
+  </div>
+</div>
+</body>
+</html>

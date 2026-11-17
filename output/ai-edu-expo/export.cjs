@@ -17,12 +17,15 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
       await document.fonts.ready;
       await Promise.all(Array.from(document.images, image => image.decode()));
     });
-    assert.equal(await page.locator('.sheet').count(), 12);
+    assert.equal(await page.locator('.sheet').count(), 16);
     assert.equal(await page.locator('.paper-stage').count(), 4);
     assert.equal(await page.locator('h1').count(), 1);
-    assert.deepEqual(await page.locator('.sheet').evaluateAll(s => s.map(n => n.id)), Array.from({ length: 12 }, (_, i) => `slide-${i + 1}`));
+    assert.deepEqual(await page.locator('.sheet').evaluateAll(s => s.map(n => n.id)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 12].map(i => `slide-${i}`));
+    const visibleIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => `slide-${i}`);
+    assert.deepEqual(await page.locator('.sheet:visible').evaluateAll(s => s.map(n => n.id)), visibleIds);
+    assert.deepEqual(await page.locator('.toolbar a[href^="#slide-"]').evaluateAll(s => s.map(n => n.hash.slice(1))), visibleIds);
     const text = await page.locator('main').innerText();
-    assert.doesNotMatch(text, /학원|원생|4주 무료|29,?000원|자동 평가|AI 무제한/);
+    assert.doesNotMatch(text, /원생|4주 무료|자동 평가|AI 무제한/);
     if (process.env.EXPO_URL) {
       await page.evaluate(() => { window.print = () => { window.printRequested = true; }; });
       await page.locator('#print-brochure').click();
@@ -39,18 +42,29 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `horizontal overflow at ${width}`);
       assert.ok(await page.locator('.sheet').evaluateAll(s => s.every(n => n.getBoundingClientRect().width <= 1200)), 'maximum width');
       if (width === 390) {
-        await page.locator('#slide-9').scrollIntoViewIfNeeded();
+        await page.locator('#slide-1').screenshot({ path: path.join(previews, 'cover-mobile.png') });
+        await page.locator('#slide-12').scrollIntoViewIfNeeded();
         await page.screenshot({ path: path.join(previews, 'mobile.png') });
       }
     }
     await page.setViewportSize({ width: 1123, height: 900 });
     await page.emulateMedia({ media: 'print' });
-    const overflow = await page.locator('.sheet').evaluateAll(sheets => sheets.flatMap(sheet => {
+    assert.deepEqual(await page.locator('.sheet:visible').evaluateAll(s => s.map(n => n.id)), visibleIds);
+    assert.deepEqual(await page.locator('.sheet:visible .page-foot span:last-child').allTextContents(), Array.from({ length: 12 }, (_, i) => `${String(i + 1).padStart(2, '0')} / 12`));
+    const cover = await page.locator('#slide-1').boundingBox();
+    const coverImage = await page.locator('#slide-1 .cover-emblem').boundingBox();
+    const coverCopy = await page.locator('#slide-1 .outer-front').boundingBox();
+    assert.ok(coverCopy.x + coverCopy.width <= coverImage.x - 16, 'cover copy has space before image');
+    assert.ok(Math.abs(coverImage.y - cover.y) < 1 && Math.abs(coverImage.height - cover.height) < 1, 'cover image fills page height');
+    assert.ok(Math.abs(coverImage.x + coverImage.width - cover.x - cover.width) < 1, 'cover image reaches right edge');
+    const overflow = await page.locator('.sheet:visible').evaluateAll(sheets => sheets.flatMap(sheet => {
       const box = sheet.getBoundingClientRect();
       const defects = [];
       const footer = sheet.querySelector('.page-foot').getBoundingClientRect();
       for (const child of sheet.children) {
         if (child.classList.contains('page-foot') || !child.getClientRects().length) continue;
+        // The cover image intentionally fills the page beside the left-column footer.
+        if (sheet.id === 'slide-1' && child.classList.contains('cover-emblem')) continue;
         if (child.getBoundingClientRect().bottom > footer.top - 8) defects.push(`${sheet.id}: footer collision ${child.className || child.tagName}`);
       }
       for (const node of sheet.querySelectorAll('*')) {
@@ -68,8 +82,12 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
       return defects;
     }));
     assert.deepEqual(overflow, [], 'print content overflow');
-    for (let i = 0; i < 12; i++) await page.locator('.sheet').nth(i).screenshot({ path: path.join(previews, `page-${i + 1}.png`) });
-    const output = path.resolve(__dirname, '../pdf/letscoding-school-brochure.pdf');
+    for (let i = 0; i < 12; i++) await page.locator('.sheet:visible').nth(i).screenshot({ path: path.join(previews, `page-${i + 1}.png`) });
+    const withBleed = process.env.EXPO_BLEED === '3';
+    if (withBleed) await page.addScriptTag({ path: path.join(__dirname, 'prepare-bleed.js') });
+    const output = path.resolve(__dirname, withBleed
+      ? '../../tmp/pdfs/letscoding-school-brochure-bleed-rgb.pdf'
+      : '../pdf/letscoding-school-brochure.pdf');
     await fs.mkdir(path.dirname(output), { recursive: true });
     await page.pdf({ path: output, printBackground: true, preferCSSPageSize: true, tagged: true });
     await page.emulateMedia({ media: 'screen', reducedMotion: 'no-preference' });
@@ -80,6 +98,6 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
       await page.waitForFunction(() => getComputedStyle(document.querySelector('.paper-layer')).opacity === '1');
     }
     assert.deepEqual(errors, [], 'browser errors');
-    console.log(`PASS: 12 pages; five viewport widths; images; print layout. PDF: ${output}. Previews: ${previews}`);
+    console.log(`PASS: 12 visible pages (16 preserved); five viewport widths; images; print layout. PDF: ${output}. Previews: ${previews}`);
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

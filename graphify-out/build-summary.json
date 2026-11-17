@@ -1,0 +1,20 @@
+{
+  "files": 404,
+  "code": 120,
+  "documents": 75,
+  "pdf": 4,
+  "images": 201,
+  "video_audio": 4,
+  "unique_images_inspected": 167,
+  "generated_video_descriptors": 4,
+  "cache_hit_files": 63,
+  "nodes": 1822,
+  "edges": 2776,
+  "communities": 190,
+  "unresolved_raw_edges": 205,
+  "merged_same_endpoint_edges": 30,
+  "token_usage": null,
+  "external_paid_extraction_api_calls": 0,
+  "benchmark_token_reduction": 21.6,
+  "validation": "Unique IDs, valid graph endpoints, labels, source coverage and manifest coverage asserted. Browser visual QA not performed."
+}

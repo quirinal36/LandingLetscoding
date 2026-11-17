@@ -1,0 +1,59 @@
+{
+  "viewport": 390,
+  "scrollWidth": 390,
+  "headings": [
+    {
+      "text": "시험장으로 들어온 AI",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "스마트안경이 시험을 푸는 시대",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "1년 전, 대학에서 먼저 시작됐습니다",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "부정행위는 분명한 잘못입니다. 다만…",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "외운 대로 쓰면 A+를 받는 평가",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "대학은 왜 이렇게 평가해 왔을까요",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "부모님들께 여쭙고 싶습니다",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    }
+  ],
+  "images": [
+    {
+      "complete": true,
+      "width": 1800
+    },
+    {
+      "complete": true,
+      "width": 1280
+    },
+    {
+      "complete": true,
+      "width": 336
+    },
+    {
+      "complete": true,
+      "width": 1800
+    }
+  ]
+}

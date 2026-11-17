@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost((await params).slug);
   if (!post) return {};
   // openGraph·twitter는 레이아웃 값과 합쳐지지 않고 통째로 바뀐다. 그래서 siteName·locale·card까지 다시 쓴다.
-  const image = post.cover ? { url: post.cover.src } : { url: "/landing/og.jpg", width: 1897, height: 990 };
+  const image = post.cover ? { url: post.cover.src, alt: post.cover.alt } : { url: "/landing/og.jpg", width: 1897, height: 990, alt: "렛츠코딩 워케이션 센터 화면" };
   return {
     title: post.title,
     description: post.summary,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       authors: [post.author],
       images: [image],
     },
-    twitter: { card: "summary_large_image", title: post.title, description: post.summary, images: [image.url] },
+    twitter: { card: "summary_large_image", title: post.title, description: post.summary, images: [image] },
   };
 }
 
@@ -86,7 +86,7 @@ export default async function Page({ params }: Props) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={post.cover.src}
-          alt=""
+          alt={post.cover.alt}
           fetchPriority="high"
           className="mb-12 w-full rounded-2xl"
         />

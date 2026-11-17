@@ -43,6 +43,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 본문 `blocks`는 `{ type: "text", content }`, `{ type: "image", url, alt? }`, `{ type: "prompt", content }`를 지원합니다. 텍스트 안의 소제목·인용·코드 블록은 기존 문법을 유지합니다. 지원하지 않는 블록이나 DB 오류는 빈 글로 숨기지 않고 오류로 처리합니다.
 
+대표 이미지 설명은 `cover_image_alt`에 저장하며 목록·상세·공유 미리보기의 대체 텍스트로 사용합니다. 본문 이미지는 각 블록의 `alt`를 사용합니다. 편집기의 이미지 설명에는 이미지가 전달하는 내용을 적고, 순수한 장식 이미지만 빈 값으로 둡니다. 설명은 사진 아래 캡션으로 표시하지 않습니다. 대표 이미지 설명 컬럼은 중앙 저장소의 `20261106031906_add_landing_blog_cover_image_alt.sql`로 관리합니다.
+
 기존 8편은 `public.blog_posts`에서 복사했고 이미지도 기존 Supabase Storage URL을 사용합니다. 이후 `landing`의 글을 수정해도 `public` 원본과 자동 동기화되지 않습니다. `content/blog/*.md`와 `public/blog/`는 이전 자료로 보관하며 사이트의 데이터 원본이 아닙니다.
 
 마이그레이션은 `../letscoding_lounge/supabase/migrations/`에서만 관리합니다. 데이터 복사는 `20260930012443_seed_landing_blog_posts.sql`에 기록되어 있습니다.
@@ -69,17 +71,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - `/guide`는 표지와 전체 목차, `/guide/편주소`는 옆 목차·영상·교재 본문·이전/다음 편이 있는 읽기 화면입니다. 영상은 `youtube-nocookie.com` 임베드로 보여 주고 소제목을 누르면 그 시점부터 재생합니다.
 - 관리자(블로그와 같은 `landing.can_manage_blog()` 권한)는 카카오 로그인 후 `/guide/editor`에서 편을, `/guide/editor/session`에서 세션을 작성·수정·삭제합니다. 유튜브 주소(watch·youtu.be·shorts)를 붙여 넣으면 ID만 저장합니다. 촬영 메모는 관리자만 읽는 `guide_lesson_notes`에 저장됩니다.
 - 로그인·로그아웃 뒤 돌아갈 경로는 `landing-next` 쿠키(`/auth` 경로, 10분)로 전달하며 `/blog`·`/guide` 아래만 허용합니다.
-- 마이그레이션은 `../letscoding_lounge/supabase/migrations/`의 `20261024145722_create_landing_guide.sql`(테이블·RLS)과 `20261024145740_seed_landing_guide.sql`(초기 목차 18편·촬영 메모)입니다. 초안 문서는 `output/onboarding_guide/video-shooting-plan.md`이며 이후 수정은 DB가 기준입니다.
+- 마이그레이션은 `../letscoding_lounge/supabase/migrations/`의 `20261024145722_create_landing_guide.sql`(테이블·RLS)과 `20261024145740_seed_landing_guide.sql`(초기 목차 18편·촬영 메모), `20261029191351_update_landing_guide_feature_tour.sql`(기능 둘러보기 영상 반영, 새 편 2개 추가로 20편)입니다. 초안 문서는 `output/onboarding_guide/video-shooting-plan.md`이며 이후 수정은 DB가 기준입니다.
 
 검증: `node scripts/check-guide.mjs`, `npm run build`.
 
 ## 프로젝트 문서와 이미지
 
+- 해커톤 제안 슬라이드: `/hackathon`. 2박 3일·참가자 100명 기준의 12장 HTML 제안서이며 원본·검증 방법은 [output/hackathon-proposal/README.md](output/hackathon-proposal/README.md)를 참고합니다.
 - 브로셔 웹 경로: `/brochure`. 10쪽을 세로로 이어 보고 `인쇄하기`로 가로 A4 한 쪽씩 출력합니다. `PDF 다운로드`는 `/brochure/pdf`입니다.
 - 인쇄 원본은 `prototypes/brochure/brochure.html`, PDF는 `output/pdf/letscoding-lounge-brochure.pdf`입니다. 배포 시 원본으로 정적 경로를 생성하며 별도 앱 헤더는 포함하지 않습니다.
 - 브로셔 검증: Playwright 경로를 `BROCHURE_PLAYWRIGHT`, Chrome 경로를 `BROCHURE_CHROME`, 실행 중인 페이지 주소를 `BROCHURE_URL`로 지정하고 `node prototypes/brochure/check.cjs`를 실행합니다.
 - 학교용 세로 상세페이지: `prototypes/lounge-detail/index.html`이 편집 원본이며, 전달용 HTML·1200px 전체 이미지·분할 이미지는 `output/lounge-detail/`에서 관리합니다. 재출력 방법은 `prototypes/lounge-detail/README.md`를 참고합니다.
-- AI EDU Expo 공교육 브로셔(본문 8쪽 + 표지 4쪽, 총 12쪽): `/ai-edu-expo`. 편집 원본·이미지·검증 스크립트·수정 제안서는 `output/ai-edu-expo/`에서 관리합니다. 기존 `/brochure`와 별도 자료입니다.
+- AI EDU Expo 공교육 브로셔(공개 12쪽; 숨긴 4쪽은 원본에 보존): `/ai-edu-expo`. 편집 원본·이미지·검증 스크립트·수정 제안서는 `output/ai-edu-expo/`에서 관리합니다. 기존 `/brochure`와 별도 자료입니다.
 
 - [랜딩 섹션 구성](docs/LANDING-PLAN.md) · [초기 요구사항](docs/PRD.md) · [디자인 시스템](docs/DESIGN.md)
 - 장면 기획: [성장](docs/GROWTH-SCENE-PLAN.md), [진화](docs/EVOLVE-SCENE-PLAN.md), [히어로 모션](docs/HERO-MOTION-PLAN.md), [히어로 영상](docs/HERO-VIDEO-PLAN.md)

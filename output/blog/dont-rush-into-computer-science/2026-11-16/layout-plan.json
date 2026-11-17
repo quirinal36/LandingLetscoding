@@ -1,0 +1,20 @@
+{
+  "headings": [
+    "아이는 게임의 어떤 부분을 좋아할까요?",
+    "아이디어를 작품으로 옮기는 방법이 달라졌습니다",
+    "학교에서 배우는 것과 아이가 마주할 세상",
+    "만들고, 보여주고, 고치면서 배우는 것",
+    "관심 있는 전공에 제작 경험을 더한다면",
+    "진로를 정하기 전에, 직접 해볼 시간을 주세요",
+    "오늘 아이에게 건넬 질문 하나"
+  ],
+  "cover": "cover.jpg",
+  "blocks": [
+    "part-1.txt",
+    "playtest-feedback.jpg",
+    "part-2.txt",
+    "interests-to-projects.jpg",
+    "part-3.txt"
+  ],
+  "original_text_preserved": true
+}

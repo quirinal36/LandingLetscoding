@@ -1,0 +1,10 @@
+{
+  "cover.jpg": {
+    "sha256": "e6247976550cb11b8a1a7f1bd10a8d43f3421ccf19b952777af674776edcd073",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/b1bb79b9-af21-474f-86ee-27135e6156c9.jpg"
+  },
+  "learning-conversation.jpg": {
+    "sha256": "42c58eea42c15280a55372bdb739fe49c1ade2b29f2245d4bbf003038d223b7a",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/df699b62-19e6-4de0-a982-edd47ec3bac1.jpg"
+  }
+}

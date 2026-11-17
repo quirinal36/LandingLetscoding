@@ -1,25 +1,25 @@
 {
-  "node_count": 900,
+  "node_count": 1822,
   "unverified_node_count": 0,
-  "raw_edge_count": 1632,
+  "raw_edge_count": 3012,
   "non_object_edges": 0,
   "missing_endpoint_edges": 0,
-  "dangling_endpoint_edges": 169,
+  "dangling_endpoint_edges": 205,
   "self_loop_edges": 0,
-  "valid_candidate_edges": 1463,
+  "valid_candidate_edges": 2807,
   "exact_duplicate_edges": 3,
-  "directed_unique_endpoint_pairs": 1442,
-  "directed_same_endpoint_collapsed_edges": 21,
-  "undirected_unique_endpoint_pairs": 1442,
-  "undirected_same_endpoint_collapsed_edges": 21,
-  "same_endpoint_group_count": 14,
-  "relation_variant_groups": 7,
+  "directed_unique_endpoint_pairs": 2780,
+  "directed_same_endpoint_collapsed_edges": 27,
+  "undirected_unique_endpoint_pairs": 2777,
+  "undirected_same_endpoint_collapsed_edges": 30,
+  "same_endpoint_group_count": 20,
+  "relation_variant_groups": 9,
   "source_file_variant_groups": 0,
   "source_location_variant_groups": 5,
   "context_variant_groups": 0,
   "post_build_graph_type": "Graph",
-  "post_build_node_count": 900,
-  "post_build_edge_count": 1441,
+  "post_build_node_count": 1822,
+  "post_build_edge_count": 2776,
   "post_build_error": "",
   "producer_suppression": {
     "path": "/Users/letscoding/.local/share/uv/tools/graphifyy/lib/python3.13/site-packages/graphify/extract.py",
@@ -177,7 +177,7 @@
       ],
       "source_locations": [
         "L2",
-        "L38"
+        "L42"
       ],
       "contexts": [
         "argument",
@@ -185,23 +185,23 @@
       ]
     },
     {
-      "source": "src_components_site_header_siteheader",
-      "target": "src_components_site_header_siteheader_onscroll",
+      "source": "scripts_check_guide",
+      "target": "src_lib_guide_getguide",
       "edge_count": 2,
       "relations": [
-        "calls",
-        "contains"
+        "imports",
+        "indirect_call"
       ],
       "source_files": [
-        "src/components/site-header.tsx"
+        "scripts/check-guide.mjs"
       ],
       "source_locations": [
-        "L152",
-        "L161"
+        "L2",
+        "L68"
       ],
       "contexts": [
-        "",
-        "call"
+        "argument",
+        "import"
       ]
     }
   ]

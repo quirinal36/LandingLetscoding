@@ -6,7 +6,9 @@ const source = await readFile(new URL('index.html', import.meta.url), 'utf8');
 const ids = [...source.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(new Set(ids).size, ids.length, 'Duplicate element IDs');
 assert.equal((source.match(/<section class="slide\b/g) || []).length, 12);
-for (const word of ['해커톤 대회를 위한','AI바이브코딩 플랫폼','100','2박 3일','데이터베이스','음원','배포','가상자산','브랜딩','토큰','종료 후']) assert.ok(source.includes(word), word);
+for (const word of ['해커톤을 위한','AI바이브코딩','데이터베이스','음원','배포','가상자산','브랜딩','토큰','종료 후','lounge-studio-cross.png']) assert.ok(source.includes(word), word);
+// 홈페이지 게시용: 특정 대회의 규모·기간·제안 문구가 남지 않도록 한다.
+for (const word of ['100명','2박 3일','운영사 제안','대회를 위한']) assert.ok(!source.includes(word), `특정 대회 표현: ${word}`);
 for (const [, relative] of source.matchAll(/(?:src|href)="(\.\.\/[^\"]+)"/g)) assert.ok((await readFile(new URL(relative, import.meta.url))).length, relative);
 const code = source.match(/<script>([\s\S]*?)<\/script>/)[1];
 new Script(code);

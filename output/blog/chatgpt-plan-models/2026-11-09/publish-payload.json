@@ -1,0 +1,74 @@
+{
+  "id": "cef7a8c7-7841-4c00-b912-7f130116928b",
+  "expected_updated_at": "2026-11-06T03:21:50.381263+00:00",
+  "changes": {
+    "summary": "2026년 11월 9일 기준. Free·Go·Plus·Pro 100·200·500의 차이와 Chat의 GPT-6, Work·Codex의 GPT-6.1 모델, 사용량·크레딧을 공식 자료로 정리했습니다.",
+    "blocks": [
+      {
+        "type": "text",
+        "content": "ChatGPT 요금제를 고를 때는 가격만 보면 헷갈립니다. 같은 구독 안에서도 대화하는 Chat, 결과물을 만드는 Work, 개발 작업을 맡기는 Codex가 사용하는 모델과 한도가 다르기 때문입니다.\n\n이 글은 2026년 11월 9일에 확인한 OpenAI 공식 문서를 바탕으로 개인 요금제를 정리했습니다. 새 기능은 순차 배포되므로 같은 요금제라도 계정과 앱 버전에 따라 보이는 메뉴가 다를 수 있습니다."
+      },
+      {
+        "type": "text",
+        "content": "## 구독료는 얼마인가요\n\n공식 문서의 월 미국 달러 기준 가격은 Free 0달러, Go 8달러, Plus 20달러입니다. Pro는 월 100달러, 200달러, 500달러 세 단계입니다. 국내 결제 금액은 결제 화면에서 확인해 주세요.\n\nPro 200은 Pro 100보다 포함 사용량이 많고, Pro 500은 세 단계 중 사용량이 가장 많습니다. Pro 500에는 Work·Codex의 Ultrafast도 포함됩니다. 따라서 Pro의 차이를 사용량 하나로만 설명하면 정확하지 않습니다.\n\n최근 Pro 100·500의 Work·Codex 사용량이 늘었고, Pro 200도 이전에 서로 달랐던 사용량이 동일한 수준으로 맞춰졌습니다. 예전 글의 ‘Plus 대비 5배·20배’를 현재의 고정 기준으로 읽지 않는 편이 좋습니다.\n\n출처: OpenAI Pricing / About ChatGPT Pro tiers\nhttps://learn.chatgpt.com/docs/pricing\nhttps://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      {
+        "type": "image",
+        "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig1-c89644001f43.png",
+        "alt": "2026년 11월 9일 기준 ChatGPT 개인 월 요금표. Free 0달러, Go 8달러, Plus 20달러, Pro 100·200·500달러이며 개인 요금제의 Work·Codex Ultrafast는 Pro 500에 포함된다. 국내 실결제 금액과 사용량은 별도 확인한다."
+      },
+      {
+        "type": "text",
+        "content": "## Chat, Work, Codex는 어디에 쓰나요\n\nChat은 질문하고 답을 주고받거나 짧은 글을 다듬을 때 쓰기 좋습니다. Work는 여러 자료를 조사해 보고서·발표자료·파일처럼 검토할 수 있는 결과물을 만드는 작업에 맞습니다. Codex는 코드 수정, 실행, 테스트와 변경 사항 검토 등 개발 작업을 위한 화면을 제공합니다.\n\nWork와 Codex에서 할 수 있는 일은 겹칩니다. Codex에서도 문서나 발표자료를 만들 수 있습니다. 두 기능은 사용량을 공유하므로 Work를 많이 쓴 뒤 Codex로 옮겨도 한도가 새로 생기지는 않습니다.\n\n출처: Use ChatGPT / ChatGPT Work and Codex\nhttps://learn.chatgpt.com/docs/use-chatgpt\nhttps://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
+      },
+      {
+        "type": "text",
+        "content": "## 일반 Chat에서 쓰는 모델\n\nFree와 Go의 기본 Chat 모델은 GPT-5.6 Luna입니다. 어려운 질문에 쓰는 Think도 같은 Luna를 사용합니다.\n\nPlus와 Pro에는 GPT-6가 순차 배포되고 있습니다. GPT-6를 선택했을 때 Instant·Medium·High·Extra High는 GPT-6 Sol이 담당하고, Pro 단계는 Astra 기반의 GPT-6 Pro가 담당합니다. 다만 모든 단계가 모든 요금제에 열리는 것은 아닙니다.\n\nPlus는 Medium과 High까지, Pro는 Extra High와 Pro 단계까지 사용할 수 있습니다. Plus에 Work·Codex용 Astra가 포함된다는 안내를 일반 Chat의 Pro 단계까지 열린다는 뜻으로 읽으면 안 됩니다.\n\n기존에 GPT-5.6 Sol을 직접 선택한 대화는 GPT-5.6을 유지합니다. GPT-6가 나왔다고 이전 모델이 모두 즉시 사라지는 것은 아닙니다.\n\nGPT-6.1 Sol과 GPT-6.1 Terra는 Work·Codex용 선택지입니다. 일반 Chat의 GPT-6 메뉴와 구분해서 보세요.\n\n출처: GPT-6 and other models in ChatGPT\nhttps://help.openai.com/en/articles/20001354-gpt-6-and-other-models-in-chatgpt"
+      },
+      {
+        "type": "image",
+        "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig2-6d031683d08a.png",
+        "alt": "2026년 11월 9일 기준 일반 Chat 모델 비교. Free·Go의 Instant·Think는 GPT-5.6 Luna, GPT-6를 선택한 Plus의 Instant·Medium·High와 Pro의 Extra High까지는 GPT-6 Sol이다. Pro 단계에서는 Astra 기반 GPT-6 Pro 또는 GPT-5.6 Sol Pro를 사용하며 계정별 순차 배포가 적용된다."
+      },
+      {
+        "type": "text",
+        "content": "## Work와 Codex에서 고르는 모델\n\n현재 공식 모델 안내에서 중심이 되는 선택지는 GPT-6 Astra, GPT-6.1 Sol, GPT-6.1 Terra, GPT-6 Luna입니다. 실제로 고를 수 있는 모델은 요금제와 배포 상태에 따라 달라집니다.\n\nAstra는 여러 단계에 걸쳐 판단해야 하는 어려운 작업에 맞습니다. Sol은 복잡한 코드·문서 작업을 반복하면서 비용도 고려할 때 살펴볼 만합니다. Terra는 글쓰기, 이미지와 화면 이해, 앱을 조작하는 업무에 강점을 둡니다. Luna는 요약·추출·분류처럼 범위와 결과가 분명한 작업을 가볍게 처리하는 선택지입니다.\n\nFree·Go의 Codex는 현재 가격 안내에서 데스크톱 앱의 GPT-6 Luna, Standard 속도로 안내합니다. 계정별 배포가 적용됩니다. 기존 글의 ‘Free·Go는 Terra 하나만 사용한다’는 설명을 최신 모델 전체에 적용하면 안 됩니다.\n\nPlus·Pro는 GPT-6.1 Sol·Terra를 포함한 유료 모델 접근 대상입니다. Plus에도 Astra가 포함되지만 포함 사용량은 제한적입니다. 새 모델이 보이지 않으면 앱을 업데이트하고 모델 선택 메뉴를 확인해 주세요.\n\nCodex는 Free·Go에도 포함되지만 Codex Cloud는 포함되지 않습니다. 무료로 Codex를 쓸 수 있다는 말이 모든 실행 환경을 제공한다는 뜻은 아닙니다.\n\n출처: Models / Model selection / Pricing / Using Codex with your ChatGPT plan\nhttps://learn.chatgpt.com/docs/models\nhttps://learn.chatgpt.com/docs/model-selection\nhttps://learn.chatgpt.com/docs/pricing\nhttps://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan"
+      },
+      {
+        "type": "image",
+        "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig3-75d055c81314.png",
+        "alt": "Work·Codex 대표 모델과 역할. GPT-6 Astra는 복잡한 판단, GPT-6.1 Sol은 복잡하고 긴 코드·문서 작업, GPT-6.1 Terra는 글쓰기와 화면 이해, GPT-6 Luna는 요약·추출 등 명확한 반복 작업에 맞는다. Free·Go Codex는 데스크톱 Luna Standard로 안내되며 Codex Cloud는 미포함이다."
+      },
+      {
+        "alt": "태양, 지구, 달이 나란히 놓이고 주변에 궤도와 별이 그려진 삽화.",
+        "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/fbec6508-b673-4bed-a2ac-4029f7ea100b.jpg",
+        "type": "image"
+      },
+      {
+        "type": "text",
+        "content": "## 추론 수준과 속도는 따로 봅니다\n\n추론 수준은 답을 만들 때 얼마나 깊이 생각할지 정하는 설정입니다. Work·Codex에서는 Light 또는 Low, Medium, High, Extra High와 모델별 Max·Ultra 같은 선택지를 볼 수 있습니다. 앱과 모델에 따라 지원 범위가 다릅니다.\n\nMax는 한 작업에 더 많은 추론을 쓰는 설정이고, Ultra는 작업을 나눠 여러 하위 에이전트가 함께 처리합니다. GPT-6 Luna는 Max까지 지원하며 Ultra는 지원하지 않습니다. 모든 모델이 같은 단계를 제공하지는 않습니다.\n\nStandard·Fast·Ultrafast는 속도 설정입니다. 추론 단계와 같은 목록이 아닙니다. Ultrafast는 GPT-6 Astra와 GPT-6.1 Sol을 지원하며, 개인 요금제에서는 Pro 500에 제공됩니다.\n\n빠른 모드는 사용량도 더 빨리 소모합니다. 같은 모델의 Standard 대비 Fast는 구독에 포함된 한도를 2.5배, 구매 크레딧을 2배 비율로 사용합니다. Ultrafast는 각각 8배와 6배입니다. 이 숫자는 사용량 소모 비율이며, 작업 전체가 그만큼 빨리 끝난다는 보장은 아닙니다.\n\n출처: Models / Speed\nhttps://learn.chatgpt.com/docs/models\nhttps://learn.chatgpt.com/docs/agent-configuration/speed"
+      },
+      {
+        "type": "image",
+        "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig4-972fb696edda.png",
+        "alt": "Work·Codex의 추론 수준과 속도 설정 비교. 추론 단계는 모델별로 다르며 Luna는 Max까지 지원한다. 속도 설정에서 Standard 대비 구독 한도 소모는 Fast 2.5배·Ultrafast 8배, 구매 크레딧 소모는 각각 2배·6배다. 이는 작업 속도 배수가 아니다. 개인 Ultrafast는 Pro 500에서 Astra·6.1 Sol에 제공된다."
+      },
+      {
+        "type": "text",
+        "content": "## 무료와 Go의 차이는 무엇인가요\n\nGo는 Free보다 이미지 생성, 파일 업로드, 데이터 분석의 사용 범위를 넓히고 메모리도 확장합니다. 공식 안내에는 프로젝트, 작업, 맞춤 GPT, Library 접근도 포함되어 있습니다. 각 기능의 제공 조건이 있으므로 ‘무료와 기능이 완전히 같고 횟수만 다르다’고 단정하지 않겠습니다.\n\n프로젝트는 대화·자료·지침을 묶어 두는 공간입니다. 프로젝트 하나에 올릴 수 있는 파일은 Free 5개, Go·Plus 25개, Pro 40개입니다. 수업 자료를 여러 개 모아 쓰려는 분에게는 이런 차이가 모델 이름보다 먼저 체감될 수 있습니다.\n\n출처: What is ChatGPT Go? / Projects in ChatGPT\nhttps://help.openai.com/en/articles/11989085-what-is-chatgpt-go\nhttps://help.openai.com/en/articles/10169521-projects-in-chatgpt"
+      },
+      {
+        "type": "text",
+        "content": "## Excel·Sheets와 Sites도 확인하세요\n\nChatGPT for Excel과 Google Sheets는 Free·Go·Plus·Pro 모두에서 제공됩니다. Free·Go에는 제한된 사용량이 포함되고, Plus·Pro도 요금제의 에이전트 작업 한도를 적용받습니다. 스프레드시트 안에서 AI를 쓴다고 별도의 무제한 사용량이 생기는 것은 아닙니다.\n\nSites는 웹사이트와 간단한 앱을 만들고 공유하는 기능입니다. 개인 요금제에서는 Plus·Pro에 제공됩니다. 사이트를 만들고 수정하는 작업은 Codex 사용량에 포함되며, 사이트를 운영하는 데 필요한 트래픽·저장공간의 한도는 별도로 봐야 합니다.\n\n출처: ChatGPT for Excel and Google Sheets / Creating and using ChatGPT Sites\nhttps://help.openai.com/en/articles/20001063-chatgpt-for-excel-and-google-sheets\nhttps://help.openai.com/en/articles/20001339-creating-and-using-chatgpt-sites"
+      },
+      {
+        "type": "text",
+        "content": "## 사용량은 질문 횟수만으로 계산하기 어렵습니다\n\n같은 한 문장을 보내도 읽어야 할 파일과 대화가 길거나 여러 도구를 쓰면 사용량이 달라집니다. 모델, 추론 수준, 속도 설정도 영향을 줍니다.\n\n현재 Codex 가격 안내는 Pro에 5시간 한도가 없다고 설명합니다. 이것은 무제한이라는 뜻이 아닙니다. 주간 한도나 모델별 한도는 별도로 적용될 수 있으므로 사용량 화면에 표시되는 잔여량과 초기화 시각을 확인해야 합니다.\n\n크레딧은 포함 사용량을 다 쓴 뒤 지원되는 기능을 계속 쓰기 위한 추가 결제 수단입니다. Free·Go의 크레딧 구매는 일부 계정에만 제공됩니다. 크레딧을 산다고 요금제가 올라가거나 모든 모델·기능이 열리지는 않습니다.\n\nChatGPT 구독과 API 결제도 구분해야 합니다. Codex에 ChatGPT 계정으로 로그인하면 구독의 사용량을 쓰고, 본인의 API 키로 연결하면 API 요금이 적용됩니다. ChatGPT 크레딧과 API 크레딧도 서로 다릅니다.\n\n출처: Pricing / Using Credits for Flexible Usage in ChatGPT\nhttps://learn.chatgpt.com/docs/pricing\nhttps://help.openai.com/en/articles/12642688-using-credits-for-flexible-usage-in-chatgpt-personal-plans"
+      },
+      {
+        "type": "text",
+        "content": "## 어떤 요금제부터 살펴보면 될까요\n\n여기부터는 위 차이를 바탕으로 한 선택 제안입니다. 짧은 질문과 가벼운 작업 위주라면 Free로 시작해도 됩니다. 파일·이미지·데이터 분석을 쓰다가 한도에 자주 걸린다면 Go에서 필요한 부분이 늘어나는지 살펴보세요.\n\n자료를 모아 결과물을 만들거나 코딩 작업을 꾸준히 맡길 생각이라면 Plus의 모델과 기능을 검토할 만합니다. Pro는 실제 사용 기록을 보고 결정하는 편이 낫습니다. 어떤 작업에서 한도가 부족했는지, Ultrafast가 필요한지 알면 100·200·500달러 중 무엇을 비교해야 할지도 분명해집니다.\n\n새 모델 이름보다 먼저 확인할 것은 내가 쓰는 화면, 필요한 기능, 한도가 줄어드는 속도입니다. 기능의 접근 권한과 사용량을 함께 보면 구독 선택이 훨씬 쉬워집니다.\n\n라운지에 올라온 학생 작품은 누구나 로그인 없이 열어볼 수 있습니다.\nhttps://lounge.letscoding.kr/works\n\n학원 소개는 여기 있습니다.\nhttps://lounge.letscoding.kr/academy\n\n렛츠코딩앤플레이학원\n전북특별자치도 완주군 이서면 출판로 46-5, 301호\n063-714-2536"
+      }
+    ]
+  }
+}

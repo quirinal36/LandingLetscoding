@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해커톤을 위한 AI바이브코딩 플랫폼 | 정사각 표지</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+/* 500×500 정사각 표지. index.html 1쪽의 밝은 표지와 같은 색 규칙을 쓴다.
+   오른쪽은 9:16 일러스트를 높이에 맞춰 통째로 넣고(약 281px), 왼쪽에 제목을 둔다. */
+:root{--ink:#142047;--muted:#4b5677;--accent:#4a3fce;--line:#b8c6e6;font-family:'Pretendard Variable','Apple SD Gothic Neo',sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9eef6}
+body{min-height:100vh;display:grid;place-items:center}
+.card{position:relative;width:500px;height:500px;overflow:hidden;color:var(--ink);
+  background:linear-gradient(180deg,#e6f2fe 0%,#cfe7fc 50%,#dcdcf8 100%)}
+.text{position:absolute;inset:0 auto 0 0;width:236px;padding:30px 0 28px 28px;display:flex;flex-direction:column;z-index:1}
+.brand{margin:0;font-size:8.5px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.brand em{font-style:normal;color:#7a72c8}
+.kicker{margin:44px 0 0;font-size:9.5px;font-weight:600;letter-spacing:.12em;color:var(--accent)}
+h1{margin:10px 0 0;font-size:35px;font-weight:800;line-height:1.1;letter-spacing:-.06em;word-break:keep-all}
+h1 span{display:block;color:var(--accent)}
+.lead{margin:16px 0 0;font-size:12px;line-height:1.6;color:var(--muted);word-break:keep-all}
+.foot{margin-top:auto;width:178px;padding-top:12px;border-top:1px solid var(--line)}
+.foot strong{display:block;font-size:12px;font-weight:650;letter-spacing:-.02em;line-height:1.4;word-break:keep-all}
+.foot p{margin:5px 0 0;font-size:9px;color:var(--muted)}
+.art{position:absolute;top:0;right:0;height:100%;margin:0}
+.art img{display:block;height:100%;width:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%);mask-image:linear-gradient(90deg,transparent,#000 9%)}
+</style>
+</head>
+<body>
+<div class="card" id="cover-square">
+  <div class="text">
+    <p class="brand">LET’S CODING <em>LOUNGE & STUDIO</em></p>
+    <p class="kicker">아이디어가 제품이 되는 시간</p>
+    <h1>해커톤을 위한<span>AI바이브코딩</span><span>플랫폼</span></h1>
+    <p class="lead">스튜디오에서 AI와 함께 만들고,<br>라운지에 공개해 서로 체험하고<br>피드백합니다.</p>
+    <div class="foot"><strong>작동하는 제품으로<br>경험하는 해커톤</strong><p>주식회사 렛츠코딩</p></div>
+  </div>
+  <figure class="art"><img src="../../public/hackathon/lounge-studio-cross-tall.png" width="941" height="1672" alt="렛츠코딩 스튜디오에서 아이들이 AI 로봇과 함께 게임을 만들고, 다리를 건너 렛츠코딩 라운지에서 서로의 작품을 함께 보는 일러스트"></figure>
+</div>
+</body>
+</html>

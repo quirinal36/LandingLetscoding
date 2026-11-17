@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import { Presentation } from '@oai/artifact-tool';
+const p=Presentation.create({slideSize:{width:1600,height:900}});
+const s=p.slides.add();
+s.background.fill='#171A20';
+const t=s.shapes.add({geometry:'textbox',position:{left:80,top:200,width:1400,height:150},fill:'none',line:{fill:'none',width:0}});
+t.text='렛츠코딩 Studio\n프로젝트 수업 도입 제안';
+t.text.style={fontFamily:'Apple SD Gothic Neo',fontSize:64,bold:true,color:'#FFFFFF'};
+const png=await p.export({slide:s,format:'png',scale:1});
+await fs.writeFile(new URL('./smoke.png',import.meta.url),new Uint8Array(await png.arrayBuffer()));
+console.log('rendered');

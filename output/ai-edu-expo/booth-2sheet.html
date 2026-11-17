@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>렛츠코딩 부스 벽당 2장 시안 · AI EDU Expo</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+/*
+  AI EDU Expo 조립부스(바닥 3,000×3,000mm, 벽 높이 2,500mm) 안쪽 벽 시안 — 벽 한 면을 2장으로 나누는 안.
+  2026-11-16 사용자 요청: 벽 두 면(뒷벽·옆벽)을 각각 2장으로 출력한다. 2026-11-17 장당 1,470×2,300mm로 바꿨다(이전 1,425×2,380 가정).
+  실제 시트 크기가 다르면 --pw 와 아래 좌표를 고친다. 이음선은 x=1,470 한 곳.
+    · 뒷벽: 왼쪽 B2(작품 4개), 오른쪽 B1(설명). 기존 파일 번호는 유지한다.
+    · 옆벽 S1~S2: assets/lounge-studio-wide-2.png 한 장을 두 장에 이어 붙인다
+    · 나머지 옆벽 자리(벽 없음)에는 65인치 TV를 둔다
+  좌표 단위는 mm. 아트 좌표는 패널 두 장을 이어 붙인 2,940×2,300 공간이며, 화면에서는 기둥 자리(--gap)를 벌려 보여 준다.
+  글자는 이음선(x=1,470)을 넘지 않는다. 2026-11-17 B2 내용을 위로 올리고 작품을 2×2로 늘린 뒤 B1·B2 좌우를 바꿨다.
+  바닥에서 650mm(y 1,650 이하)는 사람·가구에 가리므로 핵심 문구를 두지 않는다.
+  ?panel=B1 처럼 열면 그 패널 한 장만 실제 비율로 표시한다(출력용).
+*/
+:root{
+  --pw:1470; --ph:2300; --gap:12;
+  --night:#0a0920; --satin:#17144a; --mist:#c9c2ff;
+  --violet:#7439f1; --indigo:#3c34c5; --coral:#fc6a77; --pearl:#f3f1fb;
+  --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:32px 24px 60px;background:#d9dce6;color:#1b2333;font-family:var(--font);word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.note{max-width:1400px;margin:0 auto 14px;font-size:14px;color:#4b5570;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.note label{cursor:pointer;user-select:none}
+.note a{color:inherit;text-underline-offset:3px}
+h2.wall-title{max-width:1400px;margin:34px auto 10px;font-size:16px;font-weight:700;color:#2a3150}
+h2.wall-title span{font-weight:400;color:#55607a;margin-left:10px}
+
+/* ── 벽: 패널 2장 + 이음선 1개 ── */
+/* 1470 : 12 : 1470 — 이음선은 화면 확인용으로 벌려 보여 준다 */
+.wall{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1470fr 12fr 1470fr;
+  background:#2a2a30;padding:0;box-shadow:0 14px 50px rgba(10,9,32,.35)}
+.post{background:linear-gradient(90deg,#1c1c22,#3a3a44 50%,#1c1c22)}
+.panel{position:relative;aspect-ratio:var(--pw)/var(--ph);overflow:hidden;container-type:inline-size}
+.panel .tag{position:absolute;left:6px;top:6px;z-index:5;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:2px 6px;border-radius:4px;display:none}
+body.guides .panel .tag{display:block}
+.panel .floor{position:absolute;left:0;right:0;bottom:0;height:calc(650 / var(--ph) * 100%);z-index:4;display:none;
+  background:repeating-linear-gradient(135deg,rgba(252,106,119,.16) 0 8px,transparent 8px 16px);border-top:1px dashed rgba(252,106,119,.8)}
+body.guides .panel .floor{display:block}
+
+/* 패널 안의 아트: 2,940mm 폭 장면을 패널 위치만큼 옮겨서 보여 준다 */
+.scene{position:absolute;top:0;height:100%;width:200%;left:calc(var(--i) * -100%);container-type:inline-size}
+.scene > *{--u:calc(100cqw / 2940)}
+
+/* ── 뒷벽(B) ── */
+.back{background:
+    radial-gradient(40% 50% at 4% 96%, rgba(116,57,241,.45), transparent 70%),
+    radial-gradient(40% 45% at 97% 4%, rgba(252,106,119,.30), transparent 70%),
+    var(--night)}
+.band{position:absolute;inset:0;clip-path:polygon(60% 0,100% 0,100% 100%,36% 100%);
+  background:
+    linear-gradient(150deg, rgba(255,255,255,.06) 0%, transparent 40%, transparent 60%, rgba(255,255,255,.04) 100%),
+    radial-gradient(45% 60% at 70% 45%, rgba(60,52,197,.5), transparent 75%),
+    var(--satin)}
+.t{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));margin:0;white-space:nowrap;color:var(--pearl)}
+.head{font-size:calc(215 * var(--u));font-weight:800;line-height:1.1;letter-spacing:-.02em;
+  background:linear-gradient(180deg,#ffffff 0%,#f6f3ff 55%,#d4ceef 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 calc(6 * var(--u)) calc(30 * var(--u)) rgba(10,9,32,.6))}
+.head em{font-style:normal;background:linear-gradient(90deg,#ffb3b9 0%,var(--coral) 55%,#e58fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:calc(92 * var(--u));font-weight:500;line-height:1.42;color:rgba(243,241,251,.95)}
+.lead b{font-weight:700;color:#fff}
+.rule{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u));height:calc(8 * var(--u));border-radius:99px;background:linear-gradient(90deg,var(--coral),var(--violet))}
+
+.point{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y,1300) * var(--u));width:calc(590 * var(--u));height:calc(340 * var(--u));
+  padding:calc(50 * var(--u)) calc(56 * var(--u));border-radius:calc(34 * var(--u));
+  background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));
+  border:calc(2 * var(--u)) solid rgba(201,194,255,.30);
+  box-shadow:0 calc(16 * var(--u)) calc(50 * var(--u)) rgba(5,4,20,.45), inset 0 calc(2 * var(--u)) 0 rgba(255,255,255,.12)}
+.point .who{display:block;font-size:calc(38 * var(--u));font-weight:600;letter-spacing:.22em;color:var(--mist);margin-bottom:calc(22 * var(--u))}
+.point .who::before{content:"";display:inline-block;width:calc(18 * var(--u));height:calc(18 * var(--u));border-radius:50%;background:var(--coral);box-shadow:0 0 calc(14 * var(--u)) var(--coral);margin-right:calc(18 * var(--u));vertical-align:.08em}
+.point .what{display:block;font-size:calc(56 * var(--u));font-weight:700;line-height:1.3;color:var(--pearl)}
+
+.label{font-size:calc(34 * var(--u));font-weight:600;letter-spacing:.3em;color:var(--mist)}
+.label b{font-weight:400;letter-spacing:.06em;color:rgba(243,241,251,.62);margin-left:calc(16 * var(--u))}
+.card{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u));margin:0;padding:calc(10 * var(--u));border-radius:calc(26 * var(--u));
+  background:rgba(255,255,255,.10);border:calc(2 * var(--u)) solid rgba(201,194,255,.30);
+  box-shadow:0 calc(30 * var(--u)) calc(70 * var(--u)) rgba(5,4,20,.55);transform:rotate(var(--r,0deg))}
+.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:calc(18 * var(--u)) calc(18 * var(--u)) 0 0}
+.card figcaption{display:flex;align-items:center;justify-content:space-between;gap:calc(12 * var(--u));
+  padding:calc(16 * var(--u)) calc(22 * var(--u));border-radius:0 0 calc(18 * var(--u)) calc(18 * var(--u));
+  background:var(--night);color:var(--pearl);font-size:calc(48 * var(--u));font-weight:700;line-height:1.1;white-space:nowrap}
+.card figcaption svg{flex:none;width:1.05em;height:1.05em;fill:var(--coral)}
+.piece{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u));height:auto;transform:rotate(var(--r,0deg));filter:drop-shadow(0 0 calc(24 * var(--u)) var(--glow))}
+
+.foot{font-size:calc(40 * var(--u));font-weight:400;color:rgba(243,241,251,.75)}
+.brand{position:absolute;left:calc(110 * var(--u));top:calc(2060 * var(--u));display:flex;align-items:center;gap:calc(10 * var(--u))}
+.brand img{display:block;width:calc(150 * var(--u));height:auto;mix-blend-mode:screen}
+.brand strong{font-size:calc(64 * var(--u));font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap;color:var(--pearl)}
+.url{font-size:calc(46 * var(--u));font-weight:500;letter-spacing:.05em;color:var(--mist)}
+
+/* ── 옆벽(S): 이미지 한 장을 두 장에 나눠 붙인다 ── */
+.side .scene{background:#0f1150 url("assets/lounge-studio-wide-2.png") center/cover no-repeat}
+
+/* ── 한 장 출력 모드 ── */
+body.single{padding:0;background:#000}
+body.single .note,body.single h2.wall-title,body.single .post{display:none}
+body.single .wall{display:block;max-width:none;box-shadow:none;background:none}
+body.single .panel{display:none;width:100vw;max-width:calc(100vh * 1470 / 2300)}
+body.single .panel.on{display:block}
+@media print{
+  @page{size:1470mm 2300mm;margin:0}
+  body.single .panel.on{width:1470mm;max-width:none}
+}
+</style>
+</head>
+<body>
+<p class="note">AI EDU Expo 조립부스 시안 · 벽당 2장 · 장당 1,470×2,300mm · 회색 선은 장 사이 이음선
+  <a href="info-desk.html">인포데스크 정면 950×660mm ↗</a>
+  <label><input type="checkbox" onchange="document.body.classList.toggle('guides',this.checked)"> 패널 번호·가림 구역(바닥 650mm) 표시</label></p>
+
+<h2 class="wall-title">뒷벽 B2–B1<span>왼쪽: AI활용 수업·작품 / 오른쪽: 바이브코딩·설명 · 통로 정면</span></h2>
+<div class="wall back-wall" data-wall="B"></div>
+
+<h2 class="wall-title">옆벽 S1–S2<span>렛츠코딩 스튜디오 × 라운지 이미지 · 반대쪽 옆은 벽 없이 TV</span></h2>
+<div class="wall side-wall" data-wall="S"></div>
+
+<!-- 뒷벽 아트 (2,940 × 2,300mm 좌표) -->
+<template id="back-art">
+  <div class="band"></div>
+
+  <!-- 헤드라인: B2를 왼쪽, B1을 오른쪽에 설치 -->
+  <h1 class="t head" style="--x:150;--y:190">바이브코딩,</h1>
+  <h1 class="t head" style="--x:1615;--y:100"><em>AI활용</em> 수업</h1>
+
+  <!-- B1: 설명 -->
+  <span class="rule" style="--x:155;--y:580;--s:200"></span>
+  <p class="t lead" style="--x:150;--y:640">자신만의 이야기와,<br><b>공감능력</b>을 발휘해<br><b>인문학과 기술</b>이<br>만나는 공간</p>
+
+  <!-- B2: 라운지 공개 작품 -->
+  <p class="t label" style="--x:1625;--y:370">LOUNGE<b>학생이 만든 작품</b></p>
+  <figure class="card" style="--x:1630;--y:420;--s:560">
+    <img src="../../public/landing/works/english-legend.webp" alt="">
+    <figcaption>영어 학습게임<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="card" style="--x:2240;--y:420;--s:560">
+    <img src="../../public/landing/works/bezierider.webp" alt="">
+    <figcaption>그래프 탐구<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="card" style="--x:1630;--y:850;--s:560">
+    <img src="../../public/landing/works/solor.webp" alt="태양계 탐구하기">
+    <figcaption>태양계 탐구<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="card" style="--x:2240;--y:850;--s:560">
+    <img src="../../public/landing/works/joowan-car.webp" alt="음주운전 시뮬레이션">
+    <figcaption>운전 시뮬레이션<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <svg class="piece" style="--x:1050;--y:760;--s:120;--r:-16deg;--glow:rgba(116,57,241,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <svg class="piece" style="--x:2745;--y:40;--s:85;--r:32deg;--glow:rgba(252,106,119,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#fc6a77" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+
+  <!-- 요점: 장마다 둘 -->
+  <div class="point" style="--x:110"><span class="who">학생</span><span class="what">학생마다<br>자기 작품을 만듭니다</span></div>
+  <div class="point" style="--x:735"><span class="who">작품</span><span class="what">작품은 주소 하나로<br>바로 공유</span></div>
+  <div class="point" style="--x:1580;--y:1300"><span class="who">교사</span><span class="what">과제 진행과<br>AI 활용 기록 확인</span></div>
+  <div class="point" style="--x:2205;--y:1300"><span class="who">준비물</span><span class="what">노트북 또는 태블릿과<br>인터넷이면 됩니다</span></div>
+
+  <!-- 가림 구역: 브랜드·주소만 -->
+  <div class="brand"><img src="../../src/assets/logo.png" alt=""><strong>렛츠코딩 라운지</strong></div>
+  <p class="t url" style="--x:2235;--y:1830">lounge.letscoding.kr</p>
+</template>
+
+<script>
+const only = new URLSearchParams(location.search).get('panel');
+if (only) document.body.classList.add('single');
+const backArt = document.getElementById('back-art');
+for (const wall of document.querySelectorAll('.wall')) {
+  const w = wall.dataset.wall;
+  for (let i = 0; i < 2; i++) {
+    if (i) wall.insertAdjacentHTML('beforeend', '<div class="post"></div>');
+    const index = w === 'B' ? 1 - i : i;
+    const id = w + (index + 1);
+    const p = document.createElement('div');
+    p.className = 'panel ' + (w === 'B' ? 'back-panel' : 'side') + (only === id ? ' on' : '');
+    p.innerHTML = '<div class="scene" style="--i:' + index + '"></div><span class="tag">' + id + '</span><div class="floor"></div>';
+    if (w === 'B') {
+      p.querySelector('.scene').classList.add('back');
+      p.querySelector('.scene').append(backArt.content.cloneNode(true));
+      if (i) p.querySelector('.scene').querySelectorAll('h1').forEach(h => h.setAttribute('aria-hidden', 'true'));
+    }
+    wall.append(p);
+  }
+}
+</script>
+</body>
+</html>

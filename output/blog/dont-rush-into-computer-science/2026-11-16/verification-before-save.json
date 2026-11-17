@@ -1,0 +1,30 @@
+{
+  "originalTextPreserved": true,
+  "headings": [
+    "아이는 게임의 어떤 부분을 좋아할까요?",
+    "아이디어를 작품으로 옮기는 방법이 달라졌습니다",
+    "학교에서 배우는 것과 아이가 마주할 세상",
+    "만들고, 보여주고, 고치면서 배우는 것",
+    "관심 있는 전공에 제작 경험을 더한다면",
+    "진로를 정하기 전에, 직접 해볼 시간을 주세요",
+    "오늘 아이에게 건넬 질문 하나"
+  ],
+  "images": [
+    {
+      "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/11447f49-a8df-4871-bcd4-6bdf9622366d.jpg",
+      "status": 200,
+      "bytes": 595416
+    },
+    {
+      "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/75e5119f-3bc7-42cb-b014-8b3c991f82d6.jpg",
+      "status": 200,
+      "bytes": 485652
+    },
+    {
+      "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/d10312a5-bf2f-4b80-88ce-b827a0789166.jpg",
+      "status": 200,
+      "bytes": 712642
+    }
+  ],
+  "statusPreserved": true
+}

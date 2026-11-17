@@ -1,0 +1,14 @@
+{
+  "rationale": "Verified exact concept references against current source text; original endpoints retained in previous_source/previous_target edge attributes.",
+  "repaired_endpoints": 39,
+  "aliases": {
+    "motion_reel_index_reel_player": "motion_reel_index_reel_preview",
+    "lounge_model_community_cycle": "docs_lounge_model_expansion_model",
+    "output_ai_edu_expo_index_project_cycle": "output_ai_edu_expo_index_four_steps",
+    "output_ai_edu_expo_index_lucat_virtual_economy": "output_ai_edu_expo_index_virtual_economy",
+    "output_ai_edu_expo_index_teacher_guidance": "output_ai_edu_expo_index_teacher_workflow",
+    "output_ai_edu_expo_index_coding_studio": "output_ai_edu_expo_index_studio",
+    "output_ai_edu_expo_index_ai_usage_guidance": "output_ai_edu_expo_index_safety",
+    "output_ai_edu_expo_index_visibility_policy": "output_ai_edu_expo_index_safety"
+  }
+}

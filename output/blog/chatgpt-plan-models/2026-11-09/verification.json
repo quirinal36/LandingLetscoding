@@ -1,0 +1,15 @@
+{
+  "public_http": 200,
+  "anonymous_db": true,
+  "updated_at": "2026-11-09T14:23:23.858237+00:00",
+  "summary_in_html": true,
+  "new_images_in_html": 4,
+  "outdated_images_in_html": 0,
+  "browser": {
+    "public_page_opened": true,
+    "images_loaded": 6,
+    "new_charts_loaded": 4,
+    "image_natural_width": 1800,
+    "screenshot_saved": false
+  }
+}

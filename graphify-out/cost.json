@@ -13,6 +13,14 @@
       "output_tokens": 0,
       "files": 169,
       "accounting": "unmetered_host_session"
+    },
+    {
+      "date": "2026-11-13T13:58:33.047850+00:00",
+      "input_tokens": null,
+      "output_tokens": null,
+      "usage_measured": false,
+      "files": 404,
+      "note": "Host collaboration API does not expose extraction token usage. Null means unavailable, not zero. No paid external extraction API called."
     }
   ],
   "total_input_tokens": 0,

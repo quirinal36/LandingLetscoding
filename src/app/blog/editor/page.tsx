@@ -15,7 +15,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ s
   const { slug } = await searchParams;
   let post: EditablePost | undefined;
   if (slug) {
-    const { data, error } = await supabase.schema("landing").from("blog_posts").select("id,slug,title,summary,category,author_name,author_title,cover_image_url,is_published,blocks,updated_at").eq("slug", slug).maybeSingle();
+    const { data, error } = await supabase.schema("landing").from("blog_posts").select("id,slug,title,summary,category,author_name,author_title,cover_image_url,cover_image_alt,is_published,blocks,updated_at").eq("slug", slug).maybeSingle();
     if (error) throw new Error("편집할 글을 불러오지 못했습니다.");
     if (!data) notFound();
     post = { ...data, cover_image_url: data.cover_image_url ?? "" } as EditablePost;

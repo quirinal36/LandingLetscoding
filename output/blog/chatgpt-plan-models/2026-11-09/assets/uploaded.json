@@ -1,0 +1,22 @@
+[
+  {
+    "type": "image",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig1-c89644001f43.png",
+    "alt": "2026년 11월 9일 기준 ChatGPT 개인 월 요금표. Free 0달러, Go 8달러, Plus 20달러, Pro 100·200·500달러이며 개인 요금제의 Work·Codex Ultrafast는 Pro 500에 포함된다. 국내 실결제 금액과 사용량은 별도 확인한다."
+  },
+  {
+    "type": "image",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig2-6d031683d08a.png",
+    "alt": "2026년 11월 9일 기준 일반 Chat 모델 비교. Free·Go의 Instant·Think는 GPT-5.6 Luna, GPT-6를 선택한 Plus의 Instant·Medium·High와 Pro의 Extra High까지는 GPT-6 Sol이다. Pro 단계에서는 Astra 기반 GPT-6 Pro 또는 GPT-5.6 Sol Pro를 사용하며 계정별 순차 배포가 적용된다."
+  },
+  {
+    "type": "image",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig3-75d055c81314.png",
+    "alt": "Work·Codex 대표 모델과 역할. GPT-6 Astra는 복잡한 판단, GPT-6.1 Sol은 복잡하고 긴 코드·문서 작업, GPT-6.1 Terra는 글쓰기와 화면 이해, GPT-6 Luna는 요약·추출 등 명확한 반복 작업에 맞는다. Free·Go Codex는 데스크톱 Luna Standard로 안내되며 Codex Cloud는 미포함이다."
+  },
+  {
+    "type": "image",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/landing/chatgpt-plan-models/2026-11-09/fig4-972fb696edda.png",
+    "alt": "Work·Codex의 추론 수준과 속도 설정 비교. 추론 단계는 모델별로 다르며 Luna는 Max까지 지원한다. 속도 설정에서 Standard 대비 구독 한도 소모는 Fast 2.5배·Ultrafast 8배, 구매 크레딧 소모는 각각 2배·6배다. 이는 작업 속도 배수가 아니다. 개인 Ultrafast는 Pro 500에서 Astra·6.1 Sol에 제공된다."
+  }
+]

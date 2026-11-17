@@ -1,0 +1,13 @@
+# 이미지 생성 기록
+
+내장 image_gen 사용. 2026-11-15.
+
+## 표지: 시험이 평가하는 것
+
+Use case: editorial illustration. Asset type: hero cover for a Korean education blog column about exams in the AI era, landscape 16:9. Create a sophisticated warm editorial illustration, tactile gouache and delicate colored-pencil on ivory paper. An unoccupied student desk viewed diagonally from above; one cream exam paper with abstract short lines and a neat grid of multiple-choice circles (no readable letters or numbers), a navy pencil, and a small pair of ordinary-looking smart glasses. A subtle translucent pale-blue constellation of connected nodes rising above the glasses suggests artificial intelligence. Beyond the desk, an open window casts warm light and a large soft question-mark-shaped shadow across a blank part of the paper, inviting reflection on what tests measure. Restrained palette: warm ivory, slate navy, muted periwinkle blue, a small terracotta accent. Airy, calm and thoughtful, premium illustrated magazine aesthetic, balanced composition with objects occupying the center two thirds. No person, no reenactment of cheating, no tiny cameras or instructions, no sensational crime imagery, no logos, no readable text, no watermark. Fully opaque background. This is clearly a conceptual illustration, not a documentary photograph.
+
+## 본문: 아이의 생각을 듣는 시간
+
+Use case: editorial illustration. Asset type: in-article image near the closing section of a Korean parent-facing column asking what children should learn in the AI era, landscape 16:9. Create a sophisticated warm editorial illustration, tactile gouache and delicate colored-pencil on ivory paper. A Korean adolescent seen in three-quarter side view at a wooden desk, confidently showing a hand-drawn idea and small cardboard model to a parent who listens at equal eye level. The child's sketchbook contains only simple geometric sketches and arrows, with a small open laptop off to one side displaying abstract navy and pale-blue shapes. Focus on hands, thoughtful expressions, and the shared conversation; learning through explaining one's reasoning. Gentle natural window light, uncluttered room, generous breathing space. Restrained palette: warm ivory, slate navy, muted periwinkle blue, tiny terracotta accents, premium illustrated magazine aesthetic. No grades, no trophy, no robot, no glowing brain, no readable text, no logos, no watermark. Clearly an illustrative imagined scene, not evidence of a real class. Fully opaque background.
+
+생성 원본은 Codex generated_images에 보존하고, 사이트용 JPEG는 assets/cover.jpg와 assets/learning-conversation.jpg에 저장했다. 두 장 모두 실제 사건·수업을 촬영한 사진이 아닌 AI 생성 삽화다.

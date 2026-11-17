@@ -11,7 +11,7 @@ const fieldClass = "mt-2 w-full rounded-xl border border-black/20 bg-white p-3 t
 export function BlogEditor({ post }: { post?: EditablePost }) {
   const [values, setValues] = useState<EditorValues>(post ?? {
     slug: "", title: "", summary: "", category: "column", author_name: "", author_title: "",
-    cover_image_url: "", is_published: false, blocks: [{ type: "text", content: "" }],
+    cover_image_url: "", cover_image_alt: "", is_published: false, blocks: [{ type: "text", content: "" }],
   });
   const [error, setError] = useState("");
   const [pending, startTransition] = useTransition();
@@ -55,6 +55,10 @@ export function BlogEditor({ post }: { post?: EditablePost }) {
       </label>
       <label className="block text-sm font-medium">대표 이미지 주소
         <input className={fieldClass} value={values.cover_image_url} maxLength={4000} placeholder="https://… 또는 /blog/…" onChange={e => setValues(v => ({ ...v, cover_image_url: e.target.value }))} />
+      </label>
+      <label className="block text-sm font-medium">대표 이미지 설명
+        <input className={fieldClass} value={values.cover_image_alt} maxLength={1000} onChange={e => setValues(v => ({ ...v, cover_image_alt: e.target.value }))} />
+        <span className="mt-1 block text-xs text-ink-soft">이미지를 볼 수 없는 독자에게 전달할 내용을 적어 주세요. 순수한 장식 이미지는 비워 둘 수 있습니다.</span>
       </label>
       <div>
         <h2 className="text-xl font-semibold">본문</h2>

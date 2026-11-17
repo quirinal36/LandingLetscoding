@@ -1,0 +1,27 @@
+{
+  "file": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/output/pdf/letscoding-school-brochure-cmyk-bleed-3mm.pdf",
+  "pages": 12,
+  "size_bytes": 20791416,
+  "pdfx": "PDF/X-4",
+  "media_mm": [
+    303,
+    216
+  ],
+  "trim_mm": [
+    297,
+    210
+  ],
+  "bleed_mm": 3,
+  "font_files_embedded": 0,
+  "fonts_with_embedded_type3_glyphs": 445,
+  "verified": [
+    "all page text preserved",
+    "all text inside TrimBox",
+    "CMYK/Gray only",
+    "OutputIntent present",
+    "no links or preview guides",
+    "all pages visually reviewed",
+    "pages 1, 5, 12 bleed backgrounds reviewed",
+    "original PDFs unchanged"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "draft": true,
+  "counts": {
+    "heading": 7,
+    "paragraph": 29,
+    "quote": 8,
+    "image": 3
+  },
+  "links": [
+    "https://www.news2day.co.kr/article/20261115500031",
+    "https://youtu.be/Vtni0Dz35sk",
+    "https://www.gokorea.kr/news/articleView.html?idxno=846827",
+    "https://www.kmib.co.kr/article/20251116500296",
+    "https://www.chosun.com/national/national_general/2025/11/12/EQL3JICEYRHUPOKCIX44KVXWHE/",
+    "https://youtu.be/9hAUsV1zCsw",
+    "https://news.skhynix.co.kr/ai-talent-recruit-2026/"
+  ],
+  "images": [
+    {
+      "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/b1bb79b9-af21-474f-86ee-27135e6156c9.jpg",
+      "status": 200,
+      "bytes": 660132
+    },
+    {
+      "url": "https://i.ytimg.com/vi/Vtni0Dz35sk/maxresdefault.jpg",
+      "status": 200,
+      "bytes": 185539
+    },
+    {
+      "url": "https://i.ytimg.com/vi/9hAUsV1zCsw/hqdefault.jpg?sqp=-oaymwE9CNACELwBSFryq4qpAy8IARUAAAAAGAElAADIQj0AgKJDeAHwAQH4Ac4FgAKWA4oCDAgAEAEYZSBhKEUwDw==&rs=AOn4CLBqgfn9mhX66WZAX1MuCQadmhLbWQ",
+      "status": 200,
+      "bytes": 11213
+    },
+    {
+      "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/df699b62-19e6-4de0-a982-edd47ec3bac1.jpg",
+      "status": 200,
+      "bytes": 612581
+    }
+  ]
+}

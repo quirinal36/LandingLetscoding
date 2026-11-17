@@ -1,0 +1,14 @@
+{
+  "cover.jpg": {
+    "sha256": "6323c21c1a3a341a4cf3ba4535fa0387fc8461f657ef94548cb59cdebe0b5494",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/11447f49-a8df-4871-bcd4-6bdf9622366d.jpg"
+  },
+  "playtest-feedback.jpg": {
+    "sha256": "80e125ef94b44b41896354f0ed14e380bd8091d2e87ed620005b82209ff711b2",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/75e5119f-3bc7-42cb-b014-8b3c991f82d6.jpg"
+  },
+  "interests-to-projects.jpg": {
+    "sha256": "7396e0a33949c0c9f3caf9aa1979ca6acfa9bbc5a8ecea81669110746e16a19e",
+    "url": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/41f00437-af2e-4bc7-a720-b6a70f4db4f7/d10312a5-bf2f-4b80-88ce-b827a0789166.jpg"
+  }
+}

@@ -11,6 +11,9 @@ const row = {
 };
 assert.deepEqual(decodePost(row).body.map(b => b.kind), ['heading', 'paragraph', 'quote', 'image', 'code']);
 assert.equal(decodePost({ ...row, published_at: null }).publishedAt, row.created_at);
+assert.deepEqual(decodePost({ ...row, cover_image_url: '/cover.png', cover_image_alt: '작품 목록 화면' }).cover,
+  { src: '/cover.png', alt: '작품 목록 화면' });
+assert.equal(decodePost({ ...row, cover_image_url: '/cover.png' }).cover.alt, '');
 assert.throws(() => decodePost({ ...row, blocks: [{ type: 'image', url: 'javascript:alert(1)' }] }));
 assert.throws(() => decodePost({ ...row, category: 'unknown' }));
 assert.throws(() => decodePost({ ...row, blocks: {} }));
@@ -22,6 +25,7 @@ process.env.LETSCODING_LOUNGE_SUPABASE_ANON_KEY = 'test-key';
 const offsets = [];
 try {
   globalThis.fetch = async (url, options) => {
+    assert.ok(url.searchParams.get('select').split(',').includes('cover_image_alt'));
     assert.equal(options.headers['Accept-Profile'], 'landing');
     assert.equal(options.cache, 'no-store');
     assert.equal(url.searchParams.get('is_published'), 'eq.true');
@@ -41,16 +45,19 @@ console.log('Blog decoding, pagination, deletion and error checks passed.');
 
 const payload = {
   slug: 'valid-post', title: 'Title', summary: '', category: 'column',
-  author_name: 'Author', author_title: '', cover_image_url: '',
+  author_name: 'Author', author_title: '', cover_image_url: '', cover_image_alt: '',
   is_published: false, blocks: [{ type: 'text', content: '## Title\n\nBody' }],
 };
 assert.equal(validatePost(payload).is_published, false);
 assert.equal(validatePost(payload).cover_image_url, null);
+assert.equal(validatePost({ ...payload, cover_image_url: '/cover.png', cover_image_alt: '  작품 목록 화면  ' }).cover_image_alt, '작품 목록 화면');
+assert.equal(validatePost({ ...payload, cover_image_alt: '삭제한 이미지 설명' }).cover_image_alt, '');
 for (const change of [
   { slug: 'editor' }, { slug: '../bad' }, { title: ' ' }, { is_published: 'true' },
   { category: 'bad' }, { blocks: [] }, { blocks: [{ type: 'html', content: '<script/>' }] },
   { blocks: [{ type: 'image', url: 'javascript:alert(1)' }] },
   { cover_image_url: '//evil.example/a.png' }, { blocks: [{ type: 'text', content: '```\nunclosed' }] },
+  { cover_image_alt: 42 }, { cover_image_alt: 'a'.repeat(1001) },
 ]) assert.throws(() => validatePost({ ...payload, ...change }));
 assert.deepEqual(validatePost({ ...payload, blocks: [{ type: 'image', url: '/blog/image.png', alt: 'Diagram' }, { type: 'prompt', content: 'code' }] }).blocks,
   [{ type: 'image', url: '/blog/image.png', alt: 'Diagram' }, { type: 'prompt', content: 'code' }]);

@@ -1,0 +1,41 @@
+- title: "컴공과 보내지 마세요 · 렛츠코딩" [url=https://www.letscoding.kr/blog/dont-rush-into-computer-science]
+- banner:
+  - link "본문으로 건너뛰기" [ref=e1]
+  - link "주식회사 렛츠코딩 홈" [ref=e2]: "렛츠코딩"
+  - navigation "주요 메뉴" [ref=e3]:
+    - list:
+      - listitem "소개" [ref=e39]:
+        - button "소개" [ref=e4]
+      - listitem "솔루션" [ref=e40]:
+        - button "솔루션" [ref=e5]
+      - listitem "가이드" [ref=e41]:
+        - button "가이드" [ref=e6]
+      - listitem "소식" [ref=e42]:
+        - button "소식" [ref=e7]
+    - button "온라인 설명회" [ref=e8]
+- main:
+  - article:
+    - link "← 렛츠코딩 블로그" [ref=e28]
+    - link "글 작성" [ref=e29]
+    - link "수정" [ref=e30]
+    - button "삭제" [ref=e31]
+    - form:
+      - button "로그아웃" [ref=e32]
+    - banner:
+      - text: "칼럼"
+      - heading "컴공과 보내지 마세요" [level=1]
+      - text: "컴퓨터와 게임을 좋아하는 아이의 진로를 정하기 전에, 무엇을 만들고 싶어 하는지 살펴보세요. AI와 함께 기획하고 제작하는 경험이 전공과 만났을 때의 가능성을 이야기합니다.이형구 렛츠코딩앤플레이학원 원장 2026년 11월 3일 약  5 분"
+    - text: "저는 우리 학원 학생들에게 컴퓨터공학과 가지 말라는 이야기를 1년 넘게 하고 있습니다.이제는 한 가지를 더 이야기하려고 합니다.아이가 컴퓨터를 좋아한다는 이유로,\n게임 만드는 게 적성에 맞을 것 같다는 이유로,\n소프트웨어(게임)마이스터고 진학을 서두르지 마세요.진학을 결정하기 전에, 아…[+2963 chars]"
+    - contentinfo:
+      - text: "코딩 학원을 운영하고 계신가요?글에 나온 수업은 렛츠코딩 라운지에서 진행합니다. 첫 반 하나로 4주 동안 무료로 써 보실 수 있습니다."
+      - link "렛츠코딩 라운지 알아보기" [ref=e33]
+      - link "도입문의›" [ref=e34]
+      - navigation "다른 글" [ref=e35]:
+        - heading "다른 글" [level=2]
+        - list:
+          - listitem:
+            - link "칼럼 세무사 시험 AI 부정행위를 보며, 우리 아이 '시험'을 다시 생각해 봅니다" [ref=e36]
+          - listitem:
+            - link "도구 kie.ai API 사용법, API 키 발급부터 AI 영상 장면 생성까지" [ref=e37]
+          - listitem:
+            - link "도구 Concat 무료 영상 편집기 윈도우 설치와 AI로 순서·속도 편집하기" [ref=e38]

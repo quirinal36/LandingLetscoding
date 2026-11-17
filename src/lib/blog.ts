@@ -33,7 +33,7 @@ export type BlogPost = {
   authorTitle: string;
   publishedAt: string;
   updatedAt: string;
-  cover: { src: string } | null;
+  cover: { src: string; alt: string } | null;
   body: Segment[];
   readingMinutes: number;
 };
@@ -122,7 +122,7 @@ export function decodePost(value: unknown): BlogPost {
   return {
     slug, title: text("title"), summary: text("summary"), category,
     author: text("author_name"), authorTitle: text("author_title"), publishedAt, updatedAt,
-    cover: row.cover_image_url == null ? null : { src: imageUrl(row.cover_image_url) },
+    cover: row.cover_image_url == null ? null : { src: imageUrl(row.cover_image_url), alt: typeof row.cover_image_alt === "string" ? row.cover_image_alt : "" },
     body, readingMinutes: readingMinutes(body),
   };
 }
@@ -133,7 +133,7 @@ export async function getPosts(): Promise<BlogPost[]> {
   const key = process.env.LETSCODING_LOUNGE_SUPABASE_ANON_KEY;
   if (!base || !key) throw new Error("Missing blog Supabase environment variables");
   const url = new URL("/rest/v1/blog_posts", base);
-  url.searchParams.set("select", "slug,title,summary,category,blocks,cover_image_url,author_name,author_title,published_at,created_at,updated_at");
+  url.searchParams.set("select", "slug,title,summary,category,blocks,cover_image_url,cover_image_alt,author_name,author_title,published_at,created_at,updated_at");
   url.searchParams.set("is_published", "eq.true");
   url.searchParams.set("order", "published_at.desc.nullslast,slug.asc");
   const posts: BlogPost[] = [];
@@ -164,7 +164,7 @@ export function formatDate(iso: string) {
 export type Block = { type: "text" | "image" | "prompt"; content?: string; url?: string; alt?: string };
 export type EditorValues = {
   slug: string; title: string; summary: string; category: BlogCategory;
-  author_name: string; author_title: string; cover_image_url: string;
+  author_name: string; author_title: string; cover_image_url: string; cover_image_alt: string;
   is_published: boolean; blocks: Block[];
 };
 export type EditablePost = EditorValues & { id: string; updated_at: string };
@@ -204,7 +204,8 @@ export function validatePost(payload: unknown) {
     return { type: block.type, content: block.content };
   });
   const cover = text("cover_image_url", 4000);
+  const coverAlt = text("cover_image_alt", 1000);
   return { slug, title: text("title", 200, true), summary: text("summary", 1000), category: p.category,
     author_name: text("author_name", 100, true), author_title: text("author_title", 100),
-    cover_image_url: cover ? imageURL(cover) : null, is_published: p.is_published, blocks };
+    cover_image_url: cover ? imageURL(cover) : null, cover_image_alt: cover ? coverAlt : "", is_published: p.is_published, blocks };
 }

@@ -17,7 +17,7 @@ function PostCard({ post }: { post: BlogPost }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={post.cover.src}
-          alt=""
+          alt={post.cover.alt}
           loading="lazy"
           className="aspect-[16/9] w-full object-cover"
           style={post.slug === "about-letscoding-company" ? { objectPosition: "center 10%" } : undefined}

@@ -1,0 +1,61 @@
+{
+  "viewport": 390,
+  "scrollWidth": 390,
+  "headings": [
+    {
+      "text": "아이는 게임의 어떤 부분을 좋아할까요?",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "아이디어를 작품으로 옮기는 방법이 달라졌습니다",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "학교에서 배우는 것과 아이가 마주할 세상",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "만들고, 보여주고, 고치면서 배우는 것",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "관심 있는 전공에 제작 경험을 더한다면",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "진로를 정하기 전에, 직접 해볼 시간을 주세요",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    },
+    {
+      "text": "오늘 아이에게 건넬 질문 하나",
+      "fontSize": "20px",
+      "fontWeight": "600"
+    }
+  ],
+  "images": [
+    {
+      "complete": true,
+      "width": 1600,
+      "renderedWidth": 358,
+      "alt": ""
+    },
+    {
+      "complete": true,
+      "width": 1600,
+      "renderedWidth": 358,
+      "alt": "직접 만든 게임을 친구들과 해보며 의견을 나누고 수정할 부분을 스케치하는 학생들. AI 생성 삽화."
+    },
+    {
+      "complete": true,
+      "width": 1600,
+      "renderedWidth": 358,
+      "alt": "역사책 속 마을과 자연 노트의 습지가 하나의 게임 아이디어로 이어지는 장면. 관심 분야와 제작 경험의 연결을 표현한 AI 생성 삽화."
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>렛츠코딩 간판 시안 · AI EDU Expo</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+/*
+  AI EDU Expo 간판 시안 v3 — 미드나이트.
+  레이아웃: 1133×378 한 장. 대각선 띠는 선 없이 한 톤 밝은 새틴 면으로만 나눈다.
+           왼쪽 아래 = Studio(학생의 한마디), 가운데 = 브랜드, 오른쪽 위 = Lounge(완성된 작품).
+  좌표는 원본 시안의 픽셀 단위이며 모든 크기에 --u(간판 폭의 1/1133)를 곱한다.
+  실제 간판 비율이 다르면 --w, --h만 고친다. v1(흰·검·흰)은 signboard-v1.html.
+*/
+:root{
+  --w:1133; --h:378;
+  --night:#0a0920;      /* 바탕: 로고 빛번짐 뒤의 남색 */
+  --satin:#17144a;      /* 띠: 한 톤 밝은 새틴 */
+  --mist:#c9c2ff;       /* 라벨·테두리: 로고 보라를 옅게 */
+  --violet:#7439f1; --indigo:#3c34c5; --coral:#fc6a77;  /* 로고 3색 */
+  --pearl:#f3f1fb;      /* 글자 */
+  --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:32px 24px;background:#d9dce6;color:var(--pearl);font-family:var(--font);word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.note{max-width:1400px;margin:0 auto 14px;font-size:14px;color:#4b5570}
+
+.sign{position:relative;max-width:1400px;margin:0 auto;aspect-ratio:var(--w)/var(--h);container-type:inline-size;overflow:hidden;
+  background:
+    radial-gradient(60% 90% at 8% 100%, rgba(116,57,241,.42), transparent 70%),
+    radial-gradient(55% 80% at 96% 0%, rgba(252,106,119,.30), transparent 70%),
+    var(--night);
+  box-shadow:0 14px 50px rgba(10,9,32,.35)}
+.sign > *{--u:calc(100cqw / var(--w))}
+.abs{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u))}
+
+/* ── 새틴 띠와 금색 실선 ─────────────────────────── */
+.band{position:absolute;inset:0;clip-path:polygon(0 0,51.46% 0,100% 100%,47.66% 100%);
+  background:
+    linear-gradient(146deg, rgba(255,255,255,.07) 0%, transparent 38%, transparent 62%, rgba(255,255,255,.05) 100%),
+    radial-gradient(42% 70% at 47% 50%, rgba(60,52,197,.55), transparent 75%),
+    var(--satin)}
+
+/* ── 가운데 브랜드 ─────────────────────────────── */
+.brand{position:absolute;left:calc(316 * var(--u));top:calc(112 * var(--u));display:flex;align-items:center}
+.brand img{display:block;width:calc(184 * var(--u));height:auto;margin-right:calc(-6 * var(--u));mix-blend-mode:screen;filter:saturate(1.08)}
+.brand strong{font-size:calc(66 * var(--u));font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap;
+  background:linear-gradient(180deg,#ffffff 0%,#f6f3ff 55%,#d4ceef 100%);filter:drop-shadow(0 calc(2 * var(--u)) calc(14 * var(--u)) rgba(10,9,32,.55));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{position:absolute;left:calc(541 * var(--u));top:calc(222 * var(--u));margin:0;white-space:nowrap}
+.tag .kicker{display:flex;align-items:center;gap:calc(10 * var(--u));font-size:calc(17 * var(--u));font-weight:600;letter-spacing:.14em;color:var(--mist)}
+.tag .kicker i{display:block;width:calc(26 * var(--u));height:calc(1.2 * var(--u));background:linear-gradient(90deg,var(--mist),transparent)}
+.tag .line{display:block;margin-top:calc(7 * var(--u));font-size:calc(22 * var(--u));font-weight:400;letter-spacing:.02em;color:rgba(243,241,251,.92)}
+
+/* ── 영역 라벨 (Studio / Lounge) ─────────────────── */
+.label{font-size:calc(12.5 * var(--u));font-weight:600;letter-spacing:.32em;color:var(--mist);white-space:nowrap}
+.label b{font-weight:400;letter-spacing:.06em;color:rgba(243,241,251,.62);margin-left:calc(8 * var(--u))}
+
+/* ── 왼쪽 아래: 학생의 한마디 ─────────────────────── */
+.bubble{padding:calc(16 * var(--u)) calc(22 * var(--u)) calc(18 * var(--u));border-radius:calc(20 * var(--u));
+  background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04));
+  border:calc(1 * var(--u)) solid rgba(201,194,255,.32);
+  box-shadow:0 calc(10 * var(--u)) calc(30 * var(--u)) rgba(5,4,20,.45), inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.12);
+  font-size:calc(25 * var(--u));font-weight:600;line-height:1.34;letter-spacing:-.005em;color:var(--pearl)}
+.bubble::after{content:"";position:absolute;left:calc(28 * var(--u));bottom:calc(-7 * var(--u));width:calc(12 * var(--u));height:calc(12 * var(--u));
+  background:#1a1640;border-right:calc(1 * var(--u)) solid rgba(201,194,255,.32);border-bottom:calc(1 * var(--u)) solid rgba(201,194,255,.32);transform:rotate(45deg)}
+.bubble .caret{display:inline-block;width:calc(3 * var(--u));height:1em;margin-left:calc(5 * var(--u));border-radius:calc(2 * var(--u));background:var(--coral);vertical-align:-.12em;box-shadow:0 0 calc(8 * var(--u)) var(--coral)}
+
+/* ── 오른쪽 위: 라운지에 올라간 작품 ───────────────── */
+.card{margin:0;padding:calc(4 * var(--u));border-radius:calc(10 * var(--u));
+  background:rgba(255,255,255,.10);border:calc(1 * var(--u)) solid rgba(201,194,255,.30);
+  box-shadow:0 calc(12 * var(--u)) calc(28 * var(--u)) rgba(5,4,20,.55);transform:rotate(var(--r,0deg))}
+.card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:calc(7 * var(--u)) calc(7 * var(--u)) 0 0}
+.card figcaption{display:flex;align-items:center;justify-content:space-between;gap:calc(6 * var(--u));
+  padding:calc(6 * var(--u)) calc(8 * var(--u)) calc(6 * var(--u));border-radius:0 0 calc(7 * var(--u)) calc(7 * var(--u));
+  background:var(--night);color:var(--pearl);font-size:calc(var(--f,13) * var(--u));font-weight:600;line-height:1.1;letter-spacing:.01em;white-space:nowrap}
+.card figcaption svg{flex:none;width:1.05em;height:1.05em;fill:var(--coral)}
+
+/* ── 로고에서 떨어져 나온 조각 ─────────────────────── */
+.piece{display:block;height:auto;transform:rotate(var(--r,0deg));filter:drop-shadow(0 0 calc(10 * var(--u)) var(--glow))}
+
+@media print{
+  @page{size:1133px 378px;margin:0}
+  body{padding:0;background:var(--night)}
+  .note{display:none}
+  .sign{max-width:none;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<p class="note">AI EDU Expo 간판 시안 v3 · 미드나이트 · 1133×378 비율 · 이전 안은 signboard-v1.html</p>
+
+<div class="sign" role="img" aria-label="렛츠코딩. 라운지 &amp; 스튜디오, 안전한 AI 바이브코딩 교육 플랫폼. 학생의 한마디가 작품이 되는 과정을 보여 주는 간판 시안">
+
+  <div class="band"></div>
+
+
+  <!-- 가운데 브랜드 -->
+  <div class="brand">
+    <img src="../../src/assets/logo.png" alt="">
+    <strong>렛츠코딩</strong>
+  </div>
+  <p class="tag"><span class="kicker">라운지 &amp; 스튜디오<i></i></span><span class="line">안전한 AI 바이브코딩 교육 플랫폼</span></p>
+
+  <!-- 왼쪽 아래: Studio, 말한다 -->
+  <p class="abs label" style="--x:38;--y:208;--s:220;margin:0">STUDIO<b>말하면</b></p>
+  <div class="abs bubble" style="--x:34;--y:238;--s:286">내 이야기가<br>작품으로 구현되는<span class="caret"></span></div>
+  <svg class="abs piece" style="--x:58;--y:118;--s:44;--r:-16deg;--glow:rgba(116,57,241,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <svg class="abs piece" style="--x:200;--y:120;--s:40;--r:32deg;--glow:rgba(252,106,119,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#fc6a77" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+
+  <!-- 오른쪽 위: Lounge, 작품이 된다 (나나쌤 공개 작품) -->
+  <p class="abs label" style="--x:884;--y:338;--s:230;margin:0;text-align:right">LOUNGE<b>작품이 됩니다</b></p>
+  <figure class="abs card" style="--x:778;--y:20;--s:130;--r:-5deg;--f:11">
+    <img src="../../public/landing/works/word-racing.webp" alt="">
+    <figcaption>영단어 외우기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="abs card" style="--x:1000;--y:176;--s:114;--r:6deg;--f:10">
+    <img src="../../public/landing/works/ten-pang.webp" alt="">
+    <figcaption>수학연산<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <figure class="abs card" style="--x:914;--y:26;--s:192;--r:3deg;--f:14">
+    <img src="../../public/landing/works/deep-step.webp" alt="">
+    <figcaption>가족 여행의 추억<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
+  </figure>
+  <svg class="abs piece" style="--x:936;--y:232;--s:40;--r:124deg;--glow:rgba(116,57,241,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+
+</div>
+</body>
+</html>

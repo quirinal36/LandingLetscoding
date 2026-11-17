@@ -67,3 +67,4 @@ MYPROBLEM.md
 /output/cardnews/*/out/
 /graphify-out/.graphify_learning.json
 /graphify-out/reflections/
+/project/**

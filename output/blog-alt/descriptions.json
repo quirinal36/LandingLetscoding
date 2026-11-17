@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "about-letscoding-company",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/410a7a7b-0808-4012-942f-21174ba500f8.jpg",
+    "alt": "안경과 검은 셔츠를 착용한 이형구 원장이 웃고 있는 흑백 프로필 사진. 배경에 LET’S CODING 글자가 있다."
+  },
+  {
+    "slug": "ai-coding-class-before-adoption",
+    "target": "cover",
+    "src": "https://www.letscoding.kr/landing/studio-workspace.png",
+    "alt": "렛츠코딩 Studio 화면. 왼쪽 파일 탐색기, 가운데 스네이크 게임 미리보기, 오른쪽 AI 도우미 레코의 제작 설명과 조작 안내가 나란히 보인다."
+  },
+  {
+    "slug": "chatbot-is-not-ai",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/21341ea6-a4c7-4db2-8b59-0cb0f45d628d.jpg",
+    "alt": "아이가 작은 로봇 옆에서 노트에 생각을 적고, 앞에는 노트북이 놓인 삽화."
+  },
+  {
+    "slug": "chatbot-is-not-ai",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/a3fe0734-8425-463c-be56-8a9da5ff81e3.png",
+    "alt": "챗봇이 대신 생각하는 수업과 학생이 함께 생각하는 수업 비교. 답을 확인 없이 제출하면 결과물만 남지만, 학생이 만들 것을 정하고 답을 검증하며 선택 이유를 기록하면 다음 문제를 스스로 시작할 판단 경험이 남는다."
+  },
+  {
+    "slug": "chatbot-is-not-ai",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/3d5ca62f-37ca-489b-9891-1f98fd53e218.jpg",
+    "alt": "톱니바퀴와 작업대가 있는 공방에서 아이들이 설계도를 펼치고 장치를 조작하거나 상자를 옮기며 작업하고, 작은 로봇이 옆에서 지켜보는 삽화."
+  },
+  {
+    "slug": "chatbot-is-not-ai",
+    "target": "body-5",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/457c5d0f-95f2-46ee-bc19-fec872dd8506.png",
+    "alt": "하루 8시간을 쓰는 두 수업 방식의 비교. 강의 6시간과 학습지 2시간 대신, 수준에 맞춘 집중 학습 2시간 뒤 남은 6시간을 배운 것의 적용, 새 기술과 원하는 프로젝트에 쓰는 구성을 보여 준다."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/f3a9cbe7-84e5-40cf-a4c9-9695a8ba12de.jpg",
+    "alt": "서로 다른 공간으로 이어지는 네 개의 아치형 문 앞에 작은 열쇠가 떠 있는 삽화."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/5a3d28c9-c784-47f2-962b-9e5047967366.png",
+    "alt": "2026년 9월 5일 기준으로 제작된 ChatGPT 요금제별 기능 비교표. Chat은 전 요금제에서 열리고, Projects는 Free에서 제한된다. Excel·Sheets와 Codex는 Free·Go에서 제한되며, ChatGPT Work와 Sites는 Plus·Pro에서 열린다고 표시되어 있다."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/670e0a68-388f-4851-9f8e-9c75b5f5b11c.png",
+    "alt": "2026년 9월 5일 기준으로 제작된 Chat 추론 단계와 모델 비교표. Instant는 Free·Go의 Luna와 Plus·Pro의 Sol, Medium·High는 Plus·Pro의 GPT-5.6 Sol, Extra High는 Pro의 GPT-5.6 Sol, Pro 단계는 Sol Pro·GPT-6 Pro로 표시되어 있다. Free·Go의 Think도 Luna라는 주석이 있다."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "body-5",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/fbec6508-b673-4bed-a2ac-4029f7ea100b.jpg",
+    "alt": "태양, 지구, 달이 나란히 놓이고 주변에 궤도와 별이 그려진 삽화."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "body-7",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/f54b492c-bce3-4017-9fd8-fa321f9b4ece.png",
+    "alt": "2026년 9월 5일 기준으로 제작된 ChatGPT 개인 요금표. 월 미국 달러 기준 Free 0달러, Go 8달러, Plus 20달러, Pro 5x 100달러, Pro 20x 200달러. Codex 사용량은 Free·Go 기본, Plus 기준, Pro는 Plus의 5배·20배로 표시되어 있으며 세금은 결제 화면에서 확인하도록 안내한다."
+  },
+  {
+    "slug": "chatgpt-plan-models",
+    "target": "body-9",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/692b6cfd-0f64-4a16-8bf1-54c8c28bfd4a.png",
+    "alt": "2026년 9월 5일 기준으로 제작된 Codex 모델·추론 수준 비교표. Free·Go는 GPT-5.6 Terra가 기본이고, Plus·Pro는 Terra·Sol·Luna를 선택할 수 있다. GPT-6 Astra는 Plus에서 제한, Pro에서 사용 가능으로 표시된다. 추론 수준은 Light·Medium·High·Extra High·Ultra다."
+  },
+  {
+    "slug": "coding-budget-student-growth",
+    "target": "cover",
+    "src": "https://www.letscoding.kr/blog/coding-in-ai-era/1.jpg",
+    "alt": "노트북과 펼친 공책 앞에서 아이가 턱을 괴고 생각하며, 머리 위에 전구와 톱니바퀴가 떠 있는 삽화."
+  },
+  {
+    "slug": "coding-in-ai-era",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/0a9c829a-9e6b-48b0-a6cd-ae6912a86fdb.jpg",
+    "alt": "노트북과 펼친 공책 앞에서 아이가 턱을 괴고 생각하며, 머리 위에 전구와 톱니바퀴가 떠 있는 삽화."
+  },
+  {
+    "slug": "coding-in-ai-era",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/cf4bae28-3f50-476c-becc-0bdb88b59314.png",
+    "alt": "AI 도입 전후의 코딩 수업 비교. 문법 암기와 오류 수정에 쓰던 시간은 줄고, 무엇을 만들지 정하고 다른 사람에게 설명하는 시간은 늘어난다. 코드 입력을 AI가 돕더라도 만들 것의 선택, 결과 판단과 이유 설명은 학생에게 남는다."
+  },
+  {
+    "slug": "coding-in-ai-era",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/c22e35d4-aa47-42c1-9778-96a74e913ed7.png",
+    "alt": "학생 작품의 다섯 단계: 문제 발견 → 설계 → 구현 → 실제 사용 → 기록·설명. 설계와 구현은 AI의 도움을 받고, 문제 발견·사용·설명은 학생이 맡는다. 학교 자율학습 좌석 관리 시스템과 급식 티켓 QR 코드 전환을 사례로 제시한다."
+  },
+  {
+    "slug": "hermes-agent-v0-21-0",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/da273288-fdac-4a0d-9025-3b81d340dcfb.jpg",
+    "alt": "연결선으로 이어진 여러 회색 점 사이에 붉은 점 하나가 강조된 에이전트 네트워크 삽화."
+  },
+  {
+    "slug": "hermes-agent-v0-21-0",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/dd54515c-9c4c-4281-b913-3052b2b76b28.png",
+    "alt": "Hermes Agent v0.21.0의 세 변화. 사회화는 Bot Mode·그룹 채팅·hermes peer를 통한 에이전트 간 소통, 상태성은 cron 메모리·continuity·durable notepad를 통한 기억 유지, 조향은 실행 중 지시·중단·출력 검증·비용 확인을 뜻한다."
+  },
+  {
+    "slug": "hermes-agent-v0-21-0",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/d318151b-cb92-40b1-9a52-5f72e307d438.png",
+    "alt": "delegate_task의 변경 전후 비교. 이전에는 자식 작업을 맡기고 최종 결과를 기다렸지만, v0.21.0에서는 실행 중인 작업을 나열하고 중간 지시를 내리거나 조기 중단해 부분 결과를 받을 수 있다. 동시 10개·반복 250회는 권장값이 아니라 상한으로 안내한다."
+  },
+  {
+    "slug": "hermes-agent-v0-21-0",
+    "target": "body-5",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/e1d812da-e6cc-48d8-a6b7-356de53e84d8.png",
+    "alt": "Hermes Agent v0.21.0의 반영·되돌림 구분표. Bot Mode, hermes peer, cron 메모리·continuity, delegate_task 라이브 조향과 이벤트 리플레이는 반영됐다. 모델 카운슬 모드, DCP 컨텍스트 엔진, WebSocket 전용 게이트웨이와 Electron 버전 상향은 되돌려졌다고 표시한다."
+  },
+  {
+    "slug": "letscoding-studio-launch",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/f07d3087-d122-47fe-a05d-466e473266eb.png",
+    "alt": "렛츠코딩 Studio 캣트리스 미리보기. 왼쪽 프로젝트 파일과 가운데 게임 실행 화면, 아래 조작 버튼이 보인다."
+  },
+  {
+    "slug": "what-ai-schools-get-right",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/bd8eebf0-f64b-4cdc-a553-b60de58607d9.jpg",
+    "alt": "세 사람이 탁자 위 건물 모형과 지도를 함께 살펴보며 배치를 의논하는 삽화."
+  },
+  {
+    "slug": "what-ai-schools-get-right",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/21aac747-76aa-4ca3-90c9-860e609e8660.png",
+    "alt": "AI가 반복 연습과 초안 작성을 도우면 학생은 무엇을 만들지, 누구의 불편을 해결할지 질문할 시간을 얻는다. 답 비교, 직접 테스트와 선택 이유 설명을 통해 판단과 책임은 학생에게 남겨야 한다는 흐름도."
+  },
+  {
+    "slug": "what-ai-schools-get-right",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/f432ce0c-db85-400b-8b84-ebd9aabccf81.png",
+    "alt": "AI 앱 도입에 그치는 수업과 아이를 돕는 구조를 갖춘 수업 비교. 진도·정답만 볼 때는 실패·관계·지원 필요를 놓치기 쉽다. 아이가 결정할 일, 어른의 개입 시점과 방법, 과정·설명·지원까지 함께 확인하도록 제안한다."
+  },
+  {
+    "slug": "what-ai-schools-get-right",
+    "target": "body-5",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/50532f4b-b344-4019-b086-ba979d36c0c6.jpg",
+    "alt": "학생들과 어른이 종이와 테이프로 만든 다리 모형을 두 상자 사이에 놓고 함께 살펴보는 삽화."
+  },
+  {
+    "slug": "what-children-need-in-ai-hiring-era",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/fdeac4ff-4d60-48d1-a692-a55c714b5a8a.jpg",
+    "alt": "아이가 계획을 적은 종이를 들고 코드와 도형이 표시된 노트북 화면을 살펴보며, 주변에 전구·퍼즐·그래프가 그려진 삽화."
+  },
+  {
+    "slug": "what-children-need-in-ai-hiring-era",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/fa1b28cb-504c-4376-84b2-87e365d6e146.png",
+    "alt": "AI 활용 과정에서 확인할 세 단계: 문제와 조건을 스스로 정한다 → AI와 여러 해결 방법을 시도한다 → 결과를 검토하고 수정한 이유를 설명한다. 사용한 도구보다 질문, 검증과 선택의 근거를 본다는 흐름도."
+  },
+  {
+    "slug": "what-children-need-in-ai-hiring-era",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/942f7c5b-85fa-4de3-9c02-dfb06564ef8e.png",
+    "alt": "AI 수업의 역할 분담. 학생은 무엇을 왜 만들지 정하고, AI와 구현 방법을 함께 찾으며, 결과가 맞는지 직접 확인하고 설명한다. 목표와 조건을 먼저 정해야 더 정확한 질문을 할 수 있다는 안내."
+  },
+  {
+    "slug": "what-is-letscoding-lounge",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/c5ccd007-16e7-4618-a021-06c22ed209b4.jpg",
+    "alt": "렛츠코딩 라운지의 나나쌤 공개 프로필. QR 코드 생성기, 숫자 게임, 영단어 게임 등 만든 작품이 썸네일 격자로 모여 있다."
+  },
+  {
+    "slug": "when-ai-is-right",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/47181ad9-f7dd-43b3-804c-011f17570832.jpg",
+    "alt": "아이가 돋보기로 복잡하게 연결된 구조물을 살펴보고, 그 위쪽에는 붉은 정육면체가 놓인 삽화."
+  },
+  {
+    "slug": "when-ai-is-right",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/ef1729e0-2bb2-421c-bee1-c4c7b6d7a1f6.png",
+    "alt": "아이가 AI 답의 오류를 찾는 연습과, AI가 아이 생각의 전제·근거를 되묻는 상황의 비교. 후자에서는 아이가 무엇을 할지 선택하고, 자기 생각을 설명하며, 바꿀지 결정하고 결과에 답해야 한다고 제시한다."
+  },
+  {
+    "slug": "when-ai-is-right",
+    "target": "body-3",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/c57bec87-fda8-4b96-80d2-57397c3ddc17.jpg",
+    "alt": "붉은 옷을 입은 아이가 성 모형 옆에서 발표하고, 바닥에 모여 앉은 친구들이 손을 들거나 발표를 듣는 삽화."
+  },
+  {
+    "slug": "when-ai-is-right",
+    "target": "body-5",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/0ab49718-4ab7-48f4-a330-aec2ec9f5f28.png",
+    "alt": "2026년 학생들의 졸업 시점을 비교한 연표. 초등 1학년은 고교 2038년·대학까지 2042년, 초등 6학년은 2033년·2037년, 중학 3학년은 2030년·2034년으로 표시한다. AI 전망 시점인 2028년 점선보다 교육 기간이 길게 이어진다."
+  },
+  {
+    "slug": "why-we-teach",
+    "target": "cover",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/e67bf7f4-60f7-42e8-9172-5e5bae7df460.png",
+    "alt": "렛츠코딩 라운지 교육 사명 선언서. 하나, 배우는 사람과 교육하는 사람이 함께 행복한 교육. 둘, 2030년대를 살아갈 청소년이 AI로 배우며 스스로 터득하고 판단하고 리더로 성장하도록 돕는 교육."
+  },
+  {
+    "slug": "why-we-teach",
+    "target": "body-1",
+    "src": "https://zuynxiriimaimjmjnntc.supabase.co/storage/v1/object/public/image-assets/content/75ef0944-d94d-4603-a089-f763129d13d3/78958f7d-4db9-4cdf-8c0b-6ea20fa2979f.jpg",
+    "alt": "아이와 선생님이 나란히 앉아 붉은 노트북을 함께 보고, 화면 쪽에서 여러 도형이 퍼져 나가는 삽화."
+  }
+]
