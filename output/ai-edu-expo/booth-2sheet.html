@@ -11,11 +11,12 @@
   AI EDU Expo 조립부스(바닥 3,000×3,000mm, 벽 높이 2,500mm) 안쪽 벽 시안 — 벽 한 면을 2장으로 나누는 안.
   2026-11-16 사용자 요청: 벽 두 면(뒷벽·옆벽)을 각각 2장으로 출력한다. 2026-11-17 장당 1,470×2,300mm로 바꿨다(이전 1,425×2,380 가정).
   실제 시트 크기가 다르면 --pw 와 아래 좌표를 고친다. 이음선은 x=1,470 한 곳.
-    · 뒷벽: 왼쪽 B2(작품 4개), 오른쪽 B1(설명). 기존 파일 번호는 유지한다.
+    · 뒷벽: 왼쪽 B1(AI활용 수업·작품 4개), 오른쪽 B2(바이브코딩·설명). 번호는 왼쪽부터 설치 순서다.
     · 옆벽 S1~S2: assets/lounge-studio-wide-2.png 한 장을 두 장에 이어 붙인다
     · 나머지 옆벽 자리(벽 없음)에는 65인치 TV를 둔다
   좌표 단위는 mm. 아트 좌표는 패널 두 장을 이어 붙인 2,940×2,300 공간이며, 화면에서는 기둥 자리(--gap)를 벌려 보여 준다.
-  글자는 이음선(x=1,470)을 넘지 않는다. 2026-11-17 B2 내용을 위로 올리고 작품을 2×2로 늘린 뒤 B1·B2 좌우를 바꿨다.
+  글자는 이음선(x=1,470)을 넘지 않는다. 2026-11-17 작품 장 내용을 위로 올리고 작품을 2×2로 늘린 뒤 두 장의 좌우를 바꿨다.
+  2026-11-18 장을 통째로 바꿔 달던 방식을 버리고 아트 좌표에서 내용만 좌우로 옮겼다. 배경은 그대로라 이음선에서 끊기지 않는다.
   바닥에서 650mm(y 1,650 이하)는 사람·가구에 가리므로 핵심 문구를 두지 않는다.
   ?panel=B1 처럼 열면 그 패널 한 장만 실제 비율로 표시한다(출력용).
 */
@@ -90,7 +91,7 @@ body.guides .panel .floor{display:block}
 .piece{position:absolute;left:calc(var(--x) * var(--u));top:calc(var(--y) * var(--u));width:calc(var(--s) * var(--u));height:auto;transform:rotate(var(--r,0deg));filter:drop-shadow(0 0 calc(24 * var(--u)) var(--glow))}
 
 .foot{font-size:calc(40 * var(--u));font-weight:400;color:rgba(243,241,251,.75)}
-.brand{position:absolute;left:calc(110 * var(--u));top:calc(2060 * var(--u));display:flex;align-items:center;gap:calc(10 * var(--u))}
+.brand{position:absolute;left:calc(1580 * var(--u));top:calc(2060 * var(--u));display:flex;align-items:center;gap:calc(10 * var(--u))}
 .brand img{display:block;width:calc(150 * var(--u));height:auto;mix-blend-mode:screen}
 .brand strong{font-size:calc(64 * var(--u));font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap;color:var(--pearl)}
 .url{font-size:calc(46 * var(--u));font-weight:500;letter-spacing:.05em;color:var(--mist)}
@@ -115,54 +116,50 @@ body.single .panel.on{display:block}
   <a href="info-desk.html">인포데스크 정면 950×660mm ↗</a>
   <label><input type="checkbox" onchange="document.body.classList.toggle('guides',this.checked)"> 패널 번호·가림 구역(바닥 650mm) 표시</label></p>
 
-<h2 class="wall-title">뒷벽 B2–B1<span>왼쪽: AI활용 수업·작품 / 오른쪽: 바이브코딩·설명 · 통로 정면</span></h2>
+<h2 class="wall-title">뒷벽 B1–B2<span>왼쪽: AI활용 수업·작품 / 오른쪽: 바이브코딩·설명 · 통로 정면</span></h2>
 <div class="wall back-wall" data-wall="B"></div>
 
 <h2 class="wall-title">옆벽 S1–S2<span>렛츠코딩 스튜디오 × 라운지 이미지 · 반대쪽 옆은 벽 없이 TV</span></h2>
 <div class="wall side-wall" data-wall="S"></div>
 
-<!-- 뒷벽 아트 (2,940 × 2,300mm 좌표) -->
+<!-- 뒷벽 아트 (2,940 × 2,300mm 좌표). 배경(.back, .band)은 두 장에 걸쳐 한 장면으로 이어진다 -->
 <template id="back-art">
   <div class="band"></div>
 
-  <!-- 헤드라인: B2를 왼쪽, B1을 오른쪽에 설치 -->
-  <h1 class="t head" style="--x:150;--y:190">바이브코딩,</h1>
-  <h1 class="t head" style="--x:1615;--y:100"><em>AI활용</em> 수업</h1>
-
-  <!-- B1: 설명 -->
-  <span class="rule" style="--x:155;--y:580;--s:200"></span>
-  <p class="t lead" style="--x:150;--y:640">자신만의 이야기와,<br><b>공감능력</b>을 발휘해<br><b>인문학과 기술</b>이<br>만나는 공간</p>
-
-  <!-- B2: 라운지 공개 작품 -->
-  <p class="t label" style="--x:1625;--y:370">LOUNGE<b>학생이 만든 작품</b></p>
-  <figure class="card" style="--x:1630;--y:420;--s:560">
+  <!-- B1(왼쪽 장, x 0–1,470): AI활용 수업 · 라운지 공개 작품 -->
+  <h1 class="t head" style="--x:145;--y:100"><em>AI활용</em> 수업</h1>
+  <p class="t label" style="--x:155;--y:370">LOUNGE<b>학생이 만든 작품</b></p>
+  <figure class="card" style="--x:160;--y:420;--s:560">
     <img src="../../public/landing/works/english-legend.webp" alt="">
     <figcaption>영어 학습게임<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
   </figure>
-  <figure class="card" style="--x:2240;--y:420;--s:560">
+  <figure class="card" style="--x:770;--y:420;--s:560">
     <img src="../../public/landing/works/bezierider.webp" alt="">
     <figcaption>그래프 탐구<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
   </figure>
-  <figure class="card" style="--x:1630;--y:850;--s:560">
+  <figure class="card" style="--x:160;--y:850;--s:560">
     <img src="../../public/landing/works/solor.webp" alt="태양계 탐구하기">
     <figcaption>태양계 탐구<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
   </figure>
-  <figure class="card" style="--x:2240;--y:850;--s:560">
+  <figure class="card" style="--x:770;--y:850;--s:560">
     <img src="../../public/landing/works/joowan-car.webp" alt="음주운전 시뮬레이션">
     <figcaption>운전 시뮬레이션<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.9 4.5 5.6 4.1c2-.2 3.8.8 4.9 2.3L12 8.3l1.5-1.9c1.1-1.5 2.9-2.5 4.9-2.3 3.7.4 5.3 4.5 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg></figcaption>
   </figure>
-  <svg class="piece" style="--x:1050;--y:760;--s:120;--r:-16deg;--glow:rgba(116,57,241,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
-  <svg class="piece" style="--x:2745;--y:40;--s:85;--r:32deg;--glow:rgba(252,106,119,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#fc6a77" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <svg class="piece" style="--x:1275;--y:40;--s:85;--r:32deg;--glow:rgba(252,106,119,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#fc6a77" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <div class="point" style="--x:110;--y:1300"><span class="who">교사</span><span class="what">과제 진행과<br>AI 활용 기록 확인</span></div>
+  <div class="point" style="--x:735;--y:1300"><span class="who">준비물</span><span class="what">노트북 또는 태블릿과<br>인터넷이면 됩니다</span></div>
+  <!-- 가림 구역: 주소만 -->
+  <p class="t url" style="--x:765;--y:1830">lounge.letscoding.kr</p>
 
-  <!-- 요점: 장마다 둘 -->
-  <div class="point" style="--x:110"><span class="who">학생</span><span class="what">학생마다<br>자기 작품을 만듭니다</span></div>
-  <div class="point" style="--x:735"><span class="who">작품</span><span class="what">작품은 주소 하나로<br>바로 공유</span></div>
-  <div class="point" style="--x:1580;--y:1300"><span class="who">교사</span><span class="what">과제 진행과<br>AI 활용 기록 확인</span></div>
-  <div class="point" style="--x:2205;--y:1300"><span class="who">준비물</span><span class="what">노트북 또는 태블릿과<br>인터넷이면 됩니다</span></div>
-
-  <!-- 가림 구역: 브랜드·주소만 -->
+  <!-- B2(오른쪽 장, x 1,470–2,940): 바이브코딩 · 설명 -->
+  <h1 class="t head" style="--x:1620;--y:190">바이브코딩,</h1>
+  <span class="rule" style="--x:1625;--y:580;--s:200"></span>
+  <p class="t lead" style="--x:1620;--y:640">자신만의 이야기와,<br><b>공감능력</b>을 발휘해<br><b>인문학과 기술</b>이<br>만나는 공간</p>
+  <svg class="piece" style="--x:2520;--y:760;--s:120;--r:-16deg;--glow:rgba(116,57,241,.8)" viewBox="0 -5 105 105" aria-hidden="true"><path fill="#7439f1" d="M0,20 H30 A14.14,14.14 0 1 1 50,20 H80 V50 A14.14,14.14 0 1 1 80,70 V100 H50 A14.14,14.14 0 1 0 30,100 H0 V70 A14.14,14.14 0 1 0 0,50 Z"/></svg>
+  <div class="point" style="--x:1580"><span class="who">학생</span><span class="what">학생마다<br>자기 작품을 만듭니다</span></div>
+  <div class="point" style="--x:2205"><span class="who">작품</span><span class="what">작품은 주소 하나로<br>바로 공유</span></div>
+  <!-- 가림 구역: 브랜드만 -->
   <div class="brand"><img src="../../src/assets/logo.png" alt=""><strong>렛츠코딩 라운지</strong></div>
-  <p class="t url" style="--x:2235;--y:1830">lounge.letscoding.kr</p>
 </template>
 
 <script>
@@ -173,11 +170,10 @@ for (const wall of document.querySelectorAll('.wall')) {
   const w = wall.dataset.wall;
   for (let i = 0; i < 2; i++) {
     if (i) wall.insertAdjacentHTML('beforeend', '<div class="post"></div>');
-    const index = w === 'B' ? 1 - i : i;
-    const id = w + (index + 1);
+    const id = w + (i + 1);
     const p = document.createElement('div');
     p.className = 'panel ' + (w === 'B' ? 'back-panel' : 'side') + (only === id ? ' on' : '');
-    p.innerHTML = '<div class="scene" style="--i:' + index + '"></div><span class="tag">' + id + '</span><div class="floor"></div>';
+    p.innerHTML = '<div class="scene" style="--i:' + i + '"></div><span class="tag">' + id + '</span><div class="floor"></div>';
     if (w === 'B') {
       p.querySelector('.scene').classList.add('back');
       p.querySelector('.scene').append(backArt.content.cloneNode(true));

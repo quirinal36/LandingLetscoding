@@ -73,6 +73,6 @@ if sys.argv[3] == '3':
     for page in doc:
         for box, expected in [(page.mediabox, (0, 0, 303 * mm, 216 * mm)), (page.bleedbox, (0, 0, 303 * mm, 216 * mm)), (page.trimbox, (3 * mm, 3 * mm, 300 * mm, 213 * mm))]:
             assert max(abs(a - b) for a, b in zip(box, expected)) < 0.01, (page.number + 1, box)
-    assert not raster, 'Bleed PDF must preserve vector text'
+    assert all(n == 1 for n in raster), 'Bleed PDF must preserve vector text on all body pages'
 print(f"OK {sys.argv[1]}: pages={len(doc)} images={dict(cs)} outputIntent={intents[1]} rasterized-pages={raster or 'none'}")
 PY

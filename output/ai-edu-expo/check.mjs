@@ -20,10 +20,10 @@ assert.ok(source.match(/<section[^>]+id="slide-1"[\s\S]*?<\/section>/)?.[0].incl
 assert.ok(!source.includes("front-infinity-mask"));
 assert.ok(!source.includes("cover-card-") && !source.includes("cover-project-flow"));
 const coreContent = {
-  1: ["체험을 넘어, 내 작품으로", "렛츠코딩", "라운지&amp;스튜디오", "학생의 아이디어를", "공유와 피드백으로 발전시키는 수업.", "학생은 만들고,", "선생님은 배움을 이끕니다.", "기획 → AI로 제작 → 공유 → 개선"],
-  2: ["comparison-state", "Off", "On", "교구 구매 부담 완화", "창의력의 실행 범위 확장", "<h3>학생 주도 프로젝트</h3>", "자신만의 스토리와 기획력을 바탕으로 스스로 탐구하며 진행하는 프로젝트형 수업"],
+  1: ["우리들의 창작공간", "렛츠코딩", "라운지 &amp; 스튜디오", "학생의 아이디어를", "공유와 피드백으로 발전시키는 수업.", "학생은 만들고,", "교사는 배움을 이끕니다.", "기획 → AI와 제작 → 공유 → 개선", 'media="print" srcset="../lounge-studio-cross-a4.png"'],
+  2: ["comparison-state", "Off", "On", "준비 부담을 줄입니다.", "생각을 작품으로 만듭니다.", "학생 주도 프로젝트", "만드는 과정과 배운 점을 기록합니다."],
   16: ["학교 도입 문의", "학년·학생 수·운영 기간", "기기와 인터넷 환경", "작품 공개 범위", "Free", "Lounge", "Studio", "Studio 사용 불가", "이미지 인식·생성·DB 연동", "잔여량 30% 이하", "이용기간은 연장되지 않습니다"],
-  3: ["Step 01.", "Step 02.", "Step 03.", "<h3>스튜디오</h3><strong>AI 활용 바이브코딩</strong>", "<h3>라운지</h3><strong>내 작품을 업로드하는 곳</strong>", "<h3>공동체</h3><strong>함께 플레이하고 피드백하며 성장하는 곳</strong>", "작품을 개선", "진행 상황 · 결과물 확인", "AI 활용 지도"],
+  3: ["Step 01.", "Step 02.", "Step 03.", "<h3>스튜디오에서 만들고</h3><strong>내 생각을 작품으로</strong>", "<h3>라운지에 공개하고</h3><strong>내 작품을 친구들에게</strong>", "<h3>함께 발전시킵니다.</h3><strong>친구의 의견을 새 아이디어로</strong>", "의견 나누기 · 작품 개선", "개선 과정 확인", "AI 활용 지도"],
   4: ["Step 01. 내 생각을 작품으로", "렛츠코딩 스튜디오를 사용해", "lounge.letscoding.kr/studio", "studio-graphic", "설치 없는 웹 기반 실습", "다양한 기능과 콘텐츠 연동", "안전한 교육용 AI 환경"],
   5: ["Step 02. 내 작품을 친구들에게", "렛츠코딩 라운지에 게시해 친구들에게 공개합니다.", "lounge.letscoding.kr", "englsihword.webp", "bezierider.webp", "storygame.webp", "<strong>영어의 전설</strong>", "베지에 라이더", "태안: 서해안의 기적", "https://lounge.letscoding.kr/works/gihoham/englsihword", "https://lounge.letscoding.kr/works/hso/bezierider", "https://lounge.letscoding.kr/works/adam5102/storygame", "라운지에 공개된 작품 예시"],
   6: ["Step 03. 친구의 의견을 새 아이디어로", "서로 피드백하도록 지도합니다.", "TYPE STORM", "몬스터 알 연구소"],
@@ -32,7 +32,7 @@ const coreContent = {
   9: ["<span>활용 03</span><strong>학원</strong>", "academy-works", "저격! 발사!", "키캡캐슬", "6.25 전쟁 RTS 게임", "당신만 읽을 수 있는 편지", "학생의 관심사가 곧 커리큘럼이 됩니다."],
   10: ["<span>활용 04</span><strong>강사 에이전시", "outreach-cards", "바이브코딩 강사 양성 수업"],
   11: ["도입 안내", "구매 경로", "에듀집, 학교장터", "202611169836156", "edzip-qr.png", "초등학교 1학년 이상", "기관별 접속코드", "바이브코딩 연수", "안전 및 개인정보", "유해 요청 제한", "학생 규모와 총 수업 시간"],
-  12: ["pf.kakao.com/_BpVxiX", "카카오톡 채널", "Zoom 1:1", "도입 단계를 도와드립니다", "https://book.letscoding.kr", "학교 도입 문의", "landing/brochure-infinity-static.png"],
+  12: ["pf.kakao.com/_BpVxiX", "카카오톡 채널", "Zoom 1:1", "도입 단계를 도와드립니다", "https://book.letscoding.kr", "연락처 안내", "landing/brochure-infinity-static.png"],
   13: ["내 작품의 가치를", "창작", "소개", "반응", "가상경제 참여", "루캣", "배지 시스템", "창작·홍보·피드백·개선"],
   14: ["학생의 관심사와 아이디어", "과제 제시", "진행 확인", "피드백", "과제관리", "완료보고서", "project-report.png", "과제 완료 보상"],
   15: ["학교 제공 환경", "활용 기록", "공개 범위", "개별적으로 유료 AI 서비스를 구독할 필요 없이", "AI 활용 분석 보고서", "어떤 목적으로, 어떻게", "학생의 질문과 문제 해결 과정", "유해 요청", "같은 교육기관 회원"],
@@ -46,7 +46,7 @@ const backCover = source.match(/<section[^>]+id="slide-12"[\s\S]*?<\/section>/)?
 assert.doesNotMatch(backCover, /<mask\b|<animate\b/, "Back cover must not depend on SVG masking or animation for printing");
 assert.doesNotMatch(source, /<strong>(?:Basic|Lite|Plus|Pro 5x)<\/strong>/);
 assert.ok(!source.includes("seminar/inquiry"), "Inquiry destination still contains retired terms");
-for (const match of source.matchAll(/(?:src|href)="(\.\.\/[^\"]+)"/g)) {
+for (const match of source.matchAll(/(?:src|srcset|href)="(\.\.\/[^\"]+)"/g)) {
   assert.ok((await readFile(new URL(match[1], import.meta.url))).length > 0, match[1]);
 }
 const original = await readFile(new URL("index-original.html", import.meta.url), "utf8");

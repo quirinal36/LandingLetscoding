@@ -167,6 +167,13 @@ main .body-page .lead{font-size:19px;font-weight:400;line-height:1.65;letter-spa
   body:has(#show-trim-guides:checked) .sheet::after{inset:var(--trim-gap);border:1px dashed #0284c7}
 }
 @media screen and (max-width:1239px){.trim-small-note{display:inline}}
+@media screen and (max-width:700px){.zoom-support .booking a{overflow-wrap:anywhere}}
+.outer-cover picture{display:contents}
+@media print{
+  .outer-cover{background:none}
+  .outer-cover .masthead,.outer-cover .outer-front,.outer-cover .page-foot{display:none}
+  .outer-cover .cover-emblem{width:100%;object-fit:fill}
+}
 .sheet[hidden]{display:none!important}
 </style>
 </head>
@@ -175,7 +182,11 @@ main .body-page .lead{font-size:19px;font-weight:400;line-height:1.65;letter-spa
 <main>
 <section class="sheet outer-cover" id="slide-1" aria-labelledby="title-1">
 <header class="masthead"><div class="brand"><span>렛츠코딩 라운지</span></div></header>
-<div class="outer-front"><p class="eyebrow">우리들의 창작공간</p><h1 id="title-1">렛츠코딩<br><span class="blue">라운지 &amp; 스튜디오</span></h1><p class="lead">학생의 아이디어를<br>게임과 웹사이트로 만들고,<br>공유와 피드백으로 발전시키는 수업.</p><p class="cover-signature">학생은 만들고,<br>교사는 배움을 이끕니다.</p><p class="cover-process">기획 → AI와 제작 → 공유 → 개선</p></div><img class="cover-emblem" src="../../public/hackathon/lounge-studio-cross.png" width="1122" height="1402" alt="렛츠코딩 스튜디오에서 작품을 만들고 라운지에서 함께 공유하는 모습">
+<div class="outer-front"><p class="eyebrow">우리들의 창작공간</p><h1 id="title-1">렛츠코딩<br><span class="blue">라운지 &amp; 스튜디오</span></h1><p class="lead">학생의 아이디어를<br>게임과 웹사이트로 만들고,<br>공유와 피드백으로 발전시키는 수업.</p><p class="cover-signature">학생은 만들고,<br>교사는 배움을 이끕니다.</p><p class="cover-process">기획 → AI와 제작 → 공유 → 개선</p></div>
+<picture>
+  <source media="print" srcset="../lounge-studio-cross-a4.png" width="3508" height="2480">
+  <img class="cover-emblem" src="../../public/hackathon/lounge-studio-cross.png" width="1122" height="1402" alt="렛츠코딩 스튜디오에서 학생들이 게임을 만들고 렛츠코딩 라운지에서 친구들과 완성한 작품을 공유하는 모습">
+</picture>
 <footer class="page-foot"><span>LET’S CODING LOUNGE · AI 활용 프로젝트 수업을 위한 교육 플랫폼</span><span>01 / 12</span></footer>
 </section>
 <section class="sheet school-benefits body-page" id="slide-2" aria-label="학교의 수업 전환">
@@ -432,7 +443,9 @@ main .body-page .lead{font-size:19px;font-weight:400;line-height:1.65;letter-spa
 <script>
 document.getElementById('print-brochure').addEventListener('click', async () => {
   await document.fonts.ready;
-  await Promise.all(Array.from(document.images, image => image.decode()));
+  const printCover = new Image();
+  printCover.src = document.querySelector('#slide-1 source[media="print"]').srcset;
+  await Promise.all([...document.images, printCover].map(image => image.decode()));
   window.print();
 });
 </script>

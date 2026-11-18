@@ -9,8 +9,8 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
 
 const W = 1470, H = 2300;
-// 설치 위치: 뒷벽 왼쪽 B2, 오른쪽 B1 / 옆벽 왼쪽 S1, 오른쪽 S2
-const SHEETS = [['B2', '1-back-left-B2'], ['B1', '2-back-right-B1'], ['S1', '3-side-left-S1'], ['S2', '4-side-right-S2']];
+// 설치 위치: 뒷벽 왼쪽 B1, 오른쪽 B2 / 옆벽 왼쪽 S1, 오른쪽 S2 (2026-11-18 뒷벽 번호를 설치 순서대로 바꿨다)
+const SHEETS = [['B1', '1-back-left-B1'], ['B2', '2-back-right-B2'], ['S1', '3-side-left-S1'], ['S2', '4-side-right-S2']];
 const html = path.join(__dirname, 'booth-2sheet.html');
 const out = path.join(__dirname, '../pdf/expo-banner-147x230');
 

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import logo from "@/assets/logo.png";
+import printCover from "../../../output/lounge-studio-cross-a4.png";
 
 export const dynamic = "force-static";
 
@@ -17,6 +18,7 @@ export async function GET() {
     `<style>${fonts}</style>`,
   )
     .replaceAll("../../public/", "/")
+    .replace("../lounge-studio-cross-a4.png", printCover.src)
     .replaceAll("../pdf/letscoding-school-brochure.pdf", "/ai-edu-expo/pdf")
     .replaceAll("../../src/assets/logo.png", logo.src)
     .replaceAll("../../prototypes/brochure/assets/lounge-qr.svg", `data:image/svg+xml;base64,${loungeQr}`);

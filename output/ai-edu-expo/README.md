@@ -22,7 +22,7 @@
 
 ## 원본 구성 (8~11쪽 숨김)
 
-1. 겉표지 — 윗줄 “체험을 넘어, 내 작품으로”, 제목 “렛츠코딩 라운지&스튜디오”와 오른쪽의 스튜디오·라운지 이미지
+1. 겉표지 — 화면에는 서비스 소개와 오른쪽 삽화를, 인쇄와 PDF에는 스튜디오·라운지 가로 A4 이미지를 배치한다.
 2. 안쪽 앞표지 — 코딩 수업의 전환과 학교의 세 가지 도입 이점
 3. Step 01. 스튜디오 → Step 02. 라운지 → Step 03. 공동체의 작동 구조와 교사의 지도. 각 공간의 설명은 4~6쪽 제목과 동일하다.
 4. Step 01. 스튜디오 - AI 활용 바이브코딩 · 학생별 AI 활용 과정 확인 · ChatGPT, Claude 최신 모델 · 학습 특화 코딩 에디터
@@ -39,7 +39,7 @@ PDF는 읽는 순서대로 저장한다. 인쇄소의 접지·중철용 면배�
 
 ### CMYK 인쇄용 PDF
 
-사방 3mm 도련을 요청한 인쇄소에 전달할 파일은 `../pdf/letscoding-school-brochure-cmyk-bleed-3mm.pdf`다. 기존 `../pdf/letscoding-school-brochure-cmyk.pdf`는 도련 없는 A4본으로 보존한다. 두 CMYK본은 Chrome의 RGB 출력을 Ghostscript로 PDF/X-4로 변환한 것으로, 모든 색은 DeviceCMYK·DeviceGray이고 출력 의도는 Japan Color 2001 Coated다. 글자는 벡터로 유지되며 이미지는 다운샘플 없이 무손실(Flate)로 담는다. 도련 없는 기존 CMYK본은 아래 명령으로 다시 만든다.
+사방 3mm 도련을 요청한 인쇄소에 전달할 파일은 `../pdf/letscoding-school-brochure-cmyk-bleed-3mm.pdf`다. `../pdf/letscoding-school-brochure-cmyk.pdf`는 도련 없는 A4본이다. 두 CMYK본은 PDF/X-4이며 색공간은 DeviceCMYK·DeviceGray, 출력 의도는 Japan Color 2001 Coated다. 본문 글자는 벡터로 유지하고 표지 이미지는 원래 픽셀 크기로 무손실 압축한다. 도련 없는 CMYK본은 아래 명령으로 다시 만든다.
 
 ```sh
 sh output/ai-edu-expo/export-cmyk.sh                        # PDF/X-4 (기본)
@@ -48,7 +48,7 @@ PDFX=1 OUT=/tmp/x1a.pdf sh output/ai-edu-expo/export-cmyk.sh  # PDF/X-1a가 필�
 
 필요한 도구는 Ghostscript(`brew install ghostscript`), python3와 PyMuPDF, 그리고 `~/Library/ColorSync/Profiles/JapanColor2001Coated.icc`다. ICC 파일은 Adobe ICC 프로파일 end-user 배포본에서 설치하며 재배포 제한이 있어 저장소에 넣지 않는다. 스크립트는 PDF/X가 금지하는 링크 주석을 제거한 뒤 변환하고, 끝에 RGB 색공간이 남지 않았는지와 출력 의도가 있는지 검사한다. PDF/X-1a는 투명도를 허용하지 않아 3·6·7쪽이 720dpi 전면 래스터로 평탄화되므로 인쇄소가 요구할 때만 쓴다.
 
-2026-11-17 인쇄소의 요청에 맞춰 3mm 도련본을 추가했다. 총 12쪽, 완성 크기(TrimBox)는 가로 A4 297×210mm, 도련 포함 크기(MediaBox·BleedBox)는 303×216mm다. 재단 표시는 넣지 않는다. `prepare-bleed.js`가 A4 본문 크기와 위치를 유지한 채 각 쪽의 배경을 바깥 3mm까지 확장하고, 1쪽 사진도 위·아래·오른쪽 도련까지 채운다. 표지 사진은 높이에 맞춰 약간 확대되어 재단 후 보이는 범위가 조금 달라진다. 5·12쪽의 어두운 배경도 도련 끝까지 이어진다.
+총 12쪽이며 완성 크기(TrimBox)는 가로 A4 297×210mm, 도련 포함 크기(MediaBox·BleedBox)는 303×216mm다. PDF와 브라우저 인쇄에는 `../lounge-studio-cross-a4.png`가 첫 페이지 전체에 들어간다. `prepare-bleed.js`는 표지 가장자리를 사방 3mm에 반사해 채우므로 재단 후 보이는 그림은 일반본과 같다. 본문 배경도 도련 끝까지 연장한다.
 
 ```sh
 EXPO_BLEED=3 EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-edu-expo/export.cjs
@@ -208,9 +208,13 @@ EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-e
 
 2026-11-17 출력 시트 크기를 장당 **1,470×2,300mm**(147×230cm)로 확정해 `booth-2sheet.html`의 판형(`--pw`·`--ph`, `@page`)을 바꾸고 다시 배치했다. 장이 45mm 넓어진 만큼 B2 요소는 이음선 기준 위치를 유지하도록 x를 45mm 옮겼고, 높이가 80mm 줄어 작품·요점 카드·브랜드·주소를 위로 올렸다(요점 카드 아래끝 y=1,640, 가림 구역 1,650 위). 옆벽 이미지는 cover로 채워 위아래가 조금 더 잘린다. `booth-png-2sheet/` 6장을 모두 재출력했다(2px/mm, 옆벽은 원본 이미지 해상도 기준).
 
+2026-11-18 뒷벽 두 장의 번호를 설치 순서에 맞췄다. **왼쪽이 B1(AI활용 수업·작품), 오른쪽이 B2(바이브코딩·설명)**이다. 11-17에는 장을 통째로 바꿔 달아 배경이 이음선에서 끊겼다. 이번에는 `booth-2sheet.html`의 아트 좌표에서 글자·카드·요점·퍼즐 장식·브랜드·주소만 옆 장으로 옮기고(x ∓1,470), 배경(보라·코랄 빛과 사선 띠)은 그대로 두어 두 장에 걸쳐 이어진다. 장 안에서 내용의 위치는 이전과 같다. `booth-png-2sheet/back-B1.png`, `back-B2.png`, `wall-back.png`를 같은 해상도로 재출력했고, 낱장 두 장을 이어 붙여 이음선에서 배경이 맞는지 확인했다. 위 11-17 기록의 B1·B2는 바꾸기 전 번호다. `backwall.html`(v1)과 3장 안은 그대로다.
+
 ### 족자봉 인쇄용 PDF
 
-147×230cm 시트 4장을 족자봉으로 출력한다. 파일은 `../pdf/expo-banner-147x230/`에 장마다 RGB(`*-rgb.pdf`)와 CMYK PDF/X-4(`*-cmyk.pdf`, Japan Color 2001 Coated) 두 종류이고, 이름 앞 번호가 설치 순서다(1 뒷벽 왼쪽 B2, 2 뒷벽 오른쪽 B1, 3 옆벽 왼쪽 S1, 4 옆벽 오른쪽 S2). 완성 크기 1,470×2,300mm 그대로이며 도련은 넣지 않았고, 위아래 봉 감김 부분은 230cm 안에 포함된다고 보고 위아래 50mm 안에 글자·카드가 없는지 출력 스크립트가 확인한다(B2 오른쪽 위 퍼즐 장식만 조금 걸린다). 뒷벽 글자는 벡터, 사진·작품 썸네일은 원본 해상도다. 작품 썸네일 원본이 560×315px라 560mm 폭 카드에서 약 25dpi, 옆벽 이미지는 약 27dpi로 가까이서 보면 거칠 수 있다.
+147×230cm 시트 4장을 족자봉으로 출력한다. 파일은 `../pdf/expo-banner-147x230/`에 장마다 RGB(`*-rgb.pdf`)와 CMYK PDF/X-4(`*-cmyk.pdf`, Japan Color 2001 Coated) 두 종류이고, 이름 앞 번호가 설치 순서다(아래 2026-11-18 기록 참고). 완성 크기 1,470×2,300mm 그대로이며 도련은 넣지 않았고, 위아래 봉 감김 부분은 230cm 안에 포함된다고 보고 위아래 50mm 안에 글자·카드가 없는지 출력 스크립트가 확인한다(작품 장 오른쪽 위 퍼즐 장식만 조금 걸린다). 뒷벽 글자는 벡터, 사진·작품 썸네일은 원본 해상도다. 작품 썸네일 원본이 560×315px라 560mm 폭 카드에서 약 25dpi, 옆벽 이미지는 약 27dpi로 가까이서 보면 거칠 수 있다.
+
+2026-11-18 뒷벽 번호를 바꾼 뒤 4장(B1·B2·S1·S2)과 인포데스크 PDF를 RGB·CMYK 모두 다시 출력했다. 이름 앞 번호가 설치 순서다(1 뒷벽 왼쪽 B1, 2 뒷벽 오른쪽 B2, 3 옆벽 왼쪽 S1, 4 옆벽 오른쪽 S2). 이전 배치의 뒷벽 PDF(`banner-1-back-left-B2`, `banner-2-back-right-B1`)는 지웠다.
 
 ```sh
 EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-edu-expo/export-banner.cjs
