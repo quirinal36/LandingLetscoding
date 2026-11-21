@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>우리의 아이들은 어떤 준비를 해야할까요? · 렛츠코딩</title>
+<style>
+@page {size: 1280px 720px; margin:0}
+/* 길이 단위 cqw는 슬라이드 너비의 1%다. 슬라이드 쇼에서는 .deck이 기준이고, 문서·인쇄에서는 기준이 없어 화면(쪽) 너비를 따른다. */
+*{box-sizing:border-box}html{scroll-snap-type:y mandatory}body{margin:0;background:#e9edf3;color:#182842;font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;word-break:keep-all}
+section{width:100%;aspect-ratio:16/9;background:white;position:relative;overflow:hidden;padding:8.6cqw 7cqw 6cqw;display:flex;flex-direction:column;justify-content:center;break-after:page;scroll-snap-align:start}
+section:last-of-type{break-after:auto}h1,h2,p,figure{margin:0}h1,h2{font-size:5.9cqw;line-height:1.17;letter-spacing:-.055em}p{font-size:2.45cqw;line-height:1.5;margin-top:2.4cqw}small,figcaption{font-size:1.65cqw;letter-spacing:-.03em}small{display:block;font-weight:700;color:#2954af;margin-bottom:2cqw}
+.blue{background:#20478f;color:white}.blue small{color:#c5deff}.gallery{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3cqw}.gallery img{width:100%;border-radius:1cqw}.gallery h2{font-size:4.1cqw}.ocean{background:#eaf4ff}.ocean svg{position:absolute;bottom:0;left:0;width:100%;height:28%;z-index:0}.ocean>*:not(svg){position:relative;z-index:1}.quote{padding:8cqw 2.2cqw 8cqw 72.2%;word-break:keep-all}
+.ocean.quote>video{position:absolute;left:0;top:0;width:70%;height:100%;object-fit:contain;background:#101d2a}
+.ocean.quote>.tour-caption{position:absolute;z-index:2;top:2cqw;left:1.6cqw;padding:.85cqw 1.25cqw;border-left:.28cqw solid #83eddd;border-radius:.45cqw;background:rgba(7,25,40,.93);color:white;pointer-events:none}
+.tour-caption span,.tour-caption strong{display:block}.tour-country{color:#9aeee3;font-size:1.25cqw;font-weight:700}.tour-caption strong{margin:.16cqw 0;font-size:2.4cqw;line-height:1.2}.tour-conditions{font-size:1.55cqw;font-weight:650;font-variant-numeric:tabular-nums}
+.quote h2{font-size:3.1cqw}.quote ol{margin:.8cqw 0 0;padding-left:2.5cqw;font-size:2cqw;line-height:1.55}.quote .future-skills{margin-top:2.4cqw}.quote svg{left:70%;width:30%}
+.deck[data-at="5"] .brand,.quote .page-brand{left:72.2%}.row{display:flex;gap:4cqw;margin-top:4cqw}.row b{border-top:.35cqw solid #3975ca;padding-top:1cqw;flex:1;font-size:3.35cqw}.book-result{display:grid;grid-template-columns:34% 1fr;align-items:center;align-content:center;gap:3cqw;padding-inline:5cqw}.book-result h2{font-size:2.95cqw;line-height:1.5}.book-result h2 span{display:block}.book-result h2 strong{color:#2355a0}.book-result video{display:block;width:100%;height:auto}figcaption{color:#526378;margin-top:.9cqw}.two{margin-top:3cqw;border-top:1px solid #7891b4}.two p{margin:0;padding:1.4cqw 0;border-bottom:1px solid #7891b4}.two b{display:inline-block;width:12cqw;color:#b9dcff}
+.intro{padding:5.6cqw 7cqw;background:#f8fbff;color:#182e51}
+.intro .intro-company{display:flex;align-items:center;gap:.8cqw;margin:0 0 auto;font-size:1.8cqw;font-weight:700}.intro-company img{width:3.5cqw;height:auto}
+.intro h1{font:400 8cqw/1.15 "Black Han Sans","Chiron GoRound TC",sans-serif;letter-spacing:-.032em}
+.intro .intro-summary{margin:1.8cqw 0 0;font-size:2.7cqw;line-height:1.45;color:#354b66}
+.intro-features{display:flex;justify-content:space-between;list-style:none;border-top:.18cqw solid #6786ae;padding:1.7cqw 0 0;margin:auto 0 0;font-size:2.05cqw;font-weight:700}
+.deck:has(>.intro.on) .brand{visibility:hidden}
+/* 표지: 브로셔 표지(../ai-edu-expo/index.html)와 같은 문구·글꼴을 반복 영상 위에 얹는다. 영상은 A4 비율이라 16:9에 맞춰 아래쪽을 잘라 보여 준다. */
+@font-face{font-family:"Chiron GoRound TC";font-style:normal;font-weight:550 800;src:url("../../public/fonts/chiron-goround-tc/expo-cover.woff2") format("woff2")}
+@font-face{font-family:"Black Han Sans";font-style:normal;font-weight:400;src:url("../../public/fonts/black-han-sans/expo-title.woff2") format("woff2")}
+.cover{padding:0;background:#bfe3f7}.cover-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%}.cover-still{display:none}
+.cover-copy{position:absolute;top:6cqw;left:7cqw;color:#253154;font-family:"Chiron GoRound TC","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+.cover-copy p{margin:0;font-size:2.95cqw;font-weight:650;line-height:1.25;letter-spacing:-.01em;color:#344e66}
+.cover-copy h1{margin:.72cqw 0 .68cqw;font-family:"Black Han Sans","Chiron GoRound TC",sans-serif;font-size:6.8cqw;font-weight:400;line-height:1.15;letter-spacing:-.032em;white-space:nowrap}
+.cover-copy ul{display:flex;align-items:center;gap:1.55cqw;margin:0;padding:0;list-style:none;font-size:1.48cqw;font-weight:600;line-height:1.4;letter-spacing:-.015em;white-space:nowrap}
+.cover-copy li img,.cover-copy li span{display:inline-block;vertical-align:middle}.cover-copy li img{width:1.35em;height:1.35em;margin-right:.4em}.cover-copy .sharing-icon{width:1.08em;height:1.08em}.cover-copy .investment-icon{height:1.62em;object-fit:fill}
+/* 세 가지 역량: 표지의 키워드(data-from)가 날아와 바뀌는 자리. 표지 그림의 홀로그램 카드처럼 빛나는 유리판으로 그린다. */
+.skills{display:flex;gap:1.3cqw;margin:2.7cqw 0 0;padding:0;list-style:none}
+.skills li{position:relative;isolation:isolate;display:flex;align-items:center;padding:.72cqw 1.6cqw .72cqw .9cqw;font-size:2.3cqw;font-weight:700;line-height:1.4;letter-spacing:-.035em;white-space:pre}
+.skills li::before{content:"";position:absolute;inset:0;z-index:-1;border:1px solid rgba(178,234,255,.66);border-radius:1.25cqw;background:linear-gradient(90deg,rgba(255,255,255,0) 9%,#fff 34%,rgba(255,255,255,0) 62%) top/100% 1px no-repeat,linear-gradient(115deg,rgba(255,255,255,.2),rgba(150,190,255,.06) 55%,rgba(120,230,255,.13));box-shadow:0 0 1.5cqw rgba(84,205,255,.3),inset 0 0 1.1cqw rgba(170,215,255,.2);transform-origin:0 50%;transition:scale .6s cubic-bezier(.2,.8,.2,1),opacity .35s}
+.skills li::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:1.25cqw;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 62%) -60% 0/260% 100% no-repeat;transition:background-position 1s cubic-bezier(.4,0,.2,1) .2s}
+.skills i{display:grid;place-items:center;width:1.35em;height:1.35em;margin-right:.25em}
+.skills i::before{content:"";width:.46em;height:.46em;border-radius:50%;background:#b4f1ff;box-shadow:0 0 .55em .1em rgba(104,224,255,.9);transition:scale .45s cubic-bezier(.2,.9,.3,1.4),opacity .3s}
+.skills .pre::before{opacity:0;scale:.12 1}.skills .pre::after{background-position:160% 0;transition:none}.skills .pre i::before{opacity:0;scale:.2}.skills .typing span{opacity:0}
+/* 3쪽 영상 릴: 0~2초 작품 수, 이어서 게임 화면 네 개가 2초씩. 장면(.shot)은 .live일 때만 보이고 차례는 아래 스크립트가 넘긴다. */
+section[hidden]{display:none}
+.reel,.story{padding:0;background:#070c1c;color:#fff}
+.reel::after{content:"";position:absolute;inset:0 0 auto;z-index:3;height:11cqw;background:linear-gradient(rgba(5,10,28,.62),rgba(5,10,28,0));pointer-events:none}
+.shot{position:absolute;inset:0;margin:0;overflow:hidden;visibility:hidden}.shot.live{visibility:inherit}
+.shot video,.tally img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot figcaption{position:absolute;left:7cqw;bottom:9.8cqw;margin:0;padding:.55cqw 1.6cqw .65cqw;border-radius:1cqw;background:#fff;color:#101a3a;font-size:2.7cqw;font-weight:800;letter-spacing:-.03em;rotate:-3deg;box-shadow:.4cqw .45cqw 0 #5fd8ff,.8cqw .9cqw 0 #8d8cff}
+.tally{display:grid;place-content:center;justify-items:center;gap:.4cqw;background:#0a1130;text-align:center}
+.tally img{opacity:.34;filter:saturate(1.15)}.tally::after{content:"";position:absolute;inset:0;background:radial-gradient(closest-side,rgba(10,17,48,.2),rgba(10,17,48,.86))}
+.tally p,.tally strong{position:relative;z-index:1;margin:0}.tally p{font-size:2.7cqw;font-weight:700;color:#cfe3ff}.tally strong{font-size:6cqw;font-weight:800;line-height:1}
+.tally b{padding:0 .04em;font-size:19cqw;font-weight:900;letter-spacing:-.05em;font-variant-numeric:tabular-nums;background:linear-gradient(100deg,#7be7ff,#fff 45%,#b9b6ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 2cqw rgba(90,200,255,.45))}
+/* 릴 전환용 소품: 화면을 덮었다 걷히는 타일(.tiles)과 아래에서 밀려오는 파도(.surf) */
+.tiles{position:absolute;inset:0;z-index:2;display:grid;grid-template-columns:repeat(16,1fr);pointer-events:none}.tiles i{aspect-ratio:1;border-radius:.5cqw;scale:0}
+.surf{position:absolute;left:0;top:0;z-index:2;width:100%;height:16cqw;translate:0 -110%}
+/* 5쪽: Deep Step 썸네일 카드가 뜬 뒤, 카드 자리에서 바닷가 사진이 화면 가득 펼쳐지고, 그 위에 어두운 막(.story-note)과 말풍선 세 개이 차례로 뜬다. 아무 연출이 없을 때(인쇄 포함)는 마지막 모습이 보인다. */
+.story-bg,.story-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.story-bg{filter:blur(2.4cqw) brightness(.5) saturate(1.2);scale:1.25}
+.story figure{position:absolute;left:27cqw;top:15.6cqw;width:46cqw;margin:0;overflow:hidden;border:.55cqw solid #fff;border-radius:1.8cqw;rotate:-2deg;box-shadow:0 2cqw 5cqw rgba(0,0,0,.45),0 0 3cqw rgba(110,220,255,.35)}
+.story-note{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:2cqw;padding:5cqw 4cqw 4cqw 57%;background:linear-gradient(90deg,rgba(6,12,30,.63),rgba(6,12,30,.4) 48%,rgba(6,12,30,.18))}
+.story-note p{max-width:95%;transform-origin:left bottom;--bubble:#fff;align-self:flex-start;position:relative;margin:0;padding:1.2cqw 1.7cqw;border-radius:2.2cqw;background:var(--bubble);color:#182e51;font-size:2.3cqw;font-weight:700;line-height:1.36;letter-spacing:-.04em}
+.story-note p::after{content:"";position:absolute;bottom:1.1cqw;left:-1.15cqw;width:1.3cqw;height:1.4cqw;background:var(--bubble);clip-path:polygon(100% 0,100% 100%,0 100%)}
+.story-note p:nth-child(even){transform-origin:right bottom;--bubble:#baefff;align-self:flex-end}
+.story-note p:nth-child(even)::after{left:auto;right:-1.15cqw;transform:scaleX(-1)}
+.story-note h2{position:absolute;left:6cqw;top:50%;transform:translateY(-50%);width:48%;color:#fff;font-size:5.2cqw;line-height:1.2;text-shadow:0 .12em .55em rgba(4,12,24,.5)}
+.story-note h2 span{display:block;margin-bottom:.85cqw;font-size:2.3cqw;letter-spacing:-.035em}
+.library .story-photo{filter:brightness(.78)}
+.story figure img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+/* 슬라이드 쇼(화면 전용). 아래 스크립트가 html에 show를 붙인다. 인쇄·PDF는 문서 그대로 한 장씩 나간다. */
+.hud{display:none}
+@keyframes tour-text-in{
+  from{opacity:0;transform:translateY(.85cqw);color:#2167a7}
+  to{opacity:1;transform:translateY(0);color:inherit}
+}
+.office-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:center;align-content:center;gap:2.6cqw;padding:7cqw 4cqw 4cqw;background:#f4f6f8}
+.office-tools h2{grid-column:1/-1;font-size:4.2cqw}
+.office-tools figure{border:1px solid #d7dce4;border-radius:1.1cqw;overflow:hidden;background:#fff;box-shadow:0 .6cqw 2cqw #16264412}
+.office-tools figure>:is(img,video){display:block;width:100%;aspect-ratio:16/9;object-fit:contain}
+.office-tools figcaption{display:flex;align-items:center;gap:.9cqw;margin:0;padding:1.3cqw 1.6cqw;border-top:1px solid #e1e5ea;font-size:1.95cqw;font-weight:700;color:#182842}
+.office-tools figcaption img{width:2.8cqw;height:2.8cqw}
+.project-class h2{font-size:4.8cqw;margin-bottom:2cqw}
+.project-class>p{display:grid;grid-template-columns:5cqw 1fr;gap:1.5cqw;align-items:baseline;margin:0;padding:1.55cqw 0;border-top:1px solid #c9d5e5;font-size:2.45cqw;letter-spacing:-.04em}
+.project-class>p>b{font-size:1.5cqw;color:#2954af}
+.project-class>p:last-of-type{color:#20478f;font-weight:700}
+.closing{background:#183866;text-align:center}.closing>h2{font-size:3.9cqw;line-height:1.6;font-weight:600}.closing>h2 strong{color:#b8edff}
+.closing-signoff{display:flex;align-items:center;justify-content:center;gap:1.5cqw;margin-top:2.2cqw}
+.closing-signoff p{margin:0;font-size:2.9cqw;font-weight:700}.vibe-word{display:inline-block;color:#b8edff}
+.claudy-groove{position:relative;width:9cqw;aspect-ratio:61/60;margin-right:4.2cqw;transform-origin:50% 84%}
+.claudy-groove img{width:100%;display:block;image-rendering:pixelated;clip-path:polygon(21.3% 25%,82% 25%,82% 40%,88.5% 40%,88.5% 55%,82% 55%,82% 83.3%,75.4% 83.3%,75.4% 69%,67.2% 69%,67.2% 83.3%,60.7% 83.3%,60.7% 69%,41% 69%,41% 83.3%,34.4% 83.3%,34.4% 69%,27.9% 69%,27.9% 83.3%,21.3% 83.3%,21.3% 55%,14.8% 55%,14.8% 40%,21.3% 40%)}
+.claudy-headset{position:absolute;top:15%;left:14%;width:74%;height:38%;border:.43cqw solid #a6cce3;border-bottom:0;border-radius:3cqw 3cqw 0 0}
+.claudy-headset::before,.claudy-headset::after{content:"";position:absolute;bottom:-.55cqw;width:.95cqw;height:1.8cqw;background:#294964;border:.2cqw solid #b8edff;border-radius:.36cqw}
+.claudy-headset::before{left:-.63cqw}.claudy-headset::after{right:-.63cqw}
+.claudy-bubble{position:absolute;left:87%;top:1%;padding:.42cqw .72cqw;border-radius:.8cqw .8cqw .8cqw .12cqw;background:#effaff;color:#19364c;font-size:1.12cqw;font-weight:700;white-space:nowrap}
+.claudy-bubble::after{content:"";position:absolute;left:0;bottom:-.4cqw;border-top:.5cqw solid #effaff;border-right:.6cqw solid transparent}
+@keyframes vibe-shiver{0%,66%,100%{transform:none}70%,78%,86%{transform:translateX(-.09em) rotate(-3deg)}74%,82%,90%{transform:translateX(.09em) rotate(3deg)}94%{transform:translateX(-.03em)}}
+@keyframes claudy-beat{0%,100%{transform:translateX(-.2cqw) rotate(-4deg)}50%{transform:translate(.2cqw,-.4cqw) rotate(4deg)}}
+@media screen and (prefers-reduced-motion:no-preference){
+  .closing.on .closing-signoff{animation:reflection-in .7s ease-out 1.4s backwards}
+  .closing.on .vibe-word{animation:vibe-shiver 2.2s linear 1.6s infinite}
+  .closing.on .claudy-groove{animation:claudy-beat 1.1s ease-in-out infinite}
+}
+.brochure-slide{padding:8.2cqw 6cqw 3.5cqw;background:#f6f9fc;color:#182e51}
+.brochure-slide.blue{background:#20478f;color:white}
+.brochure-slide>small{margin:0 0 .7cqw;font-size:1.6cqw}
+.brochure-slide>h2{font-size:4.25cqw;margin-bottom:2.8cqw}
+.case-grid{display:grid;grid-auto-columns:minmax(0,1fr);grid-auto-flow:column;gap:1.4cqw}
+.case-grid article{padding:1.55cqw;background:white;color:#182e51;border-radius:1cqw;border:1px solid #d8e2ef}
+.case-grid h3{font-size:1.95cqw;letter-spacing:-.045em;line-height:1.3;margin:0}
+.case-grid p,.brochure-slide .case-foot{font-size:1.55cqw;line-height:1.55;margin:.85cqw 0 0}
+.case-grid img{display:block;width:100%;border-radius:.5cqw;margin-bottom:1.2cqw}
+.flow-cards img{width:4.4cqw;height:4.4cqw;object-fit:contain}
+.flow-cards article,.feedback-cards article,.shift-cards article{padding:2.25cqw;border-top:.3cqw solid #4b94d3}
+.flow-cards h3,.feedback-cards h3,.school-cards h3{font-size:2.25cqw}
+.flow-cards p,.feedback-cards p,.shift-cards p{font-size:1.9cqw}
+.feedback-cards img{width:11cqw}.feedback-cards strong,.shift-cards strong{color:#2456a0}.feedback-cards p{line-height:1.75}
+.brochure-slide .case-foot{margin-top:2cqw;font-size:1.8cqw}
+.studio-detail{display:grid;grid-template-columns:54% 1fr;align-items:center;gap:3cqw}
+.studio-detail img{width:100%;border-radius:.75cqw;border:1px solid #d8e2ef}
+.studio-detail ul{margin:0;padding-left:2cqw;font-size:2.05cqw;line-height:1.5}.studio-detail li+li{margin-top:1.25cqw}
+.course-cards{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row}
+@keyframes reflection-in{from{opacity:0;transform:translateY(.9cqw)}to{opacity:1;transform:none}}
+@media screen and (prefers-reduced-motion:no-preference){
+  .reflection.on>h2,.reflection.on>p{animation:reflection-in 700ms ease-out 450ms backwards}
+  .reflection.on>p{animation-delay:1.7s}
+  .project-class.on>p:nth-of-type(2){animation-delay:3s}
+  .project-class.on>p:nth-of-type(3){animation-delay:4.3s}
+  .book-result.on h2 span{animation:tour-text-in 650ms ease-out 500ms backwards}
+  .book-result.on h2 span+span{animation-delay:1.8s}
+  .quote.on .features{--reveal-delay:640ms}
+  .quote.on .future-skills{--reveal-delay:0ms}
+  .quote.on .features :is(h2,li),.quote.on.skills-shown .future-skills :is(h2,li){
+    animation:tour-text-in 650ms cubic-bezier(.16,1,.3,1) backwards;
+    animation-delay:calc(var(--reveal-delay) + var(--stagger,0ms))
+  }
+  .quote li{--stagger:230ms}.quote li+li{--stagger:430ms}
+}
+@media screen{
+html.show .quote:not(.skills-shown) .future-skills{visibility:hidden}
+html.show{height:100%;overflow:hidden}html.show body{background:#05080f}
+html.show .deck{position:fixed;left:50%;top:50%;translate:-50% -50%;width:min(100vw,177.78vh);aspect-ratio:16/9;overflow:hidden;container-type:inline-size;cursor:default;-webkit-user-select:none;user-select:none}
+html.show .deck>section{position:absolute;inset:0;aspect-ratio:auto;visibility:hidden}html.show .deck>section.on{visibility:visible}
+html.show .cover>.cover-copy{visibility:hidden}
+html.show .intro.on~.cover.on>.cover-copy{visibility:visible}
+html.show .title-morph :is(.intro,.cover) h1{visibility:hidden}
+html.show .title-morph .hud .brand h1{visibility:visible}
+html.show .hud{display:block;position:absolute;inset:0;z-index:5;pointer-events:none}html.show .deck .page-brand{display:none}
+}
+/* 머리말: 표지의 제목 두 줄이 2쪽부터 왼쪽 위에 작게 남는다. 밑의 빛줄은 표지 책상 모서리의 조명을 따왔다. */
+.deck .page-brand{position:absolute}.brand,.brand p{transition:color .2s}.brand p,.brand h1,.word{transform-origin:0 0}
+:is(.brand.mini,.page-brand){top:1.5cqw}
+:is(.brand.mini,.page-brand) p{font-size:1.1cqw}
+:is(.brand.mini,.page-brand) h1{margin:.2cqw 0 0;font-size:2.2cqw}
+:is(.brand.mini,.page-brand) ul{display:none}.deck:not([data-at="1"]) .brand ul{visibility:hidden}
+:is(.deck[data-tone="dark"] .brand,.blue .page-brand,.reel .page-brand,.story .page-brand){color:#fff}:is(.deck[data-tone="dark"] .brand,.blue .page-brand,.reel .page-brand,.story .page-brand) p{color:#cfe3ff}
+.brand::after{content:"";position:absolute;left:0;top:calc(100% + .42cqw);width:100%;height:.13cqw;border-radius:1cqw;background:linear-gradient(90deg,#63dcff,#8d8cff 60%,rgba(141,140,255,0));box-shadow:0 0 .7cqw rgba(88,210,255,.7);transform-origin:0 50%;scale:0 1;opacity:0;transition:scale .7s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.brand.docked::after{scale:1;opacity:1}.brand:not(.mini)::after{transition:none}
+/* 전환: 빛줄(.scan)이 화면을 훑고 지나간 자리에 다음 장이 드러난다. .rail은 진행 정도를 보여 주는 아래쪽 빛줄. */
+.scan{position:absolute;left:0;right:0;top:-.08cqw;height:.16cqw;opacity:0;background:linear-gradient(90deg,rgba(111,227,255,0),#b9f3ff 12%,#fff 50%,#cbc8ff 88%,rgba(143,139,255,0));box-shadow:0 0 .9cqw .12cqw rgba(110,220,255,.9),0 0 3.2cqw .5cqw rgba(110,160,255,.5)}
+.scan::after{content:"";position:absolute;left:0;right:0;top:100%;height:9cqw;background:linear-gradient(rgba(140,225,255,.24),rgba(140,225,255,0))}
+.rail{position:absolute;left:0;bottom:0;width:calc(var(--p,0)*100%);height:.2cqw;background:linear-gradient(90deg,#63dcff,#8d8cff);box-shadow:0 0 .8cqw rgba(100,210,255,.8);transition:width .9s cubic-bezier(.6,0,.2,1)}
+/* 표지에서 2쪽으로 넘어갈 때만 잠깐 쓰는 날아가는 아이콘(.fly)과 글자(.word). .a는 아직 표지 글자, .x는 바뀌는 중인 글자. */
+.fly,.word{position:absolute;margin:0}.fly{transition:filter .12s}.fly.lit{filter:brightness(0) invert(1)}
+.word{white-space:pre;color:#253154;transition:color .12s,text-shadow .4s}.word.lit{color:#fff;text-shadow:0 0 .55em rgba(110,220,255,.55)}.word.calm{text-shadow:none}
+.word b{display:inline-block;height:1.4em;line-height:1.4;vertical-align:top;font-weight:inherit}.word .a{font:600 1em/1.4 "Chiron GoRound TC",sans-serif;letter-spacing:-.015em}.word .x{color:#9eeaff;text-shadow:0 0 .5em rgba(110,225,255,.9)}
+@media print{html{scroll-snap-type:none}section{height:720px;width:1280px}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cover video{display:none}.cover-still{display:block}}
+</style>
+<main class="deck">
+<section class="intro" aria-labelledby="intro-title">
+  <p class="intro-company"><img src="../../src/assets/logo.png" alt="">주식회사 렛츠코딩</p>
+  <h1 id="intro-title">렛츠코딩 라운지</h1>
+  <p class="intro-summary">자기 아이디어를 AI와 함께 작품으로 만들고,<br>공동체와 함께 성장하는 프로젝트 수업 플랫폼</p>
+  <ul class="intro-features"><li>AI 코딩 스튜디오</li><li>학생 작품 공유</li><li>댓글 피드백 · 모의투자</li></ul>
+</section>
+<section class="cover"><video class="cover-bg" src="../ai-edu-expo/cover-loop/expo-cover-loop.mp4" poster="../../public/landing/expo-cover-a4.jpg" autoplay loop muted playsinline aria-hidden="true"></video><img class="cover-bg cover-still" src="../../public/landing/expo-cover-a4.jpg" alt=""><div class="cover-copy"><p>우리들의 창작공간</p><h1>렛츠코딩 라운지</h1><ul><li><img src="../../public/landing/expo-cover-icons/coding.png" alt=""><span>AI 코딩</span></li><li><img class="sharing-icon" src="../../public/landing/expo-cover-icons/sharing.png" alt=""><span>작품 공유</span></li><li><img src="../../public/landing/expo-cover-icons/feedback.png" alt=""><span>상호 피드백</span></li><li><img class="investment-icon" src="../../public/landing/expo-cover-icons/investment.png" alt=""><span>모의투자</span></li></ul></div></section>
+<section class="blue"><small>2026 AI 교육 박람회</small><h1>우리의 아이들은<br>어떤 준비를 해야할까요?</h1><ul class="skills"><li data-from="작품 공유"><i></i><span>문제 해결력</span></li><li data-from="상호 피드백"><i></i><span>공감능력</span></li><li data-from="모의투자"><i></i><span>기획력</span></li></ul></section>
+<section class="reel">
+<div class="shot tally live"><img src="../../public/landing/works-grid.jpg" alt=""><p>렛츠코딩 라운지 전체 작품</p><strong><b>296</b>개</strong></div>
+<figure class="shot"><video src="reel/1-tenpang.mp4" muted playsinline preload="auto"></video><figcaption>게이미피케이션 학습</figcaption></figure>
+<figure class="shot"><video src="reel/2-bezier-rider.mp4" muted playsinline preload="auto"></video><figcaption>탐구와 융합</figcaption></figure>
+<figure class="shot"><video src="reel/3-elemental-snake.mp4" muted playsinline preload="auto"></video><figcaption>스스로 만들고 쓰는 학습도구</figcaption></figure>
+<figure class="shot"><video src="reel/4-deep-step.mp4" muted playsinline preload="auto"></video><figcaption>자신만의 이야기</figcaption></figure>
+<svg class="surf" viewBox="0 0 1280 220" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="surf" x2="0" y2="1"><stop offset="0" stop-color="#bdf3ff"/><stop offset=".45" stop-color="#3fb6d8" stop-opacity=".9"/><stop offset="1" stop-color="#14608f" stop-opacity="0"/></linearGradient></defs><path fill="url(#surf)" d="M0 60 Q80 20 160 56 T320 58 T480 50 T640 60 T800 50 T960 58 T1120 50 T1280 58 V220 H0Z"/><path fill="#fff" d="M0 60 Q80 20 160 56 T320 58 T480 50 T640 60 T800 50 T960 58 T1120 50 T1280 58 V76 Q1200 94 1120 72 T960 78 T800 70 T640 80 T480 70 T320 78 T160 74 T0 80Z"/></svg>
+</section>
+<section class="story"><img class="story-bg" src="reel/deep-step-thumb.webp" alt=""><figure><img src="reel/deep-step-thumb.webp" alt="Deep Step 썸네일"></figure><img class="story-photo" src="beach-wave-play-keyframe-wide.png" alt="바닷가에서 파도를 피해 달리는 아빠와 아이"><div class="story-note"><h2><span>첫 번째 사례.</span>가족과의 추억을<br>게임으로</h2><p>이번 주말 해변에 놀러가서<br>재미있었던 일이 있어?</p><p>파도피하기 놀이요.<br>아빠 혼자 바지가 다 젖어버렸어요</p><p>그 장면을 게임으로 만들어볼까?</p></div></section>
+<!-- 영상 릴로 바꾸기 전의 3쪽. 숨겨 두었고 슬라이드 쇼와 인쇄에 나오지 않는다. -->
+<section class="gallery" hidden><div><small>렛츠코딩 라운지</small><h2>학생들은 AI로<br>무엇을 만들까요?</h2><p>수학과 과학을 탐구하고,<br>영어 단어를 외우고,<br>자기 이야기를 게임으로 만듭니다.</p></div><figure><img src="../../public/landing/works-grid.jpg" alt="렛츠코딩 라운지에 모인 여러 작품의 썸네일"></figure></section>
+<section class="ocean quote"><video src="reel/deep-step-world-tour.mp4" aria-label="Deep Step 게임 플레이와 세계 여섯 해변의 날씨" muted loop playsinline preload="metadata"></video><div class="tour-caption"><span class="tour-country"></span><strong></strong><span class="tour-conditions"></span></div><div class="features"><h2>추가된 기능</h2><ol><li>실시간 데이터 연동</li><li>배경 구현</li></ol></div><div class="future-skills"><h2>미래역량</h2><ol><li>공감능력</li><li>기획능력</li></ol></div><svg viewBox="0 0 1280 200" preserveAspectRatio="none" aria-hidden="true"><path fill="#a9d9ef" d="M0 55 Q160 0 320 60 T640 70 T960 65 T1280 45 V200 H0Z"/><path fill="#498ab9" d="M0 106 Q160 175 320 103 T640 108 T960 112 T1280 109 V200 H0Z"/><path fill="#285c91" d="M0 155 Q160 105 320 153 T640 160 T960 150 T1280 156 V200 H0Z"/></svg></section>
+<section class="library" aria-label="도서관 책 순서 정돈 AI"><img class="story-photo" src="library-shelf-check.png" alt="학교 도서관에서 한 학생은 서서, 다른 학생은 쪼그려 앉아 맨 아래 칸의 책 순서를 살핀다"><div class="story-note"><h2>한 고등학생의<br>문제해결 경험 사례</h2><p>동아리에서 어떤 활동을 하니?</p><p>순서가 잘못된 책을 찾아 제자리에 넣는 일이요.</p><p>조금 더 빠르게 끝낼 수 있는 방법을 찾아볼까?</p></div></section>
+<section class="book-result"><div><small>도서관 책 순서 정돈 AI</small><h2><span>사용자 중심의 화면 설계와</span> <span><strong>AI 영상 인식</strong> 기술의 만남</span></h2></div><figure><video src="reel/book-order-web.mp4" poster="book_order_found.png" aria-label="책 순서 정돈 AI가 순서가 잘못된 책을 표시하는 시연" muted playsinline loop preload="metadata"></video><figcaption>321번 책은 320번 책 다음에 놓입니다.</figcaption></figure></section>
+<section class="blue reflection"><h2>기획력과 인문학적 사고</h2><p>기술을 배우는 것은 목적이 되어서는 안된다.</p></section>
+<section class="office-tools" aria-labelledby="office-title">
+  <h2 id="office-title">AI가 대신 버튼을 눌러주는 시대</h2>
+  <figure><img src="powerpoint.png" alt="PowerPoint 작업 화면"><figcaption><img src="chatgpt-icon.svg" alt="">PowerPoint × ChatGPT</figcaption></figure>
+  <figure><img src="excel.png" alt="Excel 작업 화면"><figcaption><img src="claude-icon.svg" alt="">Excel × Claude</figcaption></figure>
+</section>
+<section class="office-tools coding-demo" aria-labelledby="coding-title">
+  <h2 id="coding-title">AI가 대신 코딩해주는 시대</h2>
+  <figure><video src="reel/human-typing.mp4" aria-label="사람이 한 글자씩 코드를 입력하는 모습" muted loop playsinline preload="metadata"></video><figcaption>사람이 직접 입력하는 코드</figcaption></figure>
+  <figure><video src="reel/ai-code-diff.mp4" aria-label="AI가 코드를 생성하고 삭제와 추가를 표시하는 모습" muted loop playsinline preload="metadata"></video><figcaption>AI가 작성하고 수정하는 코드</figcaption></figure>
+</section>
+<section class="blue reflection"><h2>AI에게 대체되지 않을 능력</h2><p>아이들이 행복하고 재밌게 할 수 있는 활동들이<br>AI에게 대체되지 않을 능력들의 기초훈련 입니다.</p></section>
+<section class="reflection project-class" aria-labelledby="project-class-title">
+  <h2 id="project-class-title">프로젝트형 수업이 쉬워집니다.</h2>
+  <p><b>질문</b>인공지능이 다 해주는데, 코딩을 배워야 하나요?</p>
+  <p><b>대답</b>기술적 진입장벽이 거의 0에 가까워진 바로 지금.</p>
+  <p><b>결론</b>모든 과목, 모든 학생이 AI를 활용해 프로젝트를 진행해야 합니다.</p>
+</section>
+<section class="brochure-slide"><small>스튜디오와 라운지</small><h2>우리 학교 수업은 이렇게 이어집니다</h2><div class="case-grid flow-cards"><article><img src="../../public/landing/expo-cover-icons/coding.png" alt=""><h3>스튜디오에서 만들고</h3><p>학생은 AI와 아이디어를 구현하고, 교사는 제작 과정을 지도합니다.</p></article><article><img src="../../public/landing/expo-cover-icons/sharing.png" alt=""><h3>라운지에 공개하고</h3><p>작품을 등록하고 친구들이 써 볼 수 있도록 사용 방법을 소개합니다.</p></article><article><img src="../../public/landing/expo-cover-icons/feedback.png" alt=""><h3>함께 발전시킵니다</h3><p>서로의 의견을 듣고 고친 뒤, 개선한 과정을 돌아봅니다.</p></article></div></section>
+<section class="brochure-slide"><small>렛츠코딩 스튜디오</small><h2>내 생각을 작품으로</h2><div class="studio-detail"><img src="brochure/studio.webp" alt="구구단 게임 미리보기와 AI 도우미가 나란히 열린 스튜디오"><ul><li>웹브라우저에서 AI와 대화하며 바로 제작합니다.</li><li>API·데이터베이스·배경음악을 작품에 연결합니다.</li><li>교육용 AI는 코딩과 학습에 관한 질문을 다룹니다.</li></ul></div></section>
+<section class="brochure-slide blue"><small>렛츠코딩 라운지</small><h2>내 작품을 친구들에게</h2><div class="case-grid"><article><img src="brochure/lounge-work-0.webp" alt=""><h3>영어의 전설</h3><p>영어 단어를 익히는 RPG</p></article><article><img src="brochure/lounge-work-1.webp" alt=""><h3>베지에 라이더</h3><p>곡선으로 공을 옮기는 수학 게임</p></article><article><img src="brochure/lounge-work-2.webp" alt=""><h3>태안: 서해안의 기적</h3><p>기름 유출 사고를 다룬 이야기</p></article><article><img src="brochure/lounge-work-3.webp" alt=""><h3>엘리멘탈 스네이크</h3><p>원소를 따라가는 과학 게임</p></article></div><p class="case-foot">학생들은 작품을 체험하고, 모은 루캣으로 작품을 홍보하거나 친구의 작품에 모의투자합니다.</p></section>
+<section class="brochure-slide"><small>상호 피드백</small><h2>친구의 의견을 새 아이디어로</h2><div class="case-grid feedback-cards"><article><img src="brochure/type-storm.webp" alt=""><h3>TYPE STORM</h3><p>“통화가 동화로 보여요.”<br><strong>글자를 키워</strong> 두 단어를 구분하기 쉽게 고쳤습니다.</p></article><article><img src="brochure/monster-eggs.webp" alt=""><h3>몬스터 알 연구소</h3><p>“같은 몬스터는 ×2로 표시해 주세요.”<br><strong>같은 종류를 묶어</strong> 한눈에 세도록 바꿨습니다.</p></article></div></section>
+<section class="brochure-slide"><small>학교의 수업 전환</small><h2>학교 PC로 시작하는 프로젝트 수업</h2><div class="case-grid shift-cards"><article><h3>준비</h3><p>교구 구매 → <strong>학교 PC 활용</strong></p></article><article><h3>학습</h3><p>기초 실습 반복 → <strong>아이디어 구현</strong></p></article><article><h3>수업 방식</h3><p>외부 강사 중심 → <strong>학생 주도 프로젝트</strong></p></article></div><p class="case-foot">학생의 관심사에서 출발해 게임과 생활 도구를 만들고, 친구들에게 공개해 개선합니다.</p></section>
+<section class="brochure-slide blue"><small>활용 사례 · 교육청과 대학</small><h2>해커톤에서 만드는 과정까지 봅니다</h2><div class="case-grid flow-cards"><article><h3>아이디어와 첫 구현</h3><p>팀마다 해결할 문제를 정하고 웹브라우저에서 핵심 기능을 만듭니다.</p></article><article><h3>공개와 피드백</h3><p>라운지에 작품을 올리고 다른 팀의 댓글과 모의투자 반응을 살펴봅니다.</p></article><article><h3>시연과 최종 심사</h3><p>작품을 시연하며 어떤 의견을 반영했고 무엇이 달라졌는지 설명합니다.</p></article></div></section>
+<section class="brochure-slide"><small>활용 사례 · 학교</small><h2>학생은 탐구 도구를, 교사는 업무 도구를</h2><div class="case-grid school-cards"><article><img src="brochure/dice.webp" alt=""><h3>학생의 주사위 확률 실험</h3><p>던진 횟수가 늘어날 때 실험값이 이론 확률에 가까워지는지 확인합니다.</p></article><article><img src="brochure/attendance.webp" alt=""><h3>선생님의 우리 반 출석부</h3><p>반에 맞는 출석부를 만들고, 학생과 동료 교사에게 링크로 공유합니다.</p></article></div></section>
+<section class="brochure-slide"><small>활용 사례 · 학원</small><h2>학생의 관심사가 수업이 됩니다</h2><div class="case-grid"><article><img src="brochure/academy-work-0.webp" alt=""><h3>먼지를 없애라</h3><p>7세 · 한붓그리기 청소 게임</p></article><article><img src="brochure/academy-work-1.webp" alt=""><h3>독립자금을 전달하세요</h3><p>초등 3학년 · 독립운동 역사 게임</p></article><article><img src="brochure/academy-work-2.webp" alt=""><h3>당신만 읽을 수 있는 편지</h3><p>초등 5학년 · 암호화와 복호화</p></article><article><img src="brochure/academy-work-3.webp" alt=""><h3>저격! 발사!</h3><p>초등 6학년 · 워털루 전쟁 RPG</p></article></div><p class="case-foot">추천 과제로 수업을 시작하고, 학생이 만든 작품 링크로 학부모와 성장 과정을 나눕니다.</p></section>
+<section class="brochure-slide"><small>활용 사례 · 강사 에이전시와 출강 수업</small><h2>수업이 끝나도 작품은 남습니다</h2><div class="case-grid course-cards"><article><h3>그림 동화 제작</h3><p>초등 1~3학년 · 4차시</p></article><article><h3>AI 코딩 캠프</h3><p>초등 · 방학 3일</p></article><article><h3>게임 제작 방과후</h3><p>초등 4~6학년 · 12차시</p></article><article><h3>역사·과학 프로젝트</h3><p>초·중등 · 4차시</p></article><article><h3>앱 개발자 진로 체험</h3><p>중학생 · 4차시</p></article><article><h3>코딩 동아리</h3><p>중·고등 · 한 학기</p></article><article><h3>바이브코딩 강사 양성</h3><p>예비 강사·교사 · 8시간</p></article><article><h3>학부모 AI 코딩 체험</h3><p>학부모 · 2시간</p></article></div></section>
+<section class="blue reflection closing"><h2>가르치는 교사도, 그리고 배우는 학생도<br><strong>함께 행복할 수 있는 교육</strong>을 만들고 싶습니다.</h2>
+  <div class="closing-signoff"><p>렛츠코딩 라운지와 <span class="vibe-word">Vibe</span> 하세요.</p>
+    <div class="claudy-groove"><img src="claudy.png" alt="헤드셋을 쓰고 리듬을 타는 Claudy"><i class="claudy-headset" aria-hidden="true"></i><span class="claudy-bubble">Vibing ...</span></div>
+  </div>
+</section>
+</main>
+<script>
+/* 슬라이드 쇼. → Space PageDown 클릭: 다음 / ← PageUp: 이전 / Home End / F: 전체 화면. 주소 끝 #3처럼 쪽 번호가 남는다. */
+(() => {
+  const deck = document.querySelector(".deck");
+  const slides = [...deck.querySelectorAll(":scope > section:not([hidden])")];
+  const cover = deck.querySelector(".cover");
+  const video = cover.querySelector("video");
+  const make = (tag, cls) => Object.assign(document.createElement(tag), { className: cls });
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+
+  // 가속·감속 곡선. CSS와 같은 cubic-bezier를 직접 계산해 빛줄이 글자를 지나는 순간을 맞춘다.
+  const curve = (x1, y1, x2, y2) => {
+    const at = (a, b, t) => 3 * a * t * (1 - t) ** 2 + 3 * b * t * t * (1 - t) + t ** 3;
+    const fn = (x) => {
+      let lo = 0, hi = 1;
+      for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; at(x1, x2, mid) < x ? (lo = mid) : (hi = mid); }
+      return at(y1, y2, (lo + hi) / 2);
+    };
+    fn.css = `cubic-bezier(${x1},${y1},${x2},${y2})`;
+    return fn;
+  };
+  const SWEEP = curve(0.65, 0, 0.35, 1), GLIDE = curve(0.7, 0, 0.2, 1), SETTLE = "cubic-bezier(.2,.8,.2,1)";
+  const JAMO = "ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ";
+  const lead = (c) => { const n = c.charCodeAt(0) - 0xac00; return n < 0 || n > 11171 ? c : "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ"[Math.floor(n / 588)]; }; // 한글 첫소리
+
+  // 머리말·빛줄을 담는 층. 제목은 표지의 문구를 복제해 쓰고, 인쇄용 머리말도 각 장에 넣어 둔다.
+  const hud = make("div", "hud"), scan = make("i", "scan"), rail = make("i", "rail");
+  const brand = cover.querySelector(".cover-copy").cloneNode(true);
+  brand.classList.add("brand");
+  hud.append(brand, scan, rail);
+  deck.append(hud);
+  slides.slice(slides.indexOf(cover) + 1).forEach((s) => { const b = brand.cloneNode(true); b.className = "cover-copy page-brand"; s.append(b); });
+
+  const tone = (i) => (slides[i].matches(".blue,.reel,.story") ? "dark" : "light");
+  let cur = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+  let run = null;
+
+  const place = (i) => {
+    deck.dataset.at = i;
+    rail.style.setProperty("--p", i / (slides.length - 1));
+  };
+  const film = () => (slides[cur] === cover ? video.play().catch(() => {}) : video.pause()); // 표지 영상은 표지에서만 돈다
+
+  // 저절로 흘러가는 쪽(4쪽 영상 릴, 5쪽 사진)의 시간표. 들어올 때 통째로 예약하고, 나갈 때 한꺼번에 걷어 처음 상태로 돌린다.
+  const stage = (total, frame) => {
+    const s = { anims: [], cues: [] };
+    s.play = (node, frames, opts) => { const a = node.animate(frames, { fill: "both", ...opts }); s.anims.push(a); return a; };
+    s.cue = (at, fn) => s.cues.push({ at, fn });
+    s.seek = (ms) => s.anims.forEach((a) => (a.currentTime = ms));
+    s.stop = () => { s.off = true; s.anims.forEach((a) => a.cancel()); };
+    const clock = s.play(rail, [], { duration: total });
+    s.now = () => clock.currentTime || 0;
+    const tick = () => {
+      if (s.off) return;
+      const ms = s.now();
+      s.cues.forEach((c) => { if (!c.done && ms >= c.at) { c.done = true; c.fn(); } });
+      frame?.(ms);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    return s;
+  };
+  const scenes = new Map(); // 쪽 → { enter, leave, step? }
+
+  { // 3쪽 영상 릴: 2초마다 다른 방식으로 장면이 바뀌고 10초에 다음 쪽으로 넘어간다.
+    const reel = deck.querySelector(".reel"), shots = [...reel.querySelectorAll(".shot")], tally = shots[0], clips = shots.slice(1);
+    const count = tally.querySelector("b"), goal = +count.textContent, surf = reel.querySelector(".surf"), tiles = make("div", "tiles");
+    for (let k = 0; k < 144; k++) tiles.append(Object.assign(make("i", ""), { style: `background:${["#4ade80", "#34d399", "#86efac", "#facc15", "#1b2a4a"][Math.floor((Math.abs(Math.sin(k * 12.9898) * 43758.5453) % 1) * 5)]}` }));
+    reel.append(tiles);
+    const live = (shot, on) => shot.classList.toggle("live", on);
+    let s;
+    const leave = () => {
+      s?.stop();
+      shots.forEach((shot, i) => live(shot, !i));
+      clips.forEach((shot) => { const v = shot.querySelector("video"); v.pause(); v.currentTime = 0; });
+      count.textContent = goal;
+    };
+    const enter = () => {
+      leave();
+      const H = reel.clientHeight, foam = surf.getBoundingClientRect().height;
+      s = stage(10000, (ms) => (count.textContent = Math.round(goal * (1 - (1 - clamp((ms - 350) / 1150)) ** 3))));
+      // 0~2초: 작품 수가 올라간다
+      s.play(tally.querySelector("img"), { scale: [1.08, 1.24], translate: ["0 0", "-2cqw -1.5cqw"] }, { duration: 2400 });
+      s.play(tally.querySelector("p"), { opacity: [0, 1], translate: ["0 1.5cqw", "0 0"] }, { duration: 500, delay: 150, easing: SETTLE });
+      s.play(count.parentNode, { scale: [1, 1.14, 1] }, { duration: 320, delay: 1500, easing: "ease-out" });
+      clips.forEach((shot, i) => {
+        const at = 2000 + i * 2000, v = shot.querySelector("video");
+        s.cue(at - 260, () => { v.currentTime = 0; v.play().catch(() => {}); });
+        s.play(shot.querySelector("figcaption"), { opacity: [0, 1, 1], scale: [0.4, 1.1, 1], rotate: ["-10deg", "-1deg", "-3deg"] }, { duration: 420, delay: at + 180, easing: "ease-out" });
+      });
+      // 2초: 숫자 속으로 빨려 들어가며 첫 게임이 튀어나온다
+      s.cue(1800, () => live(clips[0], true));
+      s.play(tally, { scale: [1, 9], opacity: [1, 1, 0], offset: [0, 0.55, 1] }, { duration: 480, delay: 1800, easing: "cubic-bezier(.7,0,.9,.4)" });
+      s.play(clips[0], { opacity: [0, 1], scale: [1.35, 1] }, { duration: 520, delay: 1840, easing: SETTLE });
+      s.cue(2340, () => live(tally, false));
+      // 4초: 옆으로 휙 밀려 나가고 다음 게임이 튕기며 들어온다
+      s.cue(3780, () => live(clips[1], true));
+      s.play(clips[0], { translate: ["0 0", "-104% 0"], transform: ["skewX(0deg)", "skewX(-9deg)"], filter: ["blur(0)", "blur(.5cqw)"] }, { duration: 360, delay: 3800, easing: "cubic-bezier(.6,0,.9,.5)" });
+      s.play(clips[1], { translate: ["104% 0", "0 0"], transform: ["skewX(-9deg)", "skewX(0deg)"] }, { duration: 520, delay: 3820, easing: "cubic-bezier(.2,1.3,.35,1)" });
+      s.cue(4200, () => live(clips[0], false));
+      // 6초: 타일이 대각선으로 화면을 덮었다가 걷히면 다음 게임
+      [...tiles.children].forEach((cell, k) => s.play(cell, { scale: [0, 1, 1, 0], rotate: ["-25deg", "0deg", "0deg", "25deg"], offset: [0, 0.25, 0.72, 1] }, { duration: 600, delay: 5680 + ((k % 16) + (k >> 4)) * 11 }));
+      s.cue(6090, () => { live(clips[1], false); live(clips[2], true); });
+      // 8초: 파도가 아래에서 밀려 올라오며 바닷가 게임을 드러낸다
+      const tide = { duration: 700, delay: 7750, easing: "cubic-bezier(.45,0,.25,1)" };
+      s.cue(7740, () => live(clips[3], true));
+      s.play(clips[3], { clipPath: [`inset(${H + foam * 0.31}px 0 0 0)`, `inset(${-foam * 0.69}px 0 0 0)`] }, tide);
+      s.play(surf, { translate: [`0 ${H}px`, `0 ${-foam}px`] }, tide);
+      s.cue(8470, () => live(clips[2], false));
+      // 10초: 다음 쪽으로
+      s.cue(10000, () => slides[cur] === reel && go(cur + 1));
+    };
+    scenes.set(reel, { enter, leave });
+  }
+
+  const playBubbles = (s, note, delay) => {
+    note.querySelectorAll("p").forEach((bubble, i) => s.play(bubble, [
+      { opacity: 0, transform: "translateY(1cqw) scale(.82)" },
+      { opacity: 1, transform: "translateY(-.2cqw) scale(1.04)", offset: .6 },
+      { opacity: 1, transform: "none" }
+    ], { duration: 500, delay: delay + i * 1850, easing: "ease-out" }));
+  };
+
+  { // 5쪽: 썸네일 카드가 튀어나오고, 잠시 뒤 카드 자리에서 바닷가 사진이 펼쳐진 다음 어두운 막과 말풍선 세 개이 뜬다. 그 전에 '다음'을 누르면 사진으로 바로 간다.
+    const story = deck.querySelector(".story"), card = story.querySelector("figure"), photo = story.querySelector(".story-photo"), note = story.querySelector(".story-note"), OPEN = 3200;
+    let s;
+    const leave = () => s?.stop();
+    const enter = () => {
+      leave();
+      const hole = `inset(${card.offsetTop}px ${story.clientWidth - card.offsetLeft - card.offsetWidth}px ${story.clientHeight - card.offsetTop - card.offsetHeight}px ${card.offsetLeft}px round 1.8cqw)`;
+      s = stage(OPEN + 5400);
+      s.play(card, { opacity: [0, 1, 1], scale: [0.5, 1.07, 1], rotate: ["-9deg", "1deg", "-2deg"] }, { duration: 620, delay: 380, easing: "ease-out" });
+      s.play(photo, { opacity: [0, 1] }, { duration: 160, delay: OPEN });
+      s.play(photo, { clipPath: [hole, "inset(0px 0px 0px 0px round 0cqw)"] }, { duration: 950, delay: OPEN, easing: GLIDE.css });
+      s.play(note, { opacity: [0, 1] }, { duration: 600, delay: OPEN + 750, easing: "ease-out" });
+      playBubbles(s, note, OPEN + 1150);
+    };
+    scenes.set(story, { enter, leave, step: () => s && !s.off && s.now() < OPEN && (s.seek(OPEN), true) });
+  }
+
+  const library = deck.querySelector(".library");
+  let libraryStage;
+  scenes.set(library, {
+    enter: () => {
+      libraryStage = stage(5200);
+      libraryStage.play(library.querySelector(".story-photo"), { scale: [1.06, 1], filter: ["brightness(1)", "brightness(.78)"] }, { duration: 1050, easing: "ease-out" });
+      libraryStage.play(library.querySelector(".story-note"), { opacity: [0, 1] }, { duration: 620, delay: 240, easing: "ease-out" });
+      playBubbles(libraryStage, library.querySelector(".story-note"), 900);
+    },
+    leave: () => libraryStage.stop()
+  });
+
+  const tour = deck.querySelector(".quote video");
+  for (const slide of deck.querySelectorAll(".book-result,.coding-demo")) {
+    const videos = slide.querySelectorAll("video");
+    scenes.set(slide, {
+      enter: () => videos.forEach(v => { v.currentTime = 0; v.play().catch(() => {}); }),
+      leave: () => videos.forEach(v => v.pause())
+    });
+  }
+
+  const tourSlide = tour.parentElement;
+  // 각 해변의 메뉴가 열리는 시각과 도착 시각은 편집된 영상 기준(초).
+  const beaches = [
+    [0, 0, "대한민국", "해운대해수욕장", "21:38", "맑음", "4.4°C"],
+    [5.5, 8.3, "미국", "와이키키 비치", "02:38", "구름", "24.2°C"],
+    [12.5, 15.2, "브라질", "코파카바나 비치", "09:38", "구름", "29.7°C"],
+    [19.4, 22.3, "포르투갈", "나자레 비치", "12:39", "비", "19.0°C"],
+    [26.6, 29.4, "남아프리카공화국", "캠프스 베이", "14:39", "맑음", "20.7°C"],
+    [33.7, 36.5, "호주", "본다이 비치", "23:39", "맑음", "23.2°C"]
+  ];
+  const caption = tourSlide.querySelector(".tour-caption");
+  const [country, beach, conditions] = caption.children;
+  const syncCaption = () => {
+    const time = tour.currentTime;
+    const [, arrival, nation, name, localTime, weather, temp] = beaches.findLast(([start]) => time >= start);
+    const selecting = time < arrival;
+    const label = selecting ? "이동할 해변 · " + nation : nation;
+    if (country.textContent === label && beach.textContent === name) return;
+    country.textContent = label;
+    beach.textContent = name;
+    conditions.textContent = selecting ? "" : `현지 ${localTime} · ${weather} · ${temp}`;
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      caption.animate({ opacity: [.55, 1], translate: ["0 .45cqw", "0 0"] }, { duration: 360, easing: "ease-out" });
+    }
+  };
+  tour.addEventListener("timeupdate", syncCaption);
+  tour.addEventListener("seeked", syncCaption);
+  scenes.set(tourSlide, {
+    enter: () => {
+      tourSlide.classList.remove("skills-shown");
+      tour.currentTime = 0;
+      syncCaption();
+      tour.play().catch(() => {});
+    },
+    step: () => {
+      if (tourSlide.classList.contains("skills-shown")) return false;
+      tourSlide.classList.add("skills-shown");
+      return true;
+    },
+    leave: () => tour.pause()
+  });
+
+  slides[cur].classList.add("on");
+  deck.dataset.tone = tone(cur);
+  brand.classList.toggle("mini", slides[cur] !== cover);
+  brand.classList.toggle("docked", slides[cur] !== cover);
+  place(cur);
+  film();
+  document.documentElement.classList.add("show");
+  scenes.get(slides[cur])?.enter();
+
+  // 진행 중인 전환을 끝 상태로 마무리한다(전환 도중에 다시 넘길 때도 쓴다).
+  const settle = () => {
+    const t = run;
+    if (!t) return;
+    run = null;
+    t.anims.forEach((a) => a.playState === "idle" || a.finish());
+    t.cues.forEach((c) => c.done || c.fn());
+    t.tidy.forEach((fn) => fn());
+  };
+
+  // 글자 바꾸기: 남는 글자가 먼저 사라지고, 왼쪽부터 한 글자씩 자음이 흔들리다가 새 글자의 첫소리를 거쳐 자리 잡는다.
+  const scramble = (w, ms) => {
+    const q = (ms - w.start) / w.len, a = [...w.from], b = [...w.to], n = Math.max(a.length, b.length), beat = Math.floor(ms / 70);
+    let html = "";
+    for (let k = 0; k < n; k++) {
+      const s = (k / b.length) * 0.6, e = s + 0.36;
+      if (k >= b.length) html += q < 0.06 + (n - 1 - k) * 0.07 ? `<b class="a">${a[k]}</b>` : "";
+      else if (q < s) html += a[k] ? `<b class="a">${a[k]}</b>` : "";
+      else if (q >= e || b[k] === " ") html += `<b>${b[k]}</b>`;
+      else html += `<b class="x">${q < s + (e - s) * 0.55 ? JAMO[(k * 5 + beat * 3 + a.length) % JAMO.length] : lead(b[k])}</b>`;
+    }
+    if (html !== w.html) w.node.innerHTML = w.html = html;
+  };
+
+  const go = (to) => {
+    to = Math.max(0, Math.min(slides.length - 1, to));
+    settle();
+    if (to === cur) return;
+    const from = cur, up = to > from, out = slides[from], inc = slides[to], hero = out === cover && inc.querySelector(".skills");
+    const t = (run = { anims: [], cues: [], tidy: [], words: [] });
+    const play = (node, frames, opts) => { const a = node.animate(frames, { fill: "backwards", ...opts }); t.anims.push(a); return a; };
+    const cue = (at, fn) => t.cues.push({ at, fn });
+    const box = deck.getBoundingClientRect(), H = box.height;
+    const rect = (node) => { const r = node.getBoundingClientRect(); return { x: r.left - box.left, y: r.top - box.top, w: r.width, h: r.height }; };
+
+    // 바뀌기 전 자리 기록
+    const titles = [brand.querySelector("p"), brand.querySelector("h1")], before = titles.map(rect);
+    const keys = hero ? [...brand.querySelectorAll("li")].map((li) => { const img = li.querySelector("img"), span = li.querySelector("span"); return { img, text: span.textContent, i: rect(img), s: rect(span), font: getComputedStyle(span).font }; }) : [];
+
+    cur = to;
+    inc.classList.add("on");
+    inc.style.zIndex = 2;
+    place(to);
+    history.replaceState(null, "", "#" + (to + 1));
+    if (inc === cover) film();
+    scenes.get(inc)?.enter();
+    t.tidy.push(() => { out.classList.remove("on"); inc.style.zIndex = ""; film(); scenes.get(out)?.leave(); });
+
+    // 빛줄이 훑으며 다음 장을 드러낸다. 다음으로 갈 때는 아래에서 위로, 이전으로 갈 때는 위에서 아래로.
+    const sweep = { delay: hero ? 180 : 0, dur: hero ? 1300 : 760 };
+    const lineAt = (ms) => { const p = SWEEP(clamp((ms - sweep.delay) / sweep.dur)); return up ? H * (1 - p) : H * p; };
+    const passes = (yAt) => { // 빛줄이 yAt(ms) 높이를 지나는 시각
+      for (let ms = sweep.delay; ms < sweep.delay + sweep.dur; ms += 8) if (up ? lineAt(ms) <= yAt(ms) : lineAt(ms) >= yAt(ms)) return ms;
+      return sweep.delay + sweep.dur;
+    };
+    const timing = { duration: sweep.dur, delay: sweep.delay, easing: SWEEP.css };
+    play(inc, { clipPath: [up ? "inset(100% 0 0 0)" : "inset(0 0 100% 0)", "inset(0 0 0 0)"] }, timing);
+    scan.style.scale = up ? "1 1" : "1 -1";
+    play(scan, { translate: up ? [`0 ${H}px`, "0 0"] : ["0 0", `0 ${H}px`] }, timing);
+    play(scan, { opacity: [0, 1, 1, 0], offset: [0, 0.1, 0.9, 1] }, { duration: sweep.dur + 200, delay: sweep.delay - (hero ? 100 : 0) });
+
+    // 제목: 표지와 머리말 사이를 오갈 때 크기와 자리를 이어서 옮긴다. 글자가 흐려지지 않게 큰 배치인 채로 줄이고, 다 줄어든 뒤 작은 배치로 바꾼다.
+    let edge = () => (up ? before[1].y + before[1].h : before[0].y); // 빛줄이 제목에 처음 닿는 쪽(올라올 때는 아랫변, 내려올 때는 윗변)
+    if (out.matches(".intro") || inc.matches(".intro")) {
+      const morph = inc === cover || out === cover;
+      brand.classList.toggle("mini", !morph && inc !== cover);
+      brand.classList.toggle("docked", !morph && inc !== cover);
+      if (morph) {
+        const introTitle = deck.querySelector("#intro-title");
+        const introBox = rect(introTitle), coverBox = rect(titles[1]);
+        const scale = parseFloat(getComputedStyle(introTitle).fontSize) / parseFloat(getComputedStyle(titles[1]).fontSize);
+        const atIntro = `translate(${introBox.x - coverBox.x}px,${introBox.y - coverBox.y}px) scale(${scale})`;
+        deck.classList.add("title-morph");
+        const move = play(titles[1], {
+          transform: up ? [atIntro, "none"] : ["none", atIntro],
+          color: up ? ["#182e51", "#253154"] : ["#253154", "#182e51"]
+        }, { duration: sweep.dur, easing: GLIDE.css, fill: "both" });
+        t.tidy.push(() => { move.cancel(); deck.classList.remove("title-morph"); });
+      }
+    } else if (out === cover || inc === cover) {
+      const leavingCover = out === cover;
+      const mini = (on) => brand.classList.toggle("mini", on);
+      mini(true);
+      const small = titles.map(rect);
+      mini(false);
+      const big = titles.map(rect), glide = { duration: hero ? 1300 : 900, delay: hero ? 220 : 40, easing: GLIDE.css, fill: leavingCover ? "both" : "backwards" };
+      const moves = titles.map((node, i) => {
+        const a = big[i], b = small[i], shrink = `translate(${b.x - a.x}px,${b.y - a.y}px) scale(${b.h / a.h})`;
+        return play(node, { transform: leavingCover ? ["none", shrink] : [shrink, "none"] }, glide);
+      });
+      edge = (ms) => {
+        const p = GLIDE(clamp((ms - glide.delay) / glide.duration)), i = up ? 1 : 0, a = (leavingCover ? big : small)[i], b = (leavingCover ? small : big)[i];
+        return a.y + (b.y - a.y) * p + (up ? a.h + (b.h - a.h) * p : 0);
+      };
+      if (leavingCover) {
+        cue(glide.delay + glide.duration + 16, () => { mini(true); moves.forEach((m) => m.cancel()); brand.classList.add("docked"); });
+        if (!hero) play(brand.querySelector("ul"), { opacity: [1, 0], visibility: ["visible", "visible"] }, { duration: 260 });
+      }
+      else {
+        brand.classList.remove("docked");
+        play(brand.querySelector("ul"), { opacity: [0, 1], translate: ["0 .6cqw", "0 0"] }, { duration: 600, delay: 620, easing: SETTLE });
+      }
+    }
+    if (tone(to) !== deck.dataset.tone) cue(passes(edge), () => (deck.dataset.tone = tone(to)));
+
+    // 다음 장의 내용은 빛줄이 지나간 뒤에 떠오른다. 표지에서 넘어올 때는 키워드가 지나갈 길(카드 위쪽)을 잠깐 더 비워 둔다.
+    const lane = hero ? rect(inc.querySelector(".skills")).y : 0;
+    if (inc !== cover && !inc.matches(".reflection") && !scenes.has(inc)) [...inc.children].forEach((node) => {
+      if (node.matches("svg,.page-brand,#intro-title") || (hero && node.matches(".skills"))) return;
+      const r = rect(node);
+      play(node, { opacity: [0, 1], translate: [`0 ${up ? 1.1 : -1.1}cqw`, "0 0"] }, { duration: 640, delay: passes(() => r.y + r.h / 2) + (r.y < lane ? 260 : 40), easing: SETTLE });
+    });
+
+    // 표지 → 2쪽: 키워드가 제자리를 떠나 역량 카드로 날아가며 글자가 바뀐다. 짝이 없는 키워드는 제자리에서 사라진다.
+    if (hero) {
+      let order = 0;
+      keys.forEach((k) => {
+        const li = inc.querySelector(`.skills li[data-from="${k.text}"]`);
+        const icon = k.img.cloneNode(), word = make("span", "word");
+        icon.className = "fly";
+        Object.assign(icon.style, { left: k.i.x + "px", top: k.i.y + "px", width: k.i.w + "px", height: k.i.h + "px", objectFit: "fill" });
+        hud.append(icon, word);
+        t.tidy.push(() => { icon.remove(); word.remove(); });
+        if (!li) {
+          Object.assign(word.style, { left: k.s.x + "px", top: k.s.y + "px", font: k.font });
+          word.innerHTML = [...k.text].map((c) => `<b class="a">${c}</b>`).join("");
+          [icon, word].forEach((node) => play(node, { opacity: [1, 0], translate: ["0 0", "0 .5cqw"], filter: ["blur(0)", "blur(.3cqw)"] }, { duration: 420, fill: "both", easing: "ease-in" }));
+          return;
+        }
+        const mark = rect(li.querySelector("i")), span = li.querySelector("span"), text = rect(span), style = getComputedStyle(span);
+        const scale = k.s.h / text.h, fly = { duration: 1100, delay: 260 + order++ * 80, easing: GLIDE.css };
+        Object.assign(word.style, { left: text.x + "px", top: text.y + "px", font: style.font, letterSpacing: style.letterSpacing });
+        play(word, { transform: [`translate(${k.s.x - text.x}px,${k.s.y - text.y}px) scale(${scale})`, "none"] }, fly);
+        play(icon, [
+          { transform: "none", opacity: 1 }, { opacity: 1, offset: 0.4 }, { opacity: 0, offset: 0.78 },
+          { transform: `translate(${mark.x + mark.w / 2 - k.i.x - k.i.w / 2}px,${mark.y + mark.h / 2 - k.i.y - k.i.h / 2}px) scale(${1 / scale})`, opacity: 0 },
+        ], { ...fly, fill: "both" });
+        t.words.push({ node: word, from: k.text, to: span.textContent, start: fly.delay + 520, len: 700 });
+        li.classList.add("pre", "typing");
+        cue(passes((ms) => { const p = GLIDE(clamp((ms - fly.delay) / fly.duration)); return k.s.y + (text.y - k.s.y) * p + k.s.h + (text.h - k.s.h) * p; }), () => { word.classList.add("lit"); icon.classList.add("lit"); });
+        cue(fly.delay + fly.duration - 320, () => li.classList.remove("pre"));
+        cue(fly.delay + fly.duration + 120, () => word.classList.add("calm"));
+        t.tidy.push(() => li.classList.remove("pre", "typing"));
+      });
+    }
+
+    // 전환 전체의 시계. 글자 바꾸기와 예약한 일(cue)은 이 시계의 시각을 보고 움직인다.
+    const total = Math.max(...t.anims.map((a) => a.effect.getComputedTiming().endTime), ...t.cues.map((c) => c.at), ...t.words.map((w) => w.start + w.len)) + (hero ? 420 : 60);
+    const clock = play(rail, [], { duration: total });
+    const tick = () => {
+      if (run !== t) return;
+      const ms = clock.currentTime || 0;
+      t.cues.forEach((c) => { if (!c.done && ms >= c.at) { c.done = true; c.fn(); } });
+      t.words.forEach((w) => scramble(w, ms));
+      requestAnimationFrame(tick);
+    };
+    tick();
+    clock.finished.then(() => run === t && settle());
+  };
+
+  const next = () => scenes.get(slides[cur])?.step?.() || go(cur + 1); // 쪽 안에 남은 연출이 있으면 그것부터 넘긴다
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"].includes(e.key)) next();
+    else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) go(cur - 1);
+    else if (e.key === "Home") go(0);
+    else if (e.key === "End") go(slides.length - 1);
+    else if (e.key === "f" || e.key === "F") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+    else return;
+    e.preventDefault();
+  });
+  // 클릭: 왼쪽 가장자리는 이전, 나머지는 다음
+  deck.addEventListener("click", (e) => { const b = deck.getBoundingClientRect(); e.clientX < b.left + b.width * 0.12 ? go(cur - 1) : next(); });
+  addEventListener("hashchange", () => go((parseInt(location.hash.slice(1), 10) || 1) - 1));
+})();
+</script>
+</html>
