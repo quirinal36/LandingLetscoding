@@ -16,6 +16,6 @@ for (const reference of new Set(references)) {
   const target = path.join(destination, filename);
   await mkdir(path.dirname(target), { recursive: true });
   await copyFile(path.join(source, reference), target);
-  published = published.replaceAll(`"${reference}"`, `"${filename}"`);
+  published = published.replaceAll(`"${reference}"`, `"/expo-talk/${filename}"`);
 }
 await writeFile(path.join(destination, "index.html"), published);
