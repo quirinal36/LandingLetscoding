@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>박람회 발표 대본 카드</title>
+<meta name="description" content="A4 세로, 가로형 카드 2장씩, 슬라이드 1–22">
+<!--
+  발표 대본 카드 원본. PDF는 output/pdf/박람회_발표_대본_카드_A4.pdf.
+  2026-11-23 리허설 녹화(expo-talk.mp4, 16분 44초)에서 실제로 한 말을 바탕으로 다듬었다.
+  고친 곳: 영화 이야기는 5쪽에서 짧게, 8쪽은 새 영상(사람이 치다 오류 / AI에게 말로 요청)에 맞춤,
+  13쪽 '가상화폐'→루캣 포인트와 댓글 사례, 15쪽 정액제·대화 기록, 18쪽 첫 문장, 20쪽 학원 대목, 22쪽 부스 안내.
+  글을 고치려면 아래 CARDS만 바꾼다. 목표 시각은 말 속도(분당 RATE 음절)로 자동 계산한다.
+  부스 번호는 BOOTH 한 곳만 바꾼다.
+-->
+<style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html{background:#e9edf3}
+body{margin:0;font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#18233a;word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;margin:0 auto;background:#fff;display:grid;grid-template-rows:1fr 1fr;break-after:page;position:relative}
+.page:last-child{break-after:auto}
+.page::after{content:"";position:absolute;left:6mm;right:6mm;top:148.5mm;border-top:.3mm dashed #b9c3d1}
+.card{position:relative;overflow:hidden;padding:8mm 11mm 7mm}
+.card.over{outline:1.2mm solid #e5484d;outline-offset:-1.2mm}
+.head{display:flex;align-items:baseline;gap:4mm;padding-bottom:2.4mm;border-bottom:.5mm solid #20478f;margin-bottom:3.2mm}
+.head h2{margin:0;font-size:16.5pt;letter-spacing:-.03em}
+.head .no{margin-left:auto;font-size:9.5pt;font-weight:700;color:#5b6b82;white-space:nowrap}
+.slide{display:grid;grid-template-columns:21mm 1fr;gap:3.5mm;margin-bottom:3.4mm}
+.meta{padding-top:.6mm;text-align:left}
+.meta b{display:block;font-size:19pt;line-height:1;color:#20478f;letter-spacing:-.02em}
+.meta span{display:block;margin-top:1.4mm;font-size:8.6pt;font-weight:700;line-height:1.3;color:#4a5a72}
+.meta time{display:inline-block;margin-top:1.6mm;padding:.5mm 1.6mm;border-radius:1.2mm;background:#eef3fb;font-size:8.4pt;font-weight:700;color:#20478f;font-variant-numeric:tabular-nums}
+.say p{margin:0 0 2mm;font-size:14.6pt;line-height:1.56;letter-spacing:-.012em}
+.say p.cue{margin:1.4mm 0 1.6mm;font-size:9.4pt;font-weight:700;color:#b3261e}
+.say p.note{font-size:9.2pt;line-height:1.45;color:#66758c}
+.say em{font-style:normal;font-weight:700;color:#20478f}
+.foot{position:absolute;left:11mm;right:11mm;bottom:5mm;font-size:8.4pt;color:#7a879a;display:flex;justify-content:space-between}
+@media screen{.page{margin:8mm auto;box-shadow:0 2mm 6mm #0002}}
+</style>
+<body>
+<main id="cards"></main>
+<script>
+const BOOTH = "E-08"; // 부스 번호. 바꾸면 덱 22쪽(index.html의 data-booth)도 같이 바꾼다.
+const RATE = 245;    // 11/23 리허설에서 잰 말 속도(쉼 포함, 분당 음절)
+const LIMIT = "15:00";
+const TARGET = 14 * 60; // 리허설처럼 말을 덧붙이는 것까지 보고, 쪽마다 시각을 14분 끝에 맞춘다(1분 여유)
+
+/* 카드마다 제목과 쪽들. 쪽마다 [쪽 번호, 넘기는 방법, 문단들, 최소 머무는 초].
+   문단이 "!"로 시작하면 진행 표시(빨강), "※"로 시작하면 메모(회색, 시간 계산에서 뺌). */
+const CARDS = [
+  ["인사와 문제 제기", [
+    [1, "발표 시작", [
+      "안녕하세요. 주식회사 렛츠코딩 대표 이형구입니다. 오늘 <em>렛츠코딩 라운지</em>를 소개해 드리려고 이 자리에 섰습니다. 제품을 보여 드리기 전에, 제가 AI 시대의 수업을 어떻게 하고 있는지 학생 사례로 먼저 말씀드리겠습니다.",
+      "인공지능이 정말 빠르게 발전하고 있습니다. 선생님이시면서 학부모이기도 한 여러분은 기대도 되고 걱정도 되실 겁니다. 내 아이에게 어떤 교육을 해야 할지, 어떤 능력을 길러 줘야 할지요. 두 아이의 아빠인 저도 같은 고민을 합니다. 그래서 여러 책과 연구 자료를 찾아봤습니다."
+    ]]
+  ]],
+  ["미래 역량과 라운지의 작품들", [
+    [2, "넘김", [
+      "세계경제포럼과 OECD, 2022 개정 교육과정이 미래 세대에게 필요하다고 꼽은 역량들입니다. 그중에서도 <em>문제 해결력, AI 활용, 기획력, 공감능력</em>이 자주 나옵니다. AI에게 대체되지 않는 인재의 역량이라고 많이 들으셨을 겁니다.",
+      "그런데 이런 역량이 실제로 어떤 수업에서 길러질까요? 저는 AI와 바이브코딩으로 학생들과 프로젝트를 만들면서, 아이들이 즐거워하고 문제 해결력과 기획력이 자라는 것을 직접 봤습니다. 그 수업을 보여 드리겠습니다."
+    ]],
+    [3, "넘김 · 10초 뒤 자동으로 4쪽", [
+      "렛츠코딩 라운지에는 지금 300개 가까운 작품이 있습니다. 수학·영어·과학 학습 작품도, 자기 이야기를 담은 게임도 있습니다.",
+      "※ 말이 끝나기 전에 4쪽으로 넘어가도 그대로 이어 말합니다."
+    ], 10]
+  ]],
+  ["첫 번째 사례 · 파도 피하기 게임", [
+    [4, "자동 전환", [
+      "저는 수업을 시작하기 전에, 모니터와 키보드 앞에 앉기 전에 학생과 먼저 인터뷰를 합니다.",
+      "“이번 주말에 바다 가서 뭐가 제일 재미있었어?”",
+      "학생의 이야기를 먼저 듣는 겁니다. 파도 피하기 놀이가 재미있었다고 하면, 그 놀이의 규칙을 게임으로 옮겨 보자고 제안합니다."
+    ]],
+    [5, "넘김", [
+      "그렇게 만든 게임입니다. 파도를 피해 최대한 멀리 가는 게임이죠. 그런데 게임만 하면 금방 지루하고 배움도 적습니다. 그래서 하나를 더 제안했습니다. 세계 여러 해변의 풍경과, 지금 그곳의 날씨·기온·파도 높이를 받아와서 게임에 넣어 보자고요.",
+      "! 클릭 → 미래역량 표시",
+      "자기 추억에서 시작한 게임이, 많은 사람에게 저마다의 바다를 떠올리게 하는 게임이 됩니다. 다른 사람이 무엇을 느낄지 헤아리는 것이 <em>공감능력</em>, 그 사람을 위해 무엇을 넣을지 정하는 것이 <em>기획력</em>입니다."
+    ]]
+  ]],
+  ["공감능력 한마디 · 두 번째 사례", [
+    [5, "5쪽에서 계속", [
+      "역사서 한 줄에서 시작한 영화 「왕과 사는 남자」에 천육백만 명이 넘는 관객이 함께 웃고 울었습니다. 이야기가 사람의 마음에 닿게 하는 힘, 저는 그것을 공감능력이라고 말씀드리고 싶습니다.",
+      "※ 영화 이야기는 5쪽에서 마치고 넘깁니다. 제목과 관객 수는 무대 전에 확인."
+    ]],
+    [6, "넘김", [
+      "두 번째는 고등학생의 사례입니다. 이 학생은 학교 도서관 동아리에서 활동합니다. 친구들이 책을 꺼내 읽고 엉뚱한 자리에 꽂아 두면, 동아리 학생들이 눈으로 하나하나 찾아서 제자리에 돌려놓는다고 합니다. 시간이 많이 걸리는 일이죠. 그래서 이 문제를 함께 풀어 보자고 제안했습니다."
+    ]],
+    [7, "넘김", [
+      "카메라로 책장 한 줄을 비추면, 순서가 잘못된 책에 빨간 네모가 뜹니다. 기술은 꼭 필요한 만큼만 쓰고, 일은 훨씬 빨라지는 프로그램입니다."
+    ]]
+  ]],
+  ["바이브코딩이란", [
+    [8, "넘김", [
+      "방금 보신 두 작품은 학생들이 직접 만든 프로그램입니다. 하지만 <em>왼쪽 화면</em>처럼 키보드를 타닥타닥 치면서 변수와 조건문, 반복문을 한 줄씩 입력해 만들지 않았습니다. 이렇게 괄호 하나만 빠져도 오류가 나는 방식이 그동안 코딩을 어렵게 만들었습니다.",
+      "대신 <em>오른쪽 화면</em>처럼, 넣고 싶은 기능을 AI에게 말로 설명합니다. 파도가 오면 소리가 나게 해 달라고 하면 AI가 코드를 넣고, 바다 색을 바꿔 달라고 하면 그 부분을 찾아 고칩니다. 이것을 <em>바이브코딩</em>이라고 합니다."
+    ]]
+  ]],
+  ["누구나 만드는 시대", [
+    [9, "넘김", [
+      "바이브코딩이 등장하면서, 무언가를 만들 때의 진입 장벽이 크게 낮아졌습니다. 그래서 저는 학생들이 모든 과목, 모든 활동에서 바이브코딩으로 공부하고 탐구하고 즐길 수 있다고 생각합니다. 선생님은 업무에 쓸 도구를, 부모님은 가족과 쓸 프로그램을 직접 만들 수 있습니다.",
+      "예전에는 백 명 중 <em>한 명</em>만 코드를 이해하고 만들 수 있었다면, 이제는 나머지 <em>아흔아홉 명</em>도 자기 이야기와 개성이 담긴 작품을 만들 수 있습니다."
+    ]],
+    [10, "넘김", [
+      "렛츠코딩 라운지에서 바이브코딩을 실제로 어떻게 하는지 화면으로 보여 드리겠습니다."
+    ], 5]
+  ]],
+  ["스튜디오와 라운지", [
+    [11, "넘김", [
+      "렛츠코딩 라운지는 크게 두 공간으로 나뉩니다. 첫 번째는 만드는 공간, <em>스튜디오</em>입니다. 3번처럼 AI와 대화하며 원하는 것을 말하면, 가운데처럼 구구단 게임이 만들어지고 script.js 같은 코드 파일이 생깁니다. 학생은 코드를 볼 일이 거의 없고, 화면을 보며 기능과 디자인을 고쳐 나갑니다. 유튜브로 치면 영상을 편집하는 스튜디오입니다."
+    ]],
+    [12, "넘김", [
+      "두 번째는 유튜브의 재생 목록 같은 <em>라운지</em>입니다. 스튜디오에서 두세 번만 누르면 작품이 라운지에 올라가고 링크가 생깁니다. 이 링크를 나누면 누구나 설치 없이 바로 플레이할 수 있습니다."
+    ]]
+  ]],
+  ["피드백과 모의투자", [
+    [13, "넘김", [
+      "올라온 작품에는 좋아요와 댓글이 달립니다. 타자 게임에 친구가 “통화가 동화로 보여요”라고 댓글을 달자, 만든 학생이 글자를 키워서 고쳤습니다.",
+      "라운지 안에서만 쓰는 포인트, <em>루캣</em>도 있습니다. 작품 조회와 참여로 모으고, 응원하는 친구 작품에 모의투자하거나 내 작품을 홍보하는 데 씁니다. 만드는 데서 끝나지 않고, 알리고, 반응을 듣고, 다시 고치는 경험을 하는 겁니다."
+    ]],
+    [14, "넘김 → 말하기", [
+      "이렇게 렛츠코딩 라운지에는 AI와 작품을 만들고, 공개하고, 서로 피드백하며 고쳐 가는 과정이 모두 준비되어 있습니다.",
+      "※ 화면을 먼저 넘기고 이 문장을 말합니다."
+    ], 6]
+  ]],
+  ["왜 렛츠코딩 라운지인가", [
+    [15, "넘김", [
+      "실제로 수업에 쓰실 분들이 느끼실 강점을 세 가지로 말씀드리겠습니다.",
+      "첫째, <em>외부 AI를 따로 구독할 필요가 없습니다.</em> 렛츠코딩 라운지는 학생당 월 정액 요금이고, 그 안에 수업에 쓸 AI 사용료가 들어 있습니다.",
+      "둘째, 앞에서 보신 것처럼 몇 번의 클릭으로 작품을 공유합니다. 배포 서비스를 따로 배울 필요가 없습니다.",
+      "셋째, <em>수업용 AI</em>입니다. 작품과 상관없는 질문이나 윤리적으로 맞지 않는 요청은 AI가 걸러 냅니다. 선생님은 학생 한 명 한 명이 AI와 나눈 대화와 작품이 바뀌어 온 과정을 열어 보고 지도하실 수 있습니다."
+    ]]
+  ]],
+  ["학교 PC로 시작 · 교육청과 대학", [
+    [16, "넘김", [
+      "준비하실 것은 거의 없습니다. 새 교구나 로봇을 살 필요 없이, 학교 컴퓨터실이나 노트북만 있으면 됩니다. 선생님이 조금만 익히시면 과목마다 탐구 활동을 하거나, 반에서 쓸 프로그램을 학생들과 함께 만들어 쓸 수 있습니다."
+    ]],
+    [17, "넘김", ["현장별로 어떻게 쓰는지 보시겠습니다."], 3],
+    [18, "넘김", [
+      "교육청과 대학입니다. 최근 초소형 기기를 이용한 부정행위가 크게 문제가 됐습니다. AI 시대에는 결과물만 보고 누가 무엇을 했는지 알기 어렵습니다. 라운지에는 학생이 AI와 나눈 대화와 작품이 바뀐 과정이 남기 때문에, <em>과정을 평가하는</em> 수업과 대회를 공정하게 운영할 수 있습니다."
+    ]]
+  ]],
+  ["학교와 학원", [
+    [19, "넘김", [
+      "학교에서는 학생이 주사위를 만 번 던지는 확률 실험 같은 탐구 도구를 만들고, 선생님은 우리 반 출석부 같은 업무 도구를 만들어 링크로 나눕니다."
+    ]],
+    [20, "넘김", [
+      "학원입니다. 이제 학원도 학생과 학부모님께 정말 가치 있는 수업을 드려야 살아남습니다. 자격증과 알고리즘 수업도 의미가 있지만, 학부모님이 가장 크게 느끼는 가치는 아이가 직접 만든 작품에서 나옵니다.",
+      "일곱 살 아이의 청소 게임, 초등 3학년의 독립운동 게임처럼, <em>작품 링크 하나가 학부모 상담 자료가 되고 학원 홍보가 됩니다.</em>"
+    ]]
+  ]],
+  ["강사 에이전시 · 맺음", [
+    [21, "넘김", [
+      "방과후와 출강 수업을 하시는 강사님과 강사 에이전시는 화면처럼 학년과 일정에 맞춰 바이브코딩 수업을 짤 수 있습니다. 수요가 빠르게 늘고 있는 바이브코딩 수업으로 강사님의 경쟁력을 넓히실 수 있습니다."
+    ]],
+    [22, "넘김", [
+      "저희 렛츠코딩은 앞에서 가르치는 사람도, 함께 배우는 학생도 자기 개성과 색깔을 드러내며 즐겁게 수업해야 한다고 생각합니다. 그 과정이 AI에게 대체되지 않는 인재를 길러 낸다고 믿습니다.",
+      `오늘 보신 작품은 <em>렛츠코딩 부스 ${BOOTH}번</em>에서 직접 만들어 보실 수 있습니다. 즐겁게, 렛츠코딩 라운지와 바이브 하세요. 감사합니다.`
+    ]]
+  ]]
+];
+
+const syllables = (html) => (html.replace(/<[^>]+>/g, "").match(/[가-힣]/g) || []).length;
+const clock = (sec) => `${Math.floor(sec / 60)}:${String(Math.round(sec % 60)).padStart(2, "0")}`;
+let elapsed = 0;
+const main = document.getElementById("cards");
+let page;
+CARDS.forEach(([title, slides], i) => {
+  if (i % 2 === 0) { page = document.createElement("section"); page.className = "page"; main.append(page); }
+  const card = document.createElement("article");
+  card.className = "card";
+  card.innerHTML = `<div class="head"><h2>${title}</h2><span class="no">카드 ${String(i + 1).padStart(2, "0")} / ${CARDS.length}</span></div>`;
+  for (const [no, how, paras, min = 0] of slides) {
+    const spoken = paras.filter((p) => !p.startsWith("※") && !p.startsWith("!")).reduce((n, p) => n + syllables(p), 0);
+    const start = elapsed;
+    elapsed += Math.max(min, spoken / RATE * 60);
+    const div = document.createElement("div");
+    div.className = "slide";
+    div.innerHTML = `<div class="meta"><b>${String(no).padStart(2, "0")}</b><span>${how}</span><time>${clock(start)}</time></div>` +
+      `<div class="say">${paras.map((p) => p.startsWith("※") ? `<p class="note">${p}</p>` : p.startsWith("!") ? `<p class="cue">${p.slice(1).trim()}</p>` : `<p>${p}</p>`).join("")}</div>`;
+    card.append(div);
+  }
+  page.append(card);
+});
+// 목표 시각: 카드 글만 읽은 시간(elapsed)을 TARGET에 맞춰 늘인다
+const scale = TARGET / elapsed;
+main.querySelectorAll("time").forEach((t) => { const [m, s] = t.textContent.split(":").map(Number); t.textContent = "목표 " + clock((m * 60 + s) * scale); });
+// 마지막 카드 아래: 예상 총 시간
+const last = main.querySelector(".page:last-child .card:last-child");
+last.insertAdjacentHTML("beforeend", `<div class="foot"><span>목표 ${clock(TARGET)} · 제한 ${LIMIT}</span><span>카드 글만 읽으면 약 ${clock(elapsed)}(분당 ${RATE}음절)</span></div>`);
+// 넘치는 카드는 빨간 테두리로 표시한다(인쇄 전에 확인)
+requestAnimationFrame(() => document.querySelectorAll(".card").forEach((c) => {
+  if (c.scrollHeight > c.clientHeight + 1) { c.classList.add("over"); console.warn("넘침:", c.querySelector("h2").textContent); }
+}));
+document.title = "박람회 발표 대본 카드";
+</script>
+</body>
+</html>

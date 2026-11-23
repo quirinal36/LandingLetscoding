@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>AI가 작성하고 수정하는 코드</title>
+<link rel="stylesheet" href="fonts/pretendard.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#e9eef5}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#e9eef5;color:#182842;font-family:"Pretendard Variable",sans-serif}
+.window{position:absolute;inset:28px;display:flex;flex-direction:column;overflow:hidden;border:2px solid #d5dce6;border-radius:26px;background:#fff;box-shadow:0 18px 50px #18284214}
+.top{flex:none;display:flex;align-items:center;gap:26px;height:96px;padding:0 34px 0 40px;border-bottom:2px solid #e3e8ef}
+.brand{font-size:38px;font-weight:800;letter-spacing:-.02em}.brand em{font-style:normal;color:#1fa968}
+.sep{width:2px;height:36px;background:#d5dce6}
+.project{font-size:34px;font-weight:600;color:#3b4a62}
+.publish{margin-left:auto;padding:16px 30px;border-radius:14px;background:#1fa968;color:#fff;font-size:30px;font-weight:700}
+.body{flex:1;display:flex;min-height:0}
+.pane{position:relative;flex:1;display:flex;flex-direction:column;border-right:2px solid #e3e8ef}
+.tabs{flex:none;display:flex;align-items:flex-end;gap:8px;height:72px;padding:0 24px;border-bottom:2px solid #e3e8ef;background:#f7f9fc}
+.tabs span{display:flex;align-items:center;height:72px;padding:0 30px;font:500 32px/1 "JetBrains Mono",monospace;color:#66768d}
+.tabs .on{color:#182842;background:#fff;border-bottom:4px solid #1fa968;margin-bottom:-2px}
+.tabs .play{font-family:"Pretendard Variable",sans-serif;font-weight:600}
+.editor{position:relative;flex:1}
+.gutter{position:absolute;left:0;top:30px;width:86px;padding-right:22px;text-align:right;font:400 32px/62px "JetBrains Mono",monospace;color:#6f7d92}
+.gutter div{height:62px}
+.lines{position:absolute;left:86px;right:0;top:30px;height:560px}
+.row{position:absolute;left:0;right:0;top:0;height:62px;display:flex;align-items:center;font:400 36px/62px "JetBrains Mono",monospace;white-space:pre;font-variant-ligatures:none}
+.row .mark{flex:none;width:46px;text-align:center;font-weight:700}
+.row .src{position:relative}
+.row.add{background:#dcf5e6}.row.add .mark{color:#1f9d5c}
+.row .strike{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:#d64545;transform-origin:left center}
+.kw{color:#2954af;font-weight:500}.str{color:#b4541f}.prop{color:#0f7d6e}.fn{color:#7a3fb0}.id{color:#182842}.punc{color:#66768d}
+.sw{display:inline-block;width:28px;height:28px;margin:0 8px 0 2px;border-radius:7px;border:2px solid #18284222;vertical-align:-3px}
+.preview{position:absolute;right:28px;bottom:28px;width:470px;height:268px;overflow:hidden;border:2px solid #d5dce6;border-radius:20px;background:#fff;box-shadow:0 10px 28px #18284218}
+.preview .label{position:absolute;left:18px;top:12px;z-index:2;padding:4px 12px;border-radius:9px;background:#ffffffd9;font-size:24px;font-weight:700;color:#3b4a62}
+.sky{position:absolute;inset:0 0 50% 0;background:#e4f3fb}
+.sea{position:absolute;left:0;right:0;top:42%;height:34%;background:#8cc7d6}
+.foam{position:absolute;left:-10px;right:-10px;top:calc(76% - 12px);height:24px;border-radius:50%;background:#fff}
+.sand{position:absolute;left:0;right:0;bottom:0;height:24%;background:#f1e2bc}
+.runner{position:absolute;left:62%;bottom:12%;width:34px;height:46px;border-radius:12px 12px 8px 8px;background:#f07c5c}
+.runner::before{content:"";position:absolute;left:5px;top:-28px;width:24px;height:24px;border-radius:50%;background:#f6c59f}
+.sound{position:absolute;right:16px;top:12px;z-index:2;display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:12px;background:#1fa968;color:#fff;font-size:22px;font-weight:700;opacity:0}
+.sound svg{width:30px;height:30px}
+.chat{flex:none;width:700px;display:flex;flex-direction:column;background:#f7f9fc}
+.chat-head{flex:none;display:flex;align-items:center;gap:14px;height:72px;padding:0 34px;border-bottom:2px solid #e3e8ef;font-size:32px;font-weight:700}
+.chat-head i{width:16px;height:16px;border-radius:50%;background:#1fa968}
+.msgs{flex:1;display:flex;flex-direction:column;gap:26px;padding:34px 34px 0}
+.u{align-self:flex-end;max-width:560px;padding:20px 28px;border-radius:28px 28px 8px 28px;background:#e5ecf8;font-size:34px;font-weight:600;line-height:1.38}
+.slot{display:grid;justify-items:start}
+.slot>*{grid-area:1/1;align-self:start}
+.a{max-width:600px;padding:18px 28px 22px;border:2px solid #9fdcbc;border-radius:28px 28px 28px 8px;background:#fff;font-size:32px;font-weight:500;line-height:1.4}
+.a b{display:block;margin-bottom:6px;font-size:24px;font-weight:800;letter-spacing:.06em;color:#1a8c58}
+.typing{display:flex;gap:10px;padding:24px 28px;border:2px solid #9fdcbc;border-radius:28px 28px 28px 8px;background:#fff}
+.typing i{width:16px;height:16px;border-radius:50%;background:#1fa968}
+.input{flex:none;position:relative;height:104px;margin:0 28px 28px;border:2px solid #d5dce6;border-radius:20px;background:#fff;font-size:30px}
+.input .ph,.input .txt{position:absolute;left:26px;top:0;line-height:100px;white-space:nowrap}
+.input .ph{color:#6f7d92}
+.input .txt span{opacity:0}
+.input .send{position:absolute;right:16px;top:20px;width:60px;height:60px;border-radius:14px;background:#1fa968}
+.input .send svg{width:60px;height:60px}
+.fade{position:absolute;inset:0;background:#e9eef5;opacity:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="ai-code-diff" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+  <div class="window">
+    <div class="top">
+      <span class="brand">Let's Coding <em>Studio</em></span><span class="sep"></span><span class="project">파도 피하기 게임</span>
+      <span class="publish">라운지에 게시하기</span>
+    </div>
+    <div class="body">
+      <div class="pane">
+        <div class="tabs"><span class="on">script.js</span><span class="play">▶ 미리보기</span></div>
+        <div class="editor">
+          <div class="gutter" id="gutter"></div>
+          <div class="lines" id="lines"></div>
+          <div class="preview">
+            <span class="label">미리보기</span>
+            <div class="sky"></div><div class="sea" id="sea"></div><div class="foam" data-layout-ignore></div><div class="sand"></div><div class="runner"></div>
+            <span class="sound" id="sound"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z" fill="#fff"/><path d="M15.5 9.2a4 4 0 0 1 0 5.6M18.2 6.8a7.5 7.5 0 0 1 0 10.4"/></svg>소리</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="chat-head"><i></i>AI 도우미 LECO</div>
+        <div class="msgs">
+          <div class="u" id="u1">파도가 오면 소리가 나게 해 줘</div>
+          <div class="slot"><div class="typing" id="t1"><i></i><i></i><i></i></div><div class="a" id="a1"><b>LECO</b>파도가 오면 소리가 나게 했어요.</div></div>
+          <div class="u" id="u2">바다 색을 더 파랗게 바꿔 줘</div>
+          <div class="slot"><div class="typing" id="t2"><i></i><i></i><i></i></div><div class="a" id="a2"><b>LECO</b>바다 색을 바꿨어요.</div></div>
+        </div>
+        <div class="input">
+          <span class="ph" id="ph">여기에 프롬프트를 작성하세요.</span>
+          <span class="txt" id="in1"></span><span class="txt" id="in2"></span>
+          <span class="send"><svg viewBox="0 0 60 60"><path d="M30 42V19M21 27l9-9 9 9" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade" id="fade"></div>
+</div>
+<script src="gsap.min.js"></script>
+<script>
+(() => {
+  const LH = 62, DURATION = 12, FADE_IN = 11.3, RESET = 11.65;
+  /* 처음 코드 여섯 줄과, 학생 요청에 따라 AI가 넣는 세 줄. 모두 그대로 실행되는 자바스크립트다. */
+  const SRC = {
+    seaOld:  'const sea = { color: "#8cc7d6" };',
+    blank:   '',
+    fn:      'function onWaveArrive(wave) {',
+    move:    '  wave.x -= wave.speed;',
+    run:     '  player.runBack();',
+    end:     '}',
+    sound:   'const waveSound = new Audio("wave.mp3");',
+    play:    '  waveSound.play();',
+    seaNew:  'const sea = { color: "#1e7fd8" };'
+  };
+  const FIRST = ["seaOld", "blank", "fn", "move", "run", "end"];
+  const KEYWORDS = new Set(["const", "function", "new"]);
+
+  const lines = document.getElementById("lines");
+  const gutter = document.getElementById("gutter");
+  for (let n = 1; n <= 9; n++) {
+    const d = document.createElement("div");
+    d.textContent = n;
+    d.id = "g" + n;
+    if (n > FIRST.length) d.style.opacity = 0;
+    gutter.appendChild(d);
+  }
+
+  const highlight = (text) => { // 글자 색을 입힌 HTML. 색 코드 앞에는 그 색의 작은 칸을 둔다.
+    let html = "", m, prevDot = false;
+    const re = /(\s+)|("[^"]*")|([A-Za-z_]\w*)(?=\s*\()|([A-Za-z_]\w*)|(.)/g;
+    while ((m = re.exec(text))) {
+      const [tok, sp, str, call, word] = m;
+      if (sp) html += tok;
+      else if (str) {
+        const hex = /^"(#[0-9a-f]{6})"$/i.exec(str);
+        html += (hex ? `<span class="sw" style="background:${hex[1]}"></span>` : "") + `<span class="str">${str}</span>`;
+      } else if (call) html += `<span class="${KEYWORDS.has(call) ? "kw" : "fn"}">${call}</span>`;
+      else if (word) html += `<span class="${KEYWORDS.has(word) ? "kw" : prevDot ? "prop" : "id"}">${word}</span>`;
+      else html += `<span class="punc">${tok}</span>`;
+      prevDot = tok === ".";
+    }
+    return html;
+  };
+  const rows = {};
+  for (const [id, text] of Object.entries(SRC)) {
+    const row = document.createElement("div");
+    row.className = "row" + (FIRST.includes(id) ? "" : " add");
+    row.id = "r-" + id;
+    row.innerHTML = `<span class="mark">${FIRST.includes(id) ? "" : "+"}</span><span class="src">${highlight(text)}${id === "seaOld" ? '<i class="strike" data-layout-allow-occlusion></i>' : ""}</span>`;
+    lines.appendChild(row);
+    rows[id] = row;
+  }
+  // 지울 줄 표시(−)는 따로 둔다
+  const delMark = document.createElement("span");
+  delMark.className = "mark";
+  delMark.style.cssText = "position:absolute;left:0;top:0;color:#d64545;opacity:0";
+  delMark.textContent = "−";
+  rows.seaOld.appendChild(delMark);
+
+  // 입력창에 칠 두 문장(음절마다 span)
+  const typed = {};
+  [["in1", "u1"], ["in2", "u2"]].forEach(([inId, uId]) => {
+    const box = document.getElementById(inId);
+    typed[inId] = [...document.getElementById(uId).textContent].map((c) => {
+      const s = document.createElement("span");
+      s.textContent = c;
+      box.appendChild(s);
+      return s;
+    });
+  });
+
+  const tl = gsap.timeline({ paused: true });
+
+  /* 줄 자리 관리: order는 지금 화면의 줄 순서다. 줄을 넣으면 그 아래 줄이 한 칸씩 내려간다. */
+  let order = FIRST.slice();
+  const setLayout = (t) => order.forEach((id, i) => tl.set(rows[id], { y: i * LH }, t));
+  FIRST.forEach((id, i) => gsap.set(rows[id], { y: i * LH }));
+  const hidden = ["sound", "play", "seaNew"];
+  hidden.forEach((id) => gsap.set(rows[id], { opacity: 0 }));
+
+  const insert = (id, at, t) => {
+    order.slice(at).forEach((rid, k) => tl.to(rows[rid], { y: (at + k + 1) * LH, duration: 0.45, ease: "power2.inOut" }, t));
+    order.splice(at, 0, id);
+    tl.set(rows[id], { y: at * LH }, t);
+    tl.fromTo(rows[id], { opacity: 0, x: -30, backgroundColor: "#a8e6c4" }, { opacity: 1, x: 0, backgroundColor: "#dcf5e6", duration: 0.55, ease: "power3.out" }, t + 0.25);
+    tl.to("#g" + order.length, { opacity: 1, duration: 0.2 }, t + 0.25);
+  };
+
+  const typeInto = (inId, from, to) => {
+    const spans = typed[inId], step = (to - from) / spans.length;
+    tl.set("#ph", { opacity: 0 }, from);
+    spans.forEach((s, i) => tl.set(s, { opacity: 1 }, from + i * step));
+  };
+  const send = (inId, bubble, t) => {
+    typed[inId].forEach((s) => tl.set(s, { opacity: 0 }, t));
+    tl.set("#ph", { opacity: 1 }, t);
+    tl.fromTo(bubble, { opacity: 0, y: 26, scale: 0.96, transformOrigin: "100% 100%" }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, t);
+  };
+  const think = (dots, answer, from, to) => {
+    tl.fromTo(dots, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, from);
+    const ds = document.querySelectorAll(dots + " i");
+    ds.forEach((d, i) => tl.fromTo(d, { y: 0 }, { y: -10, duration: 0.22, ease: "sine.inOut", yoyo: true, repeat: 3 }, from + 0.1 + i * 0.1));
+    tl.to(dots, { opacity: 0, duration: 0.15 }, to);
+    tl.fromTo(answer, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, to);
+  };
+
+  // 처음 상태: 말풍선은 아직 없다
+  gsap.set(["#u1", "#u2", "#a1", "#a2", "#t1", "#t2"], { opacity: 0 });
+
+  // 1) 기능을 말로 설명한다 → 코드 두 줄이 들어간다
+  typeInto("in1", 0.3, 1.15);
+  send("in1", "#u1", 1.3);
+  think("#t1", "#a1", 1.55, 2.3);
+  insert("sound", 1, 2.45);
+  insert("play", 4, 3.0);
+  tl.fromTo("#sound", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, 3.45);
+  tl.fromTo("#sound svg", { scale: 1 }, { scale: 1.18, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 5 }, 3.85);
+
+  // 2) 화면 색을 바꿔 달라고 한다 → 옛 줄은 빨갛게 지워지고 새 줄이 들어간다
+  typeInto("in2", 5.0, 5.85);
+  send("in2", "#u2", 6.0);
+  think("#t2", "#a2", 6.25, 7.0);
+  tl.to([rows.sound, rows.play], { backgroundColor: "#eef9f2", duration: 0.4 }, 7.05);
+  tl.to(rows.seaOld, { backgroundColor: "#fde6e6", duration: 0.35, ease: "power1.out" }, 7.15);
+  tl.to(delMark, { opacity: 1, duration: 0.2 }, 7.15);
+  tl.fromTo(rows.seaOld.querySelector(".strike"), { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.inOut" }, 7.25);
+  tl.to(rows.seaOld.querySelectorAll(".src > span"), { opacity: 0.45, duration: 0.3 }, 7.45);
+  insert("seaNew", 1, 7.55);
+  tl.to("#sea", { backgroundColor: "#1e7fd8", duration: 0.7, ease: "power2.inOut" }, 7.95);
+
+  // 3) 덮고 처음으로 되돌린 뒤 걷어 낸다(반복 이음매)
+  tl.to("#fade", { opacity: 1, duration: RESET - FADE_IN, ease: "power1.in" }, FADE_IN);
+  order = FIRST.slice();
+  setLayout(RESET);
+  hidden.forEach((id) => tl.set(rows[id], { opacity: 0, backgroundColor: "#dcf5e6" }, RESET));
+  tl.set(rows.seaOld, { backgroundColor: "rgba(0,0,0,0)" }, RESET);
+  tl.set(delMark, { opacity: 0 }, RESET);
+  tl.set(rows.seaOld.querySelector(".strike"), { scaleX: 0 }, RESET);
+  tl.set(rows.seaOld.querySelectorAll(".src > span"), { opacity: 1 }, RESET);
+  for (let n = FIRST.length + 1; n <= 9; n++) tl.set("#g" + n, { opacity: 0 }, RESET);
+  tl.set(["#u1", "#u2", "#a1", "#a2", "#sound"], { opacity: 0 }, RESET);
+  tl.set("#sea", { backgroundColor: "#8cc7d6" }, RESET);
+  tl.to("#fade", { opacity: 0, duration: DURATION - RESET, ease: "power1.out" }, RESET);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["ai-code-diff"] = tl;
+})();
+</script>
+</body>
+</html>
