@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-19",
+  "tool": "built-in image_gen",
+  "purpose": "Restore 10 sub-300ppi brochure thumbnails; keep original source assets unchanged.",
+  "assets": [
+    {
+      "id": "english-legend",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/englsihword.webp",
+      "title": "영어의 전설",
+      "detail": "Keep the cheerful isometric low-poly village, cyan fountain at center right, shops, trees, lamps, benches and little characters in their exact positions. Preserve the large upper-left Korean game logo: first line '영어의', second line '전설', with the sword, wooden board and red ribbon.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nKeep the cheerful isometric low-poly village, cyan fountain at center right, shops, trees, lamps, benches and little characters in their exact positions. Preserve the large upper-left Korean game logo: first line '영어의', second line '전설', with the sword, wooden board and red ribbon.",
+      "output": "public/landing/brochure-hires/english-legend.png"
+    },
+    {
+      "id": "bezierider",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/bezierider.webp",
+      "title": "베지에 라이더",
+      "detail": "Preserve the dark navy neon mathematics-game cover, exact luminous cyan Bezier curve, yellow ball at each visible endpoint, magenta control points and dotted tangents, purple platform at lower right and green flag. Preserve the Korean title on two lines: '베지에' and '라이더', white then mint green.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the dark navy neon mathematics-game cover, exact luminous cyan Bezier curve, yellow ball at each visible endpoint, magenta control points and dotted tangents, purple platform at lower right and green flag. Preserve the Korean title on two lines: '베지에' and '라이더', white then mint green.",
+      "output": "public/landing/brochure-hires/bezierider.png"
+    },
+    {
+      "id": "storygame",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/storygame.webp",
+      "title": "태안: 서해안의 기적",
+      "detail": "Preserve the sunset coastal oil-spill cleanup scene and block-style volunteers in yellow protective clothing, positions and buckets; ship offshore and trees at left. Preserve exact two-line Korean title at upper-left: '태안:' in white, '서해안의 기적' in yellow, over the existing black brush shape.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the sunset coastal oil-spill cleanup scene and block-style volunteers in yellow protective clothing, positions and buckets; ship offshore and trees at left. Preserve exact two-line Korean title at upper-left: '태안:' in white, '서해안의 기적' in yellow, over the existing black brush shape.",
+      "output": "public/landing/brochure-hires/storygame.png"
+    },
+    {
+      "id": "elemental-snake",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/tmp/imagegen/brochure-hires-20261119/originals/elemental-snake.webp",
+      "title": "엘리멘탈 스네이크",
+      "detail": "Preserve the glossy green segmented snake curling across the upper half of the dark blue grid, its square head and eyes, yellow chemistry tiles with exact symbols 'He', 'H', 'C', 'O', and five small tiles at bottom. Restore the exact lower-center Korean title '엘리멘탈' above '스네이크', yellow and green respectively, retaining the small lab-flask detail.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the glossy green segmented snake curling across the upper half of the dark blue grid, its square head and eyes, yellow chemistry tiles with exact symbols 'He', 'H', 'C', 'O', and five small tiles at bottom. Restore the exact lower-center Korean title '엘리멘탈' above '스네이크', yellow and green respectively, retaining the small lab-flask detail.",
+      "output": "public/landing/brochure-hires/elemental-snake.png"
+    },
+    {
+      "id": "type-storm",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/tmp/imagegen/brochure-hires-20261119/originals/type-storm.webp",
+      "title": "TYPE STORM",
+      "detail": "This cover intentionally uses pixel art; keep its crisp square-pixel aesthetic, NOT a realistic illustration. Preserve the central green title 'TYPE' / 'STORM', little spacecraft at bottom center, pink and cyan diagonal beams, dark grid and thin cyan frame. Preserve labels '번개', '태풍', '폭발', '키보드', '속도', 'WARNING!', 'HP 2', 'SCORE 12480', and 'COMBO x24'. Do not add any controls.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nThis cover intentionally uses pixel art; keep its crisp square-pixel aesthetic, NOT a realistic illustration. Preserve the central green title 'TYPE' / 'STORM', little spacecraft at bottom center, pink and cyan diagonal beams, dark grid and thin cyan frame. Preserve labels '번개', '태풍', '폭발', '키보드', '속도', 'WARNING!', 'HP 2', 'SCORE 12480', and 'COMBO x24'. Do not add any controls.",
+      "output": "public/landing/brochure-hires/type-storm.png"
+    },
+    {
+      "id": "monster-egg",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/tmp/imagegen/brochure-hires-20261119/originals/monster-egg.webp",
+      "title": "몬스터 알 연구소",
+      "detail": "Preserve the adorable purple baby monster emerging from the speckled purple egg at left and the colorful glowing laboratory. Keep the six probability cards exactly: top row '일반 60%', '희귀 25%', '초희귀 10%'; bottom row '전설 4%', '신화 0.9%', '울트라 0.1%'. Keep the exact large yellow bottom Korean title '몬스터 알 연구소'. Never change these percentages or labels.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the adorable purple baby monster emerging from the speckled purple egg at left and the colorful glowing laboratory. Keep the six probability cards exactly: top row '일반 60%', '희귀 25%', '초희귀 10%'; bottom row '전설 4%', '신화 0.9%', '울트라 0.1%'. Keep the exact large yellow bottom Korean title '몬스터 알 연구소'. Never change these percentages or labels.",
+      "output": "public/landing/brochure-hires/monster-egg.png"
+    },
+    {
+      "id": "dust-removal",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/dust-removal.webp",
+      "title": "먼지를 없애라",
+      "detail": "Preserve the smiling white and blue robot vacuum in the sunny blue bedroom, its green antenna, expressive dust clouds in their original positions, sparkles and sweeping cyan arcs. Restore the exact bottom-center Korean title '먼지를 없애라', white then yellow with dark blue outline. Keep the broom, green progress bar and star.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the smiling white and blue robot vacuum in the sunny blue bedroom, its green antenna, expressive dust clouds in their original positions, sparkles and sweeping cyan arcs. Restore the exact bottom-center Korean title '먼지를 없애라', white then yellow with dark blue outline. Keep the broom, green progress bar and star.",
+      "output": "public/landing/brochure-hires/dust-removal.png"
+    },
+    {
+      "id": "independence-fund",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/independence-fund.webp",
+      "title": "독립자금을 전달하세요",
+      "detail": "Preserve the moonlit historic Korean street, warm lanterns, Korean flag, two figures exchanging a box, and strong diagonal title on the right. Exact title: '독립자금을' in yellow above '전달하세요' in white. The label on the package reads '독립자금'. Keep the historical clothes, hand poses, roof shapes and original dramatic lighting.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the moonlit historic Korean street, warm lanterns, Korean flag, two figures exchanging a box, and strong diagonal title on the right. Exact title: '독립자금을' in yellow above '전달하세요' in white. The label on the package reads '독립자금'. Keep the historical clothes, hand poses, roof shapes and original dramatic lighting.",
+      "output": "public/landing/brochure-hires/independence-fund.png"
+    },
+    {
+      "id": "scytale-letter",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/scytale-letter.png",
+      "title": "당신만 읽을 수 있는 편지",
+      "detail": "Preserve the black-and-green terminal / cipher UI illustration and all panel positions, fine green rules, code decorations, document icon and chain-link icon. Keep the intentionally digital/pixel lettering aesthetic but restore sharp high-resolution edges. Exact large Korean title: '당신만' / '읽을 수 있는 편지'. Exact subtitle: '암호화된 비밀 메시지 프로젝트'. Preserve 'SCYTALE CIPHER', 'ENCRYPT (SEND)', 'DECRYPT (RECEIVE)', 'ENCRYPTED OUTPUT', and existing small code/text rather than inventing new features or prose.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the black-and-green terminal / cipher UI illustration and all panel positions, fine green rules, code decorations, document icon and chain-link icon. Keep the intentionally digital/pixel lettering aesthetic but restore sharp high-resolution edges. Exact large Korean title: '당신만' / '읽을 수 있는 편지'. Exact subtitle: '암호화된 비밀 메시지 프로젝트'. Preserve 'SCYTALE CIPHER', 'ENCRYPT (SEND)', 'DECRYPT (RECEIVE)', 'ENCRYPTED OUTPUT', and existing small code/text rather than inventing new features or prose.",
+      "output": "public/landing/brochure-hires/scytale-letter.png"
+    },
+    {
+      "id": "sniper-fire",
+      "input": "/Users/letscoding/Documents/workspace/github/LandingLetscoding/public/landing/works/sniper-fire.png",
+      "title": "저격! 발사!",
+      "detail": "Preserve the historical Waterloo battlefield panorama, Napoleon-like officer at right pointing left, cannons and soldiers, smoke and French tricolor near the distant fort. Keep all silhouettes and framing in the same places and retain the original cinematic painted style. Restore the exact large gold upper-left Korean title on two lines: '저격!' / '발사!'. No gore or additional text.",
+      "prompt": "Use case: precise-object-edit. This is a faithful high-resolution restoration and repaint of the supplied low-resolution game thumbnail for a printed school brochure. Preserve the original 16:9 composition, crop, palette, lighting, title placement, character identities and poses, and all meaningful objects. Improve only clarity: redraw clean edges, readable lettering, and fine material details while removing compression artifacts and accidental blur. Keep the original artwork style. Produce a 2048 by 1152 landscape image, with no added border, watermark, new slogans, objects or UI features. Text must be copied exactly, not translated or paraphrased.\nPreserve the historical Waterloo battlefield panorama, Napoleon-like officer at right pointing left, cannons and soldiers, smoke and French tricolor near the distant fort. Keep all silhouettes and framing in the same places and retain the original cinematic painted style. Restore the exact large gold upper-left Korean title on two lines: '저격!' / '발사!'. No gore or additional text.",
+      "output": "public/landing/brochure-hires/sniper-fire.png"
+    }
+  ]
+}
+

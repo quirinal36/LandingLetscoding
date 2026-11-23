@@ -20,9 +20,11 @@
 
 라우트는 HTML 원본과 폰트를 읽고, 제품 이미지에는 기존 `public/landing/` 자산을 사용한다. 수정 후 배포하려면 다시 빌드한다. PDF도 HTML 수정 후 재출력한다.
 
+현재 공개본 2쪽은 세 단계 개요, 3~5쪽은 Step 01~03, 6쪽은 학교의 수업 전환과 도입 이점이다.
+
 ## 원본 구성 (8~11쪽 숨김)
 
-1. 겉표지 — 화면에는 서비스 소개와 오른쪽 삽화를, 인쇄와 PDF에는 스튜디오·라운지 가로 A4 이미지를 배치한다.
+1. 겉표지 — 화면과 인쇄본 모두 사용자 제공 ‘우리들의 창작공간 렛츠코딩 라운지’ 이미지로 가로 A4 한 면을 채운다.
 2. 안쪽 앞표지 — 코딩 수업의 전환과 학교의 세 가지 도입 이점
 3. Step 01. 스튜디오 → Step 02. 라운지 → Step 03. 공동체의 작동 구조와 교사의 지도. 각 공간의 설명은 4~6쪽 제목과 동일하다.
 4. Step 01. 스튜디오 - AI 활용 바이브코딩 · 학생별 AI 활용 과정 확인 · ChatGPT, Claude 최신 모델 · 학습 특화 코딩 에디터
@@ -48,7 +50,7 @@ PDFX=1 OUT=/tmp/x1a.pdf sh output/ai-edu-expo/export-cmyk.sh  # PDF/X-1a가 필�
 
 필요한 도구는 Ghostscript(`brew install ghostscript`), python3와 PyMuPDF, 그리고 `~/Library/ColorSync/Profiles/JapanColor2001Coated.icc`다. ICC 파일은 Adobe ICC 프로파일 end-user 배포본에서 설치하며 재배포 제한이 있어 저장소에 넣지 않는다. 스크립트는 PDF/X가 금지하는 링크 주석을 제거한 뒤 변환하고, 끝에 RGB 색공간이 남지 않았는지와 출력 의도가 있는지 검사한다. PDF/X-1a는 투명도를 허용하지 않아 3·6·7쪽이 720dpi 전면 래스터로 평탄화되므로 인쇄소가 요구할 때만 쓴다.
 
-총 12쪽이며 완성 크기(TrimBox)는 가로 A4 297×210mm, 도련 포함 크기(MediaBox·BleedBox)는 303×216mm다. PDF와 브라우저 인쇄에는 `../lounge-studio-cross-a4.png`가 첫 페이지 전체에 들어간다. `prepare-bleed.js`는 표지 가장자리를 사방 3mm에 반사해 채우므로 재단 후 보이는 그림은 일반본과 같다. 본문 배경도 도련 끝까지 연장한다.
+총 12쪽이며 완성 크기(TrimBox)는 가로 A4 297×210mm, 도련 포함 크기(MediaBox·BleedBox)는 303×216mm다. 표지 제목에는 Black Han Sans, 부제와 기능명에는 Chiron GoRound TC를 사용한다. 두 웹폰트는 Google Fonts에서 받아 로컬에 저장한다. PDF에도 글꼴을 포함한다. 글자를 제거한 표지 배경은 `../../public/landing/expo-cover-a4.jpg`이며 단독 인쇄용 이미지는 `../pdf/expo-cover-a4-300dpi-cmyk.tif`다. `prepare-bleed.js`는 표지 가장자리를 사방 3mm에 반사해 채우므로 재단 후 보이는 그림은 일반본과 같다. 본문 배경도 도련 끝까지 연장한다.
 
 ```sh
 EXPO_BLEED=3 EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-edu-expo/export.cjs
@@ -212,7 +214,9 @@ EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-e
 
 ### 족자봉 인쇄용 PDF
 
-147×230cm 시트 4장을 족자봉으로 출력한다. 파일은 `../pdf/expo-banner-147x230/`에 장마다 RGB(`*-rgb.pdf`)와 CMYK PDF/X-4(`*-cmyk.pdf`, Japan Color 2001 Coated) 두 종류이고, 이름 앞 번호가 설치 순서다(아래 2026-11-18 기록 참고). 완성 크기 1,470×2,300mm 그대로이며 도련은 넣지 않았고, 위아래 봉 감김 부분은 230cm 안에 포함된다고 보고 위아래 50mm 안에 글자·카드가 없는지 출력 스크립트가 확인한다(작품 장 오른쪽 위 퍼즐 장식만 조금 걸린다). 뒷벽 글자는 벡터, 사진·작품 썸네일은 원본 해상도다. 작품 썸네일 원본이 560×315px라 560mm 폭 카드에서 약 25dpi, 옆벽 이미지는 약 27dpi로 가까이서 보면 거칠 수 있다.
+뒷벽(B1·B2)은 렛츠코딩 스튜디오와 세 가지 기능, 옆벽(S1·S2)은 렛츠코딩 라운지와 네 가지 기능을 소개한다. 뒷벽의 남색·보라색 사선 배경 위에 B1은 교과 작품 4개, B2는 학생 작품 6개를 배치한다. 옆벽은 브로셔 표지 일러스트를 좌우에 나눠 배치한다.
+
+147×230cm 시트 4장을 족자봉으로 출력한다. 파일은 `../pdf/expo-banner-147x230/`에 장마다 RGB(`*-rgb.pdf`)와 CMYK PDF/X-4(`*-cmyk.pdf`, Japan Color 2001 Coated) 두 종류이고, 이름 앞 번호가 설치 순서다(아래 2026-11-18 기록 참고). 완성 크기 1,470×2,300mm 그대로이며 도련은 넣지 않았고, 위아래 봉 감김 부분은 230cm 안에 포함된다고 보고 위아래 50mm 안에 글자·카드가 없는지 출력 스크립트가 확인한다(작품 장 오른쪽 위 퍼즐 장식만 조금 걸린다). 벽면 글자는 벡터, 사진·작품 썸네일은 원본 해상도다. 작품 썸네일 원본이 560×315px라 560mm 폭 카드에서 약 25dpi, 옆벽은 표지 일러스트를 확대해 사용하므로 가까이서 보면 거칠 수 있다.
 
 2026-11-18 뒷벽 번호를 바꾼 뒤 4장(B1·B2·S1·S2)과 인포데스크 PDF를 RGB·CMYK 모두 다시 출력했다. 이름 앞 번호가 설치 순서다(1 뒷벽 왼쪽 B1, 2 뒷벽 오른쪽 B2, 3 옆벽 왼쪽 S1, 4 옆벽 오른쪽 S2). 이전 배치의 뒷벽 PDF(`banner-1-back-left-B2`, `banner-2-back-right-B1`)는 지웠다.
 
@@ -221,8 +225,24 @@ EXPO_PLAYWRIGHT=/path/to/playwright EXPO_CHROME=/path/to/chrome node output/ai-e
 for f in output/pdf/expo-banner-147x230/*-rgb.pdf; do SRC="$f" OUT="${f%-rgb.pdf}-cmyk.pdf" TITLE="렛츠코딩 라운지 엑스포 족자봉 147x230" sh output/ai-edu-expo/export-cmyk.sh; done
 ```
 
-### 인포데스크 정면 (2026-11-17)
+### 인포데스크 정면 (2026-11-19)
 
-`info-desk.html`은 950×660mm 비율의 데스크 정면 검토안이다. 사용자가 제안한 「단계별 AI활용과, 평가과정에 도입하여, 미래형 수업으로 발전」을 「단계별 AI 활용, / 평가 과정까지. / 미래형 수업으로.」로 정리했다. `booth-2sheet.html`의 남색·보라·코랄과 사선 구성을 이어가며, 마지막 줄을 가장 크게 강조한다. 평가 과정에 AI를 도입한다는 방향이며 자동 평가 기능을 뜻하지 않는다. 기존 부스 테마 안의 추가 시안으로, 이전 방향 선택 기록은 `../expo-booth/direction-approved.md`, 최신 벽면 방향은 위의 「벽당 2장 안」을 따른다.
+`info-desk.html`에서 학생과 로봇 일러스트를 확인하고 인쇄 파일을 내려받을 수 있다. 원본은 `assets/info-desk-redrawn.png`다. `export-info-desk.py`는 원본을 중앙 기준으로 950 × 660mm에 맞춰 미리보기 PNG, 300dpi Japan Color 2001 Coated CMYK TIFF, 실물 크기 RGB PDF를 만든다. 도련은 포함하지 않는다. CMYK PDF는 RGB PDF에서 `export-cmyk.sh`로 변환한다.
 
-벽면 시안 상단 링크로 이동할 수 있다. 저장소 루트에서 정적 서버를 실행해 확인하며, 미리보기는 `info-desk.png`다. 2026-11-17 인쇄용 PDF를 `../pdf/expo-info-desk-950x660/`에 만들었다. RGB(`info-desk-950x660-rgb.pdf`)와 CMYK PDF/X-4(`-cmyk.pdf`, Japan Color 2001 Coated) 두 종류이며 950×660mm 완성 크기, 도련 없음, 글자 벡터 유지다. `export-banner.cjs`가 족자봉과 함께 출력하고 가장자리 20mm 안에 글자가 없는지 확인한다.
+### 표지 반복 영상 (2026-11-20)
+
+표지 일러스트(`../../public/landing/expo-cover-a4.jpg`)를 발표 제목 화면용 반복 영상으로 만들었다. 파일은 `cover-loop/`에 있다. 2048×1448(A4 가로 비율), 24fps, 9.29초, 소리 없음, H.264다.
+
+- `expo-cover-loop.mp4`: 글자 없는 배경. 슬라이드에서 제목을 직접 얹을 때 쓴다.
+- `expo-cover-loop-titled.mp4`: 브로셔 표지와 같은 제목(「우리들의 창작공간 / 렛츠코딩 라운지」와 기능 네 가지)을 같은 자리에 얹었다.
+
+발표 덱 `../expo-talk/index.html`의 표지가 `expo-cover-loop.mp4`를 배경으로 쓴다. 덱은 16:9라 영상의 아래쪽(책상 앞면, 의자 다리, 러그)이 화면 밖으로 잘리고, 인쇄·PDF에서는 영상 대신 표지 이미지가 들어간다.
+
+움직이는 것은 떠 있는 섬과 폭포, 구름, 유리 큐브, 홀로그램 카드, 모니터 화면, 로봇과 아이들의 작은 동작이다. 카메라는 고정이고 제목이 놓이는 왼쪽 위 하늘은 정지 화면이다.
+
+원본은 Higgsfield의 MiniMax H3(2K, 10초, 20크레딧)에 시작·끝 프레임을 같은 표지 이미지로 지정해 만든 `source-minimax-h3.mp4`다. Seedance 2.5는 같은 입력으로 두 번 실패했다. `make-loop.py`가 원본을 다듬는다. 움직이지 않는 영역을 고정하고, 끝의 멈춤 구간 12프레임을 자른 뒤 끝과 처음 8프레임을 겹쳐 잇고, 색을 표지 원본에 맞추고, 세로로 눌린 비율(2048×1440)을 2048×1448로 되돌린다. 제목은 `title-overlay.html`을 2048×1448 투명 PNG(`title-overlay-2048.png`)로 캡처해 얹는다. 표지 문구를 바꾸면 이 HTML도 함께 고쳐 다시 캡처한다.
+
+```sh
+"$EXPO_CHROME" --headless=new --hide-scrollbars --window-size=2048,1448 --default-background-color=00000000 --screenshot=output/ai-edu-expo/cover-loop/title-overlay-2048.png "file://$PWD/output/ai-edu-expo/cover-loop/title-overlay.html"
+uv run --with numpy --with opencv-python-headless output/ai-edu-expo/cover-loop/make-loop.py
+```

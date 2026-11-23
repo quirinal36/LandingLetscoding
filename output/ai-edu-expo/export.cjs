@@ -18,7 +18,7 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
       await Promise.all(Array.from(document.images, image => image.decode()));
     });
     assert.equal(await page.locator('.sheet').count(), 16);
-    assert.equal(await page.locator('#slide-3 .operating-node .op-visual').count(), 3);
+    assert.equal(await page.locator('.operating-model .operating-node .op-visual').count(), 3);
     assert.equal(await page.locator('h1').count(), 1);
     assert.deepEqual(await page.locator('.sheet').evaluateAll(s => s.map(n => n.id)), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 12].map(i => `slide-${i}`));
     const visibleIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => `slide-${i}`);
@@ -50,7 +50,7 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
     await page.setViewportSize({ width: 1123, height: 900 });
     await page.emulateMedia({ media: 'print' });
     assert.deepEqual(await page.locator('.sheet:visible').evaluateAll(s => s.map(n => n.id)), visibleIds);
-    assert.deepEqual(await page.locator('.page-foot:visible span:last-child').allTextContents(), Array.from({ length: 11 }, (_, i) => `${String(i + 2).padStart(2, '0')} / 12`));
+    assert.deepEqual(await page.locator('.page-foot:visible span:last-child').allTextContents(), Array.from({ length: 10 }, (_, i) => `${String(i + 2).padStart(2, '0')} / 12`));
     const cover = await page.locator('#slide-1').boundingBox();
     const art = page.locator('#slide-1 .cover-emblem');
     await page.waitForFunction(() => document.querySelector('#slide-1 .cover-emblem').naturalWidth === 3508);
@@ -61,12 +61,11 @@ const { chromium } = require(process.env.EXPO_PLAYWRIGHT || 'playwright');
     const overflow = await page.locator('.sheet:visible:not(#slide-1)').evaluateAll(sheets => sheets.flatMap(sheet => {
       const box = sheet.getBoundingClientRect();
       const defects = [];
-      const footer = sheet.querySelector('.page-foot').getBoundingClientRect();
-      // On the back cover the contact block ends immediately before the footer rule.
-      const footerGap = sheet.classList.contains('back-cover') ? 0 : 8;
+      const footer = sheet.querySelector('.page-foot');
+      const contentBottom = footer ? footer.getBoundingClientRect().top - 8 : box.bottom;
       for (const child of sheet.children) {
         if (child.classList.contains('page-foot') || !child.getClientRects().length) continue;
-        if (child.getBoundingClientRect().bottom > footer.top - footerGap) defects.push(`${sheet.id}: footer collision ${child.className || child.tagName}`);
+        if (child.getBoundingClientRect().bottom > contentBottom) defects.push(`${sheet.id}: footer collision ${child.className || child.tagName}`);
       }
       for (const node of sheet.querySelectorAll('*')) {
         if (node.closest('svg') || !node.getClientRects().length) continue;

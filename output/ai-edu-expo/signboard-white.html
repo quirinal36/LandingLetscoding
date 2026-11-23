@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>렛츠코딩 라운지 &amp; 스튜디오 · 하늘 배경 간판 시안</title>
+<link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
+<style>
+@font-face{font-family:"Black Han Sans";src:url("../../public/fonts/black-han-sans/signboard-title.ttf");font-weight:400}
+*{box-sizing:border-box}
+body{margin:0;padding:clamp(8px,3vw,40px);background:#e7e8eb;font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif}
+.sign{max-width:1400px;aspect-ratio:1133/378;margin:auto;background:#91b7ff url("assets/signboard-sky.png") center/cover no-repeat;color:#181c29;container-type:inline-size;display:grid;place-items:center;text-align:center;print-color-adjust:exact}
+.panel{width:84%;height:44%;border-radius:1.6cqw;background:#fff;display:grid;align-content:center;justify-items:center}
+h1,p{margin:0;white-space:nowrap;transform:translateY(.034cqw)}
+h1{font-family:"Black Han Sans","Pretendard Variable",sans-serif;font-size:6.45cqw;font-weight:400;letter-spacing:-.035em;line-height:1;color:#37317a}
+h1 .amp{font-family:"Pretendard Variable",sans-serif;font-weight:800}
+p{margin-top:.735cqw;font-size:2.165cqw;font-weight:600;letter-spacing:-.025em;line-height:1.25;color:#000}
+@media print{
+  @page{size:1133px 378px;margin:0}
+  body{padding:0;background:white}
+  .sign{max-width:none}
+}
+</style>
+</head>
+<body>
+<main class="sign">
+  <div class="panel">
+  <h1>렛츠코딩 라운지 <span class="amp">&amp;</span> 스튜디오</h1>
+  <p>안전한 AI 바이브코딩 교육 플랫폼</p>
+  </div>
+</main>
+</body>
+</html>

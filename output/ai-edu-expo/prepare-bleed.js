@@ -12,7 +12,7 @@
   const before = sheets.map(sheet => {
     assert(Math.abs(parseFloat(getComputedStyle(sheet).width) - 1200) < 0.1, 'Expected A4 layout');
     if (sheet === sheets[0]) return null;
-    return sheet.querySelector('.page-foot').getBoundingClientRect().y - sheet.getBoundingClientRect().y;
+    return sheet.querySelector('.page-foot, .back-contact').getBoundingClientRect().y - sheet.getBoundingClientRect().y;
   });
   for (const sheet of sheets) {
     const wrapper = document.createElement('div');
@@ -54,7 +54,7 @@
     assert(Math.abs(content.y - frame.y - margin) < 0.1, 'Incorrect top bleed');
     assert(Math.abs(frame.right - content.right - margin) < 0.1, 'Incorrect right bleed');
     assert(Math.abs(frame.bottom - content.bottom - margin) < 0.1, 'Incorrect bottom bleed');
-    if (before[index] !== null) assert(Math.abs(sheet.querySelector('.page-foot').getBoundingClientRect().y - content.y - before[index]) < 0.1, 'Content moved');
+    if (before[index] !== null) assert(Math.abs(sheet.querySelector('.page-foot, .back-contact').getBoundingClientRect().y - content.y - before[index]) < 0.1, 'Content moved');
     assert(getComputedStyle(sheet, '::before').content === 'none' && getComputedStyle(sheet, '::after').content === 'none', 'Preview guides must not print');
   }
   const trim = sheets[0].getBoundingClientRect();

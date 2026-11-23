@@ -29,7 +29,7 @@ const out = path.join(__dirname, '../pdf/expo-banner-147x230');
       // 글자·카드가 장 안에 있고, 위아래 봉 감김 여백(50mm)에 핵심 요소가 없는지 확인한다.
       const bad = await page.evaluate(([W, H]) => {
         const p = document.querySelector('.panel.on'); const b = p.getBoundingClientRect(); const mm = b.width / W;
-        return [...p.querySelectorAll('.t,.card,.point,.brand')].flatMap(e => {
+        return [...p.querySelectorAll('.wall-copy,.wall-copy li,.projects figure')].flatMap(e => {
           const r = e.getBoundingClientRect();
           if (r.right <= b.left || r.left >= b.right) return [];
           const top = (r.top - b.top) / mm, bottom = (r.bottom - b.top) / mm;
@@ -39,35 +39,20 @@ const out = path.join(__dirname, '../pdf/expo-banner-147x230');
       assert.deepEqual(bad, [], `${id}: 장 밖 또는 봉 여백 침범`);
       assert.deepEqual(errors, [], `${id}: 불러오지 못한 파일`);
       const file = path.join(out, `banner-${name}-rgb.pdf`);
-      await page.pdf({ path: file, width: `${W}mm`, height: `${H}mm`, printBackground: true, preferCSSPageSize: true, pageRanges: '1' });
+      if (id.startsWith('S')) await page.addStyleTag({ content: 'body.single,.side .scene{background:transparent}' });
+      await page.pdf({ path: file, omitBackground: id.startsWith('S'), width: `${W}mm`, height: `${H}mm`, printBackground: true, preferCSSPageSize: true, pageRanges: '1' });
+      if (id.startsWith('S')) require('node:child_process').execFileSync('python3', [path.join(__dirname, 'export-side-background.py'), id, file]);
       await page.close();
       console.log('OK', path.relative(process.cwd(), file));
     }
-    // 인포데스크 정면 950×660mm (info-desk.html의 @media print 사용)
-    {
-      const page = await browser.newPage();
-      const errors = [];
-      page.on('requestfailed', r => errors.push(r.url()));
-      await page.goto(pathToFileURL(path.join(__dirname, 'info-desk.html')).href);
-      await page.waitForLoadState('networkidle');
-      await page.evaluate(() => document.fonts.ready);
-      await page.emulateMedia({ media: 'print' });
-      const bad = await page.evaluate(() => {
-        const d = document.querySelector('.desk').getBoundingClientRect(); const mm = d.width / 950;
-        return [...document.querySelectorAll('.desk .brand, .desk .headline > *, .desk .footer')].flatMap(e => {
-          const r = e.getBoundingClientRect();
-          return (r.left - d.left) / mm < 20 || (d.right - r.right) / mm < 20 || (r.top - d.top) / mm < 20 || (d.bottom - r.bottom) / mm < 20 ? [e.textContent.trim().slice(0, 12)] : [];
-        });
-      });
-      assert.deepEqual(bad, [], 'info-desk: 가장자리 20mm 안쪽 침범');
-      assert.deepEqual(errors, [], 'info-desk: 불러오지 못한 파일');
-      const dir = path.join(__dirname, '../pdf/expo-info-desk-950x660');
-      await fs.mkdir(dir, { recursive: true });
-      const file = path.join(dir, 'info-desk-950x660-rgb.pdf');
-      await page.pdf({ path: file, width: '950mm', height: '660mm', printBackground: true, preferCSSPageSize: true, pageRanges: '1' });
-      await page.close();
-      console.log('OK', path.relative(process.cwd(), file));
-    }
+    const sign = await browser.newPage();
+    await sign.goto(pathToFileURL(path.join(__dirname, 'signboard-dark-print.html')).href);
+    await sign.evaluate(() => document.fonts.ready);
+    const signDir = path.join(out, '../expo-signboard-2930x1000');
+    await fs.mkdir(signDir, { recursive: true });
+    await sign.pdf({path: path.join(signDir, 'signboard-2930x1000-rgb.pdf'), printBackground: true, preferCSSPageSize: true});
+    await sign.close();
+    require('node:child_process').execFileSync('python3', [path.join(__dirname, 'export-info-desk.py')], { stdio: 'inherit' });
   } finally {
     await browser.close();
   }

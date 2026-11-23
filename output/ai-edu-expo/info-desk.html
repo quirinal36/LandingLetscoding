@@ -7,68 +7,28 @@
 <title>인포데스크 정면 · 렛츠코딩 AI EDU Expo</title>
 <link rel="stylesheet" href="../../prototypes/brochure/fonts.css">
 <style>
-/*
-  950 × 660mm 데스크 전면 검토안. 좌표는 mm, 화면에서는 비율을 유지한다.
-  기존 부스 방향의 연장: README.md의 2026-11-16 벽당 2장 안과 booth-2sheet.html.
-  브랜드 자산·방향 기록: ../expo-booth/brand-spec.md, direction-approved.md.
-  원문: 단계별 AI활용과, 평가과정에 도입하여, 미래형 수업으로 발전
-  수업 단계에서 평가 과정으로 이어지는 뜻을 세 줄로 정리했다. 자동 평가 기능을 주장하지 않는다.
-  도련·재단 여백은 미확정이며, 본 파일은 출력업체 전달 전 디자인 검토용이다.
-*/
-:root{
-  --night:#0a0920;--satin:#17144a;--mist:#c9c2ff;
-  --violet:#7439f1;--coral:#fc6a77;--pearl:#f3f1fb;
-  --font:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;
-}
 *{box-sizing:border-box}
-body{margin:0;padding:28px 20px 40px;background:#d9dce6;color:#1b2333;font-family:var(--font);word-break:keep-all;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.note{max-width:950px;margin:0 auto 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;line-height:1.6;color:#4b5570}
+body{margin:0;padding:28px 20px 40px;background:#d9dce6;color:#24304a;font:14px/1.6 "Pretendard Variable",sans-serif}
+.note{max-width:950px;margin:0 auto 14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px}
+.note span{margin-right:auto}
 .note a{color:inherit;text-underline-offset:3px}
-.note a:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
-.desk{position:relative;width:100%;max-width:950px;aspect-ratio:950/660;margin:0 auto;overflow:hidden;container-type:inline-size;color:var(--pearl);
-  background:radial-gradient(55% 70% at 100% 0,rgba(252,106,119,.16),transparent 75%),radial-gradient(55% 70% at 0 100%,rgba(116,57,241,.25),transparent 75%),var(--night);
-  box-shadow:0 14px 50px rgba(10,9,32,.25)}
-.desk > *{--u:calc(100cqw / 950)}
-.band{position:absolute;inset:0;clip-path:polygon(75% 0,100% 0,100% 100%,43% 100%);background:linear-gradient(150deg,rgba(255,255,255,.03),transparent 65%),var(--satin)}
-.brand{position:absolute;left:calc(64 * var(--u));top:calc(48 * var(--u));display:flex;align-items:center;gap:calc(18 * var(--u))}
-.brand img{display:block;width:calc(88 * var(--u));height:auto}
-.brand-name{display:flex;flex-direction:column;gap:calc(5 * var(--u))}
-.brand-name b{font-size:calc(27 * var(--u));font-weight:750;line-height:1.1;letter-spacing:-.02em}
-.brand-name span{font-size:calc(15 * var(--u));font-weight:500;letter-spacing:.12em;color:var(--mist)}
-.headline{position:absolute;left:calc(64 * var(--u));top:calc(164 * var(--u));margin:0;letter-spacing:-.045em;line-height:1.18;font-size:calc(72 * var(--u));font-weight:720}
-.headline span,.headline strong{display:block;white-space:nowrap}
-.headline span + span{margin-top:calc(8 * var(--u));color:var(--mist)}
-.headline strong{margin-top:calc(26 * var(--u));font-size:calc(94 * var(--u));font-weight:850;color:var(--coral);letter-spacing:-.055em}
-.footer{position:absolute;left:calc(64 * var(--u));right:calc(64 * var(--u));bottom:calc(52 * var(--u));border-top:calc(1 * var(--u)) solid rgba(201,194,255,.35);padding-top:calc(24 * var(--u));display:flex;justify-content:space-between;align-items:center;gap:calc(18 * var(--u))}
-.footer p{margin:0;font-size:calc(23 * var(--u));font-weight:550;letter-spacing:-.02em}
-.footer span{font-size:calc(18 * var(--u));font-weight:450;color:var(--mist);letter-spacing:.01em}
-.caption{max-width:950px;margin:16px auto 0;font-size:13px;line-height:1.6;color:#4b5570}
+.desk{max-width:950px;margin:auto}
+.desk img{display:block;width:100%;height:auto}
 @media print{
   @page{size:950mm 660mm;margin:0}
-  body{padding:0;background:var(--night)}
-  .note,.caption{display:none}
-  .desk{width:950mm;max-width:none;box-shadow:none}
+  body{padding:0}
+  .note{display:none}
+  .desk{width:950mm;max-width:none}
 }
 </style>
 </head>
 <body>
 <nav class="note" aria-label="부스 시안">
-  <span>인포데스크 정면 · 950 × 660mm · 디자인 검토안</span>
+  <span>인포데스크 정면 · 950 × 660mm</span>
+  <a href="../pdf/expo-info-desk-950x660/info-desk-950x660-300dpi-cmyk.tif" download>300dpi CMYK TIFF</a>
+  <a href="../pdf/expo-info-desk-950x660/info-desk-950x660-cmyk.pdf">인쇄용 PDF</a>
   <a href="booth-2sheet.html">벽면 시안 보기 ↗</a>
 </nav>
-<main class="desk" aria-label="인포데스크 전면 디자인">
-  <div class="band" aria-hidden="true"></div>
-  <div class="brand">
-    <img src="assets/logo-mark.png" alt="" width="1276" height="610">
-    <div class="brand-name"><b>렛츠코딩</b><span>라운지 &amp; 스튜디오</span></div>
-  </div>
-  <h1 class="headline">
-    <span>단계별 AI 활용,</span>
-    <span>평가 과정까지.</span>
-    <strong>미래형 수업으로.</strong>
-  </h1>
-  <footer class="footer"><p>바이브코딩 체험 · 수업 도입 상담</p><span>lounge.letscoding.kr</span></footer>
-</main>
-<p class="caption">기존 벽면의 남색·보라·코랄과 사선 구성을 이어갑니다. 출력 전 도련·재단 여백과 색상 조건을 확인해야 합니다.</p>
+<main class="desk"><img src="info-desk.png" width="1900" height="1320" alt="노트북 앞 학생이 묻습니다. 선생님! 제가 만든 게임 한번 해보실래요?"></main>
 </body>
 </html>

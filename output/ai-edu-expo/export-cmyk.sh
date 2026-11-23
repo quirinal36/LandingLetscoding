@@ -53,7 +53,7 @@ LEVEL=1.6; [ "$PDFX" = 1 ] && LEVEL=1.3
 gs -dBATCH -dNOPAUSE -dQUIET --permit-file-read="$WORK/" \
   -sDEVICE=pdfwrite -dPDFX="$PDFX" -dCompatibilityLevel="$LEVEL" -dPDFSETTINGS=/prepress \
   -sColorConversionStrategy=CMYK -dProcessColorModel=/DeviceCMYK -sOutputICCProfile="$WORK/output.icc" \
-  -dAutoRotatePages=/None -dDownsampleColorImages=false -dAutoFilterColorImages=false -dColorImageFilter=/FlateEncode \
+  -dAutoRotatePages=/None -dDownsampleColorImages=false -dAutoFilterColorImages=false -dColorImageFilter=/${EXPO_IMAGE_FILTER:-FlateEncode} \
   -o "$OUT" "$WORK/PDFX_def.ps" "$WORK/nolinks.pdf"
 
 # 검증: 모든 이미지가 CMYK/Gray이고 RGB 색공간 참조가 없는지, 출력 의도가 있는지 확인한다.

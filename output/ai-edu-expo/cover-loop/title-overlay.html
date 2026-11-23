@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- 표지 반복 영상에 얹는 제목. index.html 표지(.cover-copy)와 같은 스타일이며 2048x1448 투명 PNG로 캡처한다. --><html lang="ko"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Chiron GoRound TC";font-style:normal;font-weight:550 800;src:url("../../../public/fonts/chiron-goround-tc/expo-cover.woff2") format("woff2")}
+@font-face{font-family:"Black Han Sans";font-style:normal;font-weight:400;src:url("../../../public/fonts/black-han-sans/expo-title.woff2") format("woff2")}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent;overflow:hidden}
+ul{list-style:none}
+.sheet{position:relative;width:1200px;aspect-ratio:297/210;container-type:inline-size;zoom:1.7066667}
+.cover-copy{position:absolute;top:11.8%;left:7.6%;color:#253154;font-family:"Chiron GoRound TC","Pretendard Variable",sans-serif}
+.cover-copy p{font-size:2.95cqw;font-weight:650;letter-spacing:-.01em;color:#344e66;line-height:1.25}
+.cover-copy h1{margin:calc(1.05cqw - 4px) 0 calc(.35cqw + 4px);font-family:"Black Han Sans","Chiron GoRound TC",sans-serif;font-size:6.8cqw;font-weight:400;line-height:1.15;letter-spacing:-.032em;white-space:nowrap}
+.cover-features{display:flex;align-items:center;gap:1.55cqw;font-size:1.48cqw;font-weight:600;line-height:1.4;letter-spacing:-.015em}
+.cover-features li{white-space:nowrap}
+.cover-features img,.cover-features span{display:inline-block;vertical-align:middle}
+.cover-features img{width:1.35em;height:1.35em;margin-right:.4em}
+.cover-features .sharing-icon{width:1.08em;height:1.08em}
+.cover-features .investment-icon{height:calc(1.35em + 4.76px);object-fit:fill}
+</style></head><body>
+<section class="sheet outer-cover">
+<div class="cover-copy">
+  <p>우리들의 창작공간</p>
+  <h1>렛츠코딩 라운지</h1>
+  <ul class="cover-features">
+    <li><img src="../../../public/landing/expo-cover-icons/coding.png" width="100" height="100" alt=""><span>AI 코딩</span></li>
+    <li><img class="sharing-icon" src="../../../public/landing/expo-cover-icons/sharing.png" width="100" height="100" alt=""><span>작품 공유</span></li>
+    <li><img src="../../../public/landing/expo-cover-icons/feedback.png" width="100" height="100" alt=""><span>상호 피드백</span></li>
+    <li><img class="investment-icon" src="../../../public/landing/expo-cover-icons/investment.png" width="100" height="100" alt=""><span>모의투자</span></li>
+  </ul>
+</div>
+</section></body></html>
