@@ -88,7 +88,7 @@ const JSON_LD = {
           priceCurrency: "KRW",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: 29000,
+            price: 9900,
             priceCurrency: "KRW",
             unitText: "학생 1명 월",
             valueAddedTaxIncluded: true,

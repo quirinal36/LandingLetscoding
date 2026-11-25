@@ -14,7 +14,7 @@ const weeks = [
 ];
 const questions = [
   { q: "기존 교재와 수업을 모두 바꿔야 하나요?", a: "기존 교재와 교구를 활용하면서 작품 제작·공유 활동을 연결할 수 있습니다. 처음에는 운영 중인 반 하나에서 프로젝트 수업으로 시작해 보세요. 정해진 교안만으로 진행하는 수업보다, 학생이 직접 만들고 설명하는 수업에 잘 맞습니다." },
-  { q: "코딩은 어디서 하나요? AI 도구도 포함되나요?", a: "라운지는 자체 웹에디터를 제공합니다. 브라우저에서 HTML·CSS·JavaScript를 편집하고, 미리보기로 확인한 웹 작품을 라운지에 게시할 수 있습니다. AI 도우미에게 원하는 기능이나 수정 내용을 요청할 수도 있습니다. 학생 1명 월 29,000원에 AI LLM 토큰 비용이 포함됩니다. AI 사용 한도와 이용 조건은 도입 상담에서 안내합니다. 외부 도구로 만든 작품도 HTML·ZIP 파일이나 링크로 연결할 수 있으며, 외부 도구의 계정·연령 조건·이용료는 각 도구의 정책을 따릅니다." },
+  { q: "코딩은 어디서 하나요? AI 도구도 포함되나요?", a: "라운지는 자체 웹에디터를 제공합니다. 브라우저에서 HTML·CSS·JavaScript를 편집하고, 미리보기로 확인한 웹 작품을 라운지에 게시할 수 있습니다. AI 도우미에게 원하는 기능이나 수정 내용을 요청할 수도 있습니다. 학생 1명 월 9,900원에 AI LLM 토큰 비용이 포함됩니다. AI 사용 한도와 이용 조건은 도입 상담에서 안내합니다. 외부 도구로 만든 작품도 HTML·ZIP 파일이나 링크로 연결할 수 있으며, 외부 도구의 계정·연령 조건·이용료는 각 도구의 정책을 따릅니다." },
   { q: "다른 교육기관에도 작품이 보이나요?", a: "공개 작품은 여러 교육기관의 학생들이 함께 보는 갤러리에 올라갑니다. 작품마다 공개, 링크로만 공유, 비공개를 선택할 수 있습니다. 기관별 페이지도 있지만, 이를 기관 내부 전용 공개 기능과 혼동하지 않도록 안내합니다." },
   { q: "학부모는 어떻게 보나요? 개발일지도 공개되나요?", a: "공개 작품과 프로필은 링크로 보여 줄 수 있습니다. 개발일지는 로그인한 같은 교육기관 회원이 보는 기록이며, 공개 프로필의 작품 목록과는 다릅니다. 학부모에게는 공개 가능한 작품 링크를 전달해 주세요." },
   { q: "어린 학생의 가입과 동의는 어떻게 하나요?", a: "만 14세 미만 학생은 소속 교육기관에서 보호자 서면 동의를 받고, 시스템에는 동의를 확인한 사실을 기록하는 방식입니다. 도입할 때 가입 절차와 교육기관에서 준비할 동의 사항을 함께 안내합니다." },
@@ -66,7 +66,7 @@ export function BeforeYouBegin() {
 export function StartSmall() {
   return (
     <section id="start" className="tone-paper v2-section">
-        <Container><div className="v2-section-heading" {...reveal()}><div><h2 className="display v2-title">반 하나면 충분합니다.<br />먼저, 4주만.</h2></div><p className="v2-lead max-w-sm">우리 반 수업에 맞는지는<br />직접 써 보고 결정하세요.</p></div><div className="v2-offers">{START.map((offer, i) => <div key={offer.kicker} className={i === 0 ? "v2-offer v2-offer-featured tone-dark" : "v2-offer"} {...reveal(i * 90)}><p className="v2-kicker">{offer.kicker}</p><h3 className={i === 0 ? "display text-gold" : "display"}>{offer.title}</h3><p>{offer.body}</p>{i === 0 && <ButtonLink href={INQUIRY} tone="accent" className="pill mt-7">파일럿 신청 ↗</ButtonLink>}{i === 1 && <small>예: 학생 10명 이용 시 월 290,000원</small>}</div>)}</div><ol className="v2-start-steps">{["수업 환경 상담", "기관 개설 · 첫 반 준비", "4주 무료 파일럿", "계속 이용할지 결정"].map((step, i) => <li key={step}><span>0{i + 1}</span>{step}</li>)}</ol><p className="v2-caption mt-7">가맹 계약 없이 학생 수만큼 이용권을 구매합니다. 파일럿 종료 후 자동 결제되지 않습니다.</p></Container>
+        <Container><div className="v2-section-heading" {...reveal()}><div><h2 className="display v2-title">반 하나면 충분합니다.<br />먼저, 4주만.</h2></div><p className="v2-lead max-w-sm">우리 반 수업에 맞는지는<br />직접 써 보고 결정하세요.</p></div><div className="v2-offers">{START.map((offer, i) => <div key={offer.kicker} className={i === 0 ? "v2-offer v2-offer-featured tone-dark" : "v2-offer"} {...reveal(i * 90)}><p className="v2-kicker">{offer.kicker}</p><h3 className={i === 0 ? "display text-gold" : "display"}>{offer.title}</h3><p>{offer.body}</p>{i === 0 && <ButtonLink href={INQUIRY} tone="accent" className="pill mt-7">파일럿 신청 ↗</ButtonLink>}{i === 1 && <small>예: 학생 10명 이용 시 월 99,000원</small>}</div>)}</div><ol className="v2-start-steps">{["수업 환경 상담", "기관 개설 · 첫 반 준비", "4주 무료 파일럿", "계속 이용할지 결정"].map((step, i) => <li key={step}><span>0{i + 1}</span>{step}</li>)}</ol><p className="v2-caption mt-7">가맹 계약 없이 학생 수만큼 이용권을 구매합니다. 파일럿 종료 후 자동 결제되지 않습니다.</p></Container>
       </section>
   );
 }
